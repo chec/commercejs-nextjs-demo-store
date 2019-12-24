@@ -1,0 +1,64 @@
+// ######################################## //
+// ## Body.SCSS ## //
+// ######################################## //
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+::selection {
+  background: $black;
+  color: $white;
+}
+
+:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+p {
+  margin-bottom: 0;
+}
+
+// .form-control {
+//   font-weight: $regular-weight;
+//   font-size: 0.875rem;
+//   background-color: $gray-100;
+//   border-color: $gray-400;
+//   border-radius: 0.5rem;
+
+//   &:focus {
+//     box-shadow: none !important;
+//     border-color: $brand-700;
+//   }
+
+//   &::placeholder {
+//     color: $gray-600;
+//   }
+// }
+
+// a:hover {
+//   text-decoration: none;
+//   @include transition;
+// }
+
+// a {
+//   color: $black-900;
+
+//   &:hover {
+//     color: $brand-700;
+//   }
+// }
+
+.container.large {
+  max-width: 1500px;
+}
