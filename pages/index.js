@@ -1,6 +1,6 @@
-import React from 'react'
-import Head from 'next/head'
-import Nav from '../components/nav'
+import React from "react";
+import Head from "next/head";
+import Link from "next/link";
 
 const Home = () => (
   <div>
@@ -9,59 +9,33 @@ const Home = () => (
       <link rel="icon" href="/favicon.ico" />
     </Head>
 
-    <Nav />
-
-    <div className="hero">
-      <h1 className="title">Welcome to Next.js!</h1>
-      <p className="description">
-        To get started, edit <code>pages/index.js</code> and save to reload.
-      </p>
+    <div className="container p-5">
+      <h1 className="title mb-5">Welcome to commerce.js!</h1>
 
       <div className="row">
-        <a href="https://nextjs.org/docs" className="card">
-          <h3>Documentation &rarr;</h3>
-          <p>Learn more about Next.js in the documentation.</p>
-        </a>
-        <a href="https://nextjs.org/learn" className="card">
-          <h3>Next.js Learn &rarr;</h3>
-          <p>Learn about Next.js by following an interactive tutorial!</p>
-        </a>
-        <a
-          href="https://github.com/zeit/next.js/tree/master/examples"
-          className="card"
-        >
-          <h3>Examples &rarr;</h3>
-          <p>Find other example boilerplates on the Next.js GitHub.</p>
-        </a>
+        <div className="col-12 col-md-6">
+          <Link href="/checkout">
+            <div className="card">
+              <h3>Go to 1 step checkout &rarr;</h3>
+            </div>
+          </Link>
+        </div>
+        <div className="col-12 col-md-6">
+          <Link href="/checkout/1">
+            <div className="card">
+              <h3>Go to 2 step checkout &rarr;</h3>
+            </div>
+          </Link>
+        </div>
       </div>
     </div>
 
     <style jsx>{`
-      .hero {
-        width: 100%;
-        color: #333;
-      }
-      .title {
-        margin: 0;
-        width: 100%;
-        padding-top: 80px;
-        line-height: 1.15;
-        font-size: 48px;
-      }
-      .title,
-      .description {
-        text-align: center;
-      }
-      .row {
-        max-width: 880px;
-        margin: 80px auto 40px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-      }
       .card {
-        padding: 18px 18px 24px;
-        width: 220px;
+        cursor: pointer;
+        padding: 18px;
+        display: block;
+        width: 100%;
         text-align: left;
         text-decoration: none;
         color: #434343;
@@ -83,6 +57,6 @@ const Home = () => (
       }
     `}</style>
   </div>
-)
+);
 
-export default Home
+export default Home;

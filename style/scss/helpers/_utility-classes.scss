@@ -485,13 +485,13 @@
   color: $black-900 !important;
 }
 .font-color-medium {
-  color: $black-400 !important;
-}
-.font-color-light {
   color: $gray-900 !important;
 }
+.font-color-light {
+  color: $gray-700 !important;
+}
 .font-color-disable {
-  color: $gray-600 !important;
+  color: $gray-400 !important;
 }
 .font-color-brand {
   color: $brand-700 !important;
@@ -1046,6 +1046,9 @@
 .h-8 {
   height: 0.5rem;
 }
+.h-1 {
+  height: 1px;
+}
 .h-0 {
   height: 0;
 }
@@ -1163,20 +1166,26 @@
 // Opacity
 //----------------------------
 
-.o-0 {
+.opacity-0 {
   opacity: 0;
 }
-.o-1 {
-  opacity: 0.1;
+.opacity-16 {
+  opacity: 0.16;
 }
-.o-2 {
-  opacity: 0.2;
+.opacity-24 {
+  opacity: 0.24;
 }
-.o-3 {
-  opacity: 0.3;
+.opacity-32 {
+  opacity: 0.32;
 }
-.o-4 {
+.opacity-40 {
   opacity: 0.4;
+}
+.opacity-56 {
+  opacity: 0.56;
+}
+.opacity-64 {
+  opacity: 0.64;
 }
 
 // //---------------------------

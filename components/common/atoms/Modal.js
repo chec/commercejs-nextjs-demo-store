@@ -1,0 +1,77 @@
+import React, { Component } from "react";
+import { Transition } from "react-transition-group";
+
+/**
+ * Duration for the transition
+ */
+const duration = 300;
+
+/**
+ * Default Style for DropdownMenu
+ */
+const defaultStyle = {
+  transition: `opacity ${duration}ms ease-in-out`,
+  opacity: 0,
+  zIndex: 1000
+};
+
+/**
+ * Trasition Styles for DropdownMenu
+ */
+const transitionStyles = {
+  entering: { opacity: 0 },
+  entered: { opacity: 1 },
+  exiting: { opacity: 0 },
+  exited: { opacity: 0 }
+};
+
+export default class Modal extends Component {
+  onEntering = () => {
+    const body = document.querySelector("body");
+
+    body.classList.add("modal-open");
+  };
+
+  onExiting = () => {
+    const body = document.querySelector("body");
+
+    body.classList.remove("modal-open");
+  };
+  render() {
+    const { isOpen, children, onClose } = this.props;
+
+    return (
+      <Transition
+        in={isOpen}
+        timeout={duration}
+        onEntering={this.onEntering}
+        onExiting={this.onExiting}
+        unmountOnExit
+      >
+        {state => (
+          <div
+            className="position-fixed d-flex align-items-center justify-content-center top-0 left-0 right-0 bottom-0"
+            style={{
+              ...defaultStyle,
+              ...transitionStyles[state]
+            }}
+          >
+            <div
+              className="position-fixed top-0 left-0 right-0 bottom-0 bg-black opacity-56 modal--backlayer cursor-pointer"
+              style={{ zIndex: -1 }}
+              onClick={onClose}
+            />
+            <div
+              role="dialog"
+              tabIndex="-1"
+              className="bg-white p-5 mx-auto modal--content"
+              style={{ width: "480px" }}
+            >
+              {children}
+            </div>
+          </div>
+        )}
+      </Transition>
+    );
+  }
+}

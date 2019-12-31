@@ -1,19 +1,20 @@
 import React, { Component } from "react";
 import { Transition } from "react-transition-group";
+import Link from "next/link";
 
 const duration = 300;
 
 const defaultStyle = {
   zIndex: "-1",
-  transition: `opacity ${duration}ms ease-in-out`,
-  opacity: 0
+  transition: `height ${duration}ms ease-in-out`,
+  height: 0
 };
 
 const transitionStyles = {
-  entering: { opacity: 1 },
-  entered: { opacity: 1 },
-  exiting: { opacity: 0 },
-  exited: { opacity: 0 }
+  entering: { height: "100vh" },
+  entered: { height: "100vh" },
+  exiting: { height: 0 },
+  exited: { height: 0 }
 };
 
 const mobileMenuLinks = [
@@ -74,7 +75,9 @@ export default class Header extends Component {
               onClick={this.toggleMobileMenu}
               className="w-32 mr-1 d-block d-sm-none"
             />
-            <img src="/commerce.svg" className="logo cursor-pointer" />
+            <Link href="/">
+              <img src="/commerce.svg" className="logo cursor-pointer" />
+            </Link>
           </div>
           <div className="d-flex">
             <div className="mr-3">
@@ -93,17 +96,17 @@ export default class Header extends Component {
         <Transition in={showMobileMenu} timeout={duration}>
           {state => (
             <div
-              className="d-sm-none position-fixed top-0 left-0 right-0"
+              className="d-sm-none position-fixed top-0 left-0 right-0 overflow-hidden"
               style={{
                 ...defaultStyle,
                 ...transitionStyles[state]
               }}
             >
-              <div className="position-absolute top-0 left-0 right-0 h-100vh mobile-menu-inner bg-black d-flex flex-column justify-content-center">
+              <div className="position-absolute top-0 left-0 right-0 h-100vh mobile-menu-inner bg-brand700 d-flex flex-column justify-content-center">
                 {mobileMenuLinks.map(item => (
                   <a
                     href={item.link}
-                    className="d-block mb-4 font-size-heading font-color-white text-center"
+                    className="d-block mb-4 font-size-heading font-color-black text-center"
                   >
                     {item.name}
                   </a>

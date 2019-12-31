@@ -1,0 +1,13 @@
+.checkout-confirm-buttons {
+  max-width: 11rem;
+
+  @include mobile {
+    max-width: 100%;
+  }
+}
+
+.checkout-receipt {
+  @include md {
+    height: calc(100vh - 5rem);
+  }
+}

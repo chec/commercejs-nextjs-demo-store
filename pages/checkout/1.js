@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Head from "next/head";
-import Header from "../components/common/Header";
-import SingleStepForm from "../components/checkout/singlestep/SingleStepForm";
+import Header from "../../components/common/Header";
+import Step1 from "../../components/checkout/multisteps/Step1";
 
 const products = [
   {
@@ -44,8 +44,8 @@ class CheckoutPage extends Component {
               Cart
             </div>
             <img src="/icon/arrow-right.svg" className="w-16 mx-1" />
-            <div className="font-size-caption font-color-light cursor-pointer">
-              Checkout
+            <div className="font-size-caption font-color-light">
+              Shipping Details
             </div>
           </div>
 
@@ -58,12 +58,12 @@ class CheckoutPage extends Component {
                   Cart
                 </div>
                 <img src="/icon/arrow-right.svg" className="w-16 mx-1" />
-                <div className="font-size-caption font-color-light cursor-pointer">
-                  Checkout
+                <div className="font-size-caption font-color-light">
+                  Shipping Details
                 </div>
               </div>
 
-              <SingleStepForm />
+              <Step1 />
             </div>
 
             <div className="col-12 col-md-5 offset-md-1 d-none d-lg-block">

@@ -204,15 +204,37 @@ $desktop-1200: 1200px;
 // ----------------------------------
 // Media Query Mixin
 // ----------------------------------
-$xs-width: 576px;
-// $iphone6-width: 375px;
-// $tablet-width: 768px;
-// $tablet-p-width: 991px;
-// $desktop-width: 1025px;
-// $desktop-1200: 1200px;
+$sm-width: 576px;
+$md-width: 768px;
+$lg-width: 992px;
+$xl-width: 1200px;
 
 @mixin small-xs {
-  @media (max-width: #{$xs-width}) {
+  @media (max-width: #{$sm-width}) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media (min-width: #{$sm-width}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: #{$md-width}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: #{$lg-width}) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: #{$xl-width}) {
     @content;
   }
 }

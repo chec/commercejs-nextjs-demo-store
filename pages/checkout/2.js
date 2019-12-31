@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Head from "next/head";
-import Header from "../components/common/Header";
-import SingleStepForm from "../components/checkout/singlestep/SingleStepForm";
+import Header from "../../components/common/Header";
+import Step2 from "../../components/checkout/multisteps/Step2";
+import Link from "next/link";
 
 const products = [
   {
@@ -44,9 +45,13 @@ class CheckoutPage extends Component {
               Cart
             </div>
             <img src="/icon/arrow-right.svg" className="w-16 mx-1" />
-            <div className="font-size-caption font-color-light cursor-pointer">
-              Checkout
-            </div>
+            <Link href="/checkout/1">
+              <div className="font-size-caption text-decoration-underline cursor-pointer">
+                Shipping Details
+              </div>
+            </Link>
+            <img src="/icon/arrow-right.svg" className="w-16 mx-1" />
+            <div className="font-size-caption font-color-light">Payment</div>
           </div>
 
           {/* Row */}
@@ -58,12 +63,17 @@ class CheckoutPage extends Component {
                   Cart
                 </div>
                 <img src="/icon/arrow-right.svg" className="w-16 mx-1" />
-                <div className="font-size-caption font-color-light cursor-pointer">
-                  Checkout
+                <Link href="/checkout/1">
+                  <div className="font-size-caption text-decoration-underline cursor-pointer">
+                    Shipping Details
+                  </div>
+                </Link>
+                <img src="/icon/arrow-right.svg" className="w-16 mx-1" />
+                <div className="font-size-caption font-color-light">
+                  Payment
                 </div>
               </div>
-
-              <SingleStepForm />
+              <Step2 />
             </div>
 
             <div className="col-12 col-md-5 offset-md-1 d-none d-lg-block">
