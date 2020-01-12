@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Head from "next/head";
-import Header from "../components/common/Header";
+import Root from "../components/common/Root";
 import SingleStepForm from "../components/checkout/singlestep/SingleStepForm";
 
 const products = [
@@ -27,13 +27,12 @@ const products = [
 class CheckoutPage extends Component {
   render() {
     return (
-      <>
+      <Root>
         <Head>
           <title>Home</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <Header />
         <div className="custom-container py-5 my-4 my-sm-5">
           {/* Breadcrums Mobile */}
           <div
@@ -140,7 +139,7 @@ class CheckoutPage extends Component {
           </div>
         </div>
         {/* <div className="h-1 bg-gray400 d-sm-none"></div> */}
-      </>
+      </Root>
     );
   }
 }

@@ -1,0 +1,14 @@
+.collection-banner {
+  .collection-item:nth-child(odd) {
+    @include md {
+      margin-top: -3rem;
+    }
+  }
+  .collection-item-image {
+    padding-bottom: 80%;
+
+    @include md {
+      padding-bottom: 140%;
+    }
+  }
+}

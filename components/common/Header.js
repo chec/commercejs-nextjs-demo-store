@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Transition } from "react-transition-group";
 import Link from "next/link";
+import Cart from "./Cart";
 
 const duration = 300;
 
@@ -45,26 +46,70 @@ export default class Header extends Component {
     super(props);
 
     this.state = {
-      showMobileMenu: false
+      showMobileMenu: false,
+      showCart: false
     };
+
+    this.header = React.createRef();
   }
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+
+  toggleCart = value => {
+    this.setState({ showCart: value });
+  };
+
+  handleScroll = () => {
+    window.requestAnimationFrame(this.animate);
+  };
+
+  animate = () => {
+    const { transparent } = this.props;
+
+    if (!transparent) return;
+
+    if (window.scrollY > 10) {
+      this.header.current.classList.add("invert");
+    } else {
+      this.header.current.classList.remove("invert");
+    }
+  };
 
   toggleMobileMenu = () => {
     const { showMobileMenu } = this.state;
 
     this.setState({ showMobileMenu: !showMobileMenu });
+
+    if (!showMobileMenu) {
+      this.header.current.classList.add("invert");
+    } else {
+      this.animate();
+    }
   };
 
   render() {
-    const { showMobileMenu } = this.state;
+    const { showMobileMenu, showCart } = this.state;
+    const { transparent } = this.props;
 
     return (
       <header className="position-fixed top-0 left-0 right-0 font-weight-semibold">
-        <div className="d-flex header align-items-center justify-content-between position-relative borderbottom border-color-black bg-white">
+        <Cart isOpen={showCart} toggle={value => this.toggleCart(value)} />
+        <div
+          ref={this.header}
+          className={`d-flex header align-items-center justify-content-between position-relative ${
+            transparent ? "" : "invert"
+          }`}
+        >
           <div className="d-none d-sm-flex">
-            <a href="#" className="mr-4 font-color-black">
-              Shop
-            </a>
+            <Link href="/collection">
+              <a className="mr-4 font-color-black">Shop</a>
+            </Link>
             <a href="#" className="font-color-black">
               About
             </a>
@@ -76,14 +121,22 @@ export default class Header extends Component {
               className="w-32 mr-1 d-block d-sm-none"
             />
             <Link href="/">
-              <img src="/commerce.svg" className="logo cursor-pointer" />
+              <a>
+                <img
+                  src="/images/commerce.svg"
+                  className="logo cursor-pointer"
+                />
+              </a>
             </Link>
           </div>
           <div className="d-flex">
             <div className="mr-3">
               <img src="/icon/user.svg" className="w-32 cursor-pointer" />
             </div>
-            <div className="position-relative cursor-pointer">
+            <div
+              className="position-relative cursor-pointer"
+              onClick={() => this.toggleCart(true)}
+            >
               <img src="/icon/cart.svg" className="w-32" />
               <div className="cart-count position-absolute font-size-tiny font-weight-bold">
                 0

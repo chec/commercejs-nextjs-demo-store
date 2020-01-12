@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Head from "next/head";
-import Header from "../../components/common/Header";
+import Root from "../../components/common/Root";
 import Step2 from "../../components/checkout/multisteps/Step2";
 import Link from "next/link";
 
@@ -28,8 +28,7 @@ const products = [
 class Confirmation extends Component {
   render() {
     return (
-      <>
-        <Header />
+      <Root>
         <div className="pt-5 mt-2 checkout-confirm">
           {/* Row */}
           <div className="row mt-4">
@@ -146,7 +145,7 @@ class Confirmation extends Component {
           </div>
         </div>
         {/* <div className="h-1 bg-gray400 d-sm-none"></div> */}
-      </>
+      </Root>
     );
   }
 }

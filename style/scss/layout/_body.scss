@@ -36,9 +36,10 @@ input,
   padding: 0 1rem !important;
   border: 1px solid $gray-400;
   transition: border-color 0.3s ease-in-out;
+  border: none;
 
   &::placeholder {
-    color: $gray-900 !important;
+    color: $gray-500 !important;
   }
 
   &:focus {
@@ -130,7 +131,7 @@ a {
 // }
 
 .custom-container {
-  max-width: 1230px;
+  max-width: 1440px;
   padding-left: 3rem;
   padding-right: 3rem;
   margin-left: auto;

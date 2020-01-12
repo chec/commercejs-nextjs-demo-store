@@ -15,12 +15,13 @@
 
 // Pages
 @import "pages/checkout-confirm";
-// @import "pages/work";
+@import "pages/home-page";
 
 // Components
-// @import "components/artwork";
-// @import "components/checkbox-n-radio";
-// @import "components/tabs";
+@import "components/cart-modal";
+@import "components/explore-banner";
+@import "components/collection-banner";
+@import "components/footer-follow";
 // @import "components/app-nav";
 // @import "components/dropdowns";
 // @import "components/paintings";

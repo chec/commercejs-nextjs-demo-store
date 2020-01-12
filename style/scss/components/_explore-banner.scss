@@ -1,0 +1,17 @@
+.explore-banner {
+  .explore-banner--image {
+    background: url("/images/explore-banner.png") center center/cover;
+    padding-bottom: 100%;
+
+    @include md {
+      padding-bottom: 180%;
+    }
+    @include lg {
+      padding-bottom: 144%;
+    }
+
+    @include xl {
+      padding-bottom: 112%;
+    }
+  }
+}
