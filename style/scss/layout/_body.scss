@@ -34,9 +34,14 @@ input,
 .dropdown {
   height: 3rem !important;
   padding: 0 1rem !important;
-  border: 1px solid $gray-400;
+  border: 1px solid $gray-400 !important;
   transition: border-color 0.3s ease-in-out;
   border: none;
+
+  &.borderbottom {
+    border: none !important;
+    border-bottom: 1px solid $gray-400 !important;
+  }
 
   &::placeholder {
     color: $gray-500 !important;
@@ -220,4 +225,11 @@ a {
 .row {
   margin-right: -8px;
   margin-left: -8px;
+}
+
+button.border.border-color-white,
+a.border.border-color-white {
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
 }

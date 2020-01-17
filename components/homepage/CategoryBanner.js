@@ -6,33 +6,80 @@ const collections = [
     image: "/images/collection/1.png",
     name: "Skin Products",
     number: "20",
-    link: "/collection"
+    link: "/collection",
+    translateRatio: 30
   },
   {
     image: "/images/collection/2.png",
     name: "Beard Products",
     number: "20",
-    link: "/collection"
+    link: "/collection",
+    translateRatio: 0
   },
   {
     image: "/images/collection/3.png",
     name: "Hair Products",
     number: "20",
-    link: "/collection"
+    link: "/collection",
+    translateRatio: 60
   }
 ];
 
 export default class CategoryBanner extends Component {
+  constructor(props) {
+    super(props);
+
+    this.collectionBannerContainer = React.createRef();
+    this.category = [];
+  }
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
+    this.handleScroll();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+
+  handleScroll = () => {
+    window.requestAnimationFrame(this.animate);
+  };
+
+  animate = () => {
+    const dimentions = this.collectionBannerContainer.current.getBoundingClientRect();
+    var x = window.matchMedia("(min-width: 768px)");
+
+    if (x.matches) {
+      if (dimentions.top - window.innerHeight < 0 && dimentions.bottom > 0) {
+        const scrolledRatio =
+          (window.innerHeight - dimentions.top) / window.innerHeight;
+
+        this.category.forEach((image, index) => {
+          image.style.transform = `translateY(-${scrolledRatio *
+            collections[index].translateRatio}px)`;
+        });
+      }
+    }
+  };
+
   render() {
     return (
       <div className="bg-brand300 py-5 collection-banner">
-        <div className="custom-container py-5">
+        <div
+          ref={this.collectionBannerContainer}
+          className="custom-container py-5"
+        >
           <p className="font-size-display2 my-3 py-5 text-center font-family-secondary">
             Categories
           </p>
           <div className="row">
-            {collections.map(item => (
-              <div className="col-12 col-md-4 collection-item">
+            {collections.map((item, index) => (
+              <div
+                key={`category-item-${index}`}
+                ref={item => this.category.push(item)}
+                className="col-12 col-md-4 collection-item mb-5"
+              >
                 <Link href={item.link}>
                   <a className="align-items-center font-color-black flex-column cursor-pointer mb-5">
                     <div
