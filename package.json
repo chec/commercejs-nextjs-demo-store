@@ -13,8 +13,10 @@
     "next": "9.1.6",
     "node-sass": "^4.13.0",
     "react": "16.12.0",
+    "react-collapse": "^5.0.1",
     "react-dom": "16.12.0",
     "react-id-swiper": "^2.4.0",
+    "react-scroll": "^1.7.16",
     "react-transition-group": "^4.3.0",
     "swiper": "^5.2.1"
   }

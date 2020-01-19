@@ -9,6 +9,8 @@ html {
 body {
   font-size: 0.875rem;
   line-height: 1.25rem;
+  width: 100vw;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   color: $black;
   font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,

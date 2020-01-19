@@ -651,6 +651,11 @@
     border-right: 1px solid;
   }
 }
+.border-md-bottom {
+  @include md {
+    border-bottom: 1px solid;
+  }
+}
 .border-width-2 {
   border-width: 2px !important;
 }
@@ -1274,8 +1279,20 @@
 // Extended
 // ----------------------------
 
+.position-sm-absolute {
+  @include sm {
+    position: absolute;
+  }
+}
+
 .position-md-absolute {
   @include md {
     position: absolute;
+  }
+}
+
+.position-sm-fixed {
+  @include sm {
+    position: fixed;
   }
 }

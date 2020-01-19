@@ -38,7 +38,7 @@ export default class Modal extends Component {
     body.classList.remove("modal-open");
   };
   render() {
-    const { isOpen, children, onClose } = this.props;
+    const { isOpen, children, onClose, maxW, className } = this.props;
 
     return (
       <Transition
@@ -64,8 +64,8 @@ export default class Modal extends Component {
             <div
               role="dialog"
               tabIndex="-1"
-              className="bg-white p-5 mx-auto modal--content"
-              style={{ width: "480px" }}
+              className={`bg-white my-2 mx-2 mx-sm-auto modal--content overflow-auto ${className}`}
+              style={{ width: maxW, maxHeight: "calc(100vh - 1rem)" }}
             >
               {children}
             </div>
@@ -75,3 +75,8 @@ export default class Modal extends Component {
     );
   }
 }
+
+Modal.defaultProps = {
+  maxW: "480px",
+  className: "p-4 p-md-5"
+};

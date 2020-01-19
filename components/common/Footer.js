@@ -52,8 +52,9 @@ export default class Footer extends React.Component {
         (window.innerHeight - dimentions.top) / window.innerHeight;
 
       this.images.forEach((image, index) => {
-        image.style.transform = `translateY(${scrolledRatio *
-          imagesInfo[index].translateRatio}px)`;
+        image &&
+          (image.style.transform = `translateY(${scrolledRatio *
+            imagesInfo[index].translateRatio}px)`);
       });
     }
   };

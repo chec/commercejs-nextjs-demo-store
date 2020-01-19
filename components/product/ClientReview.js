@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import ReviewList from "./ReviewList";
+import Modal from "../common/atoms/Modal";
 
 const reviews = [
   {
@@ -35,9 +37,35 @@ const reviews = [
 ];
 
 export default class ClientReview extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showAllReviews: false
+    };
+  }
   render() {
+    const { showAllReviews } = this.state;
     return (
-      <div className="custom-container pb-5">
+      <div id="reviews" className="custom-container pb-5">
+        <Modal
+          isOpen={showAllReviews}
+          onClose={() => this.setState({ showAllReviews: false })}
+          maxW="1000px"
+        >
+          <div className="d-flex justify-content-between align-items-center pb-3">
+            <p className="font-size-subheader font-weight-medium">
+              All Reviews
+            </p>
+            <img
+              tabIndex="0"
+              src="/icon/cross.svg"
+              className="w-24 cursor-pointer"
+              onClick={() => this.setState({ showAllReviews: false })}
+            />
+          </div>
+          <ReviewList reviews={reviews} />
+        </Modal>
         <div className="row">
           <div className="col-12 col-lg-10 offset-lg-1">
             <div className="d-flex justify-content-between flex-column flex-sm-row align-items-sm-center mb-3">
@@ -51,31 +79,14 @@ export default class ClientReview extends Component {
                 Write a review
               </p>
             </div>
-            <div className="d-flex border border-color-black bg-brand300 flex-wrap">
-              {reviews.map((item, index) => (
-                <div
-                  className={`p-4 p-lg-5 w-100 borderbottom ${index % 2 === 0 &&
-                    "border-md-right"} border-color-black col-12 col-md-6`}
-                >
-                  <div d="flex">
-                    {[1, 2, 3, 4, 5].map(index => (
-                      <img src="/icon/star.svg" className="w-16" />
-                    ))}
-                    <span className="ml-2 font-size-caption font-weight-semibold">
-                      {item.stars}/5
-                    </span>
-                  </div>
-                  <p className="font-size-title mb-2 mt-3">{item.title}</p>
-                  <p className="mb-3">{item.description}</p>
-                  <p className="font-color-light font-size-caption">
-                    {item.reviewBy} | December, 2019
-                  </p>
-                </div>
-              ))}
-              <button className="text-center bg-transparent w-100 h-72 px-3 text-decoration-underline">
+            <ReviewList reviews={reviews}>
+              <button
+                onClick={() => this.setState({ showAllReviews: true })}
+                className="text-center bg-transparent w-100 h-72 px-3 text-decoration-underline"
+              >
                 View all Reviews
               </button>
-            </div>
+            </ReviewList>
           </div>
         </div>
       </div>
