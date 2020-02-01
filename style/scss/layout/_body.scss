@@ -137,6 +137,19 @@ a {
 //   }
 // }
 
+.small-container {
+  max-width: 1232px !important;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include small-xs {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
 .custom-container {
   max-width: 1440px;
   padding-left: 3rem;

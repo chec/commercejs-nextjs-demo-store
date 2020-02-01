@@ -199,7 +199,7 @@ export default class Cart extends Component {
                         </button>
                       </div>
                       <div className="col-12 col-md-6">
-                        <Link href="/checkout">
+                        <Link href="/checkout2/1">
                           <a className="h-56 d-flex align-items-center justify-content-center bg-black w-100 flex-grow-1 font-weight-medium font-color-white px-3">
                             Checkout
                           </a>

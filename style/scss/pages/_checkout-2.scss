@@ -1,0 +1,37 @@
+.checkout-2 {
+  .progress-steps {
+    max-width: 400px;
+    margin-bottom: 4rem;
+    width: 100%;
+
+    .step {
+      flex-grow: 1;
+    }
+  }
+}
+
+.underlined-input {
+  height: 2.5rem !important;
+
+  & + label {
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+  }
+
+  &::placeholder {
+    transition: all 0.2s ease-in-out;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: rgba(0, 0, 0, 0.64) !important;
+
+    &::placeholder {
+      opacity: 0;
+    }
+  }
+
+  &:focus + label {
+    opacity: 1;
+  }
+}
