@@ -1,6 +1,6 @@
 # Example Store with Commerce.js and Next.js 
 
-A high-fidelity fully-fledged eCommerce store built using Commerce.js and Next.js (an SSR app)
+A high-fidelity fully-fledged eCommerce store built using Commerce.js and Next.js (an SSR frameworked based on React)
 
 Checkout the live demo [here]()
 
@@ -8,7 +8,16 @@ Checkout the live demo [here]()
 
 ## Overview
 
+This tutorial is meant to showcase a real-world example store application while abtracting all layers that are not part of the eCommerce logic flow. We will be focusing on the initial setup and more importantly on injecting this Next.js app with Commerce.js. 
+
+Why is Next.js an ideal framework for Commerce.js?
+
+There are quite a few core features that makes Next.js an ideal framework to pair with Commerce.js. 
+
+Next.js makes it easy to setup an eCommerce app
+
 ## Requirements/Prequisites
+
 
 ## Setup
 
@@ -31,9 +40,27 @@ COMMERCE_PUBLIC_KEY=
 
 ```bash
 npm install or yarn 
+```
+This will add the necessary dependencies currently in the project: `react` `react-dom` `next`
+
+```bash
 npm run dev or yarn dev
 ```
+Run app in local host port 3000 and go to http://localhost:3000/ 
 
+## Getting Started
+
+1. Install the Commerce.js SDK and instantiate Commerce.js in a file
+
+```bash
+npm install @chec/commerce.js
+
+*or* 
+
+yarn add @chec/commerce.js
+```
+
+Create a `/lib` folder at the root of your project with a `commerce.js` file. This allow us to inject Commerce.js and abstract it to a separate and easily accessible file to continue to add our logic. There are other means and alternatives like injecting the Commerce.js object into individual components where needed, but as our app grows, this method will become unmanageable. 
 
 5. Build and Deploy
 
