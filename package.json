@@ -8,16 +8,21 @@
     "start": "next start"
   },
   "dependencies": {
+    "@chec/commerce.js": "^2.0.1",
     "@zeit/next-sass": "^1.0.1",
     "body-scroll-lock": "^2.6.4",
+    "dotenv": "^8.2.0",
     "next": "9.1.6",
+    "next-redux-wrapper": "^5.0.0",
     "node-sass": "^4.13.0",
     "react": "16.12.0",
     "react-collapse": "^5.0.1",
     "react-dom": "16.12.0",
     "react-id-swiper": "^2.4.0",
+    "react-redux": "^7.2.0",
     "react-scroll": "^1.7.16",
     "react-transition-group": "^4.3.0",
+    "redux": "^4.0.5",
     "swiper": "^5.2.1"
   }
 }

@@ -12,9 +12,9 @@ This tutorial is meant to showcase a real-world example store application while 
 
 Why is Next.js an ideal framework for Commerce.js?
 
-There are quite a few core features that makes Next.js an ideal framework to pair with Commerce.js. 
+<!-- There are quite a few core features that makes Next.js an ideal framework to pair with Commerce.js. 
 
-Next.js makes it easy to setup an eCommerce app
+Next.js makes it easy to setup an eCommerce app -->
 
 ## Requirements/Prequisites
 
@@ -23,46 +23,79 @@ Next.js makes it easy to setup an eCommerce app
 
 1. Set up a Chec account [here]() and upload the neccessary data to power your store.
 
-2. Clone this project to get started. 
+2. Start by creating a new Next.js project with manual setup. Alternatively, if you want to clone this repo and hit the ground running with a boilerplate, skip to step 3. To set up your app manually, create a folder and `cd` into it.
+
+```bash
+mkdir example-checkout-hifi
+cd example-checkout-hifi
+```
+
+Initialize your project as a Node project
+```bash
+npm init
+#or 
+yarn init
+```
+
+Now install the necessary framework dependencies 
+```bash
+npm install next react react-dom
+#or
+yarn add next react react-dom
+```
+
+There is now a package.json which displays the installed dependencies and scripts. Replace the scripts section with the below content which will allow us to use NextJS commands to run our app.
+
+```json
+"scripts": {
+  "dev": "next",
+  "build": "next build",
+  "start": "next start"
+}
+```
+
+3. Directly clone the repo and get setup with a fully-fledged Chec store.
+
 ```bash
 git clone https://github.com/chec/example-checkout-hifi.git
+cd example-checkout-hifi
+```
+
+Install dependencies included in `package.json` then run app in local development mode.
+```bash
 npm install or yarn 
 npm run dev or yarn dev
 ```
-
-3. Create a `.env` at your project root with your Chec `public_key` 
-
-```
-COMMERCE_PUBLIC_KEY=
-```
-
-4. Install and run in development mode
-
-```bash
-npm install or yarn 
-```
-This will add the necessary dependencies currently in the project: `react` `react-dom` `next`
-
-```bash
-npm run dev or yarn dev
-```
-Run app in local host port 3000 and go to http://localhost:3000/ 
 
 ## Getting Started
 
-1. Install the Commerce.js SDK and instantiate Commerce.js in a file
+1. Install the Commerce.js SDK.
 
 ```bash
 npm install @chec/commerce.js
-
-*or* 
-
+#or
 yarn add @chec/commerce.js
 ```
 
-Create a `/lib` folder at the root of your project with a `commerce.js` file. This allow us to inject Commerce.js and abstract it to a separate and easily accessible file to continue to add our logic. There are other means and alternatives like injecting the Commerce.js object into individual components where needed, but as our app grows, this method will become unmanageable. 
+2. Create a `.env` 'dot file' at your project root to store your Chec `public_key`. 
 
-5. Build and Deploy
+```
+COMMERCE_PUBLIC_KEY=your_public_API_key_here
+```
+
+This file is meant to not be committed to source control and also will be hidden in file browsers.
+
+3. Set up configuration
+
+Create a `next.config.js`
+
+```
+...
+```
+
+Create a `/lib` folder at the root of your project with a `commerce.js` file. This allow us to consume our Chec API key stored in the environment variable. Creating a separate file to abstract our application functions into an easily to be easily accessible so that we can to continue to add more logic as our application grows. There are other means and alternatives like injecting the Commerce.js object into individual components where needed but this method will become unmanageable when we scale. 
+
+## Build and Deploy
 
 ```bash
 npm build or yarn build
