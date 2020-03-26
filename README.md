@@ -9,13 +9,19 @@ Checkout the live demo [here]()
 
 ## Overview
 
-This README will guide you in getting up and running with a fully-fledged eCommerce boilerplate. We will be focusing on the initial setup, injecting your Next.js app with Commerce.js and lastly wrap up with a Netlify live deployed copy of the application. For a full detailed tutorial on building this JAMstack eCommerce application, please head on over [here]().
+This README will guide you in getting up and running with a fully-fledged eCommerce boilerplate. There are two ways to get set up: 1) Automatic live deploy a copy of the application via Netlify 2) Manual setup and deployment process. In this option, we will be focusing on the initial setup, injecting your Next.js app with Commerce.js and lastly wrap up with deployment steps. For a full detailed tutorial on building this JAMstack eCommerce application, please head on over [here]().
 
 ## Prequisites
 
 - IDE of your choice (code editor)
 - NodeJS or Yarn → npm or yarn
-- Chec account & API keys
+
+## Deploy to Netlify 
+
+*Explanation of Netlify deployment process here*
+
+*Deploy to Netlify button here*
+[Deploy to Netlify]
 
 ## Setup
 
@@ -30,16 +36,16 @@ cd your-project-name
 
 a) Initialize your project as a Node project
 ```bash
-npm init
+npm init -y
 #or 
-yarn init
+yarn init -y
 ```
 
 b) Install the necessary framework dependencies and the Commerce.js SDK
 ```bash
-npm install next react react-dom @chec/commerce.js
+npm install --save next react react-dom @chec/commerce.js
 #or
-yarn add next react react-dom @chec/commerce.js
+yarn add --save next react react-dom @chec/commerce.js
 ```
 
 There is now a `package.json` which displays the installed dependencies and scripts. Replace the scripts section with the below content which will allow us to use Next.js commands to run and build our app.
