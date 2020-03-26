@@ -1,4 +1,3 @@
-
 require('dotenv').config()
 const withSass = require('@zeit/next-sass')
 
@@ -14,3 +13,4 @@ module.exports = withSass({
     'COMMERCEJS_PUBLIC_KEY': process.env.COMMERCEJS_PUBLIC_KEY
   }
 })
+

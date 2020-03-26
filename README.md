@@ -1,23 +1,21 @@
 # Example Store with Commerce.js and Next.js 
 
-A high-fidelity fully-fledged eCommerce store built using Commerce.js and Next.js (an SSR frameworked based on React)
+A high-fidelity fully-fledged eCommerce store built using the Commerce.js SDK and Next.js (an SSR frameworked based on React).
 
 Checkout the live demo [here]()
 
+**Note**
 - This app is built using Commerce.js v2 SDK
 
 ## Overview
 
-This tutorial is meant to showcase a real-world example store application while abtracting all layers that are not part of the eCommerce logic flow. We will be focusing on the initial setup and more importantly on injecting this Next.js app with Commerce.js. 
+This README will guide you in getting up and running with a fully-fledged eCommerce boilerplate. We will be focusing on the initial setup, injecting your Next.js app with Commerce.js and lastly wrap up with a Netlify live deployed copy of the application. For a full detailed tutorial on building this JAMstack eCommerce application, please head on over [here]().
 
-Why is Next.js an ideal framework for Commerce.js?
+## Prequisites
 
-<!-- There are quite a few core features that makes Next.js an ideal framework to pair with Commerce.js. 
-
-Next.js makes it easy to setup an eCommerce app -->
-
-## Requirements/Prequisites
-
+- IDE of your choice (code editor)
+- NodeJS or Yarn → npm or yarn
+- Chec account & API keys
 
 ## Setup
 
@@ -26,26 +24,25 @@ Next.js makes it easy to setup an eCommerce app -->
 2. Start by creating a new Next.js project with manual setup. Alternatively, if you want to clone this repo and hit the ground running with a boilerplate, skip to step 3. To set up your app manually, create a folder and `cd` into it.
 
 ```bash
-mkdir example-checkout-hifi
-cd example-checkout-hifi
+mkdir your-project-name
+cd your-project-name
 ```
 
-Initialize your project as a Node project
+a) Initialize your project as a Node project
 ```bash
 npm init
 #or 
 yarn init
 ```
 
-Now install the necessary framework dependencies 
+b) Install the necessary framework dependencies and the Commerce.js SDK
 ```bash
-npm install next react react-dom
+npm install next react react-dom @chec/commerce.js
 #or
-yarn add next react react-dom
+yarn add next react react-dom @chec/commerce.js
 ```
 
-There is now a package.json which displays the installed dependencies and scripts. Replace the scripts section with the below content which will allow us to use NextJS commands to run our app.
-
+There is now a `package.json` which displays the installed dependencies and scripts. Replace the scripts section with the below content which will allow us to use Next.js commands to run and build our app.
 ```json
 "scripts": {
   "dev": "next",
@@ -61,23 +58,20 @@ git clone https://github.com/chec/example-checkout-hifi.git
 cd example-checkout-hifi
 ```
 
-Install dependencies included in `package.json` then run app in local development mode.
+Install dependencies included in `package.json` then run your development server.
 ```bash
-npm install or yarn 
-npm run dev or yarn dev
+npm install
+#or
+yarn
+
+npm run dev
+#or
+yarn dev
 ```
 
 ## Getting Started
 
-1. Install the Commerce.js SDK.
-
-```bash
-npm install @chec/commerce.js
-#or
-yarn add @chec/commerce.js
-```
-
-2. Create a `.env` 'dot file' at your project root to store your Chec `public_key`. 
+1. Create a `.env` 'dot file' at your project root to store your Chec `public_key`. 
 
 ```
 COMMERCE_PUBLIC_KEY=your_public_API_key_here
@@ -85,17 +79,37 @@ COMMERCE_PUBLIC_KEY=your_public_API_key_here
 
 This file is meant to not be committed to source control and also will be hidden in file browsers.
 
-3. Set up configuration
+2. Create custom configs for Next.js
 
-Create a `next.config.js`
+Create a `next.config.js` and copy the below code
 
+```js
+require('dotenv').config();
+const withSass = require('@zeit/next-sass');
+
+module.exports = withSass({
+  /* config options here */
+  webpack: config => {
+    config.node = {
+      fs: 'empty'
+    }
+    return config
+  },
+  env: {
+    'COMMERCEJS_PUBLIC_KEY': process.env.COMMERCEJS_PUBLIC_KEY
+  }
+})
 ```
-...
-```
+
+3. Consume Commerce.js
 
 Create a `/lib` folder at the root of your project with a `commerce.js` file. This allow us to consume our Chec API key stored in the environment variable. Creating a separate file to abstract our application functions into an easily to be easily accessible so that we can to continue to add more logic as our application grows. There are other means and alternatives like injecting the Commerce.js object into individual components where needed but this method will become unmanageable when we scale. 
 
-## Build and Deploy
+## Deployment
+
+### Netlify (recommended)
+
+### Manual hosting options
 
 ```bash
 npm build or yarn build
