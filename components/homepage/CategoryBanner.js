@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Link from "next/link";
+import commerce from '../../lib/commerce';
 
 const collections = [
   {
@@ -29,6 +30,13 @@ export default class CategoryBanner extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      categories: {
+        data: [],
+        testNum: "20" 
+      }
+    }
+
     this.collectionBannerContainer = React.createRef();
     this.category = [];
   }
@@ -36,6 +44,21 @@ export default class CategoryBanner extends Component {
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
     this.handleScroll();
+    commerce.categories.list()
+    .then(res => {
+      //Success
+      this.setState({
+        categories: {
+          data: res.data
+        }
+      });
+    })
+    .catch(
+      (error) => {
+        // Error
+        console.log(error)
+      }
+    );
   }
 
   componentWillUnmount() {
@@ -64,6 +87,7 @@ export default class CategoryBanner extends Component {
   };
 
   render() {
+    const { categories } = this.state; 
     return (
       <div className="bg-brand300 py-5 collection-banner">
         <div
@@ -73,6 +97,14 @@ export default class CategoryBanner extends Component {
           <p className="font-size-display2 my-3 py-5 text-center font-family-secondary">
             Categories
           </p>
+          <div>
+          {categories.data.map((cat, index) => ( 
+            <p className="mb-2 font-size-heading text-center">
+              {cat.name}
+            </p>
+          ))}
+
+          </div>
           <div className="row">
             {collections.map((item, index) => (
               <div

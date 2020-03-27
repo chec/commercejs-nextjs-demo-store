@@ -1,6 +1,6 @@
 # Example Store with Commerce.js and Next.js 
 
-A high-fidelity fully-fledged eCommerce store built using the Commerce.js SDK and Next.js (an SSR frameworked based on React).
+A high-fidelity fully-fledged eCommerce store built using the Commerce.js SDK and Next.js (an SSR frameworke based on React).
 
 Checkout the live demo [here]()
 
