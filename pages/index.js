@@ -8,7 +8,7 @@ import HomeBanner from "../components/homepage/HomeBanner";
 import CategoryBanner from "../components/homepage/CategoryBanner";
 import ProductsBanner from "../components/homepage/ProductsBanner";
 
-const Home = () => (
+const Home = ({ categories, products }) => (
   <Root transparentHeader={true}>
     <Head>
       <title>Home</title>

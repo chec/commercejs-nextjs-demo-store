@@ -1,18 +1,35 @@
 import App from "next/app";
+import React from "react";
+import { wrapper } from "../store";
 import "../style/scss/style.scss";
+import commerce from "../lib/commerce";
+import collections from "../lib/collections";
 
 class MyApp extends App {
-  // Only uncomment this method if you have blocking data requirements for
-  // every single page in your application. This disables the ability to
-  // perform automatic static optimization, causing every page in your app to
-  // be server-side rendered.
-  //
-  // static async getInitialProps(appContext) {
-  //   // calls page's `getInitialProps` and fills `appProps.pageProps`
-  //   const appProps = await App.getInitialProps(appContext);
-  //
-  //   return { ...appProps }
-  // }
+  static getInitialProps = wrapper.getInitialAppProps(async ({ Component, ctx }) => {
+    // Fetch data on load
+    // Fetch categories
+    const categoriesResponse = await commerce.categories.list();
+
+    // Match static data record to API data to find category name
+    const categories = categoriesResponse.data.map(item => ({
+      ...collections.find(data => data.slug === item.slug),
+      ...item,
+    }));
+
+    // Fetch products
+    const { data: products } = await commerce.products.list();
+
+    ctx.store.dispatch({ type: 'STORE_CATEGORIES', payload: categories });
+    ctx.store.dispatch({ type: 'STORE_PRODUCTS', payload: products });
+
+    return {
+      pageProps: {
+        // Call page-level getInitialProps
+        ...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {}),
+      },
+    };
+  });
 
   render() {
     const { Component, pageProps } = this.props;
@@ -20,4 +37,4 @@ class MyApp extends App {
   }
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);
