@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-import ProductRow from "../lists/ProductRow";
+import ProductRow from "../products/ProductRow";
 
 export default function SuggestedProducts() {
   return (

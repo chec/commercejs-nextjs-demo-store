@@ -1,64 +1,9 @@
 import React from "react";
 import Link from "next/link";
+import Head from "next/head";
+import commerce from '../../lib/commerce';
 
-const products = [
-  {
-    image: "/images/product/4.png",
-    title: "Heart Gummy Vitamin",
-    description:
-      "For medium to dry skin for the lorem ipsum is the best texhnique to clense your skin.",
-    price: "$32.00",
-    link: "/product"
-  },
-  {
-    image: "/images/product/5.png",
-    title: "Heart Gummy Vitamin",
-    description:
-      "For medium to dry skin for the lorem ipsum is the best texhnique to clense your skin.",
-    price: "$32.00",
-    link: "/product"
-  },
-  {
-    image: "/images/product/6.png",
-    title: "Heart Gummy Vitamin",
-    description:
-      "For medium to dry skin for the lorem ipsum is the best texhnique to clense your skin.",
-    price: "$32.00",
-    link: "/product"
-  },
-  {
-    image: "/images/product/7.png",
-    title: "Heart Gummy Vitamin",
-    description:
-      "For medium to dry skin for the lorem ipsum is the best texhnique to clense your skin.",
-    price: "$32.00",
-    link: "/product"
-  },
-  {
-    image: "/images/product/4.png",
-    title: "Heart Gummy Vitamin",
-    description:
-      "For medium to dry skin for the lorem ipsum is the best texhnique to clense your skin.",
-    price: "$32.00",
-    link: "/product"
-  },
-  {
-    image: "/images/product/5.png",
-    title: "Heart Gummy Vitamin",
-    description:
-      "For medium to dry skin for the lorem ipsum is the best texhnique to clense your skin.",
-    price: "$32.00",
-    link: "/product"
-  },
-  {
-    image: "/images/product/6.png",
-    title: "Heart Gummy Vitamin",
-    description:
-      "For medium to dry skin for the lorem ipsum is the best texhnique to clense your skin.",
-    price: "$32.00",
-    link: "/product"
-  }
-];
+import ProductRow from '../products/ProductRow'
 
 export default class Collections extends React.Component {
   constructor(props) {
@@ -66,10 +11,34 @@ export default class Collections extends React.Component {
 
     this.sidebar = React.createRef();
     this.collectionPage = React.createRef();
+
+    this.state = {
+      categories: {
+        data: [],
+        meta: []
+      },
+      productsA: {
+        data: [],
+        isLoading: true
+      },
+      productsB: {
+        data: [],
+        isLoading: true
+      },
+      productsC: {
+        data: [],
+        isLoading: true
+      }
+    }
   }
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
+
+    this.fetchCategories();
+    this.fetchProductsA();
+    this.fetchProductsB();
+    this.fetchProductsC();
   }
 
   componentWillUnmount() {
@@ -92,9 +61,86 @@ export default class Collections extends React.Component {
     }
   };
 
+  /**
+  * Fetch categories data from API
+  */
+  fetchCategories() {
+    commerce.categories.list().then((res) => {
+      // Success
+      this.setState({
+        categories: {
+          data: res.data,
+          meta: res.meta
+        }
+      })
+    })
+    // Error
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
+  /**
+  * Fetch products with category filter
+  */
+  fetchProductsA() {
+    commerce.products.list({category_slug: 'facial-products'}).then((res) => {
+      // Success
+      this.setState({
+        productsA: {
+          data: res.data,
+          isLoading: false
+        }
+      })
+    })
+    // Error
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
+  fetchProductsB() {
+    commerce.products.list({category_slug: 'body-products'}).then((res) => {
+      // Success
+      this.setState({
+        productsB: {
+          data: res.data,
+          isLoading: false
+        }
+      })
+    })
+    // Error
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
+  fetchProductsC() {
+    commerce.products.list({category_slug: 'hair-products'}).then((res) => {
+      // Success
+      this.setState({
+        productsC: {
+          data: res.data,
+          isLoading: false
+        }
+      })
+    })
+    // Error
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
   render() {
+    const { categories, productsA, productsB, productsC } = this.state
+    const reg = /(<([^>]+)>)/ig
+
     return (
       <div className="py-5 my-5">
+        <Head>
+          <title>Collections</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
         <div className="py-4">
           {/* Sidebar */}
           <div
@@ -102,66 +148,48 @@ export default class Collections extends React.Component {
             className="position-fixed left-0 right-0"
             style={{ top: "7.5rem" }}
           >
+            {categories.data.map(category => (
             <div className="custom-container">
               <div className="row">
                 <div className="col-2 d-none d-lg-block position-relative">
-                  <div className="position-absolute top-0 left-0 right-0">
+                  <p className="font-size-title font-weight-medium mb-3">
+                    {category.name}
+                  </p>
                     <div className="mb-5">
-                      <p className="font-size-title font-weight-medium mb-3">
-                        Skin Products
-                      </p>
                       {[
-                        { name: "Men", count: "11" },
-                        { name: "Women", count: "2" }
+                        { count: "2" }
                       ].map(item => (
                         <div className="d-flex">
                           <p className="mb-2 position-relative cursor-pointer">
-                            {item.name}
+                            Products
                             <span
                               className="position-absolute font-size-tiny text-right"
                               style={{ right: "-12px", top: "-4px" }}
                             >
-                              {item.count}
+                              {item.count} 
                             </span>
                           </p>
                         </div>
                       ))}
                     </div>
-                    <p className="font-size-title font-weight-medium mb-3">
-                      Hair Products
-                    </p>
-                    {[
-                      { name: "Men", count: "11" },
-                      { name: "Women", count: "2" }
-                    ].map(item => (
-                      <div className="d-flex">
-                        <p className="mb-2 position-relative cursor-pointer">
-                          {item.name}
-                          <span
-                            className="position-absolute font-size-tiny text-right"
-                            style={{ right: "-12px", top: "-4px" }}
-                          >
-                            {item.count}
-                          </span>
-                        </p>
-                      </div>
-                    ))}
-                  </div>
                 </div>
               </div>
+              
             </div>
+            ))}
           </div>
 
           {/* Main Content */}
           <div ref={this.collectionPage} className="custom-container">
             <div className="row">
               <div className="col-12 col-lg-10 offset-lg-2">
-                {/* Skin Products for men */}
+                {/* Facial Products */}
                 <p className="font-size-title font-weight-medium mb-4">
-                  Skin Products for men
+                  Facial Products
                 </p>
                 <div className="row mb-5">
-                  {products.map(item => (
+                  <ProductRow />
+                  {productsA.data.map(item => (
                     <div className="col-6 col-sm-4 col-md-3">
                       <Link href={item.link}>
                         <a className="mb-5 d-block font-color-black cursor-pointer">
@@ -169,17 +197,17 @@ export default class Collections extends React.Component {
                             className="mb-3"
                             style={{
                               paddingBottom: "125%",
-                              background: `url("${item.image}") center center/cover`
+                              background: `url("${item.media.source}") center center/cover`
                             }}
                           />
                           <p className="font-size-subheader mb-2 font-weight-medium">
-                            {item.title}
+                            {item.name}
                           </p>
                           <p className="mb-2 font-color-medium">
-                            {item.description}
+                            {item.description.replace(reg, "")}
                           </p>
                           <p className="font-size-subheader font-weight-medium pb-2 borderbottom border-color-black">
-                            {item.price}
+                            {item.price.formatted_with_symbol}
                           </p>
                         </a>
                       </Link>
@@ -187,33 +215,63 @@ export default class Collections extends React.Component {
                   ))}
                 </div>
 
-                {/* Skin Products for womenn */}
+                {/* Body Products */}
                 <p className="font-size-title font-weight-medium mb-4">
-                  Skin Products for women
+                  Body Products
                 </p>
                 <div className="row mb-5">
-                  {products.map(item => (
+                  {productsB.data.map(item => (
                     <div className="col-6 col-sm-4 col-md-3">
-                      <Link href={item.link}>
+                      {/* <Link href={item.link}> */}
                         <a className="mb-5 d-block font-color-black cursor-pointer">
                           <div
                             className="mb-3"
                             style={{
                               paddingBottom: "125%",
-                              background: `url("${item.image}") center center/cover`
+                              background: `url("${item.media.source}") center center/cover`
                             }}
                           />
                           <p className="font-size-subheader mb-2 font-weight-medium">
-                            {item.title}
+                            {item.name}
                           </p>
                           <p className="mb-2 font-color-medium">
-                            {item.description}
+                            {item.description.replace(reg, "")}
                           </p>
                           <p className="font-size-subheader font-weight-medium pb-2 borderbottom border-color-black">
-                            {item.price}
+                            {item.price.formatted_with_symbol}
                           </p>
                         </a>
-                      </Link>
+                      {/* </Link> */}
+                    </div>
+                  ))}
+                </div>
+                {/* Hair Products */}
+                <p className="font-size-title font-weight-medium mb-4">
+                  Hair Products
+                </p>
+                <div className="row mb-5">
+                  {productsC.data.map(item => (
+                    <div className="col-6 col-sm-4 col-md-3">
+                      {/* <Link href={item.link}> */}
+                        <a className="mb-5 d-block font-color-black cursor-pointer">
+                          <div
+                            className="mb-3"
+                            style={{
+                              paddingBottom: "125%",
+                              background: `url("${item.media.source}") center center/cover`
+                            }}
+                          />
+                          <p className="font-size-subheader mb-2 font-weight-medium">
+                            {item.name}
+                          </p>
+                          <p className="mb-2 font-color-medium">
+                            {item.description.replace(reg, "")}
+                          </p>
+                          <p className="font-size-subheader font-weight-medium pb-2 borderbottom border-color-black">
+                            {item.price.formatted_with_symbol}
+                          </p>
+                        </a>
+                      {/* </Link> */}
                     </div>
                   ))}
                 </div>
