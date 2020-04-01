@@ -5,19 +5,19 @@ import commerce from '../../lib/commerce';
 const collections = [
   {
     image: "/images/collection/1.png",
-    name: "Facial Products",
+    slug: "facial-products",
     link: "/collection",
     translateRatio: 30,
   },
   {
     image: "/images/collection/2.png",
-    name: "Body Products",
+    slug: "body-products",
     link: "/collection",
     translateRatio: 0,
   },
   {
     image: "/images/collection/3.png",
-    name: "Hair Products",
+    slug: "hair-products",
     link: "/collection",
     translateRatio: 60,
   }
@@ -28,7 +28,7 @@ export default class CategoryBanner extends Component {
     super(props);
 
     this.collectionBannerContainer = React.createRef();
-    this.category = [];
+    this.categoryStat = [];
 
     this.state = {
       categories: []
@@ -46,7 +46,7 @@ export default class CategoryBanner extends Component {
   }
 
   handleScroll = () => {
-    window.requestAnimationFrame(this.animate);
+    // window.requestAnimationFrame(this.animate);
   };
 
   animate = () => {
@@ -58,7 +58,7 @@ export default class CategoryBanner extends Component {
         const scrolledRatio =
           (window.innerHeight - dimentions.top) / window.innerHeight;
 
-        this.category.forEach((image, index) => {
+        this.categoryStat.forEach((image, index) => {
           image.style.transform = `translateY(-${scrolledRatio *
             collections[index].translateRatio}px)`;
         });
@@ -71,11 +71,19 @@ export default class CategoryBanner extends Component {
   */
   fetchCategories() {
     commerce.categories.list()
-    .then(res => {
-      //Success
-      this.setState({
-        categories: res.data
+    .then(({data}) => {
+      /**
+      * Match static data record to API data to find category name
+      */
+      const categories = data.map(item => {
+        const staticData = collections.find(data => data.slug === item.slug);
+        return {
+          ...staticData,
+          name: item.name
+        };
       });
+    
+      this.setState({ categories });
     })
     .catch(
       (error) => {
@@ -86,7 +94,8 @@ export default class CategoryBanner extends Component {
   }
 
   render() {
-    const { categories } = this.state; 
+
+    const { categories } = this.state
 
     return (
       <div className="bg-brand300 py-5 collection-banner">
@@ -97,14 +106,17 @@ export default class CategoryBanner extends Component {
           <p className="font-size-display2 my-3 py-5 text-center font-family-secondary">
             Categories
           </p>
+          <p className="font-size-display2 my-3 py-5 text-center font-family-secondary">
+            {categories}
+          </p>
           
           <div className="row">
-            {collections.map((item) => (
+            {categories.map((item, index) => (
               <div
-                key={item.id}
-                ref={item => this.category.push(item)}
-                className="col-12 col-md-4 collection-item mb-5"
-              >
+              key={`category-item-${index}`}
+              //ref={item => this.categoryStat.push(item)}
+              className="col-12 col-md-4 collection-item mb-5"
+            >
                 <Link href={item.link}>
                 <a className="align-items-center font-color-black flex-column cursor-pointer mb-5">
                 <div>
@@ -115,12 +127,10 @@ export default class CategoryBanner extends Component {
                         background: `url("${item.image}") center center/cover`
                       }}
                     />
-                    {categories.map((category) => (
-                    <p className="mb-2 font-size-heading text-center" key={category.id}>
-                    {category.name}
+                    <p className="mb-2 font-size-heading text-center" key={item.id}>
+                    {item.name}
                     </p>
-                    ))}
-                    <p className="text-center">{item.number} products</p>
+                    {/* <p className="text-center">{item.number} products</p> */}
                     </div>
                   </a>
                 </Link>
@@ -130,5 +140,6 @@ export default class CategoryBanner extends Component {
         </div>
       </div>
     );
+
   }
 }

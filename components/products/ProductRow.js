@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import Link from 'next/link';
-import withRouter from 'next/router';
 import commerce from '../../lib/commerce';
-
 import ProductCard from "../products/ProductCard";
 
 export default class ProductRow extends Component {
@@ -41,11 +38,12 @@ export default class ProductRow extends Component {
   }
 
   render() {
-    const { products } = this.state;
+    const { products, isLoading } = this.state;
     const reg = /(<([^>]+)>)/ig
 
     return (
       <div className="row mb-5">
+        <p className="text-center font-size-display1 mb-3 font-weight-medium">{isLoading ? 'Loading...' : ''}</p>
         {products.data.map((product) => (
           <div className="col-6 col-sm-6 col-lg-3">
             <ProductCard
