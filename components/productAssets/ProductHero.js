@@ -253,22 +253,6 @@ export default class ProductHero extends Component {
                             }
                           />
                           <div className="d-flex py-4">
-                            {/* <button
-                              className="h-56 font-weight-medium bg-white border border-color-black pl-3 pr-4 mr-3 d-flex align-items-center"
-                              onClick={() =>
-                                this.setState({ isSaved: !isSaved })
-                              }
-                            >
-                              <img
-                                src={
-                                  isSaved
-                                    ? "/icon/heart-solid.svg"
-                                    : "/icon/heart.svg"
-                                }
-                                className="mr-2"
-                              />
-                              Save{isSaved && `d`}
-                            </button> */}
                             <button className="h-56 bg-black font-color-white pl-3 pr-4 d-flex align-items-center flex-grow-1">
                               <span className="flex-grow-1 mr-3 text-center">
                                 Add to cart
@@ -286,7 +270,7 @@ export default class ProductHero extends Component {
                               this.scrollRightSection()
                             );
                           }}
-                          className="d-flex cursor-pointer py-3 justify-content-between font-weight-medium"
+                          className="d-flex cursor-pointesr py-3 justify-content-between font-weight-medium"
                         >
                           Shipping and returns
                           <img src="/icon/plus.svg" />

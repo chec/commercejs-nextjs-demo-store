@@ -1,11 +1,12 @@
 import App from "next/app";
 import React from "react";
-import { wrapper } from "../store";
 import "../style/scss/style.scss";
+import { wrapper } from "../store";
 import commerce from "../lib/commerce";
 import collections from "../lib/collections";
 
 class MyApp extends App {
+  // https://nextjs.org/docs/api-reference/data-fetching/getInitialProps
   static getInitialProps = wrapper.getInitialAppProps(async ({ Component, ctx }) => {
     // Fetch data on load
     // Fetch categories
@@ -20,6 +21,7 @@ class MyApp extends App {
     // Fetch products
     const { data: products } = await commerce.products.list();
 
+    // Allows store to be updated via the dispatch action
     ctx.store.dispatch({ type: 'STORE_CATEGORIES', payload: categories });
     ctx.store.dispatch({ type: 'STORE_PRODUCTS', payload: products });
 

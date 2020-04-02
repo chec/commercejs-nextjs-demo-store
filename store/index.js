@@ -1,12 +1,13 @@
 import { createStore } from 'redux';
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 
+// Store initial state
 const initialState = {
   categories: [],
   products: [],
 };
 
-// create your reducer
+// Create your reducer
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case HYDRATE:
@@ -20,10 +21,10 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-// create a makeStore function
+// Create a makeStore function and pass reducer to createStore
 const makeStore = () => {
   return createStore(reducer);
 };
 
-// export an assembled wrapper
+// Export an assembled wrapper
 export const wrapper = createWrapper(makeStore, { debug: true });
