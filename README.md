@@ -1,6 +1,6 @@
 # Example Store with Commerce.js and Next.js 
 
-A high-fidelity fully-fledged eCommerce store built using the Commerce.js SDK and Next.js (an SSR frameworke based on React).
+A high-fidelity fully-fledged eCommerce store built using the Commerce.js SDK and Next.js with live deployment to Netlify.
 
 Checkout the live demo [here]()
 
@@ -9,7 +9,12 @@ Checkout the live demo [here]()
 
 ## Overview
 
-This README will guide you in getting up and running with a fully-fledged eCommerce boilerplate. There are two ways to get set up: 1) Automatic live deploy a copy of the application via Netlify 2) Manual setup and deployment process. In this option, we will be focusing on the initial setup, injecting your Next.js app with Commerce.js and lastly wrap up with deployment steps. For a full detailed tutorial on building this JAMstack eCommerce application, please head on over [here]().
+This README will guide you in getting up and running with a fully-fledged eCommerce template. There are two ways to get set up:
+
+1. One-click live deploy a copy of the application via Netlify
+2. Manual setup and deployment process. In this option, we will be focusing on the initial setup, injecting your Next.js app with Commerce.js and lastly wrap up with manual deployment steps.
+
+For a full detailed tutorial on building this JAMstack eCommerce application, please head on over [here](tutorial-url).
 
 ## Prequisites
 
@@ -20,10 +25,13 @@ This README will guide you in getting up and running with a fully-fledged eComme
 
 *Explanation of Netlify deployment process here*
 
-*Deploy to Netlify button here*
-[Deploy to Netlify]
+1. Set up a Chec account [here]() and upload the neccessary data to power your store. If you would like to use our sample data, please ignore this step.
 
-## Setup
+Deploy the repo with one single click.
+
+ [![Deploy to Netlify button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/chec/example-checkout-hifi)
+
+## Manual Setup
 
 1. Set up a Chec account [here]() and upload the neccessary data to power your store.
 
@@ -77,7 +85,7 @@ yarn dev
 
 ## Getting Started
 
-1. Create a `.env` 'dot file' at your project root to store your Chec `public_key`. 
+1. Copy the `.example.env` dotenv file at your project root to store your Chec `public_key`. 
 
 ```
 COMMERCE_PUBLIC_KEY=your_public_API_key_here
