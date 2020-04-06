@@ -7,10 +7,10 @@ import Footer from "../components/common/Footer";
 
 const Home = () => (
   <Root>
-    {/* <Head>
-      <title>Home</title>
+    <Head>
+      <title>Collection</title>
       <link rel="icon" href="/favicon.ico" />
-    </Head> */}
+    </Head>
     <Collections />
     <ExploreBanner />
     <Footer />

@@ -74,7 +74,7 @@ class CategoryBanner extends Component {
                     <p className="mb-2 font-size-heading text-center" key={item.id}>
                     {item.name}
                     </p>
-                    {/* <p className="text-center">{item.number} products</p> */}
+                    <p className="text-center">{item.count} products</p>
                     </div>
                   </a>
                 </Link>
