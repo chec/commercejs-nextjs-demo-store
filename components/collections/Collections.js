@@ -49,7 +49,8 @@ class Collections extends Component {
   };
 
   render() {
-    const { categories, products } = this.props;
+    const { categories } = this.props;
+    const reg = /(<([^>]+)>)/ig;
 
     return (
       <div className="py-5 my-5">
@@ -101,8 +102,8 @@ class Collections extends Component {
                 <p className="font-size-title font-weight-medium mb-4">
                   Facial Products
                </p>
-                <div className="row mb-5 filtered-products">
-                  {this.filterProductsByCat("facial-products").map(item => (
+                <div className="row mb-5 collection-1">
+                  {this.filterProductsByCat('facial-products').map(item => (
                     <div className="col-6 col-sm-4 col-md-3">
                      <Link href={item.link}>
                         <a className="mb-5 d-block font-color-black cursor-pointer">
@@ -132,8 +133,8 @@ class Collections extends Component {
                 <p className="font-size-title font-weight-medium mb-4">
                   Body Products
                </p>
-               <div className="row mb-5 filtered-products-2">
-                  {this.filterProductsByCat('facial-products').map(item => (
+               <div className="row mb-5 collection-2">
+                  {this.filterProductsByCat('body-products').map(item => (
                     <div className="col-6 col-sm-4 col-md-3">
                       <Link href={item.link}>
                         <a className="mb-5 d-block font-color-black cursor-pointer">
@@ -163,8 +164,8 @@ class Collections extends Component {
                 <p className="font-size-title font-weight-medium mb-4">
                   Hair Products
                </p>
-               <div className="row mb-5 filtered-products-3">
-                  {this.filterProductsByCat("facial-products").map(item => (
+               <div className="row mb-5 collection-3">
+                  {this.filterProductsByCat("hair-products").map(item => (
                     <div className="col-6 col-sm-4 col-md-3">
                       <Link href={item.link}>
                         <a className="mb-5 d-block font-color-black cursor-pointer">
