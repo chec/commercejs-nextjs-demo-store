@@ -1,25 +1,22 @@
 import React from "react";
 import { useRouter } from 'next/router';
-import commerce from "../lib/commerce";
+import commerce from "../../lib/commerce";
 
 import Head from "next/head";
-import Root from "../../../components/common/Root";
-import ProductHero from "../../../components/productAssets/ProductHero";
-import ClientReview from "../../../components/productAssets/ClientReview";
-import SuggestedProducts from "../../../components/productAssets/SuggestedProducts";
-import ExploreBanner from "../../../components/productAssets/ExploreBanner";
-import Footer from "../../../components/common/Footer";
+import Root from "../../components/common/Root";
+import ProductHero from "../../components/productAssets/ProductHero";
+import ClientReview from "../../components/productAssets/ClientReview";
+import SuggestedProducts from "../../components/productAssets/SuggestedProducts";
+import ExploreBanner from "../../components/productAssets/ExploreBanner";
+import Footer from "../../components/common/Footer";
 
-
-
-function Product({product}) {
-  const router = useRouter();
-  const { permalink } = router.query
+function Product({ product }) {
+  const { name } = product;
 
   return (
     <Root>
       <Head>
-        <title>Product { permalink }</title>
+        <title>{ name } | commerce</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -34,12 +31,14 @@ function Product({product}) {
 
 // Use getStaticPaths() to pre-render PDP according to page path
 export async function getStaticPaths() {
-
-  const res = await commerce.products.list();
-  const products = await res.json()
+  const { data: products } = await commerce.products.list();
 
   // Get the paths we want to pre-render based on product
-  const paths = products.map(product => `/product/${product.permalink}`)
+  const paths = products.map(product => ({
+    params: {
+      permalink: product.permalink,
+    },
+  }));
 
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.
@@ -49,12 +48,11 @@ export async function getStaticPaths() {
   }
 }
 
-// This also gets called at build time
+// This also gets called at build time, and fetches the product to view
 export async function getStaticProps({ params: { permalink } }) {
   // params contains the product `permalink`.
   // If the route is like /product/shampoo-conditioner, then params.permalink is shampoo-conditioner
-  const res = await getProductByPerm(permalink);
-  const product = await res.json()
+  const product = await commerce.products.retrieve(permalink, { type: 'permalink '});
 
   // Pass post data to the page via props
   return {
