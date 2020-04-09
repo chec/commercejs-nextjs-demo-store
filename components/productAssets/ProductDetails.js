@@ -24,7 +24,7 @@ const onReviewClick = () => {
 
 // }
 
-const ProductDetails = ( {name, description, className, variants, options, selected, toggle, price} ) => {
+const ProductDetails = ( {name, description, className, product, options, selected, toggle, price} ) => {
   const reg = /(<([^>]+)>)/ig;
 
   return (
@@ -40,9 +40,25 @@ const ProductDetails = ( {name, description, className, variants, options, selec
       <div className="mb-4 pb-3 font-size-subheader">{description.replace(reg, "")}</div>
 
       {/* Product Variants */}
-      {/* {variants.map(variant => (
-        <VariantSelector options={variant.options} />
+      {/* {product.map(variant => (
+        <VariantSelector
+          option={variant.options}
+          name={variant.name}
+        />
       ))} */}
+
+        {/* <div className="d-none d-sm-block">
+          <VariantSelector
+            className="mb-3"
+            name={name}
+            product={product}
+            // selected={selectedSize}
+            // toggle={value =>
+            //   this.setState({ selectedSize: value })
+            // }
+          />
+        </div> */}
+
 
       {/* Add to Cart & Price */}
       <div className="d-flex py-4">

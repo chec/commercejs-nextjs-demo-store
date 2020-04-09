@@ -240,18 +240,17 @@ class Product extends Component {
                         />
 
                         {/* Desktop Add to cart */}
-                        <div className="d-none d-sm-block">
+                        {/* <div className="d-none d-sm-block">
                           <VariantSelector
                             className="mb-3"
-                            name={name}
-                            options={["500ML", "1000ML"]}
-                            selected={selectedSize}
-                            toggle={value =>
-                              this.setState({ selectedSize: value })
-                            }
+                            name={product.name}
+                            product={product}
+                            // selected={selectedSize}
+                            // toggle={value =>
+                            //   this.setState({ selectedSize: value })
+                            // }
                           />
-                        </div>
-
+                        </div> */}
                         <div
                           onClick={() => {
                             this.setState({ showShipping: !showShipping }, () =>
