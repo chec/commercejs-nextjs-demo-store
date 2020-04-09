@@ -1,15 +1,10 @@
 import React from "react";
 
-export default function VariantSelector({
-  className,
-  options,
-  heading,
-  selected,
-  toggle
-}) {
+const VariantSelector = ({ className, options, name, selected, toggle, product }) => {
+
   return (
     <div className={className}>
-      <span className="mr-3 font-weight-semibold">{heading}</span>
+      <span className="mr-3 font-weight-semibold">{name}</span>
       {options.map(option => (
         <span
           onClick={() => toggle(option)}
@@ -22,3 +17,5 @@ export default function VariantSelector({
     </div>
   );
 }
+
+export default VariantSelector;

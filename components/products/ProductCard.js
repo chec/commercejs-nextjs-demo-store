@@ -2,8 +2,8 @@ import React from "react";
 import Link from "next/link";
 
 export default function ProductCard({ permalink, image, name, description, price}) {
+
   return (
-    
     <div className="">
         <div className="">
           <Link href="/product/[permalink]" as={`/product/${permalink}`}>

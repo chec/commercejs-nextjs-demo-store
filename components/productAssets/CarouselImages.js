@@ -1,11 +1,11 @@
 import { Component } from "react";
 import { animateScroll as scroll } from "react-scroll";
 
-class CaroselImages extends Component {
+class CarouselImages extends Component {
   constructor(props) {
     super(props);
 
-    this.caroselImages = [];
+    this.carouselImages = [];
   }
 
   componentDidMount() {
@@ -21,7 +21,7 @@ class CaroselImages extends Component {
   };
 
   animate = () => {
-    const mainImages = document.querySelectorAll("#caroselMainImages");
+    const mainImages = document.querySelectorAll("#carouselMainImages");
 
     var x = window.matchMedia("(min-width: 768px)");
 
@@ -29,7 +29,7 @@ class CaroselImages extends Component {
       return;
     }
 
-    this.caroselImages.forEach(image => {
+    this.carouselImages.forEach(image => {
       image && (image.style.borderColor = "#ffffff");
     });
 
@@ -39,8 +39,8 @@ class CaroselImages extends Component {
         mainImages[mainImages.length - 1] &&
         mainImages[mainImages.length - 1].getBoundingClientRect().top < 200
       ) {
-        this.caroselImages[mainImages.length - 1] &&
-          (this.caroselImages[mainImages.length - 1].style.borderColor =
+        this.carouselImages[mainImages.length - 1] &&
+          (this.carouselImages[mainImages.length - 1].style.borderColor =
             "#000000");
         break;
       }
@@ -54,14 +54,14 @@ class CaroselImages extends Component {
       }
 
       // Darken the last image
-      this.caroselImages[index - 1] &&
-        (this.caroselImages[index - 1].style.borderColor = "#000000");
+      this.carouselImages[index - 1] &&
+        (this.carouselImages[index - 1].style.borderColor = "#000000");
       break;
     }
   };
 
   onClickImage = index => {
-    const mainImages = document.querySelectorAll("#caroselMainImages");
+    const mainImages = document.querySelectorAll("#carouselMainImages");
 
     if (mainImages) {
       const scrollDestination = mainImages[index].offsetTop;
@@ -80,9 +80,9 @@ class CaroselImages extends Component {
           <div className="ml-lg-3 mr-3">
             {images.map((image, index) => (
               <div
-                ref={image => this.caroselImages.push(image)}
-                key={`carosell-side-images-${index}`}
-                data-key={`carosell-side-images-${index}`}
+                ref={image => this.carouselImages.push(image)}
+                key={`carousel-side-images-${index}`}
+                data-key={`carousel-side-images-${index}`}
                 className="h-56 w-48 mb-3 cursor-pointer"
                 onClick={() => this.onClickImage(index)}
                 style={{
@@ -99,4 +99,4 @@ class CaroselImages extends Component {
   }
 }
 
-export default CaroselImages;
+export default CarouselImages;
