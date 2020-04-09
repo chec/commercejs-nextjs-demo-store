@@ -1,15 +1,18 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import Link from "next/link";
-
 import ProductRow from "../products/ProductRow";
+import { connect } from "react-redux";
 
-export default class ProductsBanner extends Component {
+class ProductsBanner extends Component {
   render() {
+    const { products } = this.props;
+
     return (
       <div className="custom-container py-5 my-5">
         <div className="d-flex flex-column align-items-center mb-5 pb-4">
           <p className="font-color-medium mb-4">
-            Introducing Popular products
+            Introducing Our Latest Products
           </p>
           <p
             className="text-center font-size-display1 mb-3 font-weight-medium"
@@ -24,8 +27,18 @@ export default class ProductsBanner extends Component {
             </a>
           </Link>
         </div>
-        <ProductRow />
+        <ProductRow products={products.slice(0, 4)} />
       </div>
     );
   }
 }
+
+ProductsBanner.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.object),
+};
+
+ProductsBanner.defaultProps = {
+  products: [],
+};
+
+export default connect(state => state)(ProductsBanner);

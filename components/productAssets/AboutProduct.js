@@ -21,9 +21,6 @@ function AboutProduct({ description, ...rest }) {
       <p className="font-size-display3 font-family-secondary mt-2 mb-2">
         Futuredew
       </p>
-      <p className="font-color-medium mb-4 pb-2">
-        oil serum hybrid · 30 ml / 1 fl oz
-      </p>
       <div
         dangerouslySetInnerHTML={{
           __html: description

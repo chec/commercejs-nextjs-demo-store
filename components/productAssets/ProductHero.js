@@ -22,17 +22,7 @@ const detailView = `<p>
       straps for easy carrying/storage when not being worn - Ribbed hidden
       sleeve cuffs for extra warmth - Loop at back neck for easy hanging - Hits
       at mid-thigh/above knee
-    </p>
-
-    <p>
-      Measurements (taken from flat garment) Extra Small - Chest: 19.1 in (48.5
-      cm) - Length: 34.3 in (87 cm) Small - Chest: 20.1 in (51 cm) - Length:
-      34.6 in (88 cm) Medium - Chest: 21.1 in (53.5 cm) - Length: 35.2 in (89.3
-      cm) Large - Chest: 22.3 in (56.7 cm) - Length: 35.7 in (90.6 cm) Extra
-      Large - Chest: 23.6 in (59.9 cm) - Length: 36.2 in (91.9 cm)
-    </p>
-
-    <p>Model is 5'9&quot; and is wearing a size Small.</p>`;
+    </p>`;
 
 export default class ProductHero extends Component {
   constructor(props) {
@@ -141,7 +131,6 @@ export default class ProductHero extends Component {
                           Skin Products
                         </p>
                         {[
-                          { name: "Men", count: "11" },
                           { name: "Women", count: "2" }
                         ].map(item => (
                           <div className="d-flex">
@@ -161,7 +150,6 @@ export default class ProductHero extends Component {
                         Hair Products
                       </p>
                       {[
-                        { name: "Men", count: "11" },
                         { name: "Women", count: "2" }
                       ].map(item => (
                         <div className="d-flex">
@@ -265,22 +253,6 @@ export default class ProductHero extends Component {
                             }
                           />
                           <div className="d-flex py-4">
-                            <button
-                              className="h-56 font-weight-medium bg-white border border-color-black pl-3 pr-4 mr-3 d-flex align-items-center"
-                              onClick={() =>
-                                this.setState({ isSaved: !isSaved })
-                              }
-                            >
-                              <img
-                                src={
-                                  isSaved
-                                    ? "/icon/heart-solid.svg"
-                                    : "/icon/heart.svg"
-                                }
-                                className="mr-2"
-                              />
-                              Save{isSaved && `d`}
-                            </button>
                             <button className="h-56 bg-black font-color-white pl-3 pr-4 d-flex align-items-center flex-grow-1">
                               <span className="flex-grow-1 mr-3 text-center">
                                 Add to cart
@@ -298,7 +270,7 @@ export default class ProductHero extends Component {
                               this.scrollRightSection()
                             );
                           }}
-                          className="d-flex cursor-pointer py-3 justify-content-between font-weight-medium"
+                          className="d-flex cursor-pointesr py-3 justify-content-between font-weight-medium"
                         >
                           Shipping and returns
                           <img src="/icon/plus.svg" />

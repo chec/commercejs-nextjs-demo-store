@@ -1,44 +1,19 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import Link from "next/link";
-import commerce from '../../lib/commerce';
+import { connect } from "react-redux";
 
-const collections = [
-  {
-    image: "/images/collection/1.png",
-    slug: "facial-products",
-    link: "/collection",
-    translateRatio: 30,
-  },
-  {
-    image: "/images/collection/2.png",
-    slug: "body-products",
-    link: "/collection",
-    translateRatio: 0,
-  },
-  {
-    image: "/images/collection/3.png",
-    slug: "hair-products",
-    link: "/collection",
-    translateRatio: 60,
-  }
-];
-
-export default class CategoryBanner extends Component {
+class CategoryBanner extends Component {
   constructor(props) {
     super(props);
 
     this.collectionBannerContainer = React.createRef();
     this.categoryStat = [];
-
-    this.state = {
-      categories: []
-    }
   }
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
     this.handleScroll();
-    this.fetchCategories();
   }
 
   componentWillUnmount() {
@@ -66,36 +41,8 @@ export default class CategoryBanner extends Component {
     }
   };
 
-  /**
-  * Fetch categories data from API
-  */
-  fetchCategories() {
-    commerce.categories.list()
-    .then(({data}) => {
-      /**
-      * Match static data record to API data to find category name
-      */
-      const categories = data.map(item => {
-        const staticData = collections.find(data => data.slug === item.slug);
-        return {
-          ...staticData,
-          name: item.name
-        };
-      });
-    
-      this.setState({ categories });
-    })
-    .catch(
-      (error) => {
-        // Error
-        console.log(error)
-      }
-    );
-  }
-
   render() {
-
-    const { categories } = this.state
+    const { categories } = this.props;
 
     return (
       <div className="bg-brand300 py-5 collection-banner">
@@ -106,10 +53,7 @@ export default class CategoryBanner extends Component {
           <p className="font-size-display2 my-3 py-5 text-center font-family-secondary">
             Categories
           </p>
-          <p className="font-size-display2 my-3 py-5 text-center font-family-secondary">
-            {categories}
-          </p>
-          
+
           <div className="row">
             {categories.map((item, index) => (
               <div
@@ -120,7 +64,7 @@ export default class CategoryBanner extends Component {
                 <Link href={item.link}>
                 <a className="align-items-center font-color-black flex-column cursor-pointer mb-5">
                 <div>
-                  
+
                     <div
                       className="mb-4 w-100 collection-item-image"
                       style={{
@@ -130,7 +74,7 @@ export default class CategoryBanner extends Component {
                     <p className="mb-2 font-size-heading text-center" key={item.id}>
                     {item.name}
                     </p>
-                    {/* <p className="text-center">{item.number} products</p> */}
+                    <p className="text-center">{item.count} products</p>
                     </div>
                   </a>
                 </Link>
@@ -140,6 +84,15 @@ export default class CategoryBanner extends Component {
         </div>
       </div>
     );
-
   }
 }
+
+CategoryBanner.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.object),
+};
+
+CategoryBanner.defaultProps = {
+  categories: [],
+};
+
+export default connect(state => state)(CategoryBanner);
