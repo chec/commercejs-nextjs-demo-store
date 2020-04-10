@@ -1,37 +1,26 @@
-import React, { Component } from "react";
-import PropTypes from 'prop-types';
+import React from "react";
 
-class VariantSelector extends Component {
-  render() {
-  const { className, products, selected, toggle } = this.props;
+const VariantSelector = ({ className, product, onSelectOption, addToCart, hovered }) => {
 
   return (
     <div className={className}>
-      {products.map(variant => (
+      {product.variants.map(variant => (
         <>
         <span className="mr-3 font-weight-semibold">{variant.name}</span>
         {variant.options.map(option => (
+
             <span
-            onClick={() => toggle(option)}
-            className={`mr-3 cursor-pointer ${option === selected &&
-              "text-decoration-underline"}`}
+            onClick={() => onSelectOption(variant.id, option.id, addToCart)}
+            className={`mr-3 cursor-pointer ${option.id === onSelectOption ?
+              "text-decoration-underline" : "text-decoration-none"}`}
           >
-            {option}
+            {option.name}
           </span>
         ))}
         </>
       ))}
     </div>
   );
-  }
 }
-
-VariantSelector.propTypes = {
-  products: PropTypes.arrayOf(PropTypes.object),
-};
-
-VariantSelector.defaultProps = {
-  products: [],
-};
 
 export default VariantSelector;

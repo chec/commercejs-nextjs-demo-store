@@ -3,12 +3,20 @@ import ReviewStars from "./ReviewStars";
 import { animateScroll as scroll } from "react-scroll";
 import VariantSelector from "../productAssets/VariantSelector";
 import { connect } from "react-redux";
+import commerce from '../../lib/commerce';
 
 
 class ProductDetails extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      selectedOption: null,
+    }
+  }
 
   /**
-  * Handle click on review starts to scroll to review section
+  * Handle click on review to scroll to review section
   */
   onReviewClick = () => {
     const section = document.querySelector("#reviews");
@@ -20,9 +28,42 @@ class ProductDetails extends Component {
     }
   }
 
+  /**
+  * On selecting variant
+  */
+  onSelectOption = (variantId, optionId, action) => {
+    const { selectedOption } = this.state;
+
+    let newSelectedOption = selectedOption;
+    newSelectedOption[variantId] = optionId;
+
+    this.setState(
+      { selectedOption: newSelectedOption },
+      () => action && action()
+    );
+  }
+
+
+  /**
+  * Add to Cart
+  */
+  addToCart = () => {
+    const { product, commerce, refreshCart } = this.props;
+
+    const { selectedOption } = this.state;
+
+    commerce.cart.add(product.id, 1, selectedOption)
+      .then(resp => {
+        refreshCart(() => {
+          toggleCart(true);
+        })
+      })
+  }
+
   render() {
 
-    const {name, description, product, selected, toggle, price} = this.props;
+    const {name, description, product, price} = this.props;
+    const { selectedOption } = this.state;
     const reg = /(<([^>]+)>)/ig;
 
     return (
@@ -37,35 +78,19 @@ class ProductDetails extends Component {
         </p>
         <div className="mb-4 pb-3 font-size-subheader">{description.replace(reg, "")}</div>
 
-        {/* Product Variants */}
-        {/* <div className="d-none d-sm-block">
-          {product.map(variant => (
-            <>
-              <span className="mr-3 font-weight-semibold">{variant.name}</span>
-              {variant.options.map(option => (
-                  <span
-                  onClick={() => toggle(option)}
-                  className={`mr-3 cursor-pointer ${option === selected &&
-                    "text-decoration-underline"}`}
-                >
-                  {option}
-                </span>
-              ))}
-            </>
-            ))}
-          </div> */}
-
-          {/* <div className="d-none d-sm-block">
+        {/* Product Variant */}
+          <div className="d-none d-sm-block">
             <VariantSelector
               className="mb-3"
-              name={name}
               product={product}
-              // selected={selectedSize}
+              onSelectOption={this.onSelectOption}
+              selectedOption={selectedOption}
+              addToCart={this.addToCart}
               // toggle={value =>
               //   this.setState({ selectedSize: value })
               // }
             />
-          </div> */}
+          </div>
 
         {/* Add to Cart & Price */}
         <div className="d-flex py-4">

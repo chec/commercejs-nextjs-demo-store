@@ -34,42 +34,6 @@ const cartItems = [
     name: "Futuredew",
     price: "$32.00",
     detail: "300ml, Dry Skin"
-  },
-  {
-    image: "https://images.unsplash.com/photo-1508350552147-213c11fcede6",
-    name: "Futuredew",
-    price: "$32.00",
-    detail: "300ml, Dry Skin"
-  },
-  {
-    image: "https://images.unsplash.com/photo-1508350552147-213c11fcede6",
-    name: "Futuredew",
-    price: "$32.00",
-    detail: "300ml, Dry Skin"
-  },
-  {
-    image: "https://images.unsplash.com/photo-1508350552147-213c11fcede6",
-    name: "Futuredew",
-    price: "$32.00",
-    detail: "300ml, Dry Skin"
-  },
-  {
-    image: "https://images.unsplash.com/photo-1508350552147-213c11fcede6",
-    name: "Futuredew",
-    price: "$32.00",
-    detail: "300ml, Dry Skin"
-  },
-  {
-    image: "https://images.unsplash.com/photo-1508350552147-213c11fcede6",
-    name: "Futuredew",
-    price: "$32.00",
-    detail: "300ml, Dry Skin"
-  },
-  {
-    image: "https://images.unsplash.com/photo-1508350552147-213c11fcede6",
-    name: "Futuredew",
-    price: "$32.00",
-    detail: "300ml, Dry Skin"
   }
 ];
 

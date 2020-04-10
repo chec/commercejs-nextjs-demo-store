@@ -7,7 +7,6 @@ import Head from "next/head";
 import Root from "../../components/common/Root";
 import CarouselImages from "../../components/productAssets/CarouselImages";
 import ProductDetails from "../../components/productAssets/ProductDetails";
-import VariantSelector from "../../components/productAssets/VariantSelector";
 import ClientReview from "../../components/productAssets/ClientReview";
 import SuggestedProducts from "../../components/productAssets/SuggestedProducts";
 import ExploreBanner from "../../components/productAssets/ExploreBanner";
@@ -141,8 +140,6 @@ class Product extends Component {
 
   render() {
     const {
-      selectedSize,
-      selectedColor,
       showShipping,
       showDetails
     } = this.state;
@@ -191,26 +188,14 @@ class Product extends Component {
                     <div className="w-48"></div>
                   </div>
                   <div className="flex-grow-1">
-                    {/* {images.map((image, index) => ( */}
+                    {images.map((image, index) => (
                       <img
-                        key={`carousel-main-images-${product.id}`}
+                        key={`carousel-images-${product.id}`}
                         src={product.media.source}
                         id="carouselMainImages"
                         className="w-100 mb-3"
                       />
-                      <img
-                        key={`carousel-main-images-${product.id}`}
-                        src={product.media.source}
-                        id="carouselMainImages"
-                        className="w-100 mb-3"
-                      />
-                      <img
-                        key={`carousel-main-images-${product.id}`}
-                        src={product.media.source}
-                        id="carouselMainImages"
-                        className="w-100 mb-3"
-                      />
-                    {/* ))} */}
+                    ))}
                   </div>
                 </div>
               </div>

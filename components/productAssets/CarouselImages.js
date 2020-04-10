@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { animateScroll as scroll } from "react-scroll";
+import { connect } from "react-redux";
 
 class CarouselImages extends Component {
   constructor(props) {
@@ -72,7 +73,7 @@ class CarouselImages extends Component {
   };
 
   render() {
-    const { images } = this.props;
+    const { images, products } = this.props;
 
     return (
       <div className="position-relative">
@@ -99,4 +100,4 @@ class CarouselImages extends Component {
   }
 }
 
-export default CarouselImages;
+export default connect(state => state)(CarouselImages);
