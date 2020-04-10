@@ -237,20 +237,9 @@ class Product extends Component {
                           name={product.name}
                           description={product.description}
                           price={product.price.formatted_with_symbol}
+                          product={product}
                         />
 
-                        {/* Desktop Add to cart */}
-                        {/* <div className="d-none d-sm-block">
-                          <VariantSelector
-                            className="mb-3"
-                            name={product.name}
-                            product={product}
-                            // selected={selectedSize}
-                            // toggle={value =>
-                            //   this.setState({ selectedSize: value })
-                            // }
-                          />
-                        </div> */}
                         <div
                           onClick={() => {
                             this.setState({ showShipping: !showShipping }, () =>

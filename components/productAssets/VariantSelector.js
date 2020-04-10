@@ -1,11 +1,13 @@
-import React from "react";
+import React, { Component } from "react";
+import PropTypes from 'prop-types';
 
-
-const VariantSelector = ({ className, product, selected, toggle }) => {
+class VariantSelector extends Component {
+  render() {
+  const { className, products, selected, toggle } = this.props;
 
   return (
     <div className={className}>
-      {product.map(variant => (
+      {products.map(variant => (
         <>
         <span className="mr-3 font-weight-semibold">{variant.name}</span>
         {variant.options.map(option => (
@@ -21,6 +23,15 @@ const VariantSelector = ({ className, product, selected, toggle }) => {
       ))}
     </div>
   );
+  }
 }
+
+VariantSelector.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.object),
+};
+
+VariantSelector.defaultProps = {
+  products: [],
+};
 
 export default VariantSelector;
