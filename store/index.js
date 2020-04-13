@@ -1,7 +1,7 @@
 import { createStore } from 'redux';
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 
-// Store initial state
+// Declare initial state
 const initialState = {
   categories: [],
   products: [],

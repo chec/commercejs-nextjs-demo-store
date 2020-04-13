@@ -130,9 +130,6 @@ export default class Header extends Component {
             </Link>
           </div>
           <div className="d-flex">
-            <div className="mr-3">
-              <img src="/icon/user.svg" className="w-32 cursor-pointer" />
-            </div>
             <div
               className="position-relative cursor-pointer"
               onClick={() => this.toggleCart(true)}

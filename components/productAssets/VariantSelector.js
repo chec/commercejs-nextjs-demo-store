@@ -1,24 +1,26 @@
 import React from "react";
 
-export default function VariantSelector({
-  className,
-  options,
-  heading,
-  selected,
-  toggle
-}) {
+const VariantSelector = ({ className, product, onSelectOption, addToCart, hovered }) => {
+
   return (
     <div className={className}>
-      <span className="mr-3 font-weight-semibold">{heading}</span>
-      {options.map(option => (
-        <span
-          onClick={() => toggle(option)}
-          className={`mr-3 cursor-pointer ${option === selected &&
-            "text-decoration-underline"}`}
-        >
-          {option}
-        </span>
+      {product.variants.map(variant => (
+        <>
+        <span className="mr-3 font-weight-semibold">{variant.name}</span>
+        {variant.options.map(option => (
+
+            <span
+            onClick={() => onSelectOption(variant.id, option.id, addToCart)}
+            className={`mr-3 cursor-pointer ${option.id === onSelectOption ?
+              "text-decoration-underline" : "text-decoration-none"}`}
+          >
+            {option.name}
+          </span>
+        ))}
+        </>
       ))}
     </div>
   );
 }
+
+export default VariantSelector;

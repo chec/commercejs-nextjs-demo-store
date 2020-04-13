@@ -5,13 +5,14 @@ import ProductCard from "../products/ProductCard";
 class ProductRow extends Component {
   render() {
     const { products } = this.props;
-    const reg = /(<([^>]+)>)/ig
+    const reg = /(<([^>]+)>)/ig;
 
     return (
       <div className="row mb-5">
         {products.map((product) => (
           <div className="col-6 col-sm-6 col-lg-3">
             <ProductCard
+              id={product.id}
               permalink={product.permalink}
               key={product.id}
               image={product.media.source}

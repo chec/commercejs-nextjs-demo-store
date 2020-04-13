@@ -6,7 +6,7 @@ import commerce from "../lib/commerce";
 import collections from "../lib/collections";
 
 class MyApp extends App {
-  // https://nextjs.org/docs/api-reference/data-fetching/getInitialProps
+
   static getInitialProps = wrapper.getInitialAppProps(async ({ Component, ctx }) => {
     // Fetch data on load
     // Fetch categories
