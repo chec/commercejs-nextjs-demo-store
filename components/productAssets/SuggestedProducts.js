@@ -17,7 +17,7 @@ class SuggestedProducts extends Component {
             className="text-center font-size-display1 mb-3 font-weight-medium"
             style={{ maxWidth: "32rem" }}
           >
-            You may also like to checkout these products.
+            You may also like to check out these products.
           </p>
         </div>
         <ProductRow products={products.slice(0, 4)} />
