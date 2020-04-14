@@ -126,7 +126,7 @@ class Product extends Component {
             className="position-fixed left-0 right-0"
             style={{ top: "7.5rem" }}
           >
-            <CategoryList current={ product.categories[0].id }/>
+            <CategoryList current={ product.categories[0] && product.categories[0].id }/>
           </div>
 
           <div
