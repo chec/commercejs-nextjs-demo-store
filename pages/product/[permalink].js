@@ -34,74 +34,7 @@ class Product extends Component {
       selectedSize: "500ML",
       selectedColor: "PURPLE"
     };
-
-    this.sidebar = React.createRef();
-    this.rightSection = React.createRef();
-    this.rightSectionInner = React.createRef();
-    this.productPage = React.createRef();
-    this.imagesCarousel = React.createRef();
-
   }
-
-  componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
-    this.animate();
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
-  }
-
-  handleScroll = () => {
-    window.requestAnimationFrame(this.animate);
-    window.requestAnimationFrame(this.scrollRightSection);
-  };
-
-  animate = () => {
-    var x = window.matchMedia("(min-width: 768px)");
-
-    if (!x.matches) {
-      return;
-    }
-
-    const distance =
-      this.productPage.current.getBoundingClientRect().bottom -
-      window.innerHeight;
-
-    this.sidebar.current.style.position = `fixed`;
-    this.rightSection.current.style.position = `fixed`;
-    this.imagesCarousel.current.style.position = `fixed`;
-    this.sidebar.current.style.zIndex = `2`;
-    this.rightSection.current.style.zIndex = `2`;
-    this.imagesCarousel.current.style.zIndex = `2`;
-
-    if (distance < 0) {
-      this.sidebar.current.style.transform = `translateY(${distance}px)`;
-      this.rightSection.current.style.transform = `translateY(${distance}px)`;
-      this.imagesCarousel.current.style.transform = `translateY(${distance}px)`;
-    } else {
-      this.sidebar.current.style.transform = `translateY(0px)`;
-      this.rightSection.current.style.transform = `translateY(0px)`;
-      this.imagesCarousel.current.style.transform = `translateY(0px)`;
-    }
-  };
-
-  scrollRightSection = () => {
-    const scrollBy =
-      this.rightSectionInner.current.offsetHeight - window.innerHeight + 150;
-    const scrollPos = window.scrollY;
-
-    if (scrollBy > 0) {
-      console.log("scrollPos", scrollPos);
-      console.log("scrollBy", scrollBy);
-
-      if (scrollPos < scrollBy) {
-        this.rightSectionInner.current.style.transform = `translateY(-${scrollPos}px)`;
-      } else if (scrollPos > scrollBy) {
-        this.rightSectionInner.current.style.transform = `translateY(-${scrollBy}px)`;
-      }
-    }
-  };
 
   render() {
     const {
@@ -119,122 +52,75 @@ class Product extends Component {
         </Head>
 
         <div className="py-5 my-5">
-        <div className="pt-4">
+        <div className="main-product-content">
           {/* Sidebar */}
-          <div
-            ref={this.sidebar}
-            className="position-fixed left-0 right-0"
-            style={{ top: "7.5rem" }}
-          >
-            <CategoryList current={ product.categories[0] && product.categories[0].id }/>
+          <div className="product-sidebar">
+            <CategoryList
+              className="product-left-aside__category-list"
+              current={ product.categories[0] && product.categories[0].id }
+            />
+            <CarouselImages images={images} />
           </div>
 
-          <div
-            ref={this.imagesCarousel}
-            className="left-0 right-0 d-none d-sm-block"
-            style={{ top: "7.5rem" }}
-          >
-            <div className="custom-container">
-              <div className="row">
-                {/* Image Section */}
-                <div className="col-12 col-sm-6 col-lg-5 offset-lg-2">
-                  <CarouselImages images={images} />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div ref={this.productPage} className="custom-container">
-            <div className="row">
-              {/* Image Section */}
-              <div className="col-12 col-sm-6 col-lg-5 offset-lg-2">
-                <div className="d-flex">
-                  <div className="ml-lg-3 mr-3 d-none d-sm-block">
-                    <div className="w-48"></div>
-                  </div>
-                  <div className="flex-grow-1">
-                    {images.map((image, index) => (
-                      <img
-                        key={`carousel-images-${product.id}`}
-                        src={product.media.source}
-                        id="carouselMainImages"
-                        className="w-100 mb-3"
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
+          <div className="product-images">
+            <div className="flex-grow-1">
+              {images.map((image, index) => (
+                <img
+                  key={`carousel-images-${product.id}`}
+                  src={product.media.source}
+                  id="carouselMainImages"
+                  className="w-100 mb-3"
+                />
+              ))}
             </div>
           </div>
 
           {/* Right Section - Product Details */}
-          <div
-            ref={this.rightSection}
-            className="left-0 right-0"
-            style={{ top: "7.5rem" }}
-          >
-            <div className="custom-container">
-              <div className="row">
-                <div className="col-12 col-sm-6 col-lg-5 col-xl-4 offset-sm-6 offset-lg-7 offset-xl-7">
-                  <div className="position-relative">
-                    <div
-                      ref={this.rightSectionInner}
-                      className="position-sm-absolute top-0 left-0 right-0"
-                    >
-                      <div className="pl-sm-5 pr-sm-3">
+          <div className="product-detail">
 
-                        <ProductDetails
-                          name={product.name}
-                          description={product.description}
-                          price={product.price.formatted_with_symbol}
-                          product={product}
-                        />
+              <ProductDetails
+                name={product.name}
+                description={product.description}
+                price={product.price.formatted_with_symbol}
+                product={product}
+              />
 
-                        <div
-                          onClick={() => {
-                            this.setState({ showShipping: !showShipping }, () =>
-                              this.scrollRightSection()
-                            );
-                          }}
-                          className="d-flex cursor-pointesr py-3 justify-content-between font-weight-medium"
-                        >
-                          Shipping and returns
-                          <img src="/icon/plus.svg" />
-                        </div>
-                        <Collapse isOpened={showShipping}>
-                          <div className="pb-4 font-color-medium">
-                            Arrives in 5 to 7 days, returns accepted within 30
-                            days. For more information, click here.
-                          </div>
-                        </Collapse>
-                        <div className="h-1 borderbottom border-color-black" />
-                        <div
-                          onClick={() => {
-                            this.setState({ showDetails: !showDetails }, () => {
-                              this.scrollRightSection();
-                            });
-                          }}
-                          className="d-flex cursor-pointer py-3 justify-content-between font-weight-medium"
-                        >
-                          Details
-                          <img src="/icon/plus.svg" />
-                        </div>
-                        <Collapse isOpened={showDetails}>
-                          <div
-                            className="pb-4 font-color-medium"
-                            dangerouslySetInnerHTML={{
-                              __html: detailView
-                            }}
-                          />
-                        </Collapse>
-                        <div className="h-1 borderbottom border-color-black" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div
+                onClick={() => {
+                  this.setState({ showShipping: !showShipping });
+                }}
+                className="d-flex cursor-pointesr py-3 justify-content-between font-weight-medium"
+              >
+                Shipping and returns
+                <img src="/icon/plus.svg" />
               </div>
+              <Collapse isOpened={showShipping}>
+                <div className="pb-4 font-color-medium">
+                  Arrives in 5 to 7 days, returns accepted within 30
+                  days. For more information, click here.
+                </div>
+              </Collapse>
+              <div className="h-1 borderbottom border-color-black" />
+              <div
+                onClick={() => {
+                  this.setState({ showDetails: !showDetails });
+                }}
+                className="d-flex cursor-pointer py-3 justify-content-between font-weight-medium"
+              >
+                Details
+                <img src="/icon/plus.svg" />
+              </div>
+              <Collapse isOpened={showDetails}>
+                <div
+                  className="pb-4 font-color-medium"
+                  dangerouslySetInnerHTML={{
+                    __html: detailView
+                  }}
+                />
+              </Collapse>
+              <div className="h-1 borderbottom border-color-black" />
             </div>
-          </div>
+
         </div>
       </div>
       <ClientReview />
