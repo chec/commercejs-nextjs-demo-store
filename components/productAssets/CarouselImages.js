@@ -76,24 +76,22 @@ class CarouselImages extends Component {
     const { images, products } = this.props;
 
     return (
-      <div className="position-relative">
-        <div className="d-flex position-absolute top-0 left-0 right-0">
-          <div className="ml-lg-3 mr-3">
-            {images.map((image, index) => (
-              <div
-                ref={image => this.carouselImages.push(image)}
-                key={`carousel-side-images-${index}`}
-                data-key={`carousel-side-images-${index}`}
-                className="h-56 w-48 mb-3 cursor-pointer"
-                onClick={() => this.onClickImage(index)}
-                style={{
-                  background: `url("${image}") center center/cover`,
-                  border:
-                    index === 0 ? "2px solid #000000" : "2px solid #FFFFFF"
-                }}
-              />
-            ))}
-          </div>
+      <div className="d-flex">
+        <div className="ml-lg-3 mr-3">
+          {images.map((image, index) => (
+            <div
+              ref={image => this.carouselImages.push(image)}
+              key={`carousel-side-images-${index}`}
+              data-key={`carousel-side-images-${index}`}
+              className="h-56 w-48 mb-3 cursor-pointer"
+              onClick={() => this.onClickImage(index)}
+              style={{
+                background: `url("${image}") center center/cover`,
+                border:
+                  index === 0 ? "2px solid #000000" : "2px solid #FFFFFF"
+              }}
+            />
+          ))}
         </div>
       </div>
     );
