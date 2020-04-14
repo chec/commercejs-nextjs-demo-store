@@ -27,4 +27,5 @@ const makeStore = () => {
 };
 
 // Export an assembled wrapper
-export const wrapper = createWrapper(makeStore, { debug: true });
+const debug = !process.env.NETLIFY;
+export const wrapper = createWrapper(makeStore, { debug });
