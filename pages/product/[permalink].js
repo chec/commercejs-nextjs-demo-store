@@ -11,6 +11,7 @@ import ClientReview from "../../components/productAssets/ClientReview";
 import SuggestedProducts from "../../components/productAssets/SuggestedProducts";
 import ExploreBanner from "../../components/productAssets/ExploreBanner";
 import Footer from "../../components/common/Footer";
+import CategoryList from '../../components/products/CategoryList';
 
 const images = [
   "/images/product/1.png",
@@ -102,42 +103,6 @@ class Product extends Component {
     }
   };
 
-  /**
-  * Render category sidebar
-  */
-  renderSidebar = () => {
-    const { categories } = this.props;
-
-    return (
-      <>
-      {categories.map(category => (
-      <div className="custom-container">
-        <div className="row">
-          <div className="col-2 d-none d-lg-block position-relative">
-            <p className="font-size-title font-weight-medium mb-3">
-              {category.name}
-            </p>
-              <div className="mb-5">
-                <div className="d-flex">
-                  <p className="mb-2 position-relative cursor-pointer">
-                    Products
-                    <span
-                      className="position-absolute font-size-tiny text-right"
-                      style={{ right: "-12px", top: "-4px" }}
-                    >
-                      {category.count}
-                    </span>
-                  </p>
-                </div>
-              </div>
-          </div>
-        </div>
-      </div>
-      ))}
-    </>
-    )
-  }
-
   render() {
     const {
       showShipping,
@@ -161,7 +126,7 @@ class Product extends Component {
             className="position-fixed left-0 right-0"
             style={{ top: "7.5rem" }}
           >
-            { this.renderSidebar() }
+            <CategoryList current={ product.categories[0] && product.categories[0].id }/>
           </div>
 
           <div
