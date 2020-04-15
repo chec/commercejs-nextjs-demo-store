@@ -1,17 +1,13 @@
 import { createStore } from 'redux';
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
+import { ADD_TO_CART, REMOVE_FROM_CART, UPDATE_CART_ITEM } from '../actions'
 
 // Declare initial state
 const initialState = {
   categories: [],
   products: [],
-  cart: {}
+  cart: []
 };
-
-// Cart action types
-const ADD_TO_CART = 'ADD_TO_CART';
-const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
-const UPDATE_QTY = 'UPDATE_QTY';
 
 
 // Create your reducer
@@ -27,7 +23,7 @@ const reducer = (state = initialState, action) => {
       return { ...state, cart: action.payload.cart }
     case REMOVE_FROM_CART:
         return { ...state, cart: action.payload.cart }
-    case UPDATE_QTY:
+    case UPDATE_CART_ITEM:
       return { ...state, cart: action.payload.cart }
     default:
       return state;
