@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Transition } from "react-transition-group";
 import Link from "next/link";
-import Cart from "./Cart";
+import Cart from "../cart/Cart";
 
 const duration = 300;
 
