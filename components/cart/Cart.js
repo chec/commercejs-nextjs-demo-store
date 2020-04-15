@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import Link from "next/link";
 import { Transition } from "react-transition-group";
+import { connect } from "react-redux";
+import commerce from "../../lib/commerce";
+
 import {
   disableBodyScroll,
   enableBodyScroll,
@@ -27,7 +30,6 @@ const backdropTransitionStyles = {
   exited: { opacity: "0" }
 };
 
-// const cartItems = [];
 const cartItems = [
   {
     image: "https://images.unsplash.com/photo-1508350552147-213c11fcede6",
@@ -37,12 +39,31 @@ const cartItems = [
   }
 ];
 
-export default class Cart extends Component {
+class Cart extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      cart: null
+    }
+
     this.cartScroll = React.createRef();
   }
+
+  /**
+  * Retrieve cart
+  */
+ retrieveCart() {
+  commerce.cart.retrieve().then(cart => {
+    this.setState({
+      cart: cart
+    })
+  }).catch(error => console.log(error))
+}
+
+componentDidMount() {
+  this.retrieveCart();
+}
 
   componentWillUnmount() {
     clearAllBodyScrollLocks();
@@ -195,3 +216,11 @@ export default class Cart extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    products: state.products
+  }
+}
+
+export default connect(mapStateToProps)(Cart);
