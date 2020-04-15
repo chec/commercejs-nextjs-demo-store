@@ -53,17 +53,17 @@ class Cart extends Component {
   /**
   * Retrieve cart
   */
- retrieveCart() {
-  commerce.cart.retrieve().then(cart => {
-    this.setState({
-      cart: cart
-    })
-  }).catch(error => console.log(error))
-}
+  retrieveCart() {
+    commerce.cart.retrieve().then(cart => {
+      this.setState({
+        cart: cart
+      })
+    }).catch(error => console.log(error))
+  }
 
-componentDidMount() {
-  this.retrieveCart();
-}
+  componentDidMount() {
+    this.retrieveCart();
+  }
 
   componentWillUnmount() {
     clearAllBodyScrollLocks();
