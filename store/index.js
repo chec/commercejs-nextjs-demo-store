@@ -1,4 +1,4 @@
-import { createStore } from 'redux';
+import { createStore, compose } from 'redux';
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 
 // Define action types
@@ -43,11 +43,21 @@ const reducer = (state = initialState, action) => {
   }
 };
 
+// Enable Redux dev tools
+const devtools = (process.browser && window.__REDUX_DEVTOOLS_EXTENSION__)
+  ? window.__REDUX_DEVTOOLS_EXTENSION__()
+  : f => f
+
 // Create a makeStore function and pass reducer to createStore
 const makeStore = () => {
-  return createStore(reducer);
+  return createStore(
+    reducer,
+    compose(devtools)
+  );
 };
 
-// Export an assembled wrapper
+
 const debug = !process.env.NETLIFY;
+
+// Export an assembled wrapper
 export const wrapper = createWrapper(makeStore, { debug });
