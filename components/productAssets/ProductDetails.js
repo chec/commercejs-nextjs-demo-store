@@ -5,20 +5,22 @@ import VariantSelector from "../productAssets/VariantSelector";
 import { connect } from "react-redux";
 import commerce from '../../lib/commerce';
 
-
 class ProductDetails extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      selectedOption: null,
+      selectedOptions: props.product.variants.reduce((acc, variant) => ({
+        ...acc,
+        [variant.id]: variant.options[0].id,
+      }), {}),
     }
   }
 
   /**
   * Handle click on review to scroll to review section
   */
-  onReviewClick = () => {
+  onReviewClick() {
     const section = document.querySelector("#reviews");
 
     if (section) {
@@ -31,39 +33,55 @@ class ProductDetails extends Component {
   /**
   * On selecting variant
   */
-  onSelectOption = (variantId, optionId, action) => {
-    const { selectedOption } = this.state;
-
-    let newSelectedOption = selectedOption;
-    newSelectedOption[variantId] = optionId;
-
-    this.setState(
-      { selectedOption: newSelectedOption },
-      () => action && action()
-    );
+  handleSelectOption = (variantId, optionId) => {
+    this.setState({ selectedOptions: {
+      ...this.state.selectedOptions,
+      [variantId]: optionId,
+    }});
   }
 
+  getPrice = () => {
+    const { price: { raw: base }, variants } = this.props.product;
+    const { selectedOptions } = this.state;
+
+    if (!selectedOptions || typeof selectedOptions !== 'object') {
+      return base;
+    }
+
+    const options = Object.entries(selectedOptions);
+    return base + options.reduce((acc, [variant, option]) => {
+      const variantDetail = variants.find(candidate => candidate.id === variant);
+      if (!variantDetail) {
+        return acc;
+      }
+      const optionDetail = variantDetail.options.find(candidate => candidate.id === option);
+      if (!optionDetail) {
+        return acc;
+      }
+
+      return acc + optionDetail.price.raw;
+    }, 0);
+  }
 
   /**
   * Add to Cart
   */
   addToCart = () => {
-    const { product, commerce, refreshCart } = this.props;
+    const { product, refreshCart } = this.props;
+    const { selectedOptions } = this.state;
 
-    const { selectedOption } = this.state;
-
-    commerce.cart.add(product.id, 1, selectedOption)
+    commerce.cart.add(product.id, 1, selectedOptions)
       .then(resp => {
-        refreshCart(() => {
-          toggleCart(true);
-        })
+        // refreshCart(() => {
+        //   toggleCart(true);
+        // })
       })
   }
 
   render() {
     const { product } = this.props;
-    const { name, description, formatted_with_symbol: price } = product;
-    const { selectedOption } = this.state;
+    const { name, description, variants, formatted_with_symbol: price } = product;
+    const { selectedOptions } = this.state;
     const reg = /(<([^>]+)>)/ig;
 
     return (
@@ -82,10 +100,9 @@ class ProductDetails extends Component {
           <div className="d-none d-sm-block">
             <VariantSelector
               className="mb-3"
-              product={product}
-              onSelectOption={this.onSelectOption}
-              selectedOption={selectedOption}
-              addToCart={this.addToCart}
+              variants={variants}
+              onSelectOption={this.handleSelectOption}
+              selectedOptions={selectedOptions}
               // toggle={value =>
               //   this.setState({ selectedSize: value })
               // }
@@ -99,7 +116,7 @@ class ProductDetails extends Component {
               Add to cart
             </span>
             <span className="border-left border-color-white pl-3">
-            {price}
+            ${this.getPrice()}
             </span>
           </button>
         </div>
