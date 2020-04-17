@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+
 import { Transition } from "react-transition-group";
+
 import Link from "next/link";
 import Cart from "../cart/Cart";
+
+import { connect } from 'react-redux'
 
 const duration = 300;
 
@@ -41,7 +45,7 @@ const mobileMenuLinks = [
   }
 ];
 
-export default class Header extends Component {
+class Header extends Component {
   constructor(props) {
     super(props);
 
@@ -95,7 +99,7 @@ export default class Header extends Component {
 
   render() {
     const { showMobileMenu, showCart } = this.state;
-    const { transparent } = this.props;
+    const { transparent, cart } = this.props;
 
     return (
       <header className="position-fixed top-0 left-0 right-0 font-weight-semibold">
@@ -136,7 +140,7 @@ export default class Header extends Component {
             >
               <img src="/icon/cart.svg" className="w-32" />
               <div className="cart-count position-absolute font-size-tiny font-weight-bold">
-                0
+                {cart.total_unique_items}
               </div>
             </div>
           </div>
@@ -169,3 +173,5 @@ export default class Header extends Component {
     );
   }
 }
+
+export default connect(state => state)(Header);

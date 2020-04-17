@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import Head from "next/head";
 import Root from "../../components/common/Root";
 import CarouselImages from "../../components/productAssets/CarouselImages";
-import ProductDetails from "../../components/productAssets/ProductDetails";
+import ProductDetail from "../../components/productAssets/ProductDetail";
 import ClientReview from "../../components/productAssets/ClientReview";
 import SuggestedProducts from "../../components/productAssets/SuggestedProducts";
 import ExploreBanner from "../../components/productAssets/ExploreBanner";
@@ -15,7 +15,7 @@ import CategoryList from '../../components/products/CategoryList';
 import reduceProductImages from '../../lib/reduceProductImages';
 
 const detailView = `<p>
-      - Slightly textured fabric with tonal geometric design and a bit of shine
+      Slightly textured fabric with tonal geometric design and a bit of shine
     </p>`;
 
 
@@ -26,16 +26,30 @@ class Product extends Component {
     this.state = {
       showShipping: false,
       showDetails: false,
-      selectedSize: "500ML",
-      selectedColor: "PURPLE"
     };
   }
 
+  // retrieveCart() {
+  //   commerce.cart.retrieve().then(cart => {
+  //     this.setState({
+  //       cart: cart
+  //     })
+  //   }).catch(error => console.log(error))
+  // }
+
+  /**
+  * Retrieve cart and contents client-side to dispatch to store
+  */
+  async componentDidMount() {
+    const cart = await commerce.cart.retrieve();
+    this.props.dispatch({
+      type: 'STORE_CART',
+      payload: cart
+    })
+  }
+
   render() {
-    const {
-      showShipping,
-      showDetails
-    } = this.state;
+    const { showShipping,showDetails } = this.state;
 
     const { product } = this.props;
     const images = reduceProductImages(product);
@@ -73,7 +87,7 @@ class Product extends Component {
           {/* Right Section - Product Details */}
           <div className="product-detail">
 
-              <ProductDetails product={product} />
+              <ProductDetail product={product} />
 
               <div
                 onClick={() => {
@@ -154,6 +168,11 @@ export async function getStaticProps({ params: { permalink } }) {
     }
   }
 }
+
+// Product.getInitialProps = async ({query: { permalink }}) => {
+//   const product = await commerce.products.retrieve(permalink, { type: 'permalink '});
+//   return { product };
+// };
 
 export default connect(state => state)(Product);
 

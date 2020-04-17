@@ -1,13 +1,17 @@
 import React, { Component } from "react";
-import ReviewStars from "./ReviewStars";
 import { animateScroll as scroll } from "react-scroll";
+
+import ReviewStars from "./ReviewStars";
 import VariantSelector from "../productAssets/VariantSelector";
+
 import { connect } from "react-redux";
 import commerce from '../../lib/commerce';
 
-class ProductDetails extends Component {
+class ProductDetail extends Component {
   constructor(props) {
     super(props)
+
+    // this.addToCart = this.addToCart.bind(this);
 
     this.state = {
       selectedOptions: props.product.variants.reduce((acc, variant) => ({
@@ -17,8 +21,10 @@ class ProductDetails extends Component {
     }
   }
 
+
+
   /**
-  * Handle click on review to scroll to review section
+  * Handle click to scroll to review section
   */
   onReviewClick() {
     const section = document.querySelector("#reviews");
@@ -66,16 +72,12 @@ class ProductDetails extends Component {
   /**
   * Add to Cart
   */
-  addToCart = () => {
-    const { product, refreshCart } = this.props;
-    const { selectedOptions } = this.state;
+   async addToCart() {
+    const { product } = this.props;
+    const { selectedOption } = this.state;
+    const { data: cart } = await commerce.cart.add(product.id, { quantity: 1 }, selectedOption)
 
-    commerce.cart.add(product.id, 1, selectedOptions)
-      .then(resp => {
-        // refreshCart(() => {
-        //   toggleCart(true);
-        // })
-      })
+    this.props.dispatch({ type: 'ADD_TO_CART', payload: cart });
   }
 
   render() {
@@ -103,15 +105,12 @@ class ProductDetails extends Component {
               variants={variants}
               onSelectOption={this.handleSelectOption}
               selectedOptions={selectedOptions}
-              // toggle={value =>
-              //   this.setState({ selectedSize: value })
-              // }
             />
           </div>
 
         {/* Add to Cart & Price */}
         <div className="d-flex py-4">
-          <button onClick={this.addToCart} className="h-56 bg-black font-color-white pl-3 pr-4 d-flex align-items-center flex-grow-1">
+          <button onClick={() => this.addToCart(product.id)} className="h-56 bg-black font-color-white pl-3 pr-4 d-flex align-items-center flex-grow-1">
             <span className="flex-grow-1 mr-3 text-center">
               Add to cart
             </span>
@@ -126,4 +125,5 @@ class ProductDetails extends Component {
   }
 }
 
-export default connect(state => state)(ProductDetails);
+
+export default connect(state => state)(ProductDetail);
