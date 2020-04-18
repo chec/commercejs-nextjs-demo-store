@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import Link from "next/link";
+import Link from "next/link"
+
 import { Transition } from "react-transition-group";
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
+
 import { connect } from "react-redux";
 
-import {
-  disableBodyScroll,
-  enableBodyScroll,
-  clearAllBodyScrollLocks
-} from "body-scroll-lock";
+import CartItem from '../cart/CartItem';
+
 
 const duration = 300;
 
@@ -104,48 +104,17 @@ class Cart extends Component {
                   </button>
                 </div>
               </div>
-              {cartItems.length > 0 ? (
+              {cart.total_unique_items > 0 ? (
                 <>
                   <div
                     className="flex-grow-1 overflow-auto"
                     ref={this.cartScroll}
                   >
-                    {/* Cart Items */}
-                    <div className="px-4 px-md-5 py-4">
-                      {cartItems.map(item => (
-                        <div className="cart-item d-flex">
-                          <div
-                            className="cart-item--image mr-4"
-                            style={{ backgroundImage: `url("${item.image}")` }}
-                          ></div>
-                          <div className="flex-grow-1 borderbottom border-color-gray400 h-100">
-                            <div className="d-flex justify-content-between mb-2">
-                              <p>{item.name}</p>
-                              <p className="text-right font-weight-medium">
-                                {item.price}
-                              </p>
-                            </div>
-                            <p className="font-color-medium mb-3">
-                              {item.detail}
-                            </p>
-                            <div className="d-flex align-items-center justify-content-between pt-2 pb-4">
-                              <div className="d-flex align-items-center">
-                                <button className="p-0 bg-transparent">
-                                  <img src="/icon/minus.svg" className="w-16" />
-                                </button>
-                                <p className="text-center px-3">1</p>
-                                <button className="p-0 bg-transparent">
-                                  <img src="/icon/plus.svg" className="w-16" />
-                                </button>
-                              </div>
-                              <p className="text-right text-decoration-underline font-color-medium cursor-pointer">
-                                Remove
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                    {cart.line_items.map(item => (
+                      <CartItem
+                        item={item}
+                      />
+                    ))}
                   </div>
 
                   {/* Cart Footer */}
@@ -154,7 +123,7 @@ class Cart extends Component {
                       <p className="font-color-light mr-2 font-weight-regular">
                         Subtotal:
                       </p>
-                      <p>$ 32.00</p>
+                      <p>{cart.subtotal.formatted_with_symbol}</p>
                     </div>
                     <div className="row">
                       <div className="col-6 d-none d-md-block">
