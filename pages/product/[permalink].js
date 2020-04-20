@@ -12,12 +12,7 @@ import SuggestedProducts from "../../components/productAssets/SuggestedProducts"
 import ExploreBanner from "../../components/productAssets/ExploreBanner";
 import Footer from "../../components/common/Footer";
 import CategoryList from '../../components/products/CategoryList';
-
-const images = [
-  "/images/product/1.png",
-  "/images/product/2.png",
-  "/images/product/3.png"
-];
+import reduceProductImages from '../../lib/reduceProductImages';
 
 const detailView = `<p>
       - Slightly textured fabric with tonal geometric design and a bit of shine
@@ -43,6 +38,7 @@ class Product extends Component {
     } = this.state;
 
     const { product } = this.props;
+    const images = reduceProductImages(product);
 
     return (
       <Root>
@@ -64,12 +60,11 @@ class Product extends Component {
 
           <div className="product-images">
             <div className="flex-grow-1">
-              {images.map((image, index) => (
+              {images.map(image => (
                 <img
-                  key={`carousel-images-${product.id}`}
-                  src={product.media.source}
-                  id="carouselMainImages"
-                  className="w-100 mb-3"
+                  key={image}
+                  src={image}
+                  className="w-100 mb-3 carousel-main-images"
                 />
               ))}
             </div>
@@ -78,12 +73,7 @@ class Product extends Component {
           {/* Right Section - Product Details */}
           <div className="product-detail">
 
-              <ProductDetails
-                name={product.name}
-                description={product.description}
-                price={product.price.formatted_with_symbol}
-                product={product}
-              />
+              <ProductDetails product={product} />
 
               <div
                 onClick={() => {

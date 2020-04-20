@@ -61,8 +61,8 @@ class ProductDetails extends Component {
   }
 
   render() {
-
-    const {name, description, product, price} = this.props;
+    const { product } = this.props;
+    const { name, description, formatted_with_symbol: price } = product;
     const { selectedOption } = this.state;
     const reg = /(<([^>]+)>)/ig;
 
@@ -76,7 +76,7 @@ class ProductDetails extends Component {
         <p className="font-size-display3 font-family-secondary mt-2 mb-2">
           {name}
         </p>
-        <div className="mb-4 pb-3 font-size-subheader">{description.replace(reg, "")}</div>
+        <div className="mb-4 pb-3 font-size-subheader">{(description || '').replace(reg, "")}</div>
 
         {/* Product Variant */}
           <div className="d-none d-sm-block">

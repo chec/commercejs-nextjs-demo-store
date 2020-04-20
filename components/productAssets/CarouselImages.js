@@ -22,7 +22,7 @@ class CarouselImages extends Component {
   };
 
   animate = () => {
-    const mainImages = document.querySelectorAll("#carouselMainImages");
+    const mainImages = document.querySelectorAll(".carousel-main-images");
 
     var x = window.matchMedia("(min-width: 768px)");
 
@@ -62,10 +62,10 @@ class CarouselImages extends Component {
   };
 
   onClickImage = index => {
-    const mainImages = document.querySelectorAll("#carouselMainImages");
+    const mainImages = document.querySelectorAll(".carousel-main-images");
 
     if (mainImages) {
-      const scrollDestination = mainImages[index].offsetTop;
+      const scrollDestination = mainImages[index].offsetTop - 95;
       scroll.scrollTo(scrollDestination, {
         smooth: "easeInOutQuint"
       });
