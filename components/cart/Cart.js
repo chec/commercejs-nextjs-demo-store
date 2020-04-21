@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Link from "next/link";
 import { Transition } from "react-transition-group";
 import { connect } from "react-redux";
-import commerce from "../../lib/commerce";
 
 import {
   disableBodyScroll,
@@ -43,27 +42,9 @@ class Cart extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      cart: null
-    }
-
     this.cartScroll = React.createRef();
   }
 
-  /**
-  * Retrieve cart
-  */
-  retrieveCart() {
-    commerce.cart.retrieve().then(cart => {
-      this.setState({
-        cart: cart
-      })
-    }).catch(error => console.log(error))
-  }
-
-  componentDidMount() {
-    this.retrieveCart();
-  }
 
   componentWillUnmount() {
     clearAllBodyScrollLocks();
@@ -80,6 +61,7 @@ class Cart extends Component {
 
   render() {
     const { isOpen, toggle } = this.props;
+    const { cart } = this.props;
 
     return (
       <Transition
@@ -217,10 +199,5 @@ class Cart extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    products: state.products
-  }
-}
 
-export default connect(mapStateToProps)(Cart);
+export default connect(state => state)(Cart);

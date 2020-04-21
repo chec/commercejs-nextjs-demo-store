@@ -85,7 +85,7 @@ yarn dev
 
 ## Getting Started
 
-1. Copy the `.example.env` dotenv file at your project root to store your Chec `public_key`. 
+1. Copy the `.env.example` dotenv file at your project root to store your Chec `public_key`. 
 
 ```
 COMMERCE_PUBLIC_KEY=your_public_API_key_here
