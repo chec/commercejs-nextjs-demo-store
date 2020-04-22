@@ -8,7 +8,7 @@ class CartItem extends Component {
   /**
   * Update cart item
   */
-  async udpateCartItem(id, quantity) {
+  async updateCartItem(id, quantity) {
     const { data: cart } = await commerce.cart.update(id, { quantity: quantity })
 
     this.props.dispatch({ type: 'UPDATE_CART_ITEM', payload: cart });
@@ -35,9 +35,9 @@ class CartItem extends Component {
           ></div>
           <div className="flex-grow-1 borderbottom border-color-gray400 h-100">
             <div className="d-flex justify-content-between mb-2">
-              <p>{item.name}</p>
+              <p>{item.name} - {item.variants[0].option_name}</p>
               <p className="text-right font-weight-medium">
-                {item.price.formatted_with_price}
+                ${item.line_total.formatted_with_symbol}
               </p>
             </div>
             <div className="d-flex align-items-center justify-content-between pt-2 pb-4">
@@ -45,8 +45,8 @@ class CartItem extends Component {
                 <button className="p-0 bg-transparent" onClick={() => item.quantity > 1 ? this.updateCartItem(item.id, item.quantity -1) : this.removeFromCart(item.id)}>
                   <img src="/icon/minus.svg" className="w-16" />
                 </button>
-                <p className="text-center px-3">1</p>
-                <button className="p-0 bg-transparent" onClick={() => updateCartItem(item.id, item.quantity + 1)} >
+    <p className="text-center px-3">{item.quantity}</p>
+                <button className="p-0 bg-transparent" onClick={() => this.updateCartItem(item.id, item.quantity + 1)} >
                   <img src="/icon/plus.svg" className="w-16" />
                 </button>
               </div>

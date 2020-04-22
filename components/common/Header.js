@@ -140,7 +140,7 @@ class Header extends Component {
             >
               <img src="/icon/cart.svg" className="w-32" />
               <div className="cart-count position-absolute font-size-tiny font-weight-bold">
-                {this.props.cart.total_unique_items}
+                {cart.total_items}
               </div>
             </div>
           </div>

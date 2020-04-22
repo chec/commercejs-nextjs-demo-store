@@ -14,6 +14,8 @@ import Footer from "../../components/common/Footer";
 import CategoryList from '../../components/products/CategoryList';
 import reduceProductImages from '../../lib/reduceProductImages';
 
+import * as actions from '../../actions/'
+
 const detailView = `<p>
       Slightly textured fabric with tonal geometric design and a bit of shine
     </p>`;
@@ -29,24 +31,20 @@ class Product extends Component {
     };
   }
 
-  // retrieveCart() {
-  //   commerce.cart.retrieve().then(cart => {
-  //     this.setState({
-  //       cart: cart
-  //     })
-  //   }).catch(error => console.log(error))
-  // }
-
   /**
   * Retrieve cart and contents client-side to dispatch to store
   */
   async componentDidMount() {
     const cart = await commerce.cart.retrieve();
     this.props.dispatch({
-      type: 'STORE_CART',
+      type: 'RETRIEVE_CART',
       payload: cart
     })
   }
+
+  // componentDidMount() {
+  //   this.props.fetchCart();
+  // }
 
   render() {
     const { showShipping,showDetails } = this.state;
@@ -135,6 +133,12 @@ class Product extends Component {
     );
   }
 }
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     fetchCart: () => dispatch(actions.fetchCart())
+//   }
+// }
 
 // Use getStaticPaths() to pre-render PDP according to page path
 export async function getStaticPaths() {

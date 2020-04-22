@@ -104,7 +104,7 @@ class Cart extends Component {
                   </button>
                 </div>
               </div>
-              {cart.total_unique_items > 0 ? (
+              {cart.total_items > 0 ? (
                 <>
                   <div
                     className="flex-grow-1 overflow-auto"
