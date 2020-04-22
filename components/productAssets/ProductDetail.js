@@ -11,8 +11,6 @@ class ProductDetail extends Component {
   constructor(props) {
     super(props)
 
-    // this.addToCart = this.addToCart.bind(this);
-
     this.state = {
       selectedOptions: props.product.variants.reduce((acc, variant) => ({
         ...acc,
@@ -20,7 +18,6 @@ class ProductDetail extends Component {
       }), {}),
     }
   }
-
 
   /**
   * Handle click to scroll to review section
@@ -74,7 +71,8 @@ class ProductDetail extends Component {
   /**
   * Add to Cart
   */
-  async addToCart() {
+  async addToCart(e) {
+    e.preventDefault();
     const { product, refreshCart } = this.props;
     const { selectedOptions } = this.state;
     const { data: cart } = await commerce.cart.add(product.id, { quantity: 1 }, selectedOptions)
@@ -112,7 +110,8 @@ class ProductDetail extends Component {
 
         {/* Add to Cart & Price */}
         <div className="d-flex py-4">
-          <button onClick={() => this.addToCart(product.id, 1, selectedOptions)} className="h-56 bg-black font-color-white pl-3 pr-4 d-flex align-items-center flex-grow-1">
+          <button onClick={(e) => this.addToCart(e, product.id, 1, selectedOptions)}
+              className="h-56 bg-black font-color-white pl-3 pr-4 d-flex align-items-center flex-grow-1">
             <span className="flex-grow-1 mr-3 text-center">
               Add to cart
             </span>

@@ -14,7 +14,7 @@ import Footer from "../../components/common/Footer";
 import CategoryList from '../../components/products/CategoryList';
 import reduceProductImages from '../../lib/reduceProductImages';
 
-import * as actions from '../../actions/'
+import * as actions from '../../actions/';
 
 const detailView = `<p>
       Slightly textured fabric with tonal geometric design and a bit of shine
@@ -42,9 +42,6 @@ class Product extends Component {
     })
   }
 
-  // componentDidMount() {
-  //   this.props.fetchCart();
-  // }
 
   render() {
     const { showShipping,showDetails } = this.state;
