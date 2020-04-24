@@ -58,13 +58,6 @@ class Cart extends Component {
     enableBodyScroll(this.cartScroll.current);
   };
 
-  // async generateCheckoutToken() {
-  //   const { cart } = this.props;
-  //   const checkoutToken = await commerce.checkout.generateToken(cart.id);
-
-  //   this.props.dispatch({ type: 'GENERATE_CHECKOUT_TOKEN', payload: checkoutToken });
-  // }
-
   render() {
     const { isOpen, toggle } = this.props;
     const { cart } = this.props;
@@ -174,6 +167,7 @@ class Cart extends Component {
     );
   }
 }
+
 
 
 export default connect(state => state)(Cart);
