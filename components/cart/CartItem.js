@@ -1,29 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import commerce from '../../lib/commerce';
+import { removeFromCart, updateCartItem } from '../../actions/cartActions';
 
 class CartItem extends Component {
 
   /**
   * Update cart item
   */
-  async updateCartItem(e, id, quantity) {
-    e.preventDefault();
-    const { data: cart } = await commerce.cart.update(id, { quantity: quantity })
-
-    this.props.dispatch({ type: 'UPDATE_CART_ITEM', payload: cart });
+  updateCartItem(item) {
+    this.props.dispatch(updateCartItem(item));
   }
 
   /**
   * Remove item from cart
   */
- async removeFromCart(e, item) {
-  e.preventDefault();
-  const { data: cart } = await commerce.cart.remove(item)
-
-  this.props.dispatch({ type: 'REMOVE_FROM_CART', payload: cart });
-}
+  removeFromCart(item) {
+    this.props.dispatch(removeFromCart(item));
+  }
 
   render() {
     const { item } = this.props;
@@ -49,15 +43,15 @@ class CartItem extends Component {
             </div>
             <div className="d-flex align-items-center justify-content-between pt-2 pb-4">
               <div className="d-flex align-items-center">
-                <button className="p-0 bg-transparent" onClick={(e) => item.quantity > 1 ? this.updateCartItem(e, item.id, item.quantity -1) : this.removeFromCart(e, item.id)}>
+                <button className="p-0 bg-transparent" onClick={ item.quantity > 1 ? this.updateCartItem(item.id, item.quantity -1) : this.removeFromCart(item.id)}>
                   <img src="/icon/minus.svg" className="w-16" />
                 </button>
                 <p className="text-center px-3">{item.quantity}</p>
-                <button className="p-0 bg-transparent" onClick={(e) => this.updateCartItem(e, item.id, item.quantity + 1)} >
+                <button className="p-0 bg-transparent" onClick={this.updateCartItem(item.id, item.quantity + 1)} >
                   <img src="/icon/plus.svg" className="w-16" />
                 </button>
               </div>
-              <p className="text-right text-decoration-underline font-color-medium cursor-pointer" onClick={(e) => this.removeFromCart(e, item.id)}>
+              <p className="text-right text-decoration-underline font-color-medium cursor-pointer" onClick={this.removeFromCart(item.id)}>
                 Remove
               </p>
             </div>

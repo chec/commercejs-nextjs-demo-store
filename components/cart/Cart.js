@@ -8,6 +8,8 @@ import { connect } from "react-redux";
 
 import CartItem from '../cart/CartItem';
 
+import { retrieveCart } from '../../actions/cartActions';
+
 
 const duration = 300;
 
@@ -36,6 +38,12 @@ class Cart extends Component {
     this.cartScroll = React.createRef();
   }
 
+  /**
+  * Retrieve cart and contents client-side to dispatch to store
+  */
+  componentDidMount() {
+    this.props.dispatch(retrieveCart());
+  }
 
   componentWillUnmount() {
     clearAllBodyScrollLocks();
@@ -49,6 +57,13 @@ class Cart extends Component {
   onExiting = () => {
     enableBodyScroll(this.cartScroll.current);
   };
+
+  // async generateCheckoutToken() {
+  //   const { cart } = this.props;
+  //   const checkoutToken = await commerce.checkout.generateToken(cart.id);
+
+  //   this.props.dispatch({ type: 'GENERATE_CHECKOUT_TOKEN', payload: checkoutToken });
+  // }
 
   render() {
     const { isOpen, toggle } = this.props;
@@ -126,8 +141,9 @@ class Cart extends Component {
                         </button>
                       </div>
                       <div className="col-12 col-md-6">
-                        <Link href="/checkout2/1">
-                          <a className="h-56 d-flex align-items-center justify-content-center bg-black w-100 flex-grow-1 font-weight-medium font-color-white px-3">
+                        <Link href="/checkout/1">
+                          <a className="h-56 d-flex align-items-center justify-content-center bg-black w-100 flex-grow-1 font-weight-medium font-color-white px-3"
+                          onClick={() => this.generateToken()}>
                             Checkout
                           </a>
                         </Link>

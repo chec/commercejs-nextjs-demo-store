@@ -14,8 +14,6 @@ import Footer from "../../components/common/Footer";
 import CategoryList from '../../components/products/CategoryList';
 import reduceProductImages from '../../lib/reduceProductImages';
 
-import * as actions from '../../actions/';
-
 const detailView = `<p>
       Slightly textured fabric with tonal geometric design and a bit of shine
     </p>`;
@@ -30,18 +28,6 @@ class Product extends Component {
       showDetails: false,
     };
   }
-
-  /**
-  * Retrieve cart and contents client-side to dispatch to store
-  */
-  async componentDidMount() {
-    const cart = await commerce.cart.retrieve();
-    this.props.dispatch({
-      type: 'RETRIEVE_CART',
-      payload: cart
-    })
-  }
-
 
   render() {
     const { showShipping,showDetails } = this.state;
@@ -131,13 +117,9 @@ class Product extends Component {
   }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     fetchCart: () => dispatch(actions.fetchCart())
-//   }
-// }
-
-// Use getStaticPaths() to pre-render PDP according to page path
+/**
+ * Use getStaticPaths() to pre-render PDP according to page path
+ */
 export async function getStaticPaths() {
   const { data: products } = await commerce.products.list();
 
@@ -149,9 +131,9 @@ export async function getStaticPaths() {
   }));
 
   // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
   return {
     paths,
+    // { fallback: false } means other routes should 404.
     fallback: false
   }
 }
@@ -170,10 +152,6 @@ export async function getStaticProps({ params: { permalink } }) {
   }
 }
 
-// Product.getInitialProps = async ({query: { permalink }}) => {
-//   const product = await commerce.products.retrieve(permalink, { type: 'permalink '});
-//   return { product };
-// };
 
 export default connect(state => state)(Product);
 
