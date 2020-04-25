@@ -4,11 +4,10 @@ import Link from "next/link"
 import { Transition } from "react-transition-group";
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
 
-import { connect } from "react-redux";
-
 import CartItem from '../cart/CartItem';
 
-import { retrieveCart } from '../../actions/cartActions';
+import { connect } from "react-redux";
+
 
 
 const duration = 300;
@@ -38,12 +37,6 @@ class Cart extends Component {
     this.cartScroll = React.createRef();
   }
 
-  /**
-  * Retrieve cart and contents client-side to dispatch to store
-  */
-  componentDidMount() {
-    this.props.dispatch(retrieveCart());
-  }
 
   componentWillUnmount() {
     clearAllBodyScrollLocks();

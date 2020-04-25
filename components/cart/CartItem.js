@@ -1,21 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { removeFromCart, updateCartItem } from '../../actions/cartActions';
+import { removeFromCart, updateCartItem } from '../../store/actions/cartActions';
 
 class CartItem extends Component {
 
   /**
   * Update cart item
   */
-  updateCartItem(item) {
-    this.props.dispatch(updateCartItem(item));
+  handleUpdateCartItem = (item, quantity) => {
+    this.props.dispatch(updateCartItem(item, quantity));
   }
 
   /**
   * Remove item from cart
   */
-  removeFromCart(item) {
+  handleRemoveFromCart = (item) => {
     this.props.dispatch(removeFromCart(item));
   }
 
@@ -43,15 +43,15 @@ class CartItem extends Component {
             </div>
             <div className="d-flex align-items-center justify-content-between pt-2 pb-4">
               <div className="d-flex align-items-center">
-                <button className="p-0 bg-transparent" onClick={ item.quantity > 1 ? this.updateCartItem(item.id, item.quantity -1) : this.removeFromCart(item.id)}>
+                <button className="p-0 bg-transparent" onClick={ item.quantity > 1 ? this.handleUpdateCartItem(item.id, item.quantity -1) : this.handleRemoveFromCart(item.id)}>
                   <img src="/icon/minus.svg" className="w-16" />
                 </button>
                 <p className="text-center px-3">{item.quantity}</p>
-                <button className="p-0 bg-transparent" onClick={this.updateCartItem(item.id, item.quantity + 1)} >
+                <button className="p-0 bg-transparent" onClick={this.handleUpdateCartItem(item.id, item.quantity + 1)} >
                   <img src="/icon/plus.svg" className="w-16" />
                 </button>
               </div>
-              <p className="text-right text-decoration-underline font-color-medium cursor-pointer" onClick={this.removeFromCart(item.id)}>
+              <p className="text-right text-decoration-underline font-color-medium cursor-pointer" onClick={this.handleRemoveFromCart(item.id)}>
                 Remove
               </p>
             </div>

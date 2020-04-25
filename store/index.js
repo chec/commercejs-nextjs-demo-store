@@ -7,10 +7,9 @@ import {
   STORE_CATEGORIES,
   RETRIEVE_CART_SUCCESS,
   ADD_TO_CART_SUCCESS,
-  REMOVE_FROM_CART_SUCCESS,
   UPDATE_CART_ITEM_SUCCESS,
-  //GENERATE_CHECKOUT_TOKEN
-} from '../actions/actionTypes';
+  REMOVE_FROM_CART_SUCCESS
+} from './actions/actionTypes';
 
 
 // Declare initial state
@@ -18,7 +17,6 @@ const initialState = {
   categories: [],
   products: [],
   cart: {},
-  //checkoutToken: null
 };
 
 // Create reducer
@@ -41,19 +39,15 @@ const reducer = (state = initialState, action) => {
     // Dispatch in ProductDetail client-side
     // Check if action dispatched is ADD_TO_CART and act on that
     case ADD_TO_CART_SUCCESS:
-      return { ...state, cart: action.payload }
-    // Dispatch in Cart client-side
-    // Check if action dispatched is REMOVE_FROM_CART and act on that
-    case REMOVE_FROM_CART_SUCCESS:
-      return { ...state, cart: action.payload }
+      return { ...state, cart: action.payload.cart }
     // Dispatch in Cart client-side
     // Check if action dispatched is UPDATE_CART_ITEM and act on that
     case UPDATE_CART_ITEM_SUCCESS:
-      return { ...state, cart: action.payload }
+      return { ...state, cart: action.payload.cart }
     // Dispatch in Cart client-side
-    // Check if action dispatched is GENERATE_CHECKOUT_TOKEN and act on that
-    // case GENERATE_CHECKOUT_TOKEN:
-    //   return { ...state, checkoutToken: action.payload }
+    // Check if action dispatched is REMOVE_FROM_CART and act on that
+    case REMOVE_FROM_CART_SUCCESS:
+      return { ...state, cart: action.payload.cart }
     default:
       return state;
   }
@@ -64,13 +58,13 @@ const devtools = (process.browser && window.__REDUX_DEVTOOLS_EXTENSION__)
   ? window.__REDUX_DEVTOOLS_EXTENSION__()
   : f => f
 
-const middlewares = [thunk];
 
 // Create a makeStore function and pass in reducer to create the store
 const makeStore = () => {
   return createStore(
     reducer,
-    compose(devtools, applyMiddleware(...middlewares))
+    initialState,
+    compose(applyMiddleware(thunk), devtools)
   );
 };
 

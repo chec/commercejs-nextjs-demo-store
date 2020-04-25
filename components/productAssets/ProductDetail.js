@@ -6,7 +6,7 @@ import VariantSelector from "../productAssets/VariantSelector";
 
 import { connect } from "react-redux";
 
-import { addToCart } from '../../actions/cartActions';
+import { addToCart } from '../../store/actions/cartActions';
 
 class ProductDetail extends Component {
   constructor(props) {
@@ -19,6 +19,7 @@ class ProductDetail extends Component {
       }), {}),
     }
   }
+
 
   /**
   * Handle click to scroll to review section
@@ -72,10 +73,10 @@ class ProductDetail extends Component {
   /**
   * Add to Cart
   */
-  addToCart(){
+  handleAddToCart = () => {
     const { product } = this.props
     const { selectedOptions } = this.state;
-    this.props.dispatch(addToCart(product.id, {quantity: 1}, selectedOptions))
+    this.props.dispatch(addToCart(product.id, 1, selectedOptions))
   }
 
   render() {
@@ -108,7 +109,7 @@ class ProductDetail extends Component {
 
         {/* Add to Cart & Price */}
         <div className="d-flex py-4">
-          <button onClick={this.addToCart}
+          <button onClick={this.handleAddToCart}
               className="h-56 bg-black font-color-white pl-3 pr-4 d-flex align-items-center flex-grow-1" type="button">
             <span className="flex-grow-1 mr-3 text-center">
               Add to cart
