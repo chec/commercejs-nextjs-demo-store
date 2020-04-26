@@ -4,19 +4,25 @@ import { connect } from "react-redux";
 import { removeFromCart, updateCartItem } from '../../store/actions/cartActions';
 
 class CartItem extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleUpdateCartItem = this.handleUpdateCartItem.bind(this);
+    this.handleRemoveFromCart = this.handleRemoveFromCart.bind(this);
+  }
 
   /**
   * Update cart item
   */
-  handleUpdateCartItem = (item, quantity) => {
-    this.props.dispatch(updateCartItem(item, quantity));
+  handleUpdateCartItem(lineItem) {
+    this.props.dispatch(updateCartItem(lineItem));
   }
 
   /**
   * Remove item from cart
   */
-  handleRemoveFromCart = (item) => {
-    this.props.dispatch(removeFromCart(item));
+  handleRemoveFromCart(lineItem) {
+    this.props.dispatch(removeFromCart(lineItem));
   }
 
   render() {
@@ -43,11 +49,11 @@ class CartItem extends Component {
             </div>
             <div className="d-flex align-items-center justify-content-between pt-2 pb-4">
               <div className="d-flex align-items-center">
-                <button className="p-0 bg-transparent" onClick={ item.quantity > 1 ? this.handleUpdateCartItem(item.id, item.quantity -1) : this.handleRemoveFromCart(item.id)}>
+                <button className="p-0 bg-transparent" onClick={item.quantity > 1 ? this.handleUpdateCartItem(item.id, item.quantity -1) : this.handleRemoveFromCart(item.id)}>
                   <img src="/icon/minus.svg" className="w-16" />
                 </button>
                 <p className="text-center px-3">{item.quantity}</p>
-                <button className="p-0 bg-transparent" onClick={this.handleUpdateCartItem(item.id, item.quantity + 1)} >
+                <button className="p-0 bg-transparent" sonClick={this.handleUpdateCartItem(item.id, item.quantity + 1)} >
                   <img src="/icon/plus.svg" className="w-16" />
                 </button>
               </div>

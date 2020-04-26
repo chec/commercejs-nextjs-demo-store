@@ -7,6 +7,7 @@ import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from "bo
 import CartItem from '../cart/CartItem';
 
 import { connect } from "react-redux";
+import { retrieveCart } from '../../store/actions/cartActions';
 
 
 
@@ -37,6 +38,12 @@ class Cart extends Component {
     this.cartScroll = React.createRef();
   }
 
+  /**
+  * Retrieve cart and contents client-side to dispatch to store
+  */
+ componentDidMount() {
+  this.props.dispatch(retrieveCart());
+}
 
   componentWillUnmount() {
     clearAllBodyScrollLocks();
@@ -96,7 +103,7 @@ class Cart extends Component {
                   </button>
                 </div>
               </div>
-              {cart.total_items > 0 ? (
+              {cart.total_unique_items > 0 ? (
                 <>
                   <div
                     className="flex-grow-1 overflow-auto"

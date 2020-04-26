@@ -13,7 +13,7 @@ import {
 /**
  * Set cart and update Redux store
  */
-export const retrieveCartSuccess = cart => {
+export const retrieveCartSuccess = (cart) => {
   return {
     type: RETRIEVE_CART_SUCCESS,
     payload: cart
@@ -23,7 +23,7 @@ export const retrieveCartSuccess = cart => {
 /**
  * Async retrieve cart from API
  */
-export const retrieveCart = () => async (dispatch) => {
+export const retrieveCart = () => async (dispatch, getState) => {
   try {
     // Fetch cart from commerce
     const cart = await commerce.cart.retrieve();
@@ -34,17 +34,17 @@ export const retrieveCart = () => async (dispatch) => {
   }
 };
 
-export const addToCartSuccess = (item) => {
+export const addToCartSuccess = (product) => {
   return {
     type: ADD_TO_CART_SUCCESS,
-    payload: item
+    payload: product
   }
 }
 
 export const addToCart = (productId, quantity, selectedOption) => async (dispatch) => {
   try {
-    const item = await commerce.cart.add(productId, quantity, selectedOption);
-    dispatch(addToCartSuccess(item))
+    const product = await commerce.cart.add(productId, quantity, selectedOption);
+    dispatch(addToCartSuccess(product))
   } catch (err) {
     console.log('error adding product to cart', err)
   }
