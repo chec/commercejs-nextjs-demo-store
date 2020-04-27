@@ -25,6 +25,7 @@
     "react-scroll": "^1.7.16",
     "react-transition-group": "^4.3.0",
     "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
     "swiper": "^5.2.1"
   }
 }

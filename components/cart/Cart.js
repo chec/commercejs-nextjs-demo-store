@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import Link from "next/link";
-import { Transition } from "react-transition-group";
-import { connect } from "react-redux";
+import Link from "next/link"
 
-import {
-  disableBodyScroll,
-  enableBodyScroll,
-  clearAllBodyScrollLocks
-} from "body-scroll-lock";
+import { Transition } from "react-transition-group";
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
+
+import CartItem from '../cart/CartItem';
+
+import { connect } from "react-redux";
+import { retrieveCart } from '../../store/actions/cartActions';
+
+
 
 const duration = 300;
 
@@ -29,15 +31,6 @@ const backdropTransitionStyles = {
   exited: { opacity: "0" }
 };
 
-const cartItems = [
-  {
-    image: "https://images.unsplash.com/photo-1508350552147-213c11fcede6",
-    name: "Futuredew",
-    price: "$32.00",
-    detail: "300ml, Dry Skin"
-  }
-];
-
 class Cart extends Component {
   constructor(props) {
     super(props);
@@ -45,6 +38,12 @@ class Cart extends Component {
     this.cartScroll = React.createRef();
   }
 
+  /**
+  * Retrieve cart and contents client-side to dispatch to store
+  */
+ componentDidMount() {
+  this.props.dispatch(retrieveCart());
+}
 
   componentWillUnmount() {
     clearAllBodyScrollLocks();
@@ -104,48 +103,17 @@ class Cart extends Component {
                   </button>
                 </div>
               </div>
-              {cartItems.length > 0 ? (
+              {cart.total_unique_items > 0 ? (
                 <>
                   <div
                     className="flex-grow-1 overflow-auto"
                     ref={this.cartScroll}
                   >
-                    {/* Cart Items */}
-                    <div className="px-4 px-md-5 py-4">
-                      {cartItems.map(item => (
-                        <div className="cart-item d-flex">
-                          <div
-                            className="cart-item--image mr-4"
-                            style={{ backgroundImage: `url("${item.image}")` }}
-                          ></div>
-                          <div className="flex-grow-1 borderbottom border-color-gray400 h-100">
-                            <div className="d-flex justify-content-between mb-2">
-                              <p>{item.name}</p>
-                              <p className="text-right font-weight-medium">
-                                {item.price}
-                              </p>
-                            </div>
-                            <p className="font-color-medium mb-3">
-                              {item.detail}
-                            </p>
-                            <div className="d-flex align-items-center justify-content-between pt-2 pb-4">
-                              <div className="d-flex align-items-center">
-                                <button className="p-0 bg-transparent">
-                                  <img src="/icon/minus.svg" className="w-16" />
-                                </button>
-                                <p className="text-center px-3">1</p>
-                                <button className="p-0 bg-transparent">
-                                  <img src="/icon/plus.svg" className="w-16" />
-                                </button>
-                              </div>
-                              <p className="text-right text-decoration-underline font-color-medium cursor-pointer">
-                                Remove
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                    {cart.line_items.map(item => (
+                      <CartItem
+                        item={item}
+                      />
+                    ))}
                   </div>
 
                   {/* Cart Footer */}
@@ -154,7 +122,7 @@ class Cart extends Component {
                       <p className="font-color-light mr-2 font-weight-regular">
                         Subtotal:
                       </p>
-                      <p>$ 32.00</p>
+                      <p>{cart.subtotal.formatted_with_symbol}</p>
                     </div>
                     <div className="row">
                       <div className="col-6 d-none d-md-block">
@@ -166,8 +134,9 @@ class Cart extends Component {
                         </button>
                       </div>
                       <div className="col-12 col-md-6">
-                        <Link href="/checkout2/1">
-                          <a className="h-56 d-flex align-items-center justify-content-center bg-black w-100 flex-grow-1 font-weight-medium font-color-white px-3">
+                        <Link href="/checkout/1">
+                          <a className="h-56 d-flex align-items-center justify-content-center bg-black w-100 flex-grow-1 font-weight-medium font-color-white px-3"
+                          onClick={() => this.generateToken()}>
                             Checkout
                           </a>
                         </Link>
@@ -198,6 +167,7 @@ class Cart extends Component {
     );
   }
 }
+
 
 
 export default connect(state => state)(Cart);

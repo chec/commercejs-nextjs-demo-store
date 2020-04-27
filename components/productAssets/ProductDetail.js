@@ -5,13 +5,12 @@ import ReviewStars from "./ReviewStars";
 import VariantSelector from "../productAssets/VariantSelector";
 
 import { connect } from "react-redux";
-import commerce from '../../lib/commerce';
+
+import { addToCart } from '../../store/actions/cartActions';
 
 class ProductDetail extends Component {
   constructor(props) {
     super(props)
-
-    // this.addToCart = this.addToCart.bind(this);
 
     this.state = {
       selectedOptions: props.product.variants.reduce((acc, variant) => ({
@@ -20,7 +19,6 @@ class ProductDetail extends Component {
       }), {}),
     }
   }
-
 
 
   /**
@@ -46,6 +44,9 @@ class ProductDetail extends Component {
     }});
   }
 
+  /**
+  * Get price of selected option
+  */
   getPrice = () => {
     const { price: { raw: base }, variants } = this.props.product;
     const { selectedOptions } = this.state;
@@ -72,12 +73,10 @@ class ProductDetail extends Component {
   /**
   * Add to Cart
   */
-   async addToCart() {
-    const { product } = this.props;
-    const { selectedOption } = this.state;
-    const { data: cart } = await commerce.cart.add(product.id, { quantity: 1 }, selectedOption)
-
-    this.props.dispatch({ type: 'ADD_TO_CART', payload: cart });
+  handleAddToCart = () => {
+    const { product } = this.props
+    const { selectedOptions } = this.state;
+    this.props.dispatch(addToCart(product.id, 1, selectedOptions))
   }
 
   render() {
@@ -110,7 +109,8 @@ class ProductDetail extends Component {
 
         {/* Add to Cart & Price */}
         <div className="d-flex py-4">
-          <button onClick={() => this.addToCart(product.id)} className="h-56 bg-black font-color-white pl-3 pr-4 d-flex align-items-center flex-grow-1">
+          <button onClick={this.handleAddToCart}
+              className="h-56 bg-black font-color-white pl-3 pr-4 d-flex align-items-center flex-grow-1" type="button">
             <span className="flex-grow-1 mr-3 text-center">
               Add to cart
             </span>

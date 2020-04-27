@@ -1,20 +1,22 @@
-import { createStore, compose } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
+import thunk from 'redux-thunk';
 
-// Define action types
-const STORE_CATEGORIES = 'STORE_CATEGORIES'
-const STORE_PRODUCTS = 'STORE_PRODUCTS'
-const STORE_CART = 'STORE_CART'
-const ADD_TO_CART = 'ADD_TO_CART';
-const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
-const UPDATE_CART_ITEM = 'UPDATE_CART_ITEM'
+import {
+  STORE_PRODUCTS,
+  STORE_CATEGORIES,
+  RETRIEVE_CART_SUCCESS,
+  ADD_TO_CART_SUCCESS,
+  UPDATE_CART_ITEM_SUCCESS,
+  REMOVE_FROM_CART_SUCCESS
+} from './actions/actionTypes';
 
 
 // Declare initial state
 const initialState = {
   categories: [],
   products: [],
-  cart: {}
+  cart: {},
 };
 
 // Create reducer
@@ -23,21 +25,29 @@ const reducer = (state = initialState, action) => {
     case HYDRATE:
       return { ...state, ...action.payload  };
     // Dispatch in App SSR
+    // Check if action dispatched is STORE_CATEGORIES and act on that
     case STORE_CATEGORIES:
       return { ...state, categories: action.payload };
+    // Dispatch in App SSR
+    // Check if action dispatched is STORE_PRODUCTS and act on that
     case STORE_PRODUCTS:
       return { ...state, products: action.payload };
     // Dispatch in Product client-side
-    case STORE_CART:
+    // Check if action dispatched is STORE_CART and act on that
+    case RETRIEVE_CART_SUCCESS:
       return { ...state, cart: action.payload };
     // Dispatch in ProductDetail client-side
-    case ADD_TO_CART:
-      return { ...state, cart: action.payload }
+    // Check if action dispatched is ADD_TO_CART and act on that
+    case ADD_TO_CART_SUCCESS:
+      return { ...state, cart: action.payload.cart }
     // Dispatch in Cart client-side
-    case REMOVE_FROM_CART:
-      return { ...state, cart: action.payload }
-    case UPDATE_CART_ITEM:
-      return { ...state, cart: action.payload }
+    // Check if action dispatched is UPDATE_CART_ITEM and act on that
+    case UPDATE_CART_ITEM_SUCCESS:
+      return { ...state, cart: action.payload.cart }
+    // Dispatch in Cart client-side
+    // Check if action dispatched is REMOVE_FROM_CART and act on that
+    case REMOVE_FROM_CART_SUCCESS:
+      return { ...state, cart: action.payload.cart }
     default:
       return state;
   }
@@ -48,16 +58,18 @@ const devtools = (process.browser && window.__REDUX_DEVTOOLS_EXTENSION__)
   ? window.__REDUX_DEVTOOLS_EXTENSION__()
   : f => f
 
-// Create a makeStore function and pass reducer to createStore
+
+// Create a makeStore function and pass in reducer to create the store
 const makeStore = () => {
   return createStore(
     reducer,
-    compose(devtools)
+    initialState,
+    compose(applyMiddleware(thunk), devtools)
   );
 };
 
 
 const debug = !process.env.NETLIFY;
 
-// Export an assembled wrapper
+// Export an assembled wrapper with store's data
 export const wrapper = createWrapper(makeStore, { debug });
