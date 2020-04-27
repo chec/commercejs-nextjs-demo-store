@@ -8,7 +8,9 @@ import {
   RETRIEVE_CART_SUCCESS,
   ADD_TO_CART_SUCCESS,
   UPDATE_CART_ITEM_SUCCESS,
-  REMOVE_FROM_CART_SUCCESS
+  REMOVE_FROM_CART_SUCCESS,
+  GENERATE_CHECKOUT_TOKEN_SUCCESS,
+  CAPTURE_ORDER_SUCCESS
 } from './actions/actionTypes';
 
 
@@ -17,6 +19,7 @@ const initialState = {
   categories: [],
   products: [],
   cart: {},
+  checkout: {}
 };
 
 // Create reducer
