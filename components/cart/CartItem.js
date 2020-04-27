@@ -43,9 +43,11 @@ class CartItem extends Component {
               </p>
             </div>
             <div className="d-flex justify-content-between mb-2">
-              <p className="font-color-light font-weight-small">
-                {item.variants[0].variant_name}: {item.variants[0].option_name}
-              </p>
+              {item.variants.map(variant =>
+                <p className="font-color-light font-weight-small">
+                  {variant.variant_name}: {variant.option_name}
+                </p>
+              )}
             </div>
             <div className="d-flex align-items-center justify-content-between pt-2 pb-4">
               <div className="d-flex align-items-center">
@@ -53,7 +55,7 @@ class CartItem extends Component {
                   <img src="/icon/minus.svg" className="w-16" />
                 </button>
                 <p className="text-center px-3">{item.quantity}</p>
-                <button className="p-0 bg-transparent" sonClick={this.handleUpdateCartItem(item.id, item.quantity + 1)} >
+                <button className="p-0 bg-transparent" onClick={this.handleUpdateCartItem(item.id, item.quantity + 1)} >
                   <img src="/icon/plus.svg" className="w-16" />
                 </button>
               </div>
