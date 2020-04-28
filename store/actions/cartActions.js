@@ -121,9 +121,5 @@ export const removeFromCartError = (error) => {
  * Async remove cart item
  */
 export const removeFromCart = (lineItemId) => (dispatch) => commerce.cart.remove(lineItemId)
-  .then(item => {
-    dispatch(removeFromCartSuccess(item))
-  })
-  .catch(error => {
-    dispatch(removeFromCartError(error))
-  });
+  .then(item => dispatch(removeFromCartSuccess(item)))
+  .catch(error => dispatch(removeFromCartError(error)));
