@@ -58,8 +58,10 @@ export const updateCartItemSuccess = (item) => {
 }
 
 export const updateCartItem = (lineItemId, quantity) => async (dispatch) => {
+
   try {
-    const item = await commerce.cart.update(lineItemId, quantity);
+    const item = await commerce.cart.update(lineItemId, { quantity });
+
     dispatch(updateCartItemSuccess(item))
   } catch (err) {
     console.log('error updating cart item', err)
