@@ -2,9 +2,13 @@ import commerce from '../../lib/commerce'
 
 import {
   RETRIEVE_CART_SUCCESS,
+  RETRIEVE_CART_ERROR,
   ADD_TO_CART_SUCCESS,
+  ADD_TO_CART_ERROR,
   UPDATE_CART_ITEM_SUCCESS,
-  REMOVE_FROM_CART_SUCCESS
+  UPDATE_CART_ITEM_ERROR,
+  REMOVE_FROM_CART_SUCCESS,
+  REMOVE_FROM_CART_ERROR
 } from './actionTypes';
 
 
@@ -21,19 +25,30 @@ export const retrieveCartSuccess = (cart) => {
 }
 
 /**
+ * Handle error on retrieve cart fail
+ */
+export const retrieveCartError = (error) => {
+  console.log('Error retrieving cart', error)
+  return {
+    type: RETRIEVE_CART_ERROR,
+  }
+}
+
+/**
  * Async retrieve cart from API
  */
-export const retrieveCart = () => async (dispatch, getState) => {
-  try {
-    // Fetch cart from commerce
-    const cart = await commerce.cart.retrieve();
-    // Dispatch retrieve cart action after successful response
-    dispatch(retrieveCartSuccess(cart));
-  } catch (err) {
-    console.log('error retrieving cart', err);
-  }
-};
+export const retrieveCart = () => dispatch => commerce.cart.retrieve()
+  .then(cart => {
+    dispatch(retrieveCartSuccess(cart))
+  })
+  .catch(error => {
+    dispatch(retrieveCartError(error))
+  });
 
+
+/**
+ * Handle add to cart success and update store
+ */
 export const addToCartSuccess = (product) => {
   return {
     type: ADD_TO_CART_SUCCESS,
@@ -41,15 +56,31 @@ export const addToCartSuccess = (product) => {
   }
 }
 
-export const addToCart = (productId, quantity, selectedOption) => async (dispatch) => {
-  try {
-    const product = await commerce.cart.add(productId, quantity, selectedOption);
-    dispatch(addToCartSuccess(product))
-  } catch (err) {
-    console.log('error adding product to cart', err)
+/**
+ * Handle error on adding product to cart
+ */
+export const addToCartError = (error) => {
+  console.log('Error adding product to cart', error);
+  return {
+    type: ADD_TO_CART_ERROR,
   }
-};
+}
 
+/**
+ * Async add product to cart
+ */
+export const addToCart = (productId, quantity, selectedOption) => (dispatch) => commerce.cart.add(productId, quantity, selectedOption)
+  .then(product => {
+    dispatch(addToCartSuccess(product))
+  })
+  .catch(error => {
+    dispatch(addToCartError(error))
+  });
+
+
+/**
+ * Handle update cart item success and update store
+ */
 export const updateCartItemSuccess = (item) => {
   return {
     type: UPDATE_CART_ITEM_SUCCESS,
@@ -57,15 +88,30 @@ export const updateCartItemSuccess = (item) => {
   }
 }
 
-export const updateCartItem = (lineItemId, quantity) => async (dispatch) => {
-  try {
-    const item = await commerce.cart.update(lineItemId, { quantity });
-    dispatch(updateCartItemSuccess(item))
-  } catch (err) {
-    console.log('error updating cart item', err)
+/**
+ * Handle error on updating cart item
+ */
+export const updateCartItemError = (error) => {
+  console.log('Error updating cart item', error);
+  return {
+    type: UPDATE_CART_ITEM_ERROR
   }
-};
+}
 
+/**
+ * Async update cart item
+ */
+export const updateCartItem = (lineItemId, quantity) => (dispatch) => commerce.cart.update(lineItemId, { quantity })
+  .then(item => {
+    dispatch(updateCartItemSuccess(item))
+  })
+  .catch(error => {
+    dispatch(updateCartItemError(error))
+  });
+
+/**
+ * Handle remove cart item success and update store
+ */
 export const removeFromCartSuccess = (item) => {
   return {
     type: REMOVE_FROM_CART_SUCCESS,
@@ -73,11 +119,23 @@ export const removeFromCartSuccess = (item) => {
   }
 }
 
-export const removeFromCart = (lineItemId) => async (dispatch) => {
-  try {
-    const item = await commerce.cart.remove(lineItemId);
-    dispatch(removeFromCartSuccess(item))
-  } catch (err) {
-    console.log('error removing item from cart', err)
+/**
+ * Handle remove cart item error
+ */
+export const removeFromCartError = (error) => {
+  console.log('Error removing cart item', error)
+  return {
+    type: REMOVE_FROM_CART_ERROR
   }
-};
+}
+
+/**
+ * Async remove cart item
+ */
+export const removeFromCart = (lineItemId) => (dispatch) => commerce.cart.remove(lineItemId)
+  .then(item => {
+    dispatch(removeFromCartSuccess(item))
+  })
+  .catch(error => {
+    dispatch(removeFromCartError(error))
+  });
