@@ -94,12 +94,8 @@ export const updateCartItemError = (error) => {
  * Async update cart item
  */
 export const updateCartItem = (lineItemId, quantity) => (dispatch) => commerce.cart.update(lineItemId, { quantity })
-  .then(item => {
-    dispatch(updateCartItemSuccess(item))
-  })
-  .catch(error => {
-    dispatch(updateCartItemError(error))
-  });
+  .then(item => dispatch(updateCartItemSuccess(item)))
+  .catch(error => dispatch(updateCartItemError(error)));
 
 /**
  * Handle remove cart item success and update store
