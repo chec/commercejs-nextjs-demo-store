@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import Checkbox from "../../common/atoms/Checkbox";
 import Dropdown from "../../common/atoms/Dropdown";
 
@@ -146,6 +147,32 @@ export default class ShippingForm extends Component {
             </label>
           </div>
         </div>
+        <div className="row">
+          <div className="col-12 mb-3">
+            <label className="w-100">
+              <p className="mb-1 font-size-caption font-color-light">
+                Shipping method*
+              </p>
+              {/* <input
+                className="rounded-0 w-100"
+                placeholder="Select a country"
+              /> */}
+              <Dropdown
+                menu={[
+                  "India",
+                  "China",
+                  "Nepal",
+                  "Bhutan",
+                  "SriLanka",
+                  "Myanmar",
+                  "Indonatia"
+                ]}
+              >
+                Select a country
+              </Dropdown>
+            </label>
+          </div>
+        </div>
         <div
           onClick={() => this.toggleNewsletter(!recieveNewsletter)}
           className="d-flex mb-4 flex-nowrap cursor-pointer"
@@ -190,4 +217,8 @@ export default class ShippingForm extends Component {
       </>
     );
   }
+}
+
+ShippingForm.propTypes = {
+  shippingOptions: [],
 }

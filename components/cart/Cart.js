@@ -7,9 +7,8 @@ import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from "bo
 import CartItem from '../cart/CartItem';
 
 import { connect } from "react-redux";
-import { retrieveCart } from '../../store/actions/cartActions';
-
-
+// Cart redux action creators
+import { retrieveCart as dispatchRetreiveCart } from '../../store/actions/cartActions';
 
 const duration = 300;
 
@@ -34,16 +33,15 @@ const backdropTransitionStyles = {
 class Cart extends Component {
   constructor(props) {
     super(props);
-
     this.cartScroll = React.createRef();
   }
 
   /**
   * Retrieve cart and contents client-side to dispatch to store
   */
- componentDidMount() {
-  this.props.dispatch(retrieveCart());
-}
+  componentDidMount() {
+    this.props.dispatchRetreiveCart()
+  }
 
   componentWillUnmount() {
     clearAllBodyScrollLocks();
@@ -57,6 +55,7 @@ class Cart extends Component {
   onExiting = () => {
     enableBodyScroll(this.cartScroll.current);
   };
+
 
   render() {
     const { isOpen, toggle } = this.props;
@@ -134,9 +133,8 @@ class Cart extends Component {
                         </button>
                       </div>
                       <div className="col-12 col-md-6">
-                        <Link href="/checkout/1">
-                          <a className="h-56 d-flex align-items-center justify-content-center bg-black w-100 flex-grow-1 font-weight-medium font-color-white px-3"
-                          onClick={() => this.generateToken()}>
+                        <Link href="/checkout">
+                          <a className="h-56 d-flex align-items-center justify-content-center bg-black w-100 flex-grow-1 font-weight-medium font-color-white px-3">
                             Checkout
                           </a>
                         </Link>
@@ -168,6 +166,6 @@ class Cart extends Component {
   }
 }
 
-
-
-export default connect(state => state)(Cart);
+export default connect(state => state, {
+  dispatchRetreiveCart,
+})(Cart);

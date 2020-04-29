@@ -10,7 +10,7 @@ const AuthorizationBanner = ({
       {/* Content */}
       {isAuthorized ? (
         <>
-          <p className="font-color-medium">prokshh@gmail.com</p>
+          <p className="font-color-medium">example@example.com</p>
           <a
             href="#"
             className="font-color-black text-decoration-underline"

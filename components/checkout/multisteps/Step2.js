@@ -18,7 +18,7 @@ export default class Step2 extends Component {
               <div className="col-12 col-sm-2 mb-2 mb-sm-0 font-color-light">
                 Contact
               </div>
-              <div className="col-9 col-sm-8">prokshh@gmail.com</div>
+              <div className="col-9 col-sm-8">example@example.com</div>
               <div className="col-3 col-sm-2 d-flex justify-content-end">
                 <Link href="/checkout/1">
                   <p className="text-right text-decoration-underline cursor-pointer">

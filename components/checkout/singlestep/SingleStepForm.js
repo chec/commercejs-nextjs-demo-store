@@ -1,16 +1,12 @@
 import React, { Component } from "react";
 import Link from "next/link";
 
-import ShippingDetails from "../common/ShippingDetails";
+import ShippingForm from "../common/ShippingForm";
 import PaymentDetails from "../common/PaymentDetails";
 import BillingDetails from "../common/BillingDetails";
 import AuthorizationBanner from "../common/AuthorizationBanner";
 import AuthModal from "../../common/AuthModal";
 
-const availableAddresses = [
-  "D-16/23-24 FF, Sec-7 Rohini, Delhi - 110085",
-  "H.B. Twin Tower, 5th Floor Max Hospital Building, Netaji Subhash Place, Pitam Pura, Delhi, 110034"
-];
 
 export default class SingleStepForm extends Component {
   constructor(props) {
@@ -19,7 +15,6 @@ export default class SingleStepForm extends Component {
     this.state = {
       isAuthorized: false,
       showLoginModal: false,
-      selectedAddress: availableAddresses[0]
     };
   }
 
@@ -47,12 +42,14 @@ export default class SingleStepForm extends Component {
         />
 
         {/* ShippingDetails */}
-        <ShippingDetails
-          selectedAddress={selectedAddress}
-          toggleAddress={value => this.setState({ selectedAddress: value })}
-          availableAddresses={availableAddresses}
-          isAuthorized={isAuthorized}
-        />
+        <p className="font-size-subheader font-weight-semibold mb-4">
+          Shipping Information
+        </p>
+        <div className="mb-5">
+          <ShippingForm
+
+          />
+        </div>
 
         {/* Payment Methods */}
         <PaymentDetails />

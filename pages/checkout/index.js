@@ -1,7 +1,16 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
+import { connect } from "react-redux";
 import Head from "next/head";
-import Root from "../components/common/Root";
-import SingleStepForm from "../components/checkout/singlestep/SingleStepForm";
+
+import Root from "../../components/common/Root";
+import SingleStepForm from "../../components/checkout/singlestep/SingleStepForm";
+
+// Checkout redux action creators
+import {
+  generateCheckoutTokenFromCart as dispatchGenerateCheckout,
+  getShippingOptionsForCheckout as dispatchGetShippingOptions,
+} from '../../store/actions/checkoutActions';
 
 const products = [
   {
@@ -25,12 +34,47 @@ const products = [
 ];
 
 class CheckoutPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      deliveryCountry: 'CA',
+      deliveryRegion: 'NY',
+    }
+  }
+
+  componentDidMount() {
+    // on initial mount generate checkout token object from the cart,
+    // and then subsequently below in componentDidUpdate if the props.cart.total_items has changed
+    this.generateToken();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.cart && prevProps.cart.total_items !== this.props.cart.total_items) {
+      // re-generate checkout token object since cart has been updated
+      this.generateToken();
+    }
+  }
+
+  generateToken = async () => {
+    const { cart, dispatchGenerateCheckout, dispatchGetShippingOptions } = this.props;
+    if (cart) {
+      const { deliveryCountry: country, deliveryRegion: region } = this.state;
+      try {
+        const checkout = await dispatchGenerateCheckout(cart.id);
+        // continue and dispatch getShippingOptionsForCheckout to get shipping options based on checkout.id
+        dispatchGetShippingOptions(checkout.id, country, region);
+      } catch (error) {
+        console.log('error caught in Cart.js in generateToken', error);
+      }
+    }
+  }
+
   render() {
+    const { checkout } = this.props;
     return (
       <Root>
         <Head>
-          <title>Home</title>
-          <link rel="icon" href="/favicon.ico" />
+          <title>Checkout</title>
         </Head>
 
         <div className="custom-container py-5 my-4 my-sm-5">
@@ -131,7 +175,7 @@ class CheckoutPage extends Component {
                     Total amount
                   </p>
                   <p className="text-right font-weight-semibold font-size-title">
-                    $270.00
+                    $ { checkout.live ? checkout.live.total_due.formatted_with_code : '' }
                   </p>
                 </div>
               </div>
@@ -144,4 +188,14 @@ class CheckoutPage extends Component {
   }
 }
 
-export default CheckoutPage;
+CheckoutPage.propTypes = {
+  checkout: PropTypes.object,
+  cart: PropTypes.object,
+  dispatchGenerateCheckout: PropTypes.func,
+  dispatchGetShippingOptions: PropTypes.func,
+}
+
+export default connect(({ checkout: { checkoutTokenObject, shippingOptions }, cart }) => ({ checkout: checkoutTokenObject, shippingOptions, cart }), {
+  dispatchGenerateCheckout,
+  dispatchGetShippingOptions,
+})(CheckoutPage);
