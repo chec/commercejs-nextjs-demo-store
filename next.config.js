@@ -10,7 +10,7 @@ module.exports = withSass({
     return config
   },
   env: {
-    'COMMERCEJS_PUBLIC_KEY': process.env.COMMERCEJS_PUBLIC_KEY
+    'CHEC_PUBLIC_KEY': process.env.CHEC_PUBLIC_KEY
   }
 })
 
