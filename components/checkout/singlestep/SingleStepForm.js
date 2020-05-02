@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import Link from "next/link";
 
 import ShippingForm from "../common/ShippingForm";
@@ -20,7 +21,7 @@ export default class SingleStepForm extends Component {
 
   render() {
     const { isAuthorized, selectedAddress, showLoginModal } = this.state;
-
+    const { shippingOptions, gateways, selectedGateway, handleGatewayChange } = this.props;
     return (
       <form>
         {/* Modal */}
@@ -47,12 +48,16 @@ export default class SingleStepForm extends Component {
         </p>
         <div className="mb-5">
           <ShippingForm
-
+            shippingOptions={shippingOptions}
           />
         </div>
 
         {/* Payment Methods */}
-        <PaymentDetails />
+        <PaymentDetails
+          gateways={gateways}
+          handleGatewayChange={handleGatewayChange}
+          selectedGateway={selectedGateway}
+        />
 
         {/* Billing Address */}
         <BillingDetails />
@@ -68,4 +73,11 @@ export default class SingleStepForm extends Component {
       </form>
     );
   }
+}
+
+SingleStepForm.propTypes = {
+  shippingOptions: PropTypes.array,
+  gateways: PropTypes.object,
+  handleGatewayChange: PropTypes.object,
+  selectedGateway: PropTypes.string,
 }

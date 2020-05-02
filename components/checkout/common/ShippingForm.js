@@ -23,7 +23,23 @@ export default class ShippingForm extends Component {
 
   render() {
     const { recieveNewsletter, saveInfo } = this.state;
-
+    const {
+      shippingOptions,
+      countries = {},
+      subdivisions = {},
+      deliveryCountry,
+      deliveryRegion,
+      selectedShippingOptionId,
+      selectedShippingOption,
+      firstName,
+      lastName,
+      shippingTownCity,
+      shippingStreet,
+      shippingStreet2,
+      shippingPostalZipCode,
+      customerEmail,
+      orderNotes,
+    } = this.props;
     return (
       <>
         <div className="row">
@@ -32,7 +48,7 @@ export default class ShippingForm extends Component {
               <p className="mb-1 font-size-caption font-color-light">
                 First Name*
               </p>
-              <input className="rounded-0 w-100" />
+              <input name="firstName" value={firstName} className="rounded-0 w-100" />
             </label>
           </div>
           <div className="col-12 col-sm-4 mb-3">
@@ -48,7 +64,7 @@ export default class ShippingForm extends Component {
               <p className="mb-1 font-size-caption font-color-light">
                 Last Name*
               </p>
-              <input className="rounded-0 w-100" />
+              <input name="lastName" value={lastName} className="rounded-0 w-100" />
             </label>
           </div>
         </div>
@@ -58,29 +74,25 @@ export default class ShippingForm extends Component {
               <p className="mb-1 font-size-caption font-color-light">
                 Country*
               </p>
-              {/* <input
-                className="rounded-0 w-100"
-                placeholder="Select a country"
-              /> */}
               <Dropdown
-                menu={[
-                  "India",
-                  "China",
-                  "Nepal",
-                  "Bhutan",
-                  "SriLanka",
-                  "Myanmar",
-                  "Indonatia"
-                ]}
+                name="deliveryCountry"
+                placeholder="Select a country"
+                value={deliveryCountry}
               >
-                Select a country
+                {
+                  Object.entries(countries).map(([code, name]) => (
+                    <option value={code} key={code}>
+                      { name }
+                    </option>
+                  ))
+                }
               </Dropdown>
             </label>
           </div>
           <div className="col-12 col-sm-6 mb-3">
             <label className="w-100">
               <p className="mb-1 font-size-caption font-color-light">City*</p>
-              <input className="rounded-0 w-100" />
+              <input name="shipping[town_city]" value={shippingTownCity} className="rounded-0 w-100" />
             </label>
           </div>
         </div>
@@ -91,6 +103,8 @@ export default class ShippingForm extends Component {
                 Address Line 1*
               </p>
               <input
+                name="shipping[street]"
+                value={shippingStreet}
                 className="rounded-0 w-100"
                 placeholder="House number, steet, etc."
               />
@@ -102,6 +116,8 @@ export default class ShippingForm extends Component {
                 Address Line 2 (optional)
               </p>
               <input
+                name="street2"
+                value={shippingStreet2}
                 className="rounded-0 w-100"
                 placeholder="Appartment, buero, etc."
               />
@@ -112,12 +128,21 @@ export default class ShippingForm extends Component {
           <div className="col-12 col-sm-6 mb-3">
             <label className="w-100">
               <p className="mb-1 font-size-caption font-color-light">
-                Region / Department*
+                State / Province / Region*
               </p>
-              <input
-                className="rounded-0 w-100"
+              <Dropdown
+                name="deliveryRegion"
+                value={deliveryRegion}
                 placeholder="Select a region"
-              />
+              >
+                {
+                  Object.entries(subdivisions).map(([code, name]) => (
+                    <option key={code} value={code}>
+                    { name }
+                    </option>
+                  ))
+                }
+              </Dropdown>
             </label>
           </div>
           <div className="col-12 col-sm-6 mb-3">
@@ -125,7 +150,11 @@ export default class ShippingForm extends Component {
               <p className="mb-1 font-size-caption font-color-light">
                 Postal Code*
               </p>
-              <input className="rounded-0 w-100" />
+              <input
+                name="shipping[postal_zip_code]"
+                value={shippingPostalZipCode}
+                className="rounded-0 w-100"
+              />
             </label>
           </div>
         </div>
@@ -143,7 +172,11 @@ export default class ShippingForm extends Component {
               <p className="mb-1 font-size-caption font-color-light">
                 Email Address*
               </p>
-              <input className="rounded-0 w-100" />
+              <input
+                name="customer[email]"
+                value={customerEmail}
+                className="rounded-0 w-100"
+              />
             </label>
           </div>
         </div>
@@ -153,22 +186,22 @@ export default class ShippingForm extends Component {
               <p className="mb-1 font-size-caption font-color-light">
                 Shipping method*
               </p>
-              {/* <input
-                className="rounded-0 w-100"
-                placeholder="Select a country"
-              /> */}
               <Dropdown
-                menu={[
-                  "India",
-                  "China",
-                  "Nepal",
-                  "Bhutan",
-                  "SriLanka",
-                  "Myanmar",
-                  "Indonatia"
-                ]}
+                name="fulfillment[shipping_method]"
+                value={
+                  selectedShippingOption
+                  ? (`${selectedShippingOption.description} - ${selectedShippingOption.price.formatted_with_code}`)
+                  : ''
+                }
+                placeholder="Select a shipping method"
               >
-                Select a country
+                {
+                  shippingOptions.map(option => (
+                    <option key={option.id} value={option.id}>
+                    { `${option.description} - $${option.price.formatted_with_code}` }
+                    </option>
+                  ))
+                }
               </Dropdown>
             </label>
           </div>
@@ -205,20 +238,27 @@ export default class ShippingForm extends Component {
           <p className="mb-1 font-size-caption font-color-light">
             Order Notes (optional)
           </p>
-          <textarea className="rounded-0 w-100" />
+          <textarea name="orderNotes" value={orderNotes} className="rounded-0 w-100" />
         </label>
-
-        {/* <button
-          type="submit"
-          className="bg-black font-color-white w-100 border-none h-56 font-weight-semibold"
-        >
-          Make Payment
-        </button> */}
       </>
     );
   }
 }
 
 ShippingForm.propTypes = {
-  shippingOptions: [],
+  shippingOptions: PropTypes.array,
+  countries: PropTypes.object,
+  subdivisions: PropTypes.object,
+  deliveryCountry: PropTypes.string,
+  deliveryRegion: PropTypes.string,
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  selectedShippingOptionId: PropTypes.string,
+  selectedShippingOption: PropTypes.object,
+  shippingTownCity: PropTypes.string,
+  shippingStreet: PropTypes.string,
+  shippingStreet2: PropTypes.string,
+  shippingPostalZipCode: PropTypes.string,
+  customerEmail: PropTypes.string,
+  orderNotes: PropTypes.string,
 }

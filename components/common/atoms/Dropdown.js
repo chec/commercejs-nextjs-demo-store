@@ -11,15 +11,14 @@ class Dropdown extends Component {
     };
 
   }
-
   render() {
     const { isOpen } = this.state;
     const { children, menu } = this.props;
 
     return (
-      <div className="position-relative">
+      <div
+        className="position-relative">
         <div
-          tabIndex="0"
           className={`dropdown bg-white d-flex align-items-center justify-content-between ${isOpen &&
             "border-color-black"}`}
         >
@@ -31,8 +30,7 @@ class Dropdown extends Component {
           <select
             name={this.props.name}
             disabled={this.props.disabled}
-            onChange={this.props.onChange}
-            value={this.state.deliveryState}
+            value={this.props.value}
             className="position-absolute top-0 right-0 bottom-0 left-0 opacity-0 pointer w-100">
             <option value="" disabled>
               { this.props.disabledOptionText || 'Select an option' }
@@ -51,6 +49,5 @@ Dropdown.propTypes = {
   placeholder: propTypes.string,
   disabled: propTypes.string,
   disabledOptionText: propTypes.string,
-  onChange: propTypes.func,
 }
 export default Dropdown;

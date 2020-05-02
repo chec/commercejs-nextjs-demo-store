@@ -64,9 +64,9 @@ class Product extends Component {
 
           <div className="product-images">
             <div className="flex-grow-1">
-              {images.map(image => (
+              {images.map((image, i) => (
                 <img
-                  key={image}
+                  key={i}
                   src={image}
                   className="w-100 mb-3 carousel-main-images"
                 />

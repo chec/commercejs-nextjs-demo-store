@@ -87,8 +87,8 @@ export default class Footer extends React.Component {
             </div>
           </div>
           <div className="d-flex footer-follow--images">
-            {imagesInfo.map(item => (
-              <div className="justify-content-sm-end flex-column follow-images">
+            {imagesInfo.map((item, i) => (
+              <div key={i} className="justify-content-sm-end flex-column follow-images">
                 <div
                   ref={image => this.images.push(image)}
                   style={{

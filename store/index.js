@@ -13,6 +13,9 @@ import {
   CAPTURE_ORDER_SUCCESS,
   GENERATE_CHECKOUT_TOKEN,
   GET_SHIPPING_OPTIONS,
+  REMOVE_SHIPPING_OPTIONS,
+  UPDATE_CHECKOUT_LIVE_OBJECT,
+  ABORT_CHECKOUT,
 } from './actions/actionTypes';
 
 
@@ -22,9 +25,10 @@ const initialState = {
   products: [],
   cart: {},
   checkout: {
-    shippingOptions: {},
+    shippingOptions: [],
     checkoutTokenObject: {},
-  }
+  },
+  orderReceipt: {},
 };
 
 // Create reducer
@@ -60,6 +64,14 @@ const reducer = (state = initialState, action) => {
       return { ...state, checkout: { ...state.checkout, checkoutTokenObject: action.payload }};
     case GET_SHIPPING_OPTIONS:
       return { ...state, checkout: { ...state.checkout, shippingOptions: action.payload }};
+    case REMOVE_SHIPPING_OPTIONS:
+      return { ...state, checkout: { ...state.checkout, shippingOptions: [] }};
+    case UPDATE_CHECKOUT_LIVE_OBJECT:
+      return { ...state, checkout: { ...state.checkout, checkoutTokenObject: { ...state.checkout.checkoutTokenObject, live: action.payload }}};
+    case ABORT_CHECKOUT:
+      return { ...state, checkout: initialState.checkout };
+    case CAPTURE_ORDER_SUCCESS:
+      return { ...state, checkout: initialState.checkout, orderReceipt: action.payload };
     default:
       return state;
   }

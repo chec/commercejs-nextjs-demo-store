@@ -157,8 +157,9 @@ class Header extends Component {
               }}
             >
               <div className="position-absolute top-0 left-0 right-0 h-100vh mobile-menu-inner bg-brand700 d-flex flex-column justify-content-center">
-                {mobileMenuLinks.map(item => (
+                {mobileMenuLinks.map((item, i) => (
                   <a
+                    key={i}
                     href={item.link}
                     className="d-block mb-4 font-size-heading font-color-black text-center"
                   >

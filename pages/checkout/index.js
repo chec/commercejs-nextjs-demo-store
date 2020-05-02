@@ -2,43 +2,72 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import Head from "next/head";
+import Link from "next/link";
+import { withRouter } from 'next/router'
+import ccFormat from '../../utils/ccFormat';
 
+// commerce.js client
+import commerce from '../../lib/commerce';
+
+// components
 import Root from "../../components/common/Root";
 import SingleStepForm from "../../components/checkout/singlestep/SingleStepForm";
+import ShippingForm from "../../components/checkout/common/ShippingForm";
+import PaymentDetails from "../../components/checkout/common/PaymentDetails";
+import BillingDetails from "../../components/checkout/common/BillingDetails";
+import AuthorizationBanner from "../../components/checkout/common/AuthorizationBanner";
+import AuthModal from "../../components/common/AuthModal";
 
 // Checkout redux action creators
 import {
   generateCheckoutTokenFromCart as dispatchGenerateCheckout,
   getShippingOptionsForCheckout as dispatchGetShippingOptions,
+  setShippingOptionInCheckout as dispatchSetShippingOptionsInCheckout,
+  captureOrder as dispatchCaptureOrder,
 } from '../../store/actions/checkoutActions';
-
-const products = [
-  {
-    image: "",
-    name: "1 x Futuredew",
-    detail: "300ml, Dry Skin",
-    price: "$32.00"
-  },
-  {
-    image: "",
-    name: "1 x Futuredew",
-    detail: "300ml, Dry Skin",
-    price: "$32.00"
-  },
-  {
-    image: "",
-    name: "1 x Futuredew",
-    detail: "300ml, Dry Skin",
-    price: "$32.00"
-  }
-];
 
 class CheckoutPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isAuthorized: false,
+      openLoginModal: false,
+
       deliveryCountry: 'CA',
-      deliveryRegion: 'NY',
+      deliveryRegion: 'BC',
+
+      // string property names to conveniently identify inputs related to commerce.js validation errors
+      // e.g error { param: "shipping[name]"}
+      firstName: 'Santa',
+      lastName: 'Claus',
+      'customer[email]': 'john@doe.com',
+      'shipping[name]': 'John Doe',
+      'shipping[street]': '318 Homer Street',
+      street2: '',
+      'shipping[town_city]': 'Vancouver (NE Downtown / Harbour Centre / Gastown / Yaletown)',
+      'shipping[postal_zip_code]': 'V6B 2V2',
+      orderNotes: '',
+      countries: {},
+      subdivisions: {},
+
+      'fulfillment[shipping_method]': '',
+      cardNumber: ccFormat('4242424242424242'),
+      expMonth: '01',
+      expYear: '2021',
+      cvc: '123',
+      billingPostalZipcode: 'V6B 2V2',
+
+      errors: {
+        'fulfillment[shipping_method]': null,
+        gateway_error: null,
+        'customer[email]': null,
+        'shipping[name]': null,
+        'shipping[street]': null,
+        'shipping[town_city]': null,
+        'shipping[postal_zip_code]': null
+      },
+
+      selectedGateway: 'test_gateway',
     }
   }
 
@@ -46,31 +75,214 @@ class CheckoutPage extends Component {
     // on initial mount generate checkout token object from the cart,
     // and then subsequently below in componentDidUpdate if the props.cart.total_items has changed
     this.generateToken();
+    this.getAllCountries();
+    this.getRegions(this.state.deliveryCountry)
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
+    // if cart is empty then redirect out of checkout;
+    if (this.props.cart && this.props.cart.total_items === 0) {
+      this.redirectOutOfCheckout()
+    };
+
+    // if cart items have changed then regenerate checkout token object to reflect changes.
     if (prevProps.cart && prevProps.cart.total_items !== this.props.cart.total_items) {
-      // re-generate checkout token object since cart has been updated
+      // reset selected shipping option
+      this.setState({
+        'fulfillment[shipping_method]': '',
+      })
+      // regenerate checkout token object since cart has been updated
       this.generateToken();
     }
+
+    const hasDeliveryCountryChanged = prevState.deliveryCountry !== this.state.deliveryCountry;
+    const hasDeliveryRegionChanged = prevState.deliveryRegion !== this.state.deliveryRegion;
+
+    // refresh list of regions when delivery country has changed
+    if (hasDeliveryCountryChanged) {
+      this.getRegions(this.state.deliveryCountry);
+    }
+
+    // if delivery country or region have changed, and we still have a checkout token object, then refresh the token,
+    // and reset the previously selected shipping method
+    if (hasDeliveryCountryChanged || hasDeliveryRegionChanged && this.props.checkout) {
+      // reset selected shipping option since previous checkout token live object shipping info
+      // was set based off delivery country, deliveryRegion
+      this.setState({
+        'fulfillment[shipping_method]': '',
+      })
+      this.generateToken();
+    }
+
+    // if selected shippiing option changes, regenerate checkout token object to reflect changes
+    if (prevState['fulfillment[shipping_method]'] !== this.state['fulfillment[shipping_method]'] && this.state['fulfillment[shipping_method]'] && this.props.checkout) {
+      // update checkout token object with shipping information
+      this.props.dispatchSetShippingOptionsInCheckout(this.props.checkout.id, this.state['fulfillment[shipping_method]'], this.state.deliveryCountry, this.state.deliveryRegion);
+    }
   }
 
-  generateToken = async () => {
+  generateToken = () => {
     const { cart, dispatchGenerateCheckout, dispatchGetShippingOptions } = this.props;
-    if (cart) {
-      const { deliveryCountry: country, deliveryRegion: region } = this.state;
-      try {
-        const checkout = await dispatchGenerateCheckout(cart.id);
+    const { deliveryCountry: country, deliveryRegion: region } = this.state;
+    return dispatchGenerateCheckout(cart.id)
+      .then((checkout) => {
         // continue and dispatch getShippingOptionsForCheckout to get shipping options based on checkout.id
-        dispatchGetShippingOptions(checkout.id, country, region);
-      } catch (error) {
-        console.log('error caught in Cart.js in generateToken', error);
+        return dispatchGetShippingOptions(checkout.id, country, region)
+      })
+      .catch(error => {
+        console.log('error caught in checkout/index.js in generateToken', error);
+      })
+  }
+
+  redirectOutOfCheckout = () => {
+    console.log('redirecting out of checkout');
+    this.props.router.push('/');
+  }
+
+  handleGatewayChange = (selectedGateway) => {
+    this.setState({
+      selectedGateway
+    })
+  }
+
+  handleFormChanges = (e) => {
+    // when input cardNumber changes format using ccFormat helper
+    if (e.target.name === "cardNumber") {
+      e.target.value = ccFormat(e.target.value)
+    }
+    // update form's input by name in state
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  captureOrder = (e) => {
+    e.preventDefault();
+
+    // reset error states
+    this.setState({
+      errors: {
+        "fulfillment[shipping_method]": null,
+        gateway_error: null,
+        "shipping[name]": null,
+        "shipping[street]": null,
+      },
+    });
+
+    // set up line_items object and inner variant object for order object below
+    const line_items = this.props.checkout.live.line_items.reduce((obj, lineItem) => {
+      const variants = lineItem.variants.reduce((obj, variant) => {
+        obj[variant.variant_id] = variant.option_id;
+        return obj;
+      }, {});
+      obj[lineItem.id] = { ...lineItem, variants };
+      return obj;
+    }, {});
+
+    // construct order object
+    const newOrder = {
+      line_items,
+      customer: {
+        firstname: this.state.firstName,
+        lastname: this.state.lastName,
+        email: this.state["customer[email]"]
+      },
+      // collected 'order notes' data for extra field configured in the Chec Dashboard
+      extrafields: {
+        extr_j0YnEoqOPle7P6: this.state.orderNotes,
+      },
+      shipping: {
+        name: this.state["shipping[name]"],
+        country: this.state.deliveryCountry,
+        street: this.state["shipping[street]"] + this.state.street2,
+        town_city: this.state["shipping[town_city]"],
+        county_state: this.state.deliveryRegion,
+        postal_zip_code: this.state["shipping[postal_zip_code]"]
+      },
+      fulfillment: {
+        shipping_method: this.state["fulfillment[shipping_method]"]
+      },
+      payment: {
+        gateway: this.state.selectedGateway,
+      },
+    }
+
+    // if test gateway selected add necessary card data
+    // for the order to be completed.
+    if (this.state.selectedGateway === 'test_gateway') {
+      newOrder.payment.card = {
+        number: this.state.cardNumber,
+        expiry_month: this.state.expMonth,
+        expiry_year: this.state.expYear,
+        cvc: this.state.cvc,
+        postal_zip_code: this.state.billingPostalZipcode,
       }
     }
+
+    // capture order
+    // set order-receipt global state
+    // and redirect to confirmation page
+    // or handle errors
+    this.props.dispatchCaptureOrder(this.props.checkout.id, newOrder)
+      .then(() => {
+        this.props.router.push('/checkout/confirm');
+      })
+      .catch(({ data: { error = {} }}) => {
+        let errorToAlert = '';
+        if (error.type === 'validation') {
+          console.log('error while capturing order', error.message)
+
+          error.message.forEach(({param, error}, i) => {
+            this.setState({
+              errors: {
+                ...this.state.errors,
+                [param]: error
+              }
+            })
+          })
+
+          const allErrors = error.message.reduce((string, error) => {
+            return `${string} ${error.error}`
+          }, '')
+          errorToAlert = allErrors;
+        }
+
+        if (error.type === 'gateway_error' || error.type === 'not_valid' || error.type === 'bad_request') {
+          this.setState({
+            errors: {
+              ...this.state.errors,
+              [(error.type === 'not_valid' ? 'fulfillment[shipping_method]' : error.type)]: error.message
+            }
+          })
+          errorToAlert = error.message
+        }
+        if (errorToAlert) {
+          alert(errorToAlert);
+        }
+      })
+  }
+
+  // commmerce.js helpers
+  getAllCountries = () => {
+    commerce.services.localeListCountries().then(resp => {
+      this.setState({
+        countries: resp.countries
+      })
+    }).catch(error => console.log(error))
+  }
+
+  getRegions = (deliveryCountry) => {
+    commerce.services.localeListSubdivisions(deliveryCountry).then(resp => {
+      this.setState({
+        subdivisions: resp.subdivisions
+      })
+    }).catch(error => console.log(error))
   }
 
   render() {
-    const { checkout } = this.props;
+    const { checkout, shippingOptions } = this.props;
+    const { line_items = [] } = checkout;
+    const selectedShippingOption = shippingOptions.find(({id}) => id === this.state['fulfillment[shipping_method]']);
     return (
       <Root>
         <Head>
@@ -105,8 +317,70 @@ class CheckoutPage extends Component {
                   Checkout
                 </div>
               </div>
+              {
+                checkout
+                ? (
+                <form onChange={this.handleFormChanges}>
+                  {/* Login Modal Modal */}
+                  <AuthModal
+                    isAuthorized={this.state.isAuthorized}
+                  />
 
-              <SingleStepForm />
+                  {/* ShippingDetails */}
+                  <p className="font-size-subheader font-weight-semibold mb-4">
+                    Shipping Information
+                  </p>
+                  <div className="mb-5">
+                    <ShippingForm
+                      firstName={this.state.firstName}
+                      lastName={this.state.lastName}
+                      customerEmail={this.state['customer[email]']}
+                      shippingOptions={shippingOptions}
+                      countries={this.state.countries}
+                      subdivisions={this.state.subdivisions}
+                      deliveryCountry={this.state.deliveryCountry}
+                      deliveryRegion={this.state.deliveryRegion}
+                      selectedShippingOptionId={this.state['fulfillment[shipping_method]']}
+                      selectedShippingOption={selectedShippingOption}
+                      shippingStreet={this.state['shipping[street]']}
+                      shippingStreet2={this.state.street2}
+                      shippingTownCity={this.state['shipping[town_city]']}
+                      shippingPostalZipCode={this.state['shipping[postal_zip_code]']}
+                      orderNotes={this.state.orderNotes}
+                    />
+                  </div>
+
+                  {/* Payment Methods */}
+                  <PaymentDetails
+                    gateways={checkout.gateways}
+                    handleGatewayChange={this.handleGatewayChange}
+                    selectedGateway={this.state.selectedGateway}
+
+                    cardNumber={this.state.cardNumber}
+                    expMonth={this.state.expMonth}
+                    expYear={this.state.expYear}
+                    cvc={this.state.cvc}
+                    billingPostalZipcode={this.state.billingPostalZipcode}
+                  />
+
+                  {/* Billing Address */}
+                  {
+                    checkout.collectsBillingAddress ?
+                    <BillingDetails />
+                    : ''
+                  }
+
+                    <button
+                      type="submit"
+                      className="bg-black font-color-white w-100 border-none h-56 font-weight-semibold"
+                      onClick={this.captureOrder}
+                    >
+                      Make Payment
+                    </button>
+                </form>
+                )
+                : ''
+              }
             </div>
 
             <div className="col-12 col-md-5 offset-md-1 d-none d-lg-block">
@@ -114,26 +388,32 @@ class CheckoutPage extends Component {
                 <div className="borderbottom font-size-subheader border-color-gray400 pb-2 font-weight-medium">
                   Your order
                 </div>
-                <div className="py-4 borderbottom border-color-gray400">
-                  {products.map((product, index) => (
-                    <div
-                      className={`d-flex ${products.length - 1 !== index &&
-                        "mb-3"}`}
-                    >
-                      <div className="w-56 h-64 bg-gray200 mr-4" />
-                      <div className="d-flex flex-grow-1">
-                        <div className="flex-grow-1">
-                          <p className="mb-2 font-weight-medium">
-                            {product.name}
-                          </p>
-                          <p className="font-color-light">{product.detail}</p>
-                        </div>
-                        <div className="text-right font-weight-semibold">
-                          {product.price}
+                <div className="pt-3 borderbottom border-color-gray400">
+                  {(checkout.live ? checkout.live.line_items : []).map((item, index, items) => {
+                    const _item = line_items.find(i => i.id === item.id); // from root checkout token object, not checkout.live, since it includes an image property
+                    return (
+                      <div
+                        key={item.id}
+                        className="d-flex mb-2"
+                      >
+                        { (_item && _item.image)
+                          ? (<img className="checkout__line-item-image mr-2" src={_item.image} />)
+                          : ''
+                        }
+                        <div className="d-flex flex-grow-1">
+                          <div className="flex-grow-1">
+                            <p className="font-weight-medium">
+                              {item.product_name}
+                            </p>
+                            <p className="font-color-light">Quantity: {item.quantity}</p>
+                          </div>
+                          <div className="text-right font-weight-semibold">
+                            ${item.price.formatted_with_code}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    )
+                  })}
                 </div>
                 <form className="d-flex py-3 borderbottom border-color-gray400">
                   <input
@@ -151,18 +431,18 @@ class CheckoutPage extends Component {
                   {[
                     {
                       name: "Subtotal",
-                      amount: "$ 203.00"
+                      amount: checkout.live ? checkout.live.subtotal.formatted_with_symbol : '',
                     },
                     {
                       name: "Tax",
-                      amount: "$ 3.00"
+                      amount: checkout.live ? checkout.live.tax.amount.formatted_with_symbol : '',
                     },
                     {
                       name: "Shipping",
-                      amount: "$ 30.00"
+                      amount: selectedShippingOption ? `${selectedShippingOption.description} - ${selectedShippingOption.price.formatted_with_symbol}` : 'No shipping method selected',
                     }
-                  ].map(item => (
-                    <div className="d-flex justify-content-between align-items-center mb-2">
+                  ].map((item, i) => (
+                    <div key={i} className="d-flex justify-content-between align-items-center mb-2">
                       <p>{item.name}</p>
                       <p className="text-right font-weight-medium">
                         {item.amount}
@@ -175,14 +455,13 @@ class CheckoutPage extends Component {
                     Total amount
                   </p>
                   <p className="text-right font-weight-semibold font-size-title">
-                    $ { checkout.live ? checkout.live.total_due.formatted_with_code : '' }
+                    $ { checkout.live ? checkout.live.total.formatted_with_code : '' }
                   </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {/* <div className="h-1 bg-gray400 d-sm-none"></div> */}
       </Root>
     );
   }
@@ -191,11 +470,14 @@ class CheckoutPage extends Component {
 CheckoutPage.propTypes = {
   checkout: PropTypes.object,
   cart: PropTypes.object,
+  shippingOptions: PropTypes.array,
   dispatchGenerateCheckout: PropTypes.func,
   dispatchGetShippingOptions: PropTypes.func,
 }
 
-export default connect(({ checkout: { checkoutTokenObject, shippingOptions }, cart }) => ({ checkout: checkoutTokenObject, shippingOptions, cart }), {
+export default withRouter(connect(({ checkout: { checkoutTokenObject, shippingOptions }, cart }) => ({ checkout: checkoutTokenObject, shippingOptions, cart }), {
   dispatchGenerateCheckout,
   dispatchGetShippingOptions,
-})(CheckoutPage);
+  dispatchSetShippingOptionsInCheckout,
+  dispatchCaptureOrder,
+})(CheckoutPage));

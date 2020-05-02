@@ -105,16 +105,16 @@ class Cart extends Component {
               {cart.total_unique_items > 0 ? (
                 <>
                   <div
-                    className="flex-grow-1 overflow-auto"
+                    className="flex-grow-1 overflow-auto pt-4"
                     ref={this.cartScroll}
                   >
                     {cart.line_items.map(item => (
                       <CartItem
+                        key={item.id}
                         item={item}
                       />
                     ))}
                   </div>
-
                   {/* Cart Footer */}
                   <div className="cart-footer">
                     <div className="mb-3 d-flex">
@@ -125,12 +125,11 @@ class Cart extends Component {
                     </div>
                     <div className="row">
                       <div className="col-6 d-none d-md-block">
-                        <button
-                          className="h-56 w-100 flex-grow-1 bg-white  border border-color-black px-3"
-                          onClick={() => toggle(false)}
-                        >
-                          Continue Shopping
-                        </button>
+                        <Link href="/collection">
+                          <a className="h-56 d-flex align-items-center justify-content-center border border-color-black bg-white w-100 flex-grow-1 font-weight-medium font-color-black px-3">
+                            Continue Shopping
+                          </a>
+                        </Link>
                       </div>
                       <div className="col-12 col-md-6">
                         <Link href="/checkout">
