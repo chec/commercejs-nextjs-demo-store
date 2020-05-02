@@ -1,5 +1,6 @@
 # Example Store with Commerce.js and Next.js 
 
+
 A high-fidelity fully-fledged eCommerce store built using the Commerce.js SDK and Next.js with live deployment to Netlify.
 
 Checkout the live demo [here]()
@@ -11,19 +12,32 @@ Checkout the live demo [here]()
 
 This README will guide you in getting up and running with a fully-fledged eCommerce template. There are two ways to get set up:
 
-1. One-click live deploy a copy of the application via Netlify
+1. Deploy with Netlify
 2. Manual setup and deployment process. In this option, we will be focusing on the initial setup, injecting your Next.js app with Commerce.js and lastly wrap up with manual deployment steps.
 
 For a full detailed tutorial on building this JAMstack eCommerce application, please head on over [here](tutorial-url).
+
+## 🥞 Stack
+
+- Framework - [Next.js](https://nextjs.org)
+- eCommerce - [Chec/Commerce.js](https://commercejs.com)
+- Hosting - [Netlify](https://netlify.com)
+
 
 ## Prequisites
 
 - IDE of your choice (code editor)
 - NodeJS or Yarn → npm or yarn
 
-## Deploy to Netlify 
+## Deploy with Netlify 
 
-*Explanation of Netlify deployment process here*
+Now you get to see the real beauty of deploying a static site with minimal effort. There are two options to launch a live deploy of the application: 
+
+
+1. Manual setup involves cloning the repo into your local environment and using the Netlify CLI for deployment.
+
+
+2. One-click deploy helps to deploy the application with… you guessed it, one single click.  Skip to one-click deploy here if you prefer to go this route.
 
 1. Set up a Chec account [here]() and upload the neccessary data to power your store. If you would like to use our sample data, please ignore this step.
 
@@ -88,7 +102,7 @@ yarn dev
 1. Copy the `.env.example` dotenv file at your project root to store your Chec `public_key`. 
 
 ```
-COMMERCE_PUBLIC_KEY=your_public_API_key_here
+CHEC_PUBLIC_KEY=your_public_API_key_here
 ```
 
 This file is meant to not be committed to source control and also will be hidden in file browsers.
@@ -110,7 +124,7 @@ module.exports = withSass({
     return config
   },
   env: {
-    'COMMERCEJS_PUBLIC_KEY': process.env.COMMERCEJS_PUBLIC_KEY
+    'CHEC_PUBLIC_KEY': process.env.CHEC_PUBLIC_KEY
   }
 })
 ```
