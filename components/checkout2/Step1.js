@@ -1,13 +1,12 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import Link from "next/link";
-
 import UnderlineInput from "./UnderlineInput";
 import Checkbox from "../common/atoms/Checkbox";
 
 export default class Step1 extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       recieveNewsletter: false
     };

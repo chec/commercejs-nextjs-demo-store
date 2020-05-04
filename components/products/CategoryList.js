@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
  * view sidebars.
  */
 export default connect(({ categories }) => ({ categories }))(
-  ({ categories, current, ...platformProps }) => (
-    <div {...platformProps}>
+  ({ categories, current, className }) => (
+    <div className={className}>
       <h3 className="font-size-title font-weight-medium mb-3">Products</h3>
       <ul style={{ 'listStyleType': 'none' }} className="pl-0">
         { categories.map(category => (

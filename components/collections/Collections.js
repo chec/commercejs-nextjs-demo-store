@@ -40,7 +40,7 @@ class Collections extends Component {
     return (
       <>
       {categories.map(category => (
-      <div className="custom-container">
+      <div key={category.id} className="custom-container">
         <div className="row">
           <div className="col-2 d-none d-lg-block position-relative">
             <p className="font-size-title font-weight-medium mb-3">
@@ -90,13 +90,13 @@ class Collections extends Component {
     return (
       <div className="collection">
         {categories.map(category => (
-          <>
+          <div key={category.id}>
               <p className="font-size-title font-weight-medium mb-4">
                 {category.name}
               </p>
               <div className="row mb-5 collection-1">
                 { this.filterProductsByCat(category.slug).map(product => (
-                  <div className="col-6 col-sm-4 col-md-3">
+                  <div key={product.id} className="col-6 col-sm-4 col-md-3">
                     <Link href="/product/[permalink]" as={`/product/${product.permalink}`}>
                       <a className="mb-5 d-block font-color-black cursor-pointer">
                         <div
@@ -120,7 +120,7 @@ class Collections extends Component {
                   </div>
                 ))}
               </div>
-          </>
+          </div>
         ))}
       </div>
     )

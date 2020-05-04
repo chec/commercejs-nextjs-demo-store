@@ -23,6 +23,7 @@ export default class BillingDetails extends Component {
         <div className="border border-color-gray400 mb-5">
           {options.map((value, index) => (
             <label
+              key={index}
               onClick={() => this.setState({ selectedValue: value })}
               className={`p-3 d-flex align-items-center cursor-pointer ${index !==
                 options.length - 1 && "borderbottom border-color-gray500"}`}

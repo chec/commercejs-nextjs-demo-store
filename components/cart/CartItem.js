@@ -29,7 +29,7 @@ class CartItem extends Component {
     const { item } = this.props;
 
     return (
-      <div className="px-4 px-md-5 py-4">
+      <div className="px-4 px-md-5 mb-2">
         <div className="cart-item d-flex">
           <div
             className="cart-item--image mr-4"
@@ -43,8 +43,8 @@ class CartItem extends Component {
               </p>
             </div>
             <div className="d-flex justify-content-between mb-2">
-              {item.variants.map(variant =>
-                <p className="font-color-light font-weight-small">
+              {item.variants.map((variant, i) =>
+                <p key={i} className="font-color-light font-weight-small">
                   {variant.variant_name}: {variant.option_name}
                 </p>
               )}

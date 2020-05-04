@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import Link from "next/link";
 
 import ShippingDetails from "../common/ShippingDetails";
@@ -63,4 +64,8 @@ export default class Step1 extends Component {
       </form>
     );
   }
+}
+
+Step1.propTypes = {
+
 }

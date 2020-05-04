@@ -3,7 +3,7 @@ import React from "react";
 const VariantSelector = ({ variants, onSelectOption, selectedOptions, ...passthrough }) => (
   <div {...passthrough}>
     {variants.map(variant => (
-      <>
+      <div key={variant.id}>
       <span className="mr-3 font-weight-semibold">{variant.name}</span>
       {variant.options.map(option => (
         <span
@@ -18,7 +18,7 @@ const VariantSelector = ({ variants, onSelectOption, selectedOptions, ...passthr
           {option.name}
         </span>
       ))}
-      </>
+      </div>
     ))}
   </div>
 );

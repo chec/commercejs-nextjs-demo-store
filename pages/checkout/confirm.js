@@ -80,7 +80,7 @@ class Confirmation extends Component {
                       </p>
                     </div>
                     <div className="flex-grow-1">
-                      <p className="mb-2">Proksh Luthra</p>
+                      <p className="mb-2">First Name</p>
                       <p className="font-color-medium">
                         D-16/23-24 FF, Sec-7 Rohini, Delhi - 110085
                       </p>
