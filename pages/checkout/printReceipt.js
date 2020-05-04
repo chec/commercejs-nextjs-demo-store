@@ -56,15 +56,12 @@ class PrintReceipt extends Component {
                       <p className="mb-2">{orderReceipt.shipping.name}</p>
                       <p className="font-color-medium">{orderReceipt.shipping.street}</p>
                       <p className="font-color-medium">{orderReceipt.shipping.town_city}</p>
-                      <p className="font-color-medium">{orderReceipt.shipping.postal_zip_code}, {order.shipping.country}</p>
+                      <p className="font-color-medium">{orderReceipt.shipping.postal_zip_code}, {orderReceipt.shipping.country}</p>
                     </div>
                   </div>
                   <div className="py-4 borderbottom border-color-gray400">
                     {orderReceipt.order.line_items.map((item, index) => (
-                      <div
-                        className={`d-flex ${item.length - 1 !== index &&
-                          "mb-3"}`}
-                      >
+                      <div>
                         <div className="w-56 h-64 bg-gray200 mr-4" />
                         <div className="d-flex flex-grow-1">
                           <div className="flex-grow-1">
