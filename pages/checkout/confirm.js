@@ -16,7 +16,7 @@ class Confirmation extends Component {
           <title>Order | commerce</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <div className="pt-5 mt-2 checkout-confirm" id="receipt">
+        <div className="pt-5 mt-2 checkout-confirm receipt">
           {/* Row */}
           <div className="row mt-4">
             <div className="col-12 col-md-10 col-lg-6 offset-md-1 offset-lg-0">
@@ -58,14 +58,10 @@ class Confirmation extends Component {
                       </p>
                       <p className="font-size-subheader">Order Details</p>
                     </div>
-                    {window.print ?
-                    <>
-                    <button onClick={window.print} className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0 no-print bg-transparent" role="button">
+                    <button onClick={() => window.print()} className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0 no-print bg-transparent" role="button">
                       <img src="/icon/print.svg" className="mr-2 w-20 no-print"/>
                       <div class="no-print">Print Receipt</div>
                     </button>
-                    </>
-                    : '' }
                   </div>
                   <div className="border-bottom border-color-gray400 d-flex align-items-start py-4 flex-column flex-sm-row">
                     <div>
