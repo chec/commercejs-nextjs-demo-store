@@ -5,7 +5,6 @@ import Head from "next/head";
 
 import { connect } from "react-redux";
 
-
 class Confirmation extends Component {
 
   render() {
@@ -36,12 +35,12 @@ class Confirmation extends Component {
                 </h4>
                 <div className="d-flex w-100 justify-content-center flex-column flex-sm-row">
                   <Link href="/">
-                    <button className="checkout-confirm-buttons h-48 px-3 flex-grow-1 border bg-white border-color-gray500 font-color-light mb-2 mb-sm-0 mr-sm-2" id="no-print">
+                    <button className="checkout-confirm-buttons h-48 px-3 flex-grow-1 border bg-white border-color-gray500 font-color-light mb-2 mb-sm-0 mr-sm-2 no-print">
                       Go back home
                     </button>
                   </Link>
                   <Link href="/">
-                    <button className="checkout-confirm-buttons h-48 px-3 flex-grow-1 bg-black font-color-white" id="no-print">
+                    <button className="checkout-confirm-buttons h-48 px-3 flex-grow-1 bg-black font-color-white no-print">
                       Continue shopping
                     </button>
                   </Link>
@@ -59,10 +58,14 @@ class Confirmation extends Component {
                       </p>
                       <p className="font-size-subheader">Order Details</p>
                     </div>
-                    <div onClick={window.print} className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0" id="no-print">
-                      <img src="/icon/print.svg" className="mr-2 w-20" id="no-print"/>
-                      <div id="no-print">Print Receipt</div>
-                    </div>
+                    {window.print ?
+                    <>
+                    <button onClick={window.print} className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0 no-print bg-transparent" role="button">
+                      <img src="/icon/print.svg" className="mr-2 w-20 no-print"/>
+                      <div class="no-print">Print Receipt</div>
+                    </button>
+                    </>
+                    : '' }
                   </div>
                   <div className="border-bottom border-color-gray400 d-flex align-items-start py-4 flex-column flex-sm-row">
                     <div>
@@ -80,7 +83,7 @@ class Confirmation extends Component {
                     {orderReceipt.order.line_items.map((item, index) => (
                       <>
                         <div className="d-flex flex-grow-1 mb-3">
-                        <div className="w-56 h-64 bg-gray200 mr-4" id="no-print"/>
+                        <div className="w-56 h-64 bg-gray200 mr-4 no-print"/>
                           <div className="flex-grow-1">
                             <p className="mb-2 font-weight-medium">
                               {item.quantity} x {item.product_name}
