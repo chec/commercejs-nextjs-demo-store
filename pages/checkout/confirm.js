@@ -17,7 +17,7 @@ class Confirmation extends Component {
     const renderPrintButton = () => {
       if(typeof window !== 'undefined') {
         return (
-        <button onClick={window.print} className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0 no-print bg-transparent" role="button">
+        <button onClick={() => window && window.print && window.print()} className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0 no-print bg-transparent" role="button">
           <img src="/icon/print.svg" className="mr-2 w-20 no-print"/>
           <div class="no-print">Print Receipt</div>
         </button>
