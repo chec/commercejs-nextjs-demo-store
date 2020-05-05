@@ -1,19 +1,10 @@
 import React, { Component } from "react";
 import Root from "../../components/common/Root";
 import Link from "next/link";
+import Head from "next/head";
 
 import { connect } from "react-redux";
 
-
-const printIframe = (id) => {
-  const iframe = document.frames ? document.frames[id] : document.getElementById(id);
-  const iframeWindow = iframe.contentWindow || iframe;
-
-  iframe.focus();
-  iframeWindow.print();
-
-  return false;
-}
 
 class Confirmation extends Component {
 
@@ -22,7 +13,11 @@ class Confirmation extends Component {
 
     return (
       <Root>
-        <div className="pt-5 mt-2 checkout-confirm">
+        <Head>
+          <title>Order | commerce</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <div className="pt-5 mt-2 checkout-confirm" id="receipt">
           {/* Row */}
           <div className="row mt-4">
             <div className="col-12 col-md-10 col-lg-6 offset-md-1 offset-lg-0">
@@ -30,20 +25,23 @@ class Confirmation extends Component {
                 <div className="bg-success700 h-64 w-64 d-flex rounded-circle align-items-center justify-content-center mb-4">
                   <img src="/icon/check.svg" className="w-40"/>
                 </div>
-                <p className="text-center font-size-subheader mb-1">
-                  Thank you for your purchase, your order completed successfully
-                </p>
-                <p className="text-center font-size-caption font-color-light mb-5">
+                <h3 className="text-center font-family-secondary mb-3">
+                  Thank you for your purchase!
+                </h3>
+                <h4 className="text-center font-size-subheader mb-3">
+                Your order completed successfully
+                </h4>
+                <h4 className="text-center font-size-caption font-color-light mb-5">
                   Here is your order number for reference : {orderReceipt.id}
-                </p>
+                </h4>
                 <div className="d-flex w-100 justify-content-center flex-column flex-sm-row">
                   <Link href="/">
-                    <button className="checkout-confirm-buttons h-48 px-3 flex-grow-1 border bg-white border-color-gray500 font-color-light mb-2 mb-sm-0 mr-sm-2">
+                    <button className="checkout-confirm-buttons h-48 px-3 flex-grow-1 border bg-white border-color-gray500 font-color-light mb-2 mb-sm-0 mr-sm-2" id="no-print">
                       Go back home
                     </button>
                   </Link>
                   <Link href="/">
-                    <button className="checkout-confirm-buttons h-48 px-3 flex-grow-1 bg-black font-color-white">
+                    <button className="checkout-confirm-buttons h-48 px-3 flex-grow-1 bg-black font-color-white" id="no-print">
                       Continue shopping
                     </button>
                   </Link>
@@ -61,15 +59,9 @@ class Confirmation extends Component {
                       </p>
                       <p className="font-size-subheader">Order Details</p>
                     </div>
-                    <iframe
-                      id="receipt"
-                      src="./printReceipt"
-                      style={{ display: 'none' }}
-                      title="Receipt"
-                    />
-                    <div onClick={() => printIframe('receipt')}className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0">
-                      <img src="/icon/print.svg" className="mr-2 w-20" />
-                      Print Receipt
+                    <div onClick={window.print} className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0" id="no-print">
+                      <img src="/icon/print.svg" className="mr-2 w-20" id="no-print"/>
+                      <div id="no-print">Print Receipt</div>
                     </div>
                   </div>
                   <div className="border-bottom border-color-gray400 d-flex align-items-start py-4 flex-column flex-sm-row">
@@ -87,11 +79,11 @@ class Confirmation extends Component {
                   <div className="py-4 borderbottom border-color-gray400">
                     {orderReceipt.order.line_items.map((item, index) => (
                       <>
-                        <div className="w-56 h-64 bg-gray200 mr-4" />
-                        <div className="d-flex flex-grow-1">
+                        <div className="d-flex flex-grow-1 mb-3">
+                        <div className="w-56 h-64 bg-gray200 mr-4" id="no-print"/>
                           <div className="flex-grow-1">
                             <p className="mb-2 font-weight-medium">
-                              {item.quantity} x {item.name}
+                              {item.quantity} x {item.product_name}
                             </p>
                             <p className="font-color-light">
                               {item.variants[0].variant_name}: {item.variants[0].option_name}

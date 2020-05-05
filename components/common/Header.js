@@ -102,7 +102,7 @@ class Header extends Component {
     const { transparent, cart } = this.props;
 
     return (
-      <header className="position-fixed top-0 left-0 right-0 font-weight-semibold">
+      <header className="position-fixed top-0 left-0 right-0 font-weight-semibold" id="no-print">
         <Cart isOpen={showCart} toggle={value => this.toggleCart(value)} />
         <div
           ref={this.header}
