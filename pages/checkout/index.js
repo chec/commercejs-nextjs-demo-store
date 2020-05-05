@@ -225,7 +225,7 @@ class CheckoutPage extends Component {
     // or handle errors
     this.props.dispatchCaptureOrder(this.props.checkout.id, newOrder)
       .then(() => {
-        this.props.router.push('/order/confirm');
+        this.props.router.push('/checkout/confirm');
       })
       .catch(({ data: { error = {} }}) => {
         let errorToAlert = '';

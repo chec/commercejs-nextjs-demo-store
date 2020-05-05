@@ -6,15 +6,17 @@ import Head from "next/head";
 import { connect } from "react-redux";
 
 
-class Confirmation extends Component {
+class Confirm extends Component {
 
   render() {
+
     const { orderReceipt } = this.props;
+    if (!orderReceipt) {
+      return null;
+    }
 
     const renderPrintButton = () => {
-      if (!orderReceipt) {
-        return null;
-      }
+
       if(typeof window !== 'undefined') {
         return (
         <button onClick={() => window && window.print && window.print()} className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0 no-print bg-transparent" role="button">
@@ -132,4 +134,9 @@ class Confirmation extends Component {
   }
 }
 
-export default connect(state => state)(Confirmation);
+function mapStateToProps (state) {
+  const {orderReceipt} = state.orderReceipt;
+  return {orderReceipt};
+}
+
+export default connect(mapStateToProps)(Confirm);
