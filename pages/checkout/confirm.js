@@ -5,10 +5,27 @@ import Head from "next/head";
 
 import { connect } from "react-redux";
 
+function print(){
+  window.print();
+}
+
 class Confirmation extends Component {
 
   render() {
     const { orderReceipt } = this.props;
+
+    const renderPrintButton = () => {
+      if(typeof window !== 'undefined') {
+        return (
+        <button onClick={window.print} className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0 no-print bg-transparent" role="button">
+          <img src="/icon/print.svg" className="mr-2 w-20 no-print"/>
+          <div class="no-print">Print Receipt</div>
+        </button>
+        )
+      } else {
+        <div></div>
+      }
+    }
 
     return (
       <Root>
@@ -58,10 +75,7 @@ class Confirmation extends Component {
                       </p>
                       <p className="font-size-subheader">Order Details</p>
                     </div>
-                    <button onClick={() => window.print()} className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0 no-print bg-transparent" role="button">
-                      <img src="/icon/print.svg" className="mr-2 w-20 no-print"/>
-                      <div class="no-print">Print Receipt</div>
-                    </button>
+                    {renderPrintButton()}
                   </div>
                   <div className="border-bottom border-color-gray400 d-flex align-items-start py-4 flex-column flex-sm-row">
                     <div>
