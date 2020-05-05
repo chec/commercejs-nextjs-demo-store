@@ -5,9 +5,6 @@ import Head from "next/head";
 
 import { connect } from "react-redux";
 
-function print(){
-  window.print();
-}
 
 class Confirmation extends Component {
 
@@ -15,6 +12,9 @@ class Confirmation extends Component {
     const { orderReceipt } = this.props;
 
     const renderPrintButton = () => {
+      if (!orderReceipt) {
+        return null;
+      }
       if(typeof window !== 'undefined') {
         return (
         <button onClick={() => window && window.print && window.print()} className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0 no-print bg-transparent" role="button">
