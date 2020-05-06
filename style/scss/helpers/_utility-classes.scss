@@ -1304,3 +1304,9 @@
 .object-cover {
   object-fit: cover;
 }
+
+@media print {
+  .no-print {
+    display: none;
+  }
+}
