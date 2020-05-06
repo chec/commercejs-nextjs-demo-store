@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Root from "../../components/common/Root";
 import Link from "next/link";
-import Head from "next/head";
 
 import { connect } from "react-redux";
 
@@ -12,24 +11,19 @@ class Confirm extends Component {
     const { orderReceipt } = this.props;
 
     const renderPrintButton = () => {
-      if(typeof window !== 'undefined') {
-        return (
-        <button onClick={() => window && window.print && window.print()} className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0 no-print bg-transparent" role="button">
-          <img src="/icon/print.svg" className="mr-2 w-20 no-print"/>
-          <div class="no-print">Print Receipt</div>
-        </button>
-        )
-      } else {
-        <div></div>
+      if (typeof window === 'undefined') {
+        return null;
       }
+      return (
+      <button onClick={() => window && window.print && window.print()} className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0 no-print bg-transparent" role="button">
+        <img src="/icon/print.svg" className="mr-2 w-20 no-print"/>
+        <div class="no-print">Print Receipt</div>
+      </button>
+      )
     }
 
     return (
       <Root>
-        <Head>
-          <title>Order | commerce</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
         <div className="pt-5 mt-2 checkout-confirm receipt">
           {/* Row */}
           <div className="row mt-4">
