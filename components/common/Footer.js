@@ -6,19 +6,19 @@ const imagesInfo = [
     translateRatio: -50
   },
   {
-    image: "/images/insta/2.png",
+    image: "/images/insta/2.jpg",
     translateRatio: 30
   },
   {
-    image: "/images/insta/3.png",
+    image: "/images/insta/3.jpg",
     translateRatio: 0
   },
   {
-    image: "/images/insta/4.png",
+    image: "/images/insta/4.jpg",
     translateRatio: -20
   },
   {
-    image: "/images/insta/5.png",
+    image: "/images/insta/5.jpg",
     translateRatio: -80
   }
 ];
