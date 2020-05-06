@@ -1,6 +1,5 @@
 # Example Store with Commerce.js and Next.js 
 
-
 A high-fidelity fully-fledged eCommerce store built using the Commerce.js SDK and Next.js with live deployment to Netlify.
 
 Checkout the live demo [here]()
@@ -33,17 +32,15 @@ For a full detailed tutorial on building this JAMstack eCommerce application, pl
 
 Now you get to see the real beauty of deploying a static site with minimal effort. There are two options to launch a live deploy of the application: 
 
-
 1. Manual setup involves cloning the repo into your local environment and using the Netlify CLI for deployment.
-
 
 2. One-click deploy helps to deploy the application with… you guessed it, one single click.  Skip to one-click deploy here if you prefer to go this route.
 
-1. Set up a Chec account [here]() and upload the neccessary data to power your store. If you would like to use our sample data, please ignore this step.
+3. Set up a Chec account [here]() and upload the neccessary data to power your store. If you would like to use our sample data, please ignore this step.
 
 Deploy the repo with one single click.
 
- [![Deploy to Netlify button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/chec/example-checkout-hifi)
+ [![Deploy to Netlify button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/chec/commercejs-example-store)
 
 ## Manual Setup
 
@@ -82,8 +79,8 @@ There is now a `package.json` which displays the installed dependencies and scri
 3. Directly clone the repo and get setup with a fully-fledged Chec store.
 
 ```bash
-git clone https://github.com/chec/example-checkout-hifi.git
-cd example-checkout-hifi
+git clone https://github.com/chec/commercejs-example-store.git
+cd commercejs-example-store
 ```
 
 Install dependencies included in `package.json` then run your development server.
