@@ -221,20 +221,7 @@ export default class ShippingForm extends Component {
             per month approximately 🙂
           </p>
         </div>
-        <div
-          onClick={() => this.toggleSaveInfo(!saveInfo)}
-          className="d-flex mb-4 flex-nowrap cursor-pointer"
-        >
-          <Checkbox
-            onClick={() => this.toggleSaveInfo(!saveInfo)}
-            checked={saveInfo}
-            className="mr-3"
-          />
-          <p className="align-self-center">
-            Save the information for next time
-          </p>
-        </div>
-        <label className="w-100 mb-5">
+        <label className="w-100 mb-3">
           <p className="mb-1 font-size-caption font-color-light">
             Order Notes (optional)
           </p>
