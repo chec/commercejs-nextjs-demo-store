@@ -33,7 +33,7 @@ export default class PaymentDetails extends Component {
                   checked={selectedGateway === "test_gateway"}
                   className="mr-3"
                 />
-                <p className="font-weight-medium">Credit card / debit card</p>
+                <p className="font-weight-medium">Credit/ Debit card</p>
               </label>
 
               <div className="pl-5 pr-3 pb-3 ml-2">
@@ -45,32 +45,51 @@ export default class PaymentDetails extends Component {
                       </p>
                       <input
                         name="cardNumber"
+                        pattern="[0-9.]+"
                         value={cardNumber}
+                        maxlength="16"
                         className="rounded-0 w-100"
                       />
                     </label>
                   </div>
-                  <div className="col-sm-3">
+                  <div className="col-sm-2">
                     <label className="w-100 mb-3 mb-sm-0">
                       <p className="mb-1 font-size-caption font-color-light">
-                        Exp. date
+                        Exp. Month
                       </p>
                       <input
-                        name="billingPostalZipcode"
-                        value={billingPostalZipcode}
+                        name="expMonth"
+                        type="number"
+                        value={expMonth}
                         className="rounded-0 w-100"
-                        placeholder="MM/YY"
+                        placeholder="MM"
                       />
                     </label>
                   </div>
-                  <div className="col-sm-3">
+                  <div className="col-sm-2">
                     <label className="w-100 mb-3 mb-sm-0">
                       <p className="mb-1 font-size-caption font-color-light">
-                        CVV
+                        Exp. Year
+                      </p>
+                      <input
+                        type="number"
+                        name="expYear"
+                        value={expYear}
+                        className="rounded-0 w-100"
+                        placeholder="YY"
+                      />
+                    </label>
+                  </div>
+                  <div className="col-sm-2">
+                    <label className="w-100 mb-3 mb-sm-0">
+                      <p className="mb-1 font-size-caption font-color-light">
+                        CVC (CVV)
                       </p>
                       <input
                         name="cvc"
                         value={cvc}
+                        maxlength="3"
+                        type="number"
                         className="rounded-0 w-100"
                       />
                     </label>

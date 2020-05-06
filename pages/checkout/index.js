@@ -11,11 +11,9 @@ import commerce from '../../lib/commerce';
 
 // components
 import Root from "../../components/common/Root";
-import SingleStepForm from "../../components/checkout/singlestep/SingleStepForm";
 import ShippingForm from "../../components/checkout/common/ShippingForm";
 import PaymentDetails from "../../components/checkout/common/PaymentDetails";
 import BillingDetails from "../../components/checkout/common/BillingDetails";
-import AuthorizationBanner from "../../components/checkout/common/AuthorizationBanner";
 import AuthModal from "../../components/common/AuthModal";
 
 // Checkout redux action creators
@@ -38,13 +36,13 @@ class CheckoutPage extends Component {
 
       // string property names to conveniently identify inputs related to commerce.js validation errors
       // e.g error { param: "shipping[name]"}
-      firstName: 'Santa',
-      lastName: 'Claus',
+      firstName: 'John',
+      lastName: 'Doe',
       'customer[email]': 'john@doe.com',
       'shipping[name]': 'John Doe',
       'shipping[street]': '318 Homer Street',
       street2: '',
-      'shipping[town_city]': 'Vancouver (NE Downtown / Harbour Centre / Gastown / Yaletown)',
+      'shipping[town_city]': 'Vancouver',
       'shipping[postal_zip_code]': 'V6B 2V2',
       orderNotes: '',
       countries: {},
@@ -52,8 +50,8 @@ class CheckoutPage extends Component {
 
       'fulfillment[shipping_method]': '',
       cardNumber: ccFormat('4242424242424242'),
-      expMonth: '01',
-      expYear: '2021',
+      expMonth: '11',
+      expYear: '22',
       cvc: '123',
       billingPostalZipcode: 'V6B 2V2',
 
@@ -295,11 +293,13 @@ class CheckoutPage extends Component {
             className="d-flex d-sm-none px-4 py-3 borderbottom border-color-gray400 justify-content-center"
             style={{ margin: "0 -1.5rem" }}
           >
-            <div className="font-size-caption text-decoration-underline cursor-pointer">
-              Cart
-            </div>
+            <Link href="/collection">
+              <div className="font-size-caption text-decoration-underline cursor-pointer">
+                Cart
+              </div>
+            </Link>
             <img src="/icon/arrow-right.svg" className="w-16 mx-1" />
-            <div className="font-size-caption font-color-light cursor-pointer">
+            <div className="font-size-caption cursor-pointer">
               Checkout
             </div>
           </div>
@@ -309,11 +309,13 @@ class CheckoutPage extends Component {
             <div className="col-12 col-md-10 col-lg-6 offset-md-1 offset-lg-0">
               {/* Breadcrums Desktop */}
               <div className="d-none d-sm-flex pb-4">
-                <div className="font-size-caption text-decoration-underline cursor-pointer">
-                  Cart
-                </div>
+                <Link href="/collection">
+                  <div className="font-size-caption text-decoration-underline cursor-pointer">
+                    Cart
+                  </div>
+                </Link>
                 <img src="/icon/arrow-right.svg" className="w-16 mx-1" />
-                <div className="font-size-caption font-color-light cursor-pointer">
+                <div className="font-size-caption font-weight-bold cursor-pointer">
                   Checkout
                 </div>
               </div>
@@ -328,7 +330,7 @@ class CheckoutPage extends Component {
 
                   {/* ShippingDetails */}
                   <p className="font-size-subheader font-weight-semibold mb-4">
-                    Shipping Information
+                    Customer and Shipping Details
                   </p>
                   <div className="mb-5">
                     <ShippingForm

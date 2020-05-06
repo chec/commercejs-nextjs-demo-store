@@ -1,8 +1,8 @@
 import React, { Component } from "react";
+import Link from 'next/link';
 
 import { Transition } from "react-transition-group";
 
-import Link from "next/link";
 import Cart from "../cart/Cart";
 
 import { connect } from 'react-redux'
@@ -25,23 +25,15 @@ const transitionStyles = {
 const mobileMenuLinks = [
   {
     name: "Home",
-    link: "#"
+    link: "/"
   },
   {
     name: "Shop",
-    link: "#"
+    link: "/collection"
   },
   {
     name: "About",
-    link: "#"
-  },
-  {
-    name: "Account",
-    link: "#"
-  },
-  {
-    name: "Saved",
-    link: "#"
+    link: "/about"
   }
 ];
 
@@ -114,9 +106,11 @@ class Header extends Component {
             <Link href="/collection">
               <a className="mr-4 font-color-black">Shop</a>
             </Link>
-            <a href="#" className="font-color-black">
-              About
-            </a>
+            <Link href="/about">
+              <a href="/about" className="font-color-black">
+                About
+              </a>
+            </Link>
           </div>
           <div className="logo-container">
             <img

@@ -46,6 +46,7 @@ class Collections extends Component {
             <p className="font-size-title font-weight-medium mb-3">
               {category.name}
             </p>
+            <Link href={`/collection#${category.slug}`}>
               <div className="mb-5">
                 <div className="d-flex">
                   <p className="mb-2 position-relative cursor-pointer">
@@ -59,6 +60,7 @@ class Collections extends Component {
                   </p>
                 </div>
               </div>
+            </Link>
           </div>
         </div>
       </div>
@@ -91,7 +93,7 @@ class Collections extends Component {
       <div className="collection">
         {categories.map(category => (
           <div key={category.id}>
-              <p className="font-size-title font-weight-medium mb-4">
+              <p className="font-size-title font-weight-medium mb-4" id={category.slug}>
                 {category.name}
               </p>
               <div className="row mb-5 collection-1">

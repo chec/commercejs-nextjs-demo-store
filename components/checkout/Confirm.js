@@ -47,7 +47,7 @@ class Confirm extends Component {
                       Go back home
                     </button>
                   </Link>
-                  <Link href="/">
+                  <Link href="/collection">
                     <button className="checkout-confirm-buttons h-48 px-3 flex-grow-1 bg-black font-color-white no-print">
                       Continue shopping
                     </button>

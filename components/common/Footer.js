@@ -6,19 +6,19 @@ const imagesInfo = [
     translateRatio: -50
   },
   {
-    image: "/images/insta/2.png",
+    image: "/images/insta/2.jpg",
     translateRatio: 30
   },
   {
-    image: "/images/insta/3.png",
+    image: "/images/insta/3.jpg",
     translateRatio: 0
   },
   {
-    image: "/images/insta/4.png",
+    image: "/images/insta/4.jpg",
     translateRatio: -20
   },
   {
-    image: "/images/insta/5.png",
+    image: "/images/insta/5.jpg",
     translateRatio: -80
   }
 ];
@@ -76,8 +76,9 @@ export default class Footer extends React.Component {
                 Follow us on instagram for more updates
               </p>
               <div className="d-flex">
+
                 <a
-                  href="#"
+                  href="/about"
                   className="d-flex py-3 align-items-center font-color-black borderbottom border-color-black"
                 >
                   <p className="mr-3">Follow Us</p>
@@ -109,13 +110,13 @@ export default class Footer extends React.Component {
               <div className="d-flex font-color-medium mb-5 pb-3 pb-md-0 mb-md-0">
                 <div className="pr-5">
                   <a
-                    href="https://google.com"
+                    href="#"
                     className="mb-3 d-block font-color-medium"
                   >
                     Shop
                   </a>
                   <a
-                    href="https://google.com"
+                    href="#"
                     className="d-block font-color-medium"
                   >
                     Lookbook
@@ -123,13 +124,13 @@ export default class Footer extends React.Component {
                 </div>
                 <div>
                   <a
-                    href="https://google.com"
+                    href="#"
                     className="mb-3 d-block font-color-medium"
                   >
                     Instashop
                   </a>
                   <a
-                    href="https://google.com"
+                    href="#"
                     className="d-block font-color-medium"
                   >
                     About
@@ -144,13 +145,13 @@ export default class Footer extends React.Component {
               <div className="d-flex font-color-medium mb-5 pb-3 pb-md-0 mb-md-0">
                 <div className="pr-5">
                   <a
-                    href="https://google.com"
+                    href="#"
                     className="mb-3 d-block font-color-medium"
                   >
                     Facebook
                   </a>
                   <a
-                    href="https://google.com"
+                    href="#"
                     className="d-block font-color-medium"
                   >
                     Instagram
@@ -158,13 +159,13 @@ export default class Footer extends React.Component {
                 </div>
                 <div>
                   <a
-                    href="https://google.com"
+                    href="#"
                     className="mb-3 d-block font-color-medium"
                   >
                     Twitter
                   </a>
                   <a
-                    href="https://google.com"
+                    href="#"
                     className="d-block font-color-medium"
                   >
                     Linkedin
@@ -193,35 +194,35 @@ export default class Footer extends React.Component {
             <div className="custom-container d-flex flex-column flex-md-row align-items-center justify-content-between">
               <div className="pt-5 pb-0 pt-md-4 pb-md-4 d-flex align-items-center flex-wrap justify-content-center">
                 <a
-                  href="https://google.com"
+                  href="#"
                   className="font-color-brand font-size-caption text-uppercase text-center"
                 >
                   Legal notice
                 </a>
                 <p className="px-2 font-color-brand font-size-caption">-</p>
                 <a
-                  href="https://google.com"
+                  href="#"
                   className="font-color-brand font-size-caption text-uppercase text-center"
                 >
                   Terms
                 </a>
                 <p className="px-2 font-color-brand font-size-caption">-</p>
                 <a
-                  href="https://google.com"
+                  href="#"
                   className="font-color-brand font-size-caption text-uppercase text-center"
                 >
                   faqs
                 </a>
                 <p className="px-2 font-color-brand font-size-caption">-</p>
                 <a
-                  href="https://google.com"
+                  href="#"
                   className="font-color-brand font-size-caption text-uppercase text-center"
                 >
                   shipping and returns
                 </a>
               </div>
               <div className="font-color-brand font-size-caption py-4 text-right">
-                © 2019 - 2014 Commerce Js Pvt.
+                © 2020 Chec/Commerce.js.
               </div>
             </div>
           </div>
