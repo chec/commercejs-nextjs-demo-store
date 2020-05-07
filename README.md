@@ -1,4 +1,4 @@
-# Example Store with Commerce.js and Next.js 
+# Example Store with Commerce.js and Next.js 🛒💳
 
 A high-fidelity fully-fledged eCommerce store built using the Commerce.js SDK and Next.js with live deployment to Netlify.
 
@@ -101,7 +101,7 @@ You can access your API key under in your Chec dashboard setup, then navigate to
 ```js
 // .env
 
-# Replace with your Public API Key
+// Replace with your Public API Key
 CHEC_PUBLIC_KEY=your_public_API_key_here
 ```
 
@@ -123,3 +123,13 @@ Be sure to sign up for a Netlify account and log in to it. Navigate to “New si
 - Framework - [Next.js](https://nextjs.org)
 - eCommerce - [Chec/Commerce.js](https://commercejs.com)
 - Hosting - [Netlify](https://netlify.com)
+- Styling - Bootstrap and SASS
+
+## Customization and Extendability
+
+- Add new features
+- Customize styling
+- A/B test checkout designs
+- Extend on new features
+- Integrate other backend tools like CMS
+- Fetch reviews from other APIs
