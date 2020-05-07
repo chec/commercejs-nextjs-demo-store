@@ -31,12 +31,6 @@ class Product extends Component {
     };
   }
 
-  /**
-  * Retrieve cart and contents client-side to dispatch to store
-  */
-  componentDidMount() {
-    this.props.dispatch(retrieveCart());
-  }
 
   render() {
     const { showShipping,showDetails } = this.state;
