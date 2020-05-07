@@ -105,53 +105,53 @@ export default class Footer extends React.Component {
           <div className="row">
             <div className="col-12 col-sm-6 col-md-4">
               <p className="font-family-secondary font-size-display1 mb-4">
-                sitemap
+                Commerce.js
               </p>
               <div className="d-flex font-color-medium mb-5 pb-3 pb-md-0 mb-md-0">
                 <div className="pr-5">
                   <a
-                    href="#"
+                    href="https://commercejs.com/docs/"
                     className="mb-3 d-block font-color-medium"
                   >
-                    Shop
+                    Documentation
                   </a>
                   <a
-                    href="#"
+                    href="https://commercejs.com/features"
                     className="d-block font-color-medium"
                   >
-                    Lookbook
+                    Features
                   </a>
                 </div>
                 <div>
                   <a
-                    href="#"
+                    href="https://commercejs.com/company/about"
                     className="mb-3 d-block font-color-medium"
                   >
-                    Instashop
+                    About
                   </a>
                   <a
-                    href="#"
+                    href="http://slack.commercejs.com/"
                     className="d-block font-color-medium"
                   >
-                    About
+                    Community
                   </a>
                 </div>
               </div>
             </div>
             <div className="col-12 col-sm-6 col-md-4">
               <p className="font-family-secondary font-size-display1 mb-4">
-                follow us
+                Follow us
               </p>
               <div className="d-flex font-color-medium mb-5 pb-3 pb-md-0 mb-md-0">
                 <div className="pr-5">
                   <a
-                    href="#"
+                    href="https://twitter.com/commercejs"
                     className="mb-3 d-block font-color-medium"
                   >
-                    Facebook
+                    Twitter
                   </a>
                   <a
-                    href="#"
+                    href="https://www.instagram.com/commerce.js/"
                     className="d-block font-color-medium"
                   >
                     Instagram
@@ -159,13 +159,13 @@ export default class Footer extends React.Component {
                 </div>
                 <div>
                   <a
-                    href="#"
+                    href="https://angel.co/company/chec"
                     className="mb-3 d-block font-color-medium"
                   >
-                    Twitter
+                    Angel
                   </a>
                   <a
-                    href="#"
+                    href="https://www.linkedin.com/company/chec-chec-commerce-inc.-/"
                     className="d-block font-color-medium"
                   >
                     Linkedin
@@ -175,7 +175,7 @@ export default class Footer extends React.Component {
             </div>
             <div className="col-12 col-md-4">
               <p className="font-family-secondary font-size-display1 mb-3">
-                newsletter
+                Newsletter
               </p>
               <div className="position-relative">
                 <input
@@ -194,35 +194,33 @@ export default class Footer extends React.Component {
             <div className="custom-container d-flex flex-column flex-md-row align-items-center justify-content-between">
               <div className="pt-5 pb-0 pt-md-4 pb-md-4 d-flex align-items-center flex-wrap justify-content-center">
                 <a
-                  href="#"
+                  href="https://app.netlify.com/start/deploy?repository=https://github.com/chec/commercejs-nextjs-demo-store"
                   className="font-color-brand font-size-caption text-uppercase text-center"
                 >
-                  Legal notice
+                  Deploy to Netlify
                 </a>
                 <p className="px-2 font-color-brand font-size-caption">-</p>
                 <a
-                  href="#"
+                  href="https://github.com/chec/commercejs-nextjs-demo-store"
                   className="font-color-brand font-size-caption text-uppercase text-center"
                 >
-                  Terms
+                  Clone in GitHub
                 </a>
                 <p className="px-2 font-color-brand font-size-caption">-</p>
                 <a
-                  href="#"
+                  href="https://app.netlify.com/start/deploy?repository=https://github.com/chec/commercejs-nextjs-demo-store"
                   className="font-color-brand font-size-caption text-uppercase text-center"
                 >
-                  faqs
-                </a>
-                <p className="px-2 font-color-brand font-size-caption">-</p>
-                <a
-                  href="#"
-                  className="font-color-brand font-size-caption text-uppercase text-center"
-                >
-                  shipping and returns
+                  Contribute
                 </a>
               </div>
               <div className="font-color-brand font-size-caption py-4 text-right">
-                © 2020 Chec/Commerce.js.
+              <a
+                  href="https://commercejs.com/"
+                  className="font-color-brand font-size-caption text-uppercase text-center"
+                >
+                  © 2020 Chec/Commerce.js.
+                </a>
               </div>
             </div>
           </div>
