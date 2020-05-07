@@ -38,9 +38,9 @@ class Confirm extends Component {
                 <h4 className="text-center font-size-subheader mb-3">
                 Your order completed successfully
                 </h4>
-                <h4 className="text-center font-size-caption font-color-light mb-5">
+                <p className="text-center font-color-light mb-5">
                   Here is your order number for reference : {orderReceipt.id}
-                </h4>
+                </p>
                 <div className="d-flex w-100 justify-content-center flex-column flex-sm-row">
                   <Link href="/">
                     <button className="checkout-confirm-buttons h-48 px-3 flex-grow-1 border bg-white border-color-gray500 font-color-light mb-2 mb-sm-0 mr-sm-2 no-print">
@@ -62,7 +62,7 @@ class Confirm extends Component {
                   <div className="border-bottom border-color-gray400 d-flex justify-content-between align-items-start pb-3 flex-column flex-sm-row">
                     <div>
                       <p className="font-color-light mb-2">
-                        Receipt Number: {orderReceipt.id}
+                        Receipt Number: {orderReceipt.customer_reference}
                       </p>
                       <p className="font-size-subheader">Order Details</p>
                     </div>
