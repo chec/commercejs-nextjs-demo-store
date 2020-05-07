@@ -179,10 +179,10 @@ export default class Footer extends React.Component {
               </p>
               <div className="position-relative">
                 <input
-                  className="borderbottom border-color-gray400 h-48 w-100 pl-0 pr-3"
+                  className="borderbottom border-color-gray400 h-48 w-100 px-3"
                   placeholder="email address"
                 />
-                <button className="bg-transparent position-absolute right-0 top-50 translateY--50 p-0 h-48">
+                <button className="bg-transparent position-absolute right-0 top-50 translateY--50 pr-2 h-48">
                   <img src="/icon/arrow-long-right.svg" className="w-24" />
                 </button>
               </div>
