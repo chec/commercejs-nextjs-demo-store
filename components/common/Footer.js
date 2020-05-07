@@ -219,7 +219,7 @@ export default class Footer extends React.Component {
                   href="https://commercejs.com/"
                   className="font-color-brand font-size-caption text-uppercase text-center"
                 >
-                  © 2020 Chec/Commerce.js.
+                  &copy; 2020 Chec/Commerce.js.
                 </a>
               </div>
             </div>
