@@ -23,7 +23,7 @@ For a full detailed tutorial on building this JAMstack eCommerce application, pl
 
 ## Setup
 
-1. Create a Chec account 
+**STEP 1.** Create a Chec account 
 
 Now that you’ve installed Chec CLI globally, you will be able to access the list of `chec [COMMANDS]`, one of which is registering for a Chec account. Let’s go ahead and get that set up!
 
@@ -35,22 +35,22 @@ chec register
 Follow the rest of the walk-through to set up your merchant details. Alternatively, you can go here to register for a Chec account. 
 
 
-2. Upload the data necessary to power your Chec store
+**STEP 2.** Upload the data necessary to power your Chec store
 
 You can optionally skip the following steps for now, until after the deployment. Otherwise, start with uploading the below data: 
 
 
-a) Shipping zone (at least one)
+1. Shipping zone (at least one)
 
 - Sign into your Chec account once you’ve registered and go into the setup view in the sidebar. Navigate into the shipping tab and add a shipping zone. 
 
 
-b) Categories (at least three)
+2. Categories (at least three)
 
 - Under Products in the sidebar, click to navigate into the Categories view and fill in Category Name and Permalink/Slug. For the sake of getting the deploy up and running before customizing your data later on, please add in the categories: Body Products, Hair Products, and Facial Products. 
 
 
-c). Products (at least three) with:
+3. Products (at least three) with:
 
   - Product name
   - Product description
@@ -73,7 +73,7 @@ Please note that the site deploy will first fail as your have yet to enter in yo
 
 Manual setup involves cloning the repo into your local environment and using the Netlify CLI for deployment.
 
-1. Clone the repo
+**STEP 1.** Clone the repo
 
 ```bash
 # Clone the repository locally, optionally rename the repo, change into the directory
@@ -81,14 +81,14 @@ git clone https://github.com/chec/commercejs-example-store.git chec-store
 cd chec-store
 ```
 
-2. Install dependencies
+**STEP 2.** Install dependencies
 
 ```bash
 # Install dependencies included in `package.json`.
 yarn
 ```
 
-3. Set up your environment variables
+**STEP 3.** Set up your environment variables
 
 Replace the sample .env.example dotenv file at the root of the project to store your Chec public_key.
 
@@ -97,8 +97,8 @@ Replace the sample .env.example dotenv file at the root of the project to store 
 cp .env.example .env
 ```
 
-You can access your API key under in your Chec dashboard setup, then navigate to the Develop tab to copy your Public Key.
-```bash
+You can access your API key under in your Chec dashboard setup, then navigate to the Develop tab to copy your Public Key to your `.env` file.
+```js
 // .env
 
 # Replace with your Public API Key
@@ -107,14 +107,14 @@ CHEC_PUBLIC_KEY=your_public_API_key_here
 
 This file is meant to not be committed to source control and also will be hidden in file browsers. Be sure to add your .env containing your API key to .gitignore. Lastly, commit your local repository to git.
 
-3. Run your development environment on http://localhost:3000.
-```
+**STEP 4.** Run your development environment on http://localhost:3000.
+```bash
 yarn dev
 ```
 
-4. Make any necessary changes you need and push the code to a repository on Github or your choice of platform.
+**STEP 5.** Make any necessary changes you need and push the code to a repository on Github or your choice of platform.
 
-4. Deploy
+**STEP 6.** Deploy
 
 Be sure to sign up for a Netlify account and log in to it. Navigate to “New site from Git” and give access to select your repo. Your build settings is automatically filled out for your from the `netlify.toml` in the template. Now go ahead and click the "deploy site" to see your live site!
 
