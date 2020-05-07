@@ -39,7 +39,7 @@ class Confirm extends Component {
                 Your order completed successfully
                 </h4>
                 <p className="text-center font-color-light mb-5">
-                  Here is your order number for reference : {orderReceipt.id}
+                  Here is your order number for reference : {orderReceipt.customer_reference}
                 </p>
                 <div className="d-flex w-100 justify-content-center flex-column flex-sm-row">
                   <Link href="/">
