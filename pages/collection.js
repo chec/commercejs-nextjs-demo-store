@@ -9,7 +9,6 @@ const Home = () => (
   <Root>
     <Head>
       <title>Collection</title>
-      <link rel="icon" href="/favicon.ico" />
     </Head>
     <Collections />
     <ExploreBanner />

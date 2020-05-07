@@ -48,7 +48,6 @@ class Product extends Component {
       <Root>
         <Head>
           <title>{ product.name } | commerce</title>
-          <link rel="icon" href="/favicon.ico" />
         </Head>
 
         <div className="py-5 my-5">

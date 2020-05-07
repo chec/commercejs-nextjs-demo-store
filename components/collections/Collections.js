@@ -134,7 +134,6 @@ class Collections extends Component {
       <div className="py-5 my-5">
         <Head>
           <title>Collections</title>
-          <link rel="icon" href="/favicon.ico" />
         </Head>
         <div className="py-4">
           {/* Sidebar */}
