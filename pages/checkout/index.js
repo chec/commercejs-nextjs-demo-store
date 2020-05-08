@@ -67,6 +67,15 @@ class CheckoutPage extends Component {
 
       selectedGateway: 'test_gateway',
     }
+
+    this.captureOrder = this.captureOrder.bind(this);
+    this.generateToken = this.generateToken.bind(this);
+    this.getAllCountries = this.getAllCountries.bind(this);
+    this.getRegions = this.getRegions.bind(this);
+    this.handleChangeForm = this.handleChangeForm.bind(this);
+    this.handleDiscountChange = this.handleDiscountChange.bind(this);
+    this.handleGatewayChange = this.handleGatewayChange.bind(this);
+    this.redirectOutOfCheckout = this.redirectOutOfCheckout.bind(this);
   }
 
   componentDidMount() {
@@ -81,7 +90,7 @@ class CheckoutPage extends Component {
     // if cart is empty then redirect out of checkout;
     if (this.props.cart && this.props.cart.total_items === 0) {
       this.redirectOutOfCheckout()
-    };
+    }
 
     // if cart items have changed then regenerate checkout token object to reflect changes.
     if (prevProps.cart && prevProps.cart.total_items !== this.props.cart.total_items) {
@@ -119,9 +128,13 @@ class CheckoutPage extends Component {
     }
   }
 
-  generateToken = () => {
+  /**
+   * Generate a checkout token. This is called when the checkout first loads.
+   */
+  generateToken() {
     const { cart, dispatchGenerateCheckout, dispatchGetShippingOptions } = this.props;
     const { deliveryCountry: country, deliveryRegion: region } = this.state;
+
     return dispatchGenerateCheckout(cart.id)
       .then((checkout) => {
         // continue and dispatch getShippingOptionsForCheckout to get shipping options based on checkout.id
@@ -132,19 +145,17 @@ class CheckoutPage extends Component {
       })
   }
 
-
-  redirectOutOfCheckout = () => {
-    console.log('redirecting out of checkout');
+  redirectOutOfCheckout() {
     this.props.router.push('/');
   }
 
-  handleGatewayChange = (selectedGateway) => {
+  handleGatewayChange(selectedGateway) {
     this.setState({
-      selectedGateway
-    })
+      selectedGateway,
+    });
   }
 
-  handleDiscountChange = e => {
+  handleDiscountChange(e) {
     e.preventDefault();
     if (!this.state.discountCode.trim() || !this.props.checkout) {
       return;
@@ -164,18 +175,23 @@ class CheckoutPage extends Component {
       });
   }
 
-  handleFormChanges = (e) => {
+  handleChangeForm(e) {
     // when input cardNumber changes format using ccFormat helper
     if (e.target.name === "cardNumber") {
       e.target.value = ccFormat(e.target.value)
     }
     // update form's input by name in state
     this.setState({
-      [e.target.name]: e.target.value
-    })
+      [e.target.name]: e.target.value,
+    });
   }
 
-  captureOrder = (e) => {
+  /**
+   * Capture the order
+   *
+   * @param {Event} e
+   */
+  captureOrder(e) {
     e.preventDefault();
 
     // reset error states
@@ -261,10 +277,9 @@ class CheckoutPage extends Component {
             })
           })
 
-          const allErrors = error.message.reduce((string, error) => {
+          errorToAlert = error.message.reduce((string, error) => {
             return `${string} ${error.error}`
-          }, '')
-          errorToAlert = allErrors;
+          }, '');
         }
 
         if (error.type === 'gateway_error' || error.type === 'not_valid' || error.type === 'bad_request') {
@@ -272,7 +287,7 @@ class CheckoutPage extends Component {
             errors: {
               ...this.state.errors,
               [(error.type === 'not_valid' ? 'fulfillment[shipping_method]' : error.type)]: error.message
-            }
+            },
           })
           errorToAlert = error.message
         }
@@ -282,8 +297,10 @@ class CheckoutPage extends Component {
       })
   }
 
-  // commmerce.js helpers
-  getAllCountries = () => {
+  /**
+   * Fetch all available countries for shipping
+   */
+  getAllCountries() {
     commerce.services.localeListCountries().then(resp => {
       this.setState({
         countries: resp.countries
@@ -291,7 +308,12 @@ class CheckoutPage extends Component {
     }).catch(error => console.log(error))
   }
 
-  getRegions = (deliveryCountry) => {
+  /**
+   * Fetch available shipping regions for the chosen country
+   *
+   * @param {string} deliveryCountry
+   */
+  getRegions(deliveryCountry) {
     commerce.services.localeListSubdivisions(deliveryCountry).then(resp => {
       this.setState({
         subdivisions: resp.subdivisions
@@ -344,8 +366,7 @@ class CheckoutPage extends Component {
               {
                 checkout
                 ? (
-                <form onChange={this.handleFormChanges}>
-
+                <form onChange={this.handleChangeForm}>
                   {/* ShippingDetails */}
                   <p className="font-size-subheader font-weight-semibold mb-4">
                     Customer and Shipping Details
@@ -373,7 +394,7 @@ class CheckoutPage extends Component {
                   {/* Payment Methods */}
                   <PaymentDetails
                     gateways={checkout.gateways}
-                    handleGatewayChange={this.handleGatewayChange}
+                    onChangeGateway={this.handleGatewayChange}
                     selectedGateway={this.state.selectedGateway}
 
                     cardNumber={this.state.cardNumber}

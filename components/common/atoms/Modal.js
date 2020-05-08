@@ -26,17 +26,21 @@ const transitionStyles = {
 };
 
 export default class Modal extends Component {
-  onEntering = () => {
-    const body = document.querySelector("body");
+  constructor(props) {
+    super(props);
 
-    body.classList.add("modal-open");
-  };
+    this.handleEntering = this.handleEntering.bind(this);
+    this.handleExiting = this.handleExiting.bind(this);
+  }
 
-  onExiting = () => {
-    const body = document.querySelector("body");
+  handleEntering() {
+    document.querySelector("body").body.classList.add("modal-open");
+  }
 
-    body.classList.remove("modal-open");
-  };
+  handleExiting() {
+    document.querySelector("body").body.classList.remove("modal-open");
+  }
+
   render() {
     const { isOpen, children, onClose, maxW, className } = this.props;
 
@@ -44,8 +48,8 @@ export default class Modal extends Component {
       <Transition
         in={isOpen}
         timeout={duration}
-        onEntering={this.onEntering}
-        onExiting={this.onExiting}
+        onEntering={this.handleEntering}
+        onExiting={this.handleExiting}
         unmountOnExit
       >
         {state => (

@@ -47,6 +47,11 @@ class Header extends Component {
     };
 
     this.header = React.createRef();
+
+    this.animate = this.animate.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
+    this.toggleCart = this.toggleCart.bind(this);
+    this.toggleMobileMenu = this.toggleMobileMenu.bind(this);
   }
 
   componentDidMount() {
@@ -57,15 +62,18 @@ class Header extends Component {
     window.removeEventListener("scroll", this.handleScroll);
   }
 
-  toggleCart = value => {
-    this.setState({ showCart: value });
+  toggleCart() {
+    const { showCart } = this.state;
+    this.setState({
+      showCart: !showCart,
+    });
   };
 
-  handleScroll = () => {
+  handleScroll() {
     window.requestAnimationFrame(this.animate);
   };
 
-  animate = () => {
+  animate() {
     const { transparent } = this.props;
 
     if (!transparent) return;
@@ -75,11 +83,10 @@ class Header extends Component {
     } else {
       this.header.current.classList.remove("invert");
     }
-  };
+  }
 
-  toggleMobileMenu = () => {
+  toggleMobileMenu() {
     const { showMobileMenu } = this.state;
-
     this.setState({ showMobileMenu: !showMobileMenu });
 
     if (!showMobileMenu) {
@@ -130,7 +137,7 @@ class Header extends Component {
           <div className="d-flex">
             <div
               className="position-relative cursor-pointer"
-              onClick={() => this.toggleCart(true)}
+              onClick={this.toggleCart}
             >
               <img src="/icon/cart.svg" className="w-32" />
               <div className="cart-count position-absolute font-size-tiny font-weight-bold">

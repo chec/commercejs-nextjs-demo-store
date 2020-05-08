@@ -7,6 +7,9 @@ export default class ExploreBanner extends React.Component {
 
     this.exploreContainer = React.createRef();
     this.image = React.createRef();
+
+    this.handleScroll = this.handleScroll.bind(this);
+    this.animate = this.animate.bind(this);
   }
 
   componentDidMount() {
@@ -18,11 +21,11 @@ export default class ExploreBanner extends React.Component {
     window.removeEventListener("scroll", this.handleScroll);
   }
 
-  handleScroll = () => {
+  handleScroll() {
     window.requestAnimationFrame(this.animate);
-  };
+  }
 
-  animate = () => {
+  animate() {
     const dimentions = this.exploreContainer.current.getBoundingClientRect();
     var x = window.matchMedia("(min-width: 768px)");
 
@@ -35,7 +38,7 @@ export default class ExploreBanner extends React.Component {
           100}px)`;
       }
     }
-  };
+  }
 
   render() {
     return (
@@ -51,7 +54,7 @@ export default class ExploreBanner extends React.Component {
                       <div
                         ref={this.image}
                         className="explore-banner--image"
-                      ></div>
+                      />
                     </div>
                   </div>
                 </div>
@@ -72,7 +75,7 @@ export default class ExploreBanner extends React.Component {
                 <div className="d-flex">
                   <Link href="/collection">
                     <a className="d-flex py-3 align-items-center font-color-black borderbottom border-color-black">
-                      <p className="mr-3">Explore Products</p>
+                      <p className="mr-3">Explore products</p>
                       <img src="/icon/arrow-long-right.svg" />
                     </a>
                   </Link>

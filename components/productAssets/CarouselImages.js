@@ -7,6 +7,9 @@ class CarouselImages extends Component {
     super(props);
 
     this.carouselImages = [];
+
+    this.handleScroll = this.handleScroll.bind(this);
+    this.animate = this.animate.bind(this);
   }
 
   componentDidMount() {
@@ -17,11 +20,11 @@ class CarouselImages extends Component {
     window.removeEventListener("scroll", this.handleScroll);
   }
 
-  handleScroll = () => {
+  handleScroll() {
     window.requestAnimationFrame(this.animate);
   };
 
-  animate = () => {
+  animate() {
     const mainImages = document.querySelectorAll(".carousel-main-images");
 
     var x = window.matchMedia("(min-width: 768px)");
@@ -61,7 +64,7 @@ class CarouselImages extends Component {
     }
   };
 
-  onClickImage = index => {
+  onClickImage(index) {
     const mainImages = document.querySelectorAll(".carousel-main-images");
 
     if (mainImages) {
@@ -70,7 +73,7 @@ class CarouselImages extends Component {
         smooth: "easeInOutQuint"
       });
     }
-  };
+  }
 
   render() {
     const { images, products } = this.props;
@@ -84,7 +87,7 @@ class CarouselImages extends Component {
               key={`carousel-side-images-${index}`}
               data-key={`carousel-side-images-${index}`}
               className="h-56 w-48 mb-3 cursor-pointer"
-              onClick={() => this.onClickImage(index)}
+              onClick={this.onClickImage.bind(this, index)}
               style={{
                 background: `url("${image}") center center/cover`,
                 border:

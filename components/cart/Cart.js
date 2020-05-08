@@ -33,7 +33,11 @@ const backdropTransitionStyles = {
 class Cart extends Component {
   constructor(props) {
     super(props);
+
     this.cartScroll = React.createRef();
+
+    this.onEntering = this.onEntering.bind(this);
+    this.onExiting = this.onExiting.bind(this);
   }
 
   /**
@@ -47,12 +51,11 @@ class Cart extends Component {
     clearAllBodyScrollLocks();
   }
 
-  onEntering = () => {
-    console.log("entering");
+  onEntering() {
     disableBodyScroll(this.cartScroll.current);
   };
 
-  onExiting = () => {
+  onExiting() {
     enableBodyScroll(this.cartScroll.current);
   };
 
@@ -153,7 +156,7 @@ class Cart extends Component {
                     </div>
                   </div>
                   <p className="text-center font-weight-medium">
-                    Your Cart is empty
+                    Your cart is empty
                   </p>
                 </div>
               )}
