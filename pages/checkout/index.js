@@ -14,7 +14,6 @@ import Root from "../../components/common/Root";
 import ShippingForm from "../../components/checkout/common/ShippingForm";
 import PaymentDetails from "../../components/checkout/common/PaymentDetails";
 import BillingDetails from "../../components/checkout/common/BillingDetails";
-import AuthModal from "../../components/common/AuthModal";
 
 // Checkout redux action creators
 import {
@@ -29,8 +28,6 @@ class CheckoutPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isAuthorized: false,
-      openLoginModal: false,
 
       deliveryCountry: 'CA',
       deliveryRegion: 'BC',
@@ -348,10 +345,6 @@ class CheckoutPage extends Component {
                 checkout
                 ? (
                 <form onChange={this.handleFormChanges}>
-                  {/* Login Modal Modal */}
-                  <AuthModal
-                    isAuthorized={this.state.isAuthorized}
-                  />
 
                   {/* ShippingDetails */}
                   <p className="font-size-subheader font-weight-semibold mb-4">
