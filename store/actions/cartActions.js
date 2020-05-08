@@ -37,9 +37,15 @@ export const retrieveCartError = (error) => {
 /**
  * Async retrieve cart from API
  */
-export const retrieveCart = () => dispatch => commerce.cart.retrieve()
-  .then(cart => dispatch(retrieveCartSuccess(cart)))
-  .catch(error => dispatch(retrieveCartError(error)));
+export const retrieveCart = () => {
+  return (dispatch, getState) => {
+    if (getState().cart) {
+      return Promise.resolve();
+    }
+    return commerce.cart.retrieve().then(cart => dispatch(retrieveCartSuccess(cart)))
+      .catch(error => dispatch(retrieveCartError(error)));
+  }
+}
 
 
 /**

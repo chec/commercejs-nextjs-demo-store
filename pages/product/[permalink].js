@@ -14,8 +14,6 @@ import Footer from "../../components/common/Footer";
 import CategoryList from '../../components/products/CategoryList';
 import reduceProductImages from '../../lib/reduceProductImages';
 
-import { retrieveCart } from '../../store/actions/cartActions';
-
 const detailView = `<p>
       Slightly textured fabric with tonal geometric design and a bit of shine
     </p>`;
@@ -31,12 +29,6 @@ class Product extends Component {
     };
   }
 
-  /**
-  * Retrieve cart and contents client-side to dispatch to store
-  */
-  componentDidMount() {
-    this.props.dispatch(retrieveCart());
-  }
 
   render() {
     const { showShipping,showDetails } = this.state;
