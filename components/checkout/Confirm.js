@@ -84,7 +84,6 @@ class Confirm extends Component {
                     {orderReceipt.order.line_items.map((item, index) => (
                       <>
                         <div className="d-flex flex-grow-1 mb-3">
-                        <div className="w-56 h-64 bg-gray200 mr-4 no-print"/>
                           <div className="flex-grow-1">
                             <p className="mb-2 font-weight-medium">
                               {item.quantity} x {item.product_name}
