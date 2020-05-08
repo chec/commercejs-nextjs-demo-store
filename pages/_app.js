@@ -6,8 +6,7 @@ import commerce from "../lib/commerce";
 import collections from "../lib/collections";
 
 class MyApp extends App {
-
-  static getInitialProps = wrapper.getInitialAppProps(async ({ Component, ctx }) => {
+  static async getInitialProps({ Component, ctx }) {
     // Fetch data on load
     // Fetch categories
     const categoriesResponse = await commerce.categories.list();
@@ -31,7 +30,7 @@ class MyApp extends App {
         ...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {}),
       },
     };
-  });
+  }
 
   render() {
     const { Component, pageProps } = this.props;

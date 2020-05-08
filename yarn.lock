@@ -4383,10 +4383,10 @@ neo-async@^2.5.0, neo-async@^2.6.0, neo-async@^2.6.1:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
 
-next-redux-wrapper@^6.0.0-rc.1:
-  version "6.0.0-rc.3"
-  resolved "https://registry.yarnpkg.com/next-redux-wrapper/-/next-redux-wrapper-6.0.0-rc.3.tgz#03aaff2795ce871db842c1327d1a5480d1ce7f60"
-  integrity sha512-TW3yByIQ8QH6iNdH+fb599mdHSy7cK8FiVCv7J4lXCa6awOi9yBqKG8gVmHWyh/IyQOIL5BiIpsiF8hNZt8BOg==
+next-redux-wrapper@^6.0.0-rc.8:
+  version "6.0.0-rc.8"
+  resolved "https://registry.yarnpkg.com/next-redux-wrapper/-/next-redux-wrapper-6.0.0-rc.8.tgz#8f86c9343a7585f4d0cab7febf3efbf583b124a4"
+  integrity sha512-/LQeQUemmINoJdyaKU2fPPdg6XhPZn1v4gH1yEf/TVolRfaFn0uP1aSynqqMPcqE5saYBsBniLpUhf02r3r5wA==
 
 next-tick@~1.0.0:
   version "1.0.0"
