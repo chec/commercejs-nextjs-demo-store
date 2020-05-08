@@ -149,20 +149,22 @@ class CheckoutPage extends Component {
 
   handleDiscountChange = e => {
     e.preventDefault();
-    if (this.state.discountCode.trim() && this.props.checkout) {
-      this.props.dispatchSetDiscountCodeInCheckout(this.props.checkout.id, this.state.discountCode)
-        .then(resp => {
-          if (resp.valid) {
-            return this.setState({
-              discountCode: '',
-            });
-          }
-          return Promise.reject(resp);
-        })
-        .catch(eror => {
-          alert('Sorry, the discount code could not be applied');
-        })
+    if (!this.state.discountCode.trim() || !this.props.checkout) {
+      return;
     }
+
+    this.props.dispatchSetDiscountCodeInCheckout(this.props.checkout.id, this.state.discountCode)
+      .then(resp => {
+        if (resp.valid) {
+          return this.setState({
+            discountCode: '',
+          });
+        }
+        return Promise.reject(resp);
+      })
+      .catch(error => {
+        alert('Sorry, the discount code could not be applied');
+      });
   }
 
   handleFormChanges = (e) => {
