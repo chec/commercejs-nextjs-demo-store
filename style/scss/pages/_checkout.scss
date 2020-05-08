@@ -3,3 +3,11 @@
     @extend .w-56, .h-64, .object-cover;
   }
 }
+
+.custom-container {
+
+  .order-summary {
+    position: sticky;
+    top: 15%;
+  }
+}
