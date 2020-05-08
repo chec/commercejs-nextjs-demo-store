@@ -84,7 +84,7 @@ class Product extends Component {
 
               <div
                 onClick={this.toggleShipping}
-                className="d-flex cursor-pointesr py-3 justify-content-between font-weight-medium"
+                className="d-flex cursor-pointer py-3 justify-content-between font-weight-medium"
               >
                 Shipping and returns
                 <img src="/icon/plus.svg" />
@@ -95,7 +95,7 @@ class Product extends Component {
                   days. For more information, click here.
                 </div>
               </Collapse>
-              <div className="h-1 borderbottom border-color-black" />
+              <div className="h-1 border-bottom border-color-black" />
               <div
                 onClick={this.toggleDetails}
                 className="d-flex cursor-pointer py-3 justify-content-between font-weight-medium"
