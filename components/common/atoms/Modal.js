@@ -34,11 +34,17 @@ export default class Modal extends Component {
   }
 
   handleEntering() {
-    document.querySelector('body').body.classList.add('modal-open');
+    const body = document.querySelector('body').body;
+    if (body) {
+      body.classList.add('modal-open');
+    }
   }
 
   handleExiting() {
-    document.querySelector('body').body.classList.remove('modal-open');
+    const body = document.querySelector('body').body;
+    if (body) {
+      body.classList.remove('modal-open');
+    }
   }
 
   render() {
