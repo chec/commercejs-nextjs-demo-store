@@ -13,7 +13,7 @@ import {
 
 // utilize commerce.js checkout helper, commerce.checkout.getShippingOptions
 // to return lsit of available shipping methods for the provided checkout token
-export const getShippingOptionsForCheckout = (checkoutId, country = 'US', region = "") => (dispatch) => {
+export const getShippingOptionsForCheckout = (checkoutId, country = 'US', region = "") => dispatch => {
   return commerce.checkout.getShippingOptions(checkoutId, { country })
     .then(shippingOptions => {
       dispatch({
@@ -34,7 +34,7 @@ export const getShippingOptionsForCheckout = (checkoutId, country = 'US', region
 // uitlize commerce.js checkout generateToken method to
 // generate a checkout token object from a cart.id
 // which can be used to initiate the process of capturing an order
-export const generateCheckoutTokenFromCart = (cartId) => (dispatch) => {
+export const generateCheckoutTokenFromCart = (cartId) => dispatch => {
   return commerce.checkout.generateToken(cartId, { type: 'cart' }).then(checkout => {
     dispatch({
       type: GENERATE_CHECKOUT_TOKEN,
@@ -51,7 +51,7 @@ export const generateCheckoutTokenFromCart = (cartId) => (dispatch) => {
 }
 
 // Validates a shipping method for the provided checkout token, and applies it to the checkout.
-export const setShippingOptionInCheckout = (checkoutId, shippingOptionId, country, region) => (dispatch) => {
+export const setShippingOptionInCheckout = (checkoutId, shippingOptionId, country, region) => dispatch => {
   return commerce.checkout.checkShippingOption(checkoutId, {
     shipping_option_id: shippingOptionId,
     country,
@@ -63,14 +63,35 @@ export const setShippingOptionInCheckout = (checkoutId, shippingOptionId, countr
         payload: resp.live,
       })
     }
+    return resp;
   }).catch(error => {
     console.log('error while attempting to update live object with selected shipping option')
     throw error;
   })
 }
 
+// Validates a discount code for the provided checkout token and applies it to the checkout.
+export const setDiscountCodeInCheckout = (checkoutId, code) => dispatch => {
+  return commerce.checkout.checkDiscount(checkoutId, { code })
+    .then(resp => {
+      if (resp.valid) {
+        dispatch({
+          type: UPDATE_CHECKOUT_LIVE_OBJECT,
+          payload: resp.live,
+        })
+        return resp;
+      } else if (resp.valid) {
+        return Promise.reject(resp);
+      };
+    })
+    .catch(error => {
+      console.log('error while attempting to update live object with discount code');
+      throw error;
+    })
+}
+
 // Captures an order and payment by providing the checkout id and order data derived from checkout
-export const captureOrder = (checkoutId, order) => (dispatch) => {
+export const captureOrder = (checkoutId, order) => dispatch => {
   return commerce.checkout.capture(checkoutId, order)
     .then(resp => {
       // reset checkout, and set global order-receipt state
