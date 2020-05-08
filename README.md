@@ -1,8 +1,8 @@
-# Example Store with Commerce.js and Next.js 🛒💳
+# Demo Store with Commerce.js and Next.js 🛍️💳
 
-A high-fidelity fully-fledged eCommerce store built using the Commerce.js SDK and Next.js with live deployment to Netlify.
+A high-fidelity fully-fledged eCommerce demo store built using the Commerce.js SDK and Next.js with live deployment to Netlify.
 
-Checkout the live demo [here](https://commercejs-example-store.netlify.app)
+Checkout the live demo [here](https://commercejs-demo-store.netlify.app)
 
 **Note**
 - This app is built using Commerce.js v2 SDK
@@ -65,7 +65,7 @@ You can optionally skip the following steps for now, until after the deployment.
 
 The one-click deploy allows you to connect Netlify to your GitHub account to clone the `commercejs-example-store` repository and deploy it automatically. Be sure to go to Netlify and sign up for an account before clicking the deploy button.
 
- [![Deploy to Netlify button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/chec/commercejs-example-store)
+ [![Deploy to Netlify button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/chec/commercejs-nextjs-demo-store)
 
 Please note that the site deploy will first fail as your have yet to enter in your environment variables for your Netlify site. Configure your site by going under the Build and Deploy settings then Environment to enter your API key. You can access your Chec public key here as explained in the manual setup below. 
 
@@ -77,7 +77,7 @@ Manual setup involves cloning the repo into your local environment and using the
 
 ```bash
 # Clone the repository locally, optionally rename the repo, change into the directory
-git clone https://github.com/chec/commercejs-example-store.git chec-store 
+git clone https://github.com/chec/commercejs-nextjs-demo-store.git chec-store 
 cd chec-store
 ```
 
