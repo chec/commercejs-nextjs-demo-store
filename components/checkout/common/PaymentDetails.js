@@ -109,7 +109,7 @@ export default class PaymentDetails extends Component {
                   checked={selectedGateway === "paypal"}
                   className="mr-3"
                 />
-                <p className="font-weight-medium">Paypal</p>
+                <p className="font-weight-medium">PayPal</p>
               </label>
             </div>)
             : ''
