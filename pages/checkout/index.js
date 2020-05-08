@@ -66,7 +66,7 @@ class CheckoutPage extends Component {
         'shipping[postal_zip_code]': null
       },
 
-      discountCode: '',
+      discountCode: 'CUSTOMCOMMERCE',
 
       selectedGateway: 'test_gateway',
     }
@@ -152,11 +152,12 @@ class CheckoutPage extends Component {
     if (this.state.discountCode.trim() && this.props.checkout) {
       this.props.dispatchSetDiscountCodeInCheckout(this.props.checkout.id, this.state.discountCode)
         .then(resp => {
-          if (resp.true) {
-            this.setState({
+          if (resp.valid) {
+            return this.setState({
               discountCode: '',
             });
           }
+          return Promise.reject(resp);
         })
         .catch(eror => {
           alert('Sorry, the discount code could not be applied');
@@ -468,6 +469,10 @@ class CheckoutPage extends Component {
                     {
                       name: "Shipping",
                       amount: selectedShippingOption ? `${selectedShippingOption.description} - ${selectedShippingOption.price.formatted_with_symbol}` : 'No shipping method selected',
+                    },
+                    {
+                      name: "Discount",
+                      amount: (checkout.live && checkout.live.discount && checkout.live.discount.code) ? `Saved ${checkout.live.discount.amount_saved.formatted_with_symbol}` : 'No discount code applied',
                     }
                   ].map((item, i) => (
                     <div key={i} className="d-flex justify-content-between align-items-center mb-2">
