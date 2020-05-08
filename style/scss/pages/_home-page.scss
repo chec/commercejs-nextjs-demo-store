@@ -17,6 +17,18 @@ $color: rgba(0, 0, 0, 0);
       cursor: none;
     }
   }
+
+  .hero-header {
+    text-shadow: 2px 2px 3px rgba(33, 33, 33, 0.5);
+  }
+
+  .hero-subheader {
+    text-shadow: 2px 2px 3px rgba(33, 33, 33, 0.5);
+  }
+
+  .hero-btn {
+    text-shadow: 1px 1px 3px rgba(33, 33, 33, 0.5);
+  }
 }
 
 @keyframes border {
