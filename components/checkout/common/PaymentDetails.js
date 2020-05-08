@@ -33,7 +33,7 @@ export default class PaymentDetails extends Component {
                   checked={selectedGateway === "test_gateway"}
                   className="mr-3"
                 />
-                <p className="font-weight-medium">Credit/ Debit card</p>
+                <p className="font-weight-medium">Credit / Debit card</p>
               </label>
 
               <div className="pl-5 pr-3 pb-3 ml-2">
