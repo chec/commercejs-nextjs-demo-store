@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
 const Radiobox = ({
   checked,
-  size = "24px",
-  color = "#000000",
+  size = '24px',
+  color = '#000000',
   className,
   onClick,
   ...rest
@@ -18,7 +18,7 @@ const Radiobox = ({
       style={{ height: size, width: size, minHeight: size, minWidth: size }}
       onClick={onClick}
       onKeyDown={e => {
-        e.key === "Enter" && onClick();
+        e.key === 'Enter' && onClick();
       }}
       {...rest}
     >

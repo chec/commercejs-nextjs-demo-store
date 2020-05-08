@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ProductCard from "../products/ProductCard";
+import ProductCard from '../products/ProductCard';
 
 class ProductRow extends Component {
   render() {
@@ -17,7 +17,7 @@ class ProductRow extends Component {
               image={product.media.source}
               name={product.name}
               price={product.price.formatted_with_symbol}
-              description={product.description.replace(reg, "")}
+              description={product.description.replace(reg, '')}
             />
           </div>
         ))}

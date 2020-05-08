@@ -1,39 +1,36 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import Link from 'next/link';
-
-import { Transition } from "react-transition-group";
-
-import Cart from "../cart/Cart";
-
+import Cart from '../cart/Cart';
+import { Transition } from 'react-transition-group';
 import { connect } from 'react-redux'
 
 const duration = 300;
 
 const defaultStyle = {
-  zIndex: "-1",
+  zIndex: '-1',
   transition: `height ${duration}ms ease-in-out`,
   height: 0
 };
 
 const transitionStyles = {
-  entering: { height: "100vh" },
-  entered: { height: "100vh" },
+  entering: { height: '100vh' },
+  entered: { height: '100vh' },
   exiting: { height: 0 },
   exited: { height: 0 }
 };
 
 const mobileMenuLinks = [
   {
-    name: "Home",
-    link: "/"
+    name: 'Home',
+    link: '/'
   },
   {
-    name: "Shop",
-    link: "/collection"
+    name: 'Shop',
+    link: '/collection'
   },
   {
-    name: "About",
-    link: "/about"
+    name: 'About',
+    link: '/about'
   }
 ];
 
@@ -55,11 +52,11 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
+    window.addEventListener('scroll', this.handleScroll);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
+    window.removeEventListener('scroll', this.handleScroll);
   }
 
   toggleCart() {
@@ -67,21 +64,21 @@ class Header extends Component {
     this.setState({
       showCart: !showCart,
     });
-  };
+  }
 
   handleScroll() {
     window.requestAnimationFrame(this.animate);
-  };
+  }
 
   animate() {
     const { transparent } = this.props;
 
-    if (!transparent) return;
+    if (!transparent) {return;}
 
     if (window.scrollY > 10) {
-      this.header.current.classList.add("invert");
+      this.header.current.classList.add('invert');
     } else {
-      this.header.current.classList.remove("invert");
+      this.header.current.classList.remove('invert');
     }
   }
 
@@ -90,11 +87,11 @@ class Header extends Component {
     this.setState({ showMobileMenu: !showMobileMenu });
 
     if (!showMobileMenu) {
-      this.header.current.classList.add("invert");
+      this.header.current.classList.add('invert');
     } else {
       this.animate();
     }
-  };
+  }
 
   render() {
     const { showMobileMenu, showCart } = this.state;
@@ -106,7 +103,7 @@ class Header extends Component {
         <div
           ref={this.header}
           className={`d-flex header align-items-center justify-content-between position-relative ${
-            transparent ? "" : "invert"
+            transparent ? '' : 'invert'
           }`}
         >
           <div className="d-none d-sm-flex">
@@ -121,7 +118,7 @@ class Header extends Component {
           </div>
           <div className="logo-container">
             <img
-              src={`/icon/${showMobileMenu ? "cross" : "menu"}.svg`}
+              src={`/icon/${showMobileMenu ? 'cross' : 'menu'}.svg`}
               onClick={this.toggleMobileMenu}
               className="w-32 mr-1 d-block d-sm-none"
             />

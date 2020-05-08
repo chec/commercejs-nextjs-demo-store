@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Link from "next/link";
-import { connect } from "react-redux";
+import Link from 'next/link';
+import { connect } from 'react-redux';
 
 class CategoryBanner extends Component {
   render() {

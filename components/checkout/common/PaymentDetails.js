@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Radiobox from "../../common/atoms/Radiobox";
+import Radiobox from '../../common/atoms/Radiobox';
 
 export default class PaymentDetails extends Component {
   constructor(props) {
@@ -27,10 +27,10 @@ export default class PaymentDetails extends Component {
             (<div className="borderbottom border-color-gray500">
               <label
                 onClick={() => onChangeGateway('test_gateway')}
-                className={`p-3 d-flex align-items-center cursor-pointer`}
+                className={'p-3 d-flex align-items-center cursor-pointer'}
               >
                 <Radiobox
-                  checked={selectedGateway === "test_gateway"}
+                  checked={selectedGateway === 'test_gateway'}
                   className="mr-3"
                 />
                 <p className="font-weight-medium">Credit/debit card</p>
@@ -103,10 +103,10 @@ export default class PaymentDetails extends Component {
             (<div>
               <label
                 onClick={() => onChangeGateway('paypal')}
-                className={`p-3 d-flex align-items-center cursor-pointer`}
+                className={'p-3 d-flex align-items-center cursor-pointer'}
               >
                 <Radiobox
-                  checked={selectedGateway === "paypal"}
+                  checked={selectedGateway === 'paypal'}
                   className="mr-3"
                 />
                 <p className="font-weight-medium">PayPal</p>

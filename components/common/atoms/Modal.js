@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Transition } from "react-transition-group";
+import React, { Component } from 'react';
+import { Transition } from 'react-transition-group';
 
 /**
  * Duration for the transition
@@ -7,7 +7,7 @@ import { Transition } from "react-transition-group";
 const duration = 300;
 
 /**
- * Default Style for DropdownMenu
+ * Default style for DropdownMenu
  */
 const defaultStyle = {
   transition: `opacity ${duration}ms ease-in-out`,
@@ -16,7 +16,7 @@ const defaultStyle = {
 };
 
 /**
- * Trasition Styles for DropdownMenu
+ * Transition styles for DropdownMenu
  */
 const transitionStyles = {
   entering: { opacity: 0 },
@@ -34,11 +34,11 @@ export default class Modal extends Component {
   }
 
   handleEntering() {
-    document.querySelector("body").body.classList.add("modal-open");
+    document.querySelector('body').body.classList.add('modal-open');
   }
 
   handleExiting() {
-    document.querySelector("body").body.classList.remove("modal-open");
+    document.querySelector('body').body.classList.remove('modal-open');
   }
 
   render() {
@@ -69,7 +69,7 @@ export default class Modal extends Component {
               role="dialog"
               tabIndex="-1"
               className={`bg-white my-2 mx-2 mx-sm-auto modal--content overflow-auto ${className}`}
-              style={{ width: maxW, maxHeight: "calc(100vh - 1rem)" }}
+              style={{ width: maxW, maxHeight: 'calc(100vh - 1rem)' }}
             >
               {children}
             </div>
@@ -81,6 +81,6 @@ export default class Modal extends Component {
 }
 
 Modal.defaultProps = {
-  maxW: "480px",
-  className: "p-4 p-md-5"
+  maxW: '480px',
+  className: 'p-4 p-md-5'
 };

@@ -1,5 +1,5 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
 export default class ExploreBanner extends React.Component {
   constructor(props) {
@@ -13,12 +13,12 @@ export default class ExploreBanner extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
+    window.addEventListener('scroll', this.handleScroll);
     this.handleScroll();
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
+    window.removeEventListener('scroll', this.handleScroll);
   }
 
   handleScroll() {
@@ -26,13 +26,13 @@ export default class ExploreBanner extends React.Component {
   }
 
   animate() {
-    const dimentions = this.exploreContainer.current.getBoundingClientRect();
-    var x = window.matchMedia("(min-width: 768px)");
+    const dimensions = this.exploreContainer.current.getBoundingClientRect();
+    const x = window.matchMedia('(min-width: 768px)');
 
     if (x.matches) {
-      if (dimentions.top - window.innerHeight < 0 && dimentions.bottom > 0) {
+      if (dimensions.top - window.innerHeight < 0 && dimensions.bottom > 0) {
         const scrolledRatio =
-          (window.innerHeight - dimentions.top) / window.innerHeight - 1;
+          (window.innerHeight - dimensions.top) / window.innerHeight - 1;
 
         this.image.current.style.transform = `translateY(${-scrolledRatio *
           100}px)`;
@@ -68,7 +68,7 @@ export default class ExploreBanner extends React.Component {
               <div className="col-12 col-md-6 py-5">
                 <p
                   className="font-size-display3 font-weight-light mb-4"
-                  style={{ maxWidth: "20rem" }}
+                  style={{ maxWidth: '20rem' }}
                 >
                   A new shopping experience
                 </p>

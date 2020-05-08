@@ -1,23 +1,21 @@
-import React, { Component } from "react";
-import commerce from "../../lib/commerce";
-import { Collapse } from "react-collapse";
-import { connect } from "react-redux";
-
-import Head from "next/head";
-import Root from "../../components/common/Root";
-import CarouselImages from "../../components/productAssets/CarouselImages";
-import ProductDetail from "../../components/productAssets/ProductDetail";
-import ClientReview from "../../components/productAssets/ClientReview";
-import SuggestedProducts from "../../components/productAssets/SuggestedProducts";
-import ExploreBanner from "../../components/productAssets/ExploreBanner";
-import Footer from "../../components/common/Footer";
+import React, { Component } from 'react';
+import commerce from '../../lib/commerce';
+import { Collapse } from 'react-collapse';
+import { connect } from 'react-redux';
+import Head from 'next/head';
+import Root from '../../components/common/Root';
+import CarouselImages from '../../components/productAssets/CarouselImages';
+import ProductDetail from '../../components/productAssets/ProductDetail';
+import ClientReview from '../../components/productAssets/ClientReview';
+import SuggestedProducts from '../../components/productAssets/SuggestedProducts';
+import ExploreBanner from '../../components/productAssets/ExploreBanner';
+import Footer from '../../components/common/Footer';
 import CategoryList from '../../components/products/CategoryList';
 import reduceProductImages from '../../lib/reduceProductImages';
 
 const detailView = `<p>
   Slightly textured fabric with tonal geometric design and a bit of shine
 </p>`;
-
 
 class Product extends Component {
   constructor(props) {
@@ -144,7 +142,7 @@ export async function getStaticPaths() {
     // { fallback: false } means other routes should 404.
     fallback: false,
   }
-};
+}
 
 // This also gets called at build time, and fetches the product to view
 export async function getStaticProps({ params: { permalink } }) {
@@ -158,8 +156,6 @@ export async function getStaticProps({ params: { permalink } }) {
       product,
     },
   };
-};
-
+}
 
 export default connect(state => state)(Product);
-

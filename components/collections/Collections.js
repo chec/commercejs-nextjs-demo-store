@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import Link from "next/link";
-import Head from "next/head";
+import React, { Component } from 'react';
+import Link from 'next/link';
+import Head from 'next/head';
 import { connect } from 'react-redux';
 
 class Collections extends Component {
@@ -14,11 +14,11 @@ class Collections extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
+    window.addEventListener('scroll', this.handleScroll);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
+    window.removeEventListener('scroll', this.handleScroll);
   }
 
   handleScroll() {
@@ -30,7 +30,7 @@ class Collections extends Component {
       if (distance < 0) {
         this.sidebar.current.style.transform = `translateY(${distance}px)`;
       } else {
-        this.sidebar.current.style.transform = `translateY(0px)`;
+        this.sidebar.current.style.transform = 'translateY(0px)';
       }
     };
 
@@ -56,7 +56,7 @@ class Collections extends Component {
                     Products
                     <span
                       className="position-absolute font-size-tiny text-right"
-                      style={{ right: "-12px", top: "-4px" }}
+                      style={{ right: '-12px', top: '-4px' }}
                     >
                       {category.count}
                     </span>
@@ -83,7 +83,7 @@ class Collections extends Component {
       return [];
     }
     return products.filter(product => product.categories.find(productCategory => productCategory.id === cat.id));
-  };
+  }
 
   /**
   * Render collections based on categories available in data
@@ -107,7 +107,7 @@ class Collections extends Component {
                         <div
                           className="mb-3"
                           style={{
-                            paddingBottom: "125%",
+                            paddingBottom: '125%',
                             background: `url("${product.media.source}") center center/cover`
                           }}
                         />
@@ -115,7 +115,7 @@ class Collections extends Component {
                           {product.name}
                         </p>
                         <p className="mb-2 font-color-medium">
-                          {product.description.replace(reg, "")}
+                          {product.description.replace(reg, '')}
                         </p>
                         <p className="font-size-subheader font-weight-medium pb-2 borderbottom border-color-black">
                           {product.price.formatted_with_symbol}
@@ -142,7 +142,7 @@ class Collections extends Component {
           <div
             ref={this.sidebar}
             className="position-fixed left-0 right-0"
-            style={{ top: "7.5rem" }}
+            style={{ top: '7.5rem' }}
           >
             { this.renderSidebar() }
           </div>
@@ -160,7 +160,7 @@ class Collections extends Component {
       </div>
     );
   }
-};
+}
 
 export default connect(state => state)(Collections);
 

@@ -1,5 +1,4 @@
 import commerce from '../../lib/commerce';
-import { retrieveCart } from './cartActions';
 
 import {
   GET_SHIPPING_OPTIONS,
@@ -10,10 +9,9 @@ import {
   CAPTURE_ORDER_SUCCESS,
 } from './actionTypes';
 
-
-// utilize commerce.js checkout helper, commerce.checkout.getShippingOptions
-// to return lsit of available shipping methods for the provided checkout token
-export const getShippingOptionsForCheckout = (checkoutId, country = 'US', region = "") => (dispatch) => {
+// Use commerce.js checkout helper, commerce.checkout.getShippingOptions
+// to return list of available shipping methods for the provided checkout token
+export const getShippingOptionsForCheckout = (checkoutId, country = 'US') => (dispatch) => {
   return commerce.checkout.getShippingOptions(checkoutId, { country })
     .then(shippingOptions => {
       dispatch({
@@ -31,7 +29,7 @@ export const getShippingOptionsForCheckout = (checkoutId, country = 'US', region
     })
 }
 
-// uitlize commerce.js checkout generateToken method to
+// Use commerce.js checkout generateToken method to
 // generate a checkout token object from a cart.id
 // which can be used to initiate the process of capturing an order
 export const generateCheckoutTokenFromCart = (cartId) => (dispatch) => {

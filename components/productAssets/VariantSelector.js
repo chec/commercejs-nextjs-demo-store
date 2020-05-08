@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const VariantSelector = ({ variants, onSelectOption, selectedOptions, ...passthrough }) => (
   <div {...passthrough}>
@@ -11,8 +11,8 @@ const VariantSelector = ({ variants, onSelectOption, selectedOptions, ...passthr
           onClick={() => onSelectOption(variant.id, option.id)}
           className={`mr-3 cursor-pointer ${
             selectedOptions[variant.id] && selectedOptions[variant.id] === option.id
-              ? "text-decoration-underline"
-              : "text-decoration-none"
+              ? 'text-decoration-underline'
+              : 'text-decoration-none'
           }`}
         >
           {option.name}

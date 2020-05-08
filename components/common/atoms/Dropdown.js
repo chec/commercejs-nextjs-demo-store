@@ -1,6 +1,5 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import ReactDOM from "react-dom";
 
 class Dropdown extends Component {
   constructor(props) {
@@ -20,7 +19,7 @@ class Dropdown extends Component {
         className="position-relative">
         <div
           className={`dropdown bg-white d-flex align-items-center justify-content-between ${isOpen &&
-            "border-color-black"}`}
+            'border-color-black'}`}
         >
           <p className="font-color-medium">{this.props.value || this.props.placeholder }</p>
           <img

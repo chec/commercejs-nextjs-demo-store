@@ -1,6 +1,5 @@
-import React from "react";
-import ShippingForm from "./ShippingForm";
-import Radiobox from "../../common/atoms/Radiobox";
+import React from 'react';
+import ShippingForm from './ShippingForm';
 
 const ShippingDetail = () => (
   <>

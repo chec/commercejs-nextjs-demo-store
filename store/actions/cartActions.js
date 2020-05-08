@@ -11,7 +11,6 @@ import {
   REMOVE_FROM_CART_ERROR
 } from './actionTypes';
 
-
 // Create all Cart actions, define the callbacks to the reducers
 
 /**

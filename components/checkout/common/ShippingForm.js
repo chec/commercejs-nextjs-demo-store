@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Checkbox from "../../common/atoms/Checkbox";
-import Dropdown from "../../common/atoms/Dropdown";
+import Checkbox from '../../common/atoms/Checkbox';
+import Dropdown from '../../common/atoms/Dropdown';
 
 export default class ShippingForm extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ export default class ShippingForm extends Component {
     this.setState({
       receiveNewsletter: !this.state.receiveNewsletter,
     });
-  };
+  }
 
   render() {
     const { receiveNewsletter } = this.state;

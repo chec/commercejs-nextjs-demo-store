@@ -1,0 +1,7 @@
+{
+  "extends": "react-app",
+  "rules": {
+    "curly": "error",
+    "quotes": ["error", "single"]
+  }
+}

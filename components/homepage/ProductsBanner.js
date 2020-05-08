@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Link from "next/link";
-import ProductRow from "../products/ProductRow";
-import { connect } from "react-redux";
+import Link from 'next/link';
+import ProductRow from '../products/ProductRow';
+import { connect } from 'react-redux';
 
 class ProductsBanner extends Component {
   render() {
@@ -16,7 +16,7 @@ class ProductsBanner extends Component {
           </p>
           <p
             className="text-center font-size-display1 mb-3 font-weight-medium"
-            style={{ maxWidth: "32rem" }}
+            style={{ maxWidth: '32rem' }}
           >
             Limited reservations on upcoming products and restocks.
           </p>

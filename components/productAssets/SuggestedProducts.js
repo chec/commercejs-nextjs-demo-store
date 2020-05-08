@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ProductRow from "../products/ProductRow";
-import { connect } from "react-redux";
+import ProductRow from '../products/ProductRow';
+import { connect } from 'react-redux';
 
 class SuggestedProducts extends Component {
   render() {
@@ -15,7 +15,7 @@ class SuggestedProducts extends Component {
           </p>
           <p
             className="text-center font-size-display1 mb-3 font-weight-medium"
-            style={{ maxWidth: "32rem" }}
+            style={{ maxWidth: '32rem' }}
           >
             You may also like to check out these products.
           </p>
