@@ -184,7 +184,7 @@ export default class ShippingForm extends Component {
           <div className="col-12 mb-3">
             <label className="w-100">
               <p className="mb-1 font-size-caption font-color-light">
-                Shipping method*
+                Shipping Method*
               </p>
               <Dropdown
                 name="fulfillment[shipping_method]"
