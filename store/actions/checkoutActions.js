@@ -69,6 +69,22 @@ export const setShippingOptionInCheckout = (checkoutId, shippingOptionId, countr
   })
 }
 
+// Validates a discount code for the provided checkout token and applies it to the checkout.
+export const setDiscountCodeInCheckout = (checkoutId, code) => (dispatch) => {
+  return commerce.checkout.checkDiscount(checkoutId, { code })
+    .then(resp => {
+      dispatch({
+        type: UPDATE_CHECKOUT_LIVE_OBJECT,
+        payload: resp.live,
+      });
+      return resp;
+    })
+    .catch(error => {
+      console.log('error while attempting to update live object with discount code');
+      throw error;
+    })
+}
+
 // Captures an order and payment by providing the checkout id and order data derived from checkout
 export const captureOrder = (checkoutId, order) => (dispatch) => {
   return commerce.checkout.capture(checkoutId, order)

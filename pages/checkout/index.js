@@ -21,6 +21,7 @@ import {
   generateCheckoutTokenFromCart as dispatchGenerateCheckout,
   getShippingOptionsForCheckout as dispatchGetShippingOptions,
   setShippingOptionInCheckout as dispatchSetShippingOptionsInCheckout,
+  setDiscountCodeInCheckout as dispatchSetDiscountCodeInCheckout,
   captureOrder as dispatchCaptureOrder,
 } from '../../store/actions/checkoutActions';
 
@@ -64,6 +65,8 @@ class CheckoutPage extends Component {
         'shipping[town_city]': null,
         'shipping[postal_zip_code]': null
       },
+
+      discountCode: 'CUSTOMCOMMERCE',
 
       selectedGateway: 'test_gateway',
     }
@@ -132,6 +135,7 @@ class CheckoutPage extends Component {
       })
   }
 
+
   redirectOutOfCheckout = () => {
     console.log('redirecting out of checkout');
     this.props.router.push('/');
@@ -141,6 +145,26 @@ class CheckoutPage extends Component {
     this.setState({
       selectedGateway
     })
+  }
+
+  handleDiscountChange = e => {
+    e.preventDefault();
+    if (!this.state.discountCode.trim() || !this.props.checkout) {
+      return;
+    }
+
+    this.props.dispatchSetDiscountCodeInCheckout(this.props.checkout.id, this.state.discountCode)
+      .then(resp => {
+        if (resp.valid) {
+          return this.setState({
+            discountCode: '',
+          });
+        }
+        return Promise.reject(resp);
+      })
+      .catch(error => {
+        alert('Sorry, the discount code could not be applied');
+      });
   }
 
   handleFormChanges = (e) => {
@@ -180,6 +204,7 @@ class CheckoutPage extends Component {
     // construct order object
     const newOrder = {
       line_items,
+      discount_code: this.state.discountCode,
       customer: {
         firstname: this.state.firstName,
         lastname: this.state.lastName,
@@ -419,12 +444,16 @@ class CheckoutPage extends Component {
                 </div>
                 <form className="d-flex py-3 borderbottom border-color-gray400">
                   <input
+                    name="discountCode"
+                    onChange={this.handleFormChanges}
+                    value={this.state.discountCode}
                     placeholder="Gift card or discount code"
                     className="mr-2 flex-grow-1"
                   />
                   <button
                     className="font-color-white border-none font-weight-medium px-4"
-                    disabled
+                    disable={!this.props.checkout}
+                    onClick={this.handleDiscountChange}
                   >
                     Apply
                   </button>
@@ -442,6 +471,10 @@ class CheckoutPage extends Component {
                     {
                       name: "Shipping",
                       amount: selectedShippingOption ? `${selectedShippingOption.description} - ${selectedShippingOption.price.formatted_with_symbol}` : 'No shipping method selected',
+                    },
+                    {
+                      name: "Discount",
+                      amount: (checkout.live && checkout.live.discount && checkout.live.discount.code) ? `Saved ${checkout.live.discount.amount_saved.formatted_with_symbol}` : 'No discount code applied',
                     }
                   ].map((item, i) => (
                     <div key={i} className="d-flex justify-content-between align-items-center mb-2">
@@ -475,11 +508,13 @@ CheckoutPage.propTypes = {
   shippingOptions: PropTypes.array,
   dispatchGenerateCheckout: PropTypes.func,
   dispatchGetShippingOptions: PropTypes.func,
+  dispatchSetDiscountCodeInCheckout: PropTypes.func,
 }
 
 export default withRouter(connect(({ checkout: { checkoutTokenObject, shippingOptions }, cart }) => ({ checkout: checkoutTokenObject, shippingOptions, cart }), {
   dispatchGenerateCheckout,
   dispatchGetShippingOptions,
   dispatchSetShippingOptionsInCheckout,
+  dispatchSetDiscountCodeInCheckout,
   dispatchCaptureOrder,
 })(CheckoutPage));
