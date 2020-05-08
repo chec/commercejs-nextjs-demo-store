@@ -6,8 +6,11 @@ import { connect } from 'react-redux';
 class Collections extends Component {
   constructor(props) {
     super(props);
+
     this.sidebar = React.createRef();
     this.page = React.createRef();
+
+    this.handleScroll = this.handleScroll.bind(this);
   }
 
   componentDidMount() {
@@ -18,23 +21,23 @@ class Collections extends Component {
     window.removeEventListener("scroll", this.handleScroll);
   }
 
-  handleScroll = () => {
-    window.requestAnimationFrame(this.animate);
-  };
+  handleScroll() {
+    const animate = () => {
+      const distance =
+        this.page.current.getBoundingClientRect().bottom -
+        window.innerHeight;
 
-  animate = () => {
-    const distance =
-      this.page.current.getBoundingClientRect().bottom -
-      window.innerHeight;
+      if (distance < 0) {
+        this.sidebar.current.style.transform = `translateY(${distance}px)`;
+      } else {
+        this.sidebar.current.style.transform = `translateY(0px)`;
+      }
+    };
 
-    if (distance < 0) {
-      this.sidebar.current.style.transform = `translateY(${distance}px)`;
-    } else {
-      this.sidebar.current.style.transform = `translateY(0px)`;
-    }
-  };
+    window.requestAnimationFrame(animate);
+  }
 
-  renderSidebar = () => {
+  renderSidebar() {
     const { categories } = this.props;
 
     return (
@@ -72,7 +75,7 @@ class Collections extends Component {
   /**
   * Filter products by category
   */
-   filterProductsByCat = (catSlug) => {
+   filterProductsByCat(catSlug) {
     const { categories, products } = this.props;
 
     const cat = categories.find(category => category.slug === catSlug);
@@ -85,7 +88,7 @@ class Collections extends Component {
   /**
   * Render collections based on categories available in data
   */
-  renderCollection = () => {
+  renderCollection() {
     const { categories } = this.props;
     const reg = /(<([^>]+)>)/ig;
 
@@ -129,7 +132,6 @@ class Collections extends Component {
   }
 
   render() {
-
     return (
       <div className="py-5 my-5">
         <Head>

@@ -6,21 +6,36 @@ import { connect } from "react-redux";
 
 
 class Confirm extends Component {
+  constructor(props) {
+    super(props);
 
-  render() {
-    const { orderReceipt } = this.props;
+    this.handlePrint = this.handlePrint.bind(this);
+  }
 
-    const renderPrintButton = () => {
-      if (typeof window === 'undefined') {
-        return null;
-      }
-      return (
-      <button onClick={() => window && window.print && window.print()} className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0 no-print bg-transparent" role="button">
+  /**
+   * Print the window using the browser's native print functionality, if possible
+   */
+  handlePrint() {
+    if (window && window.print) {
+      window.print();
+    }
+  }
+
+  renderPrintButton() {
+    if (typeof window === 'undefined') {
+      return null;
+    }
+
+    return (
+      <button onClick={this.handlePrint} className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0 no-print bg-transparent" role="button">
         <img src="/icon/print.svg" className="mr-2 w-20 no-print"/>
         <div class="no-print">Print Receipt</div>
       </button>
-      )
-    }
+    );
+  }
+
+  render() {
+    const { orderReceipt } = this.props;
 
     return (
       <Root>
@@ -66,7 +81,7 @@ class Confirm extends Component {
                       </p>
                       <p className="font-size-subheader">Order Details</p>
                     </div>
-                    {renderPrintButton()}
+                    { this.renderPrintButton() }
                   </div>
                   <div className="border-bottom border-color-gray400 d-flex align-items-start py-4 flex-column flex-sm-row">
                     <div>
@@ -108,7 +123,7 @@ class Confirm extends Component {
                   </div>
                   <div className="d-flex justify-content-between align-items-center mb-2 pt-3">
                     <p className="font-size-title font-weight-semibold">
-                      Grand total
+                      Order total
                     </p>
                     <p className="text-right font-weight-semibold font-size-title">${orderReceipt.order.total.formatted_with_code}</p>
                   </div>

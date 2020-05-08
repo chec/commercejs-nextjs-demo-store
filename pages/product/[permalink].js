@@ -15,8 +15,8 @@ import CategoryList from '../../components/products/CategoryList';
 import reduceProductImages from '../../lib/reduceProductImages';
 
 const detailView = `<p>
-      Slightly textured fabric with tonal geometric design and a bit of shine
-    </p>`;
+  Slightly textured fabric with tonal geometric design and a bit of shine
+</p>`;
 
 
 class Product extends Component {
@@ -27,13 +27,25 @@ class Product extends Component {
       showShipping: false,
       showDetails: false,
     };
+
+    this.toggleShipping = this.toggleShipping.bind(this);
+    this.toggleDetails = this.toggleDetails.bind(this);
   }
 
+  toggleShipping() {
+    const { showShipping } = this.state;
+    this.setState({ showShipping: !showShipping });
+  }
+
+  toggleDetails() {
+    const { showDetails } = this.state;
+    this.setState({ showDetails: !showDetails });
+  }
 
   render() {
     const { showShipping,showDetails } = this.state;
-
     const { product } = this.props;
+
     const images = reduceProductImages(product);
 
     return (
@@ -71,10 +83,8 @@ class Product extends Component {
               <ProductDetail product={product} />
 
               <div
-                onClick={() => {
-                  this.setState({ showShipping: !showShipping });
-                }}
-                className="d-flex cursor-pointesr py-3 justify-content-between font-weight-medium"
+                onClick={this.toggleShipping}
+                className="d-flex cursor-pointer py-3 justify-content-between font-weight-medium"
               >
                 Shipping and returns
                 <img src="/icon/plus.svg" />
@@ -85,11 +95,9 @@ class Product extends Component {
                   days. For more information, click here.
                 </div>
               </Collapse>
-              <div className="h-1 borderbottom border-color-black" />
+              <div className="h-1 border-bottom border-color-black" />
               <div
-                onClick={() => {
-                  this.setState({ showDetails: !showDetails });
-                }}
+                onClick={this.toggleDetails}
                 className="d-flex cursor-pointer py-3 justify-content-between font-weight-medium"
               >
                 Details
@@ -118,7 +126,7 @@ class Product extends Component {
 }
 
 /**
- * Use getStaticPaths() to pre-render PDP according to page path
+ * Use getStaticPaths() to pre-render PDP (product display page) according to page path
  */
 export async function getStaticPaths() {
   const { data: products } = await commerce.products.list();
@@ -134,9 +142,9 @@ export async function getStaticPaths() {
   return {
     paths,
     // { fallback: false } means other routes should 404.
-    fallback: false
+    fallback: false,
   }
-}
+};
 
 // This also gets called at build time, and fetches the product to view
 export async function getStaticProps({ params: { permalink } }) {
@@ -147,10 +155,10 @@ export async function getStaticProps({ params: { permalink } }) {
   // Pass product data to the page via props
   return {
     props: {
-      product
-    }
-  }
-}
+      product,
+    },
+  };
+};
 
 
 export default connect(state => state)(Product);

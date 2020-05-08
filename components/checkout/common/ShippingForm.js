@@ -8,21 +8,21 @@ export default class ShippingForm extends Component {
     super(props);
 
     this.state = {
-      recieveNewsletter: true,
+      receiveNewsletter: true,
       saveInfo: true
     };
+
+    this.toggleNewsletter = this.toggleNewsletter.bind(this);
   }
 
-  toggleNewsletter = value => {
-    this.setState({ recieveNewsletter: value });
-  };
-
-  toggleSaveInfo = value => {
-    this.setState({ saveInfo: value });
+  toggleNewsletter() {
+    this.setState({
+      receiveNewsletter: !this.state.receiveNewsletter,
+    });
   };
 
   render() {
-    const { recieveNewsletter, saveInfo } = this.state;
+    const { receiveNewsletter } = this.state;
     const {
       shippingOptions,
       countries = {},
@@ -207,12 +207,12 @@ export default class ShippingForm extends Component {
           </div>
         </div>
         <div
-          onClick={() => this.toggleNewsletter(!recieveNewsletter)}
+          onClick={this.toggleNewsletter}
           className="d-flex mb-4 flex-nowrap cursor-pointer"
         >
           <Checkbox
-            onClick={() => this.toggleNewsletter(!recieveNewsletter)}
-            checked={recieveNewsletter}
+            onClick={this.toggleNewsletter}
+            checked={receiveNewsletter}
             className="mr-3"
           />
           <p>

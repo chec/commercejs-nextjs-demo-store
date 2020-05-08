@@ -9,7 +9,7 @@ export default class PaymentDetails extends Component {
   render() {
     const {
       gateways,
-      handleGatewayChange,
+      onChangeGateway,
       selectedGateway,
       cardNumber,
       expMonth,
@@ -26,7 +26,7 @@ export default class PaymentDetails extends Component {
           {(gateways && gateways.available['test_gateway']) ?
             (<div className="borderbottom border-color-gray500">
               <label
-                onClick={() => handleGatewayChange('test_gateway')}
+                onClick={() => onChangeGateway('test_gateway')}
                 className={`p-3 d-flex align-items-center cursor-pointer`}
               >
                 <Radiobox
@@ -47,7 +47,7 @@ export default class PaymentDetails extends Component {
                         name="cardNumber"
                         pattern="[0-9.]+"
                         value={cardNumber}
-                        maxlength="16"
+                        maxLength="16"
                         className="rounded-0 w-100"
                       />
                     </label>
@@ -88,7 +88,7 @@ export default class PaymentDetails extends Component {
                       <input
                         name="cvc"
                         value={cvc}
-                        maxlength="3"
+                        maxLength="3"
                         type="number"
                         className="rounded-0 w-100"
                       />
@@ -102,7 +102,7 @@ export default class PaymentDetails extends Component {
           {(gateways && gateways.available['paypal']) ?
             (<div>
               <label
-                onClick={() => handleGatewayChange('paypal')}
+                onClick={() => onChangeGateway('paypal')}
                 className={`p-3 d-flex align-items-center cursor-pointer`}
               >
                 <Radiobox
@@ -122,6 +122,6 @@ export default class PaymentDetails extends Component {
 
 PaymentDetails.propTypes = {
   gateways: PropTypes.object,
-  handleGatewayChange: PropTypes.func,
+  onChangeGateway: PropTypes.func,
   selectedGateway: PropTypes.string,
 }

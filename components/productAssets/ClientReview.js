@@ -41,27 +41,45 @@ export default class ClientReview extends Component {
     super(props);
 
     this.state = {
-      showAllReviews: false
+      open: false
     };
+
+    this.handleClose = this.handleClose.bind(this);
+    this.handleOpen = this.handleOpen.bind(this);
   }
+
+  /**
+   * Close the review modal
+   */
+  handleClose() {
+    this.setState({ open: false });
+  }
+
+  /**
+   * Show the review modal
+   */
+  handleOpen() {
+    this.setState({ open: true });
+  }
+
   render() {
-    const { showAllReviews } = this.state;
+    const { open } = this.state;
     return (
       <div id="reviews" className="custom-container pb-5">
         <Modal
-          isOpen={showAllReviews}
-          onClose={() => this.setState({ showAllReviews: false })}
+          isOpen={open}
+          onClose={this.handleClose}
           maxW="1000px"
         >
           <div className="d-flex justify-content-between align-items-center pb-3">
             <p className="font-size-subheader font-weight-medium">
-              All Reviews
+              All reviews
             </p>
             <img
               tabIndex="0"
               src="/icon/cross.svg"
               className="w-24 cursor-pointer"
-              onClick={() => this.setState({ showAllReviews: false })}
+              onClick={this.handleClose}
             />
           </div>
           <ReviewList reviews={reviews} />
@@ -81,10 +99,10 @@ export default class ClientReview extends Component {
             </div>
             <ReviewList reviews={reviews}>
               <button
-                onClick={() => this.setState({ showAllReviews: true })}
+                onClick={this.handleOpen}
                 className="text-center bg-transparent w-100 h-72 px-3 text-decoration-underline"
               >
-                View all Reviews
+                View all reviews
               </button>
             </ReviewList>
           </div>
