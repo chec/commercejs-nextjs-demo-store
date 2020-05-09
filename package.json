@@ -1,7 +1,7 @@
 {
-  "name": "checkout",
+  "name": "commercejs-nextjs-demo-store",
+  "license": "BSD-3-Clause",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
