@@ -38,8 +38,8 @@ export default class PaymentDetails extends Component {
 
               <div className="pl-5 pr-3 pb-3 ml-2">
                 <div className="row">
-                  <div className="col-sm-6">
-                    <label className="w-100 mb-3 mb-sm-0">
+                  <div className="col-sm-8">
+                    <label className="w-100 mb-3 mt-2 mb-sm-0">
                       <p className="mb-1 font-size-caption font-color-light">
                         Card Number
                       </p>
@@ -52,8 +52,22 @@ export default class PaymentDetails extends Component {
                       />
                     </label>
                   </div>
-                  <div className="col-sm-2">
-                    <label className="w-100 mb-3 mb-sm-0">
+                  <div className="col-sm-3">
+                    <label className="w-100 mb-3 mt-2 mb-sm-0">
+                      <p className="mb-1 font-size-caption font-color-light">
+                        CVC (CVV)
+                      </p>
+                      <input
+                        name="cvc"
+                        value={cvc}
+                        maxLength="3"
+                        type="number"
+                        className="rounded-0 w-100"
+                      />
+                    </label>
+                  </div>
+                  <div className="col-sm-3">
+                    <label className="w-100 mb-3 mt-2 mb-sm-0">
                       <p className="mb-1 font-size-caption font-color-light">
                         Exp. Month
                       </p>
@@ -66,8 +80,8 @@ export default class PaymentDetails extends Component {
                       />
                     </label>
                   </div>
-                  <div className="col-sm-2">
-                    <label className="w-100 mb-3 mb-sm-0">
+                  <div className="col-sm-3">
+                    <label className="w-100 mb-3 mt-2 mb-sm-0">
                       <p className="mb-1 font-size-caption font-color-light">
                         Exp. Year
                       </p>
@@ -77,20 +91,6 @@ export default class PaymentDetails extends Component {
                         value={expYear}
                         className="rounded-0 w-100"
                         placeholder="YY"
-                      />
-                    </label>
-                  </div>
-                  <div className="col-sm-2">
-                    <label className="w-100 mb-3 mb-sm-0">
-                      <p className="mb-1 font-size-caption font-color-light">
-                        CVC (CVV)
-                      </p>
-                      <input
-                        name="cvc"
-                        value={cvc}
-                        maxLength="3"
-                        type="number"
-                        className="rounded-0 w-100"
                       />
                     </label>
                   </div>
