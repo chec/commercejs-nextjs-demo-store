@@ -79,11 +79,9 @@ const reducer = (state = initialState, action) => {
 
 // Enable Redux dev tools
 const devtools = (process.browser && window.__REDUX_DEVTOOLS_EXTENSION__)
-  // ? window.__REDUX_DEVTOOLS_EXTENSION__()
-  /* Use the below commented out line if you want to enable tracing action calls, use only in dev mode as it will affect performance
-  https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/Features/Trace.md */
-
-  ? window.__REDUX_DEVTOOLS_EXTENSION__({ trace: true, traceLimit: 25 })
+  ? window.__REDUX_DEVTOOLS_EXTENSION__(
+    // { trace: true, traceLimit: 25 }
+  )
   : f => f;
 
 
