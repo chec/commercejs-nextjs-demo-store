@@ -4,6 +4,10 @@
   margin: 0 auto;
   padding: 0 2rem;
 
+  @include md-max {
+    display: block;
+  }
+
   .product-sidebar {
     display: flex;
     top: 6.5rem;
@@ -11,6 +15,10 @@
     position: sticky;
     align-self: flex-start;
     justify-content: space-between;
+
+    @include md-max {
+      display: none;
+    }
   }
 
   .product-images {
@@ -23,5 +31,13 @@
     top: 6.5rem;
     min-width: 24rem;
     align-self: flex-start;
+
+    @include md-max {
+      padding: 1.5rem 1em 0;
+    }
+
+    @include small-xs {
+      padding: 1.5rem 0 0;
+    }
   }
 }

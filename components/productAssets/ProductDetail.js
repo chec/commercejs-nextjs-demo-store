@@ -18,17 +18,13 @@ class ProductDetail extends Component {
         [variant.id]: variant.options[0].id,
       }), {}),
     }
-
-    this.handleAddToCart = this.handleAddToCart.bind(this);
-    this.handleReviewClick = this.handleReviewClick.bind(this);
-    this.handleSelectOption = this.handleSelectOption.bind(this);
   }
 
 
   /**
   * Handle click to scroll to review section
   */
-  handleReviewClick() {
+  onReviewClick() {
     const section = document.querySelector("#reviews");
 
     if (section) {
@@ -41,19 +37,17 @@ class ProductDetail extends Component {
   /**
   * On selecting variant
   */
-  handleSelectOption(variantId, optionId) {
-    this.setState({
-      selectedOptions: {
-        ...this.state.selectedOptions,
-        [variantId]: optionId,
-      },
-    });
+  handleSelectOption = (variantId, optionId) => {
+    this.setState({ selectedOptions: {
+      ...this.state.selectedOptions,
+      [variantId]: optionId,
+    }});
   }
 
   /**
   * Get price of selected option
   */
-  getPrice() {
+  getPrice = () => {
     const { price: { raw: base }, variants } = this.props.product;
     const { selectedOptions } = this.state;
 
@@ -79,7 +73,7 @@ class ProductDetail extends Component {
   /**
   * Add to Cart
   */
-  handleAddToCart() {
+  handleAddToCart = () => {
     const { product } = this.props
     const { selectedOptions } = this.state;
     this.props.dispatch(addToCart(product.id, 1, selectedOptions))
@@ -95,7 +89,7 @@ class ProductDetail extends Component {
       <div>
 
         {/* Product Summary */}
-        <div onClick={this.handleReviewClick} className="cursor-pointer">
+        <div onClick={this.onReviewClick} className="cursor-pointer">
           <ReviewStars count={4.5} />
         </div>
         <p className="font-size-display3 font-family-secondary mt-2 mb-2">

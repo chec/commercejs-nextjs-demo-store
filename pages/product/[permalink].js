@@ -79,9 +79,7 @@ class Product extends Component {
 
           {/* Right Section - Product Details */}
           <div className="product-detail">
-
               <ProductDetail product={product} />
-
               <div
                 onClick={this.toggleShipping}
                 className="d-flex cursor-pointer py-3 justify-content-between font-weight-medium"
@@ -113,7 +111,6 @@ class Product extends Component {
               </Collapse>
               <div className="h-1 borderbottom border-color-black" />
             </div>
-
         </div>
       </div>
       <ClientReview />

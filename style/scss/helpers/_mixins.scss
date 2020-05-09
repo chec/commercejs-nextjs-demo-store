@@ -238,3 +238,9 @@ $xl-width: 1200px;
     @content;
   }
 }
+
+@mixin md-max {
+  @media (max-width: #{$lg-width}) {
+    @content;
+  }
+}
