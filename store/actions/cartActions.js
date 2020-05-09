@@ -106,10 +106,10 @@ export const updateCartItem = (lineItemId, quantity) => (dispatch) => commerce.c
 /**
  * Handle remove cart item success and update store
  */
-export const removeFromCartSuccess = (item) => {
+export const removeFromCartSuccess = (resp) => {
   return {
     type: REMOVE_FROM_CART_SUCCESS,
-    payload: item
+    payload: resp
   }
 }
 
@@ -127,5 +127,5 @@ export const removeFromCartError = (error) => {
  * Async remove cart item
  */
 export const removeFromCart = (lineItemId) => (dispatch) => commerce.cart.remove(lineItemId)
-  .then(item => dispatch(removeFromCartSuccess(item)))
+  .then(resp => dispatch(removeFromCartSuccess(resp)))
   .catch(error => dispatch(removeFromCartError(error)));

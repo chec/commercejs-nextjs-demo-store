@@ -59,7 +59,7 @@ const reducer = (state = initialState, action) => {
     // Dispatch in Cart client-side
     // Check if action dispatched is REMOVE_FROM_CART and act on that
     case REMOVE_FROM_CART_SUCCESS:
-      return { ...state, cart: action.payload };
+      return { ...state, cart: action.payload.cart };
     case GENERATE_CHECKOUT_TOKEN:
       return { ...state, checkout: { ...state.checkout, checkoutTokenObject: action.payload }};
     case GET_SHIPPING_OPTIONS:
@@ -79,11 +79,9 @@ const reducer = (state = initialState, action) => {
 
 // Enable Redux dev tools
 const devtools = (process.browser && window.__REDUX_DEVTOOLS_EXTENSION__)
-  ? window.__REDUX_DEVTOOLS_EXTENSION__()
-  /* Use the below commented out line if you want to enable tracing action calls, use only in dev mode as it will affect performance
-  https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/Features/Trace.md */
-
-  // ? window.__REDUX_DEVTOOLS_EXTENSION__({ trace: true, traceLimit: 25 })
+  ? window.__REDUX_DEVTOOLS_EXTENSION__(
+    // { trace: true, traceLimit: 25 }
+  )
   : f => f;
 
 
