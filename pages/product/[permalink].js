@@ -10,6 +10,7 @@ import ClientReview from '../../components/productAssets/ClientReview';
 import SuggestedProducts from '../../components/productAssets/SuggestedProducts';
 import ExploreBanner from '../../components/productAssets/ExploreBanner';
 import Footer from '../../components/common/Footer';
+import SocialMedia from '../../components/common/SocialMedia';
 import CategoryList from '../../components/products/CategoryList';
 import reduceProductImages from '../../lib/reduceProductImages';
 
@@ -117,6 +118,7 @@ class Product extends Component {
       <ClientReview />
       <SuggestedProducts />
       <ExploreBanner />
+      <SocialMedia />
       <Footer />
     </Root>
     );
