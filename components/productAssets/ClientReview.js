@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReviewList from './ReviewList';
 import Modal from '../common/atoms/Modal';
-import Link from 'next/link';
 
 const reviews = [
   {
