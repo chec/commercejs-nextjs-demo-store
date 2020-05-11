@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReviewList from './ReviewList';
 import Modal from '../common/atoms/Modal';
+import Link from 'next/link';
 
 const reviews = [
   {
@@ -80,6 +81,7 @@ export default class ClientReview extends Component {
               src="/icon/cross.svg"
               className="w-24 cursor-pointer"
               onClick={this.handleClose}
+              alt="Cross icon"
             />
           </div>
           <ReviewList reviews={reviews} />
@@ -89,12 +91,6 @@ export default class ClientReview extends Component {
             <div className="d-flex justify-content-between flex-column flex-sm-row align-items-sm-center mb-3">
               <p className="font-size-title font-weight-medium mb-2 mb-sm-0">
                 4.3 stars from 10 reviews
-              </p>
-              <p
-                className="text-decoration-underline text-write cursor-pointer"
-                tabIndex="0"
-              >
-                Write a review
               </p>
             </div>
             <ReviewList reviews={reviews}>
