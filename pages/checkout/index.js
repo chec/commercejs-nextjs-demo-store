@@ -406,7 +406,7 @@ class CheckoutPage extends Component {
                   }
                     <button
                       type="submit"
-                      className="bg-black font-color-white w-100 border-none h-56 font-weight-semibold"
+                      className="bg-black font-color-white w-100 border-none h-56 font-weight-semibold d-none d-lg-block"
                       onClick={this.captureOrder}
                     >
                       Make payment
@@ -417,8 +417,8 @@ class CheckoutPage extends Component {
               }
             </div>
 
-            <div className="col-12 col-md-5 offset-md-1 d-none d-lg-block">
-              <div className="bg-brand200 p-5 order-summary">
+            <div className="col-12 col-md-10 offset-md-1">
+              <div className="bg-brand200 p-5 checkout-summary">
                 <div className="borderbottom font-size-subheader border-color-gray400 pb-2 font-weight-medium">
                   Your order
                 </div>
@@ -500,6 +500,15 @@ class CheckoutPage extends Component {
                     $ { checkout.live ? checkout.live.total.formatted_with_code : '' }
                   </p>
                 </div>
+
+
+              <button
+                type="submit"
+                className="bg-black mt-4 font-color-white w-100 border-none h-56 font-weight-semibold d-lg-none"
+                onClick={this.captureOrder}
+              >
+                Make payment
+              </button>
               </div>
             </div>
           </div>
