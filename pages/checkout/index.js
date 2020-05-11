@@ -1,21 +1,13 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from "react-redux";
-import Head from "next/head";
-import Link from "next/link";
-import { withRouter } from 'next/router'
+import Head from 'next/head';
+import Link from 'next/link';
 import ccFormat from '../../utils/ccFormat';
-
-// commerce.js client
 import commerce from '../../lib/commerce';
-
-// components
-import Root from "../../components/common/Root";
-import ShippingForm from "../../components/checkout/common/ShippingForm";
-import PaymentDetails from "../../components/checkout/common/PaymentDetails";
-import BillingDetails from "../../components/checkout/common/BillingDetails";
-
-// Checkout redux action creators
+import Root from '../../components/common/Root';
+import ShippingForm from '../../components/checkout/common/ShippingForm';
+import PaymentDetails from '../../components/checkout/common/PaymentDetails';
+import BillingDetails from '../../components/checkout/common/BillingDetails';
 import {
   generateCheckoutTokenFromCart as dispatchGenerateCheckout,
   getShippingOptionsForCheckout as dispatchGetShippingOptions,
@@ -23,6 +15,8 @@ import {
   setDiscountCodeInCheckout as dispatchSetDiscountCodeInCheckout,
   captureOrder as dispatchCaptureOrder,
 } from '../../store/actions/checkoutActions';
+import { connect } from 'react-redux';
+import { withRouter } from 'next/router';
 
 class CheckoutPage extends Component {
   constructor(props) {
@@ -177,7 +171,7 @@ class CheckoutPage extends Component {
 
   handleChangeForm(e) {
     // when input cardNumber changes format using ccFormat helper
-    if (e.target.name === "cardNumber") {
+    if (e.target.name === 'cardNumber') {
       e.target.value = ccFormat(e.target.value)
     }
     // update form's input by name in state
@@ -197,10 +191,10 @@ class CheckoutPage extends Component {
     // reset error states
     this.setState({
       errors: {
-        "fulfillment[shipping_method]": null,
+        'fulfillment[shipping_method]': null,
         gateway_error: null,
-        "shipping[name]": null,
-        "shipping[street]": null,
+        'shipping[name]': null,
+        'shipping[street]': null,
       },
     });
 
@@ -221,22 +215,22 @@ class CheckoutPage extends Component {
       customer: {
         firstname: this.state.firstName,
         lastname: this.state.lastName,
-        email: this.state["customer[email]"]
+        email: this.state['customer[email]']
       },
       // collected 'order notes' data for extra field configured in the Chec Dashboard
       extrafields: {
         extr_j0YnEoqOPle7P6: this.state.orderNotes,
       },
       shipping: {
-        name: this.state["shipping[name]"],
+        name: this.state['shipping[name]'],
         country: this.state.deliveryCountry,
-        street: this.state["shipping[street]"] + this.state.street2,
-        town_city: this.state["shipping[town_city]"],
+        street: this.state['shipping[street]'] + this.state.street2,
+        town_city: this.state['shipping[town_city]'],
         county_state: this.state.deliveryRegion,
-        postal_zip_code: this.state["shipping[postal_zip_code]"]
+        postal_zip_code: this.state['shipping[postal_zip_code]']
       },
       fulfillment: {
-        shipping_method: this.state["fulfillment[shipping_method]"]
+        shipping_method: this.state['fulfillment[shipping_method]']
       },
       payment: {
         gateway: this.state.selectedGateway,
@@ -335,7 +329,7 @@ class CheckoutPage extends Component {
           {/* Breadcrums Mobile */}
           <div
             className="d-flex d-sm-none px-4 py-3 borderbottom border-color-gray400 justify-content-center"
-            style={{ margin: "0 -1.5rem" }}
+            style={{ margin: '0 -1.5rem' }}
           >
             <Link href="/collection">
               <div className="font-size-caption text-decoration-underline cursor-pointer">
@@ -410,13 +404,12 @@ class CheckoutPage extends Component {
                     <BillingDetails />
                     : ''
                   }
-
                     <button
                       type="submit"
                       className="bg-black font-color-white w-100 border-none h-56 font-weight-semibold"
                       onClick={this.captureOrder}
                     >
-                      Make Payment
+                      Make payment
                     </button>
                 </form>
                 )
@@ -475,19 +468,19 @@ class CheckoutPage extends Component {
                 <div className="py-3 borderbottom border-color-black">
                   {[
                     {
-                      name: "Subtotal",
+                      name: 'Subtotal',
                       amount: checkout.live ? checkout.live.subtotal.formatted_with_symbol : '',
                     },
                     {
-                      name: "Tax",
+                      name: 'Tax',
                       amount: checkout.live ? checkout.live.tax.amount.formatted_with_symbol : '',
                     },
                     {
-                      name: "Shipping",
+                      name: 'Shipping',
                       amount: selectedShippingOption ? `${selectedShippingOption.description} - ${selectedShippingOption.price.formatted_with_symbol}` : 'No shipping method selected',
                     },
                     {
-                      name: "Discount",
+                      name: 'Discount',
                       amount: (checkout.live && checkout.live.discount && checkout.live.discount.code) ? `Saved ${checkout.live.discount.amount_saved.formatted_with_symbol}` : 'No discount code applied',
                     }
                   ].map((item, i) => (

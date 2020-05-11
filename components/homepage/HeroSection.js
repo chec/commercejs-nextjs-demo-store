@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import Swiper, { EffectFade, Autoplay } from "react-id-swiper";
-import Link from "next/link";
+import React, { Component } from 'react';
+import Swiper, { EffectFade, Autoplay } from 'react-id-swiper';
+import Link from 'next/link';
 
 const params = {
   modules: [EffectFade, Autoplay],
@@ -12,16 +12,16 @@ const params = {
   loop: true,
   allowTouchMove: false,
   speed: 1000,
-  effect: "fade",
+  effect: 'fade',
   fadeEffect: {
     crossFade: true
   }
 };
 const images = [
-  "/images/home-1.jpg",
-  "/images/home-2.jpg",
-  "/images/home-3.jpg",
-  "/images/home-4.jpg",
+  '/images/home-1.jpg',
+  '/images/home-2.jpg',
+  '/images/home-3.jpg',
+  '/images/home-4.jpg',
 ];
 
 export default class HeroSection extends Component {

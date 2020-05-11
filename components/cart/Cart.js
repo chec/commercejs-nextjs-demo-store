@@ -1,12 +1,9 @@
-import React, { Component } from "react";
-import Link from "next/link"
-
-import { Transition } from "react-transition-group";
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
-
+import React, { Component } from 'react';
+import Link from 'next/link'
+import { Transition } from 'react-transition-group';
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import CartItem from '../cart/CartItem';
-
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 // Cart redux action creators
 import { retrieveCart as dispatchRetreiveCart } from '../../store/actions/cartActions';
 
@@ -17,17 +14,17 @@ const defaultStyle = {
 };
 
 const transitionStyles = {
-  entering: { transform: "translateX(100%)" },
-  entered: { transform: "translateX(0)" },
-  exiting: { transform: "translateX(100%)" },
-  exited: { transform: "translateX(100%)" }
+  entering: { transform: 'translateX(100%)' },
+  entered: { transform: 'translateX(0)' },
+  exiting: { transform: 'translateX(100%)' },
+  exited: { transform: 'translateX(100%)' }
 };
 
 const backdropTransitionStyles = {
-  entering: { opacity: "0" },
-  entered: { opacity: "0.56" },
-  exiting: { opacity: "0" },
-  exited: { opacity: "0" }
+  entering: { opacity: '0' },
+  entered: { opacity: '0.56' },
+  exiting: { opacity: '0' },
+  exited: { opacity: '0' }
 };
 
 class Cart extends Component {
@@ -53,11 +50,11 @@ class Cart extends Component {
 
   onEntering() {
     disableBodyScroll(this.cartScroll.current);
-  };
+  }
 
   onExiting() {
     enableBodyScroll(this.cartScroll.current);
-  };
+  }
 
 
   render() {
@@ -150,7 +147,7 @@ class Cart extends Component {
                     <img src="/icon/cart.svg" className="w-32" />
                     <div
                       className="position-absolute font-size-tiny font-weight-bold"
-                      style={{ right: "-4px", top: "-4px" }}
+                      style={{ right: '-4px', top: '-4px' }}
                     >
                       0
                     </div>

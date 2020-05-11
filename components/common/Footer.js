@@ -1,24 +1,24 @@
-import React from "react";
+import React from 'react';
 
 const imagesInfo = [
   {
-    image: "/images/insta/1.png",
+    image: '/images/insta/1.png',
     translateRatio: -50
   },
   {
-    image: "/images/insta/2.jpg",
+    image: '/images/insta/2.jpg',
     translateRatio: 30
   },
   {
-    image: "/images/insta/3.jpg",
+    image: '/images/insta/3.jpg',
     translateRatio: 0
   },
   {
-    image: "/images/insta/4.jpg",
+    image: '/images/insta/4.jpg',
     translateRatio: -20
   },
   {
-    image: "/images/insta/5.jpg",
+    image: '/images/insta/5.jpg',
     translateRatio: -80
   }
 ];
@@ -29,27 +29,29 @@ export default class Footer extends React.Component {
 
     this.followContainer = React.createRef();
     this.images = [];
+
+    this.animate = this.animate.bind(this);
   }
 
   componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
+    window.addEventListener('scroll', this.handleScroll);
     this.animate();
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
+    window.removeEventListener('scroll', this.handleScroll);
   }
 
   handleScroll = () => {
     window.requestAnimationFrame(this.animate);
   };
 
-  animate = () => {
-    const dimentions = this.followContainer.current.getBoundingClientRect();
+  animate() {
+    const dimensions = this.followContainer.current.getBoundingClientRect();
 
-    if (dimentions.top - window.innerHeight < 0 && dimentions.bottom > 0) {
+    if (dimensions.top - window.innerHeight < 0 && dimensions.bottom > 0) {
       const scrolledRatio =
-        (window.innerHeight - dimentions.top) / window.innerHeight;
+        (window.innerHeight - dimensions.top) / window.innerHeight;
 
       this.images.forEach((image, index) => {
         const translateRatio = imagesInfo[index] ? imagesInfo[index].translateRatio : 0;
@@ -67,21 +69,19 @@ export default class Footer extends React.Component {
           className="custom-container px-3 mb-5 footer-follow"
         >
           <div className="row footer-follow--header">
-            {/* <div className="px-3" style={{ flexGrow: 2, maxWidth: "40%" }}></div> */}
             <div className="px-3 footer-follow--title">
               <p
                 className="font-size-display1 mb-3"
-                style={{ maxWidth: "26rem" }}
+                style={{ maxWidth: '26rem' }}
               >
                 Follow us on instagram for more updates
               </p>
               <div className="d-flex">
-
                 <a
                   href="/about"
                   className="d-flex py-3 align-items-center font-color-black borderbottom border-color-black"
                 >
-                  <p className="mr-3">Follow Us</p>
+                  <p className="mr-3">Follow us</p>
                   <img src="/icon/arrow-long-right.svg" />
                 </a>
               </div>
@@ -93,7 +93,7 @@ export default class Footer extends React.Component {
                 <div
                   ref={image => this.images.push(image)}
                   style={{
-                    paddingBottom: "100%",
+                    paddingBottom: '100%',
                     background: `url("${item.image}") center center/cover`
                   }}
                 />
@@ -168,7 +168,7 @@ export default class Footer extends React.Component {
                     href="https://www.linkedin.com/company/chec-chec-commerce-inc.-/"
                     className="d-block font-color-medium"
                   >
-                    Linkedin
+                    LinkedIn
                   </a>
                 </div>
               </div>

@@ -9,7 +9,6 @@ import {
   ADD_TO_CART_SUCCESS,
   UPDATE_CART_ITEM_SUCCESS,
   REMOVE_FROM_CART_SUCCESS,
-  GENERATE_CHECKOUT_TOKEN_SUCCESS,
   CAPTURE_ORDER_SUCCESS,
   GENERATE_CHECKOUT_TOKEN,
   GET_SHIPPING_OPTIONS,
@@ -17,7 +16,6 @@ import {
   UPDATE_CHECKOUT_LIVE_OBJECT,
   ABORT_CHECKOUT,
 } from './actions/actionTypes';
-
 
 // Declare initial state
 const initialState = {
@@ -84,7 +82,6 @@ const devtools = (process.browser && window.__REDUX_DEVTOOLS_EXTENSION__)
   )
   : f => f;
 
-
 // Create a makeStore function and pass in reducer to create the store
 const makeStore = () => {
   return createStore(
@@ -93,7 +90,6 @@ const makeStore = () => {
     compose(applyMiddleware(thunk), devtools)
   );
 };
-
 
 const debug = !process.env.NETLIFY;
 

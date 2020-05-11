@@ -1,6 +1,6 @@
-import { Component } from "react";
-import { animateScroll as scroll } from "react-scroll";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { animateScroll as scroll } from 'react-scroll';
+import { connect } from 'react-redux';
 
 class CarouselImages extends Component {
   constructor(props) {
@@ -13,28 +13,28 @@ class CarouselImages extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
+    window.addEventListener('scroll', this.handleScroll);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
+    window.removeEventListener('scroll', this.handleScroll);
   }
 
   handleScroll() {
     window.requestAnimationFrame(this.animate);
-  };
+  }
 
   animate() {
-    const mainImages = document.querySelectorAll(".carousel-main-images");
+    const mainImages = document.querySelectorAll('.carousel-main-images');
 
-    var x = window.matchMedia("(min-width: 768px)");
+    var x = window.matchMedia('(min-width: 768px)');
 
     if (!x.matches) {
       return;
     }
 
     this.carouselImages.forEach(image => {
-      image && (image.style.borderColor = "#ffffff");
+      image && (image.style.borderColor = '#ffffff');
     });
 
     for (let index = 0; index <= mainImages.length - 1; index++) {
@@ -45,7 +45,7 @@ class CarouselImages extends Component {
       ) {
         this.carouselImages[mainImages.length - 1] &&
           (this.carouselImages[mainImages.length - 1].style.borderColor =
-            "#000000");
+            '#000000');
         break;
       }
 
@@ -59,24 +59,24 @@ class CarouselImages extends Component {
 
       // Darken the last image
       this.carouselImages[index - 1] &&
-        (this.carouselImages[index - 1].style.borderColor = "#000000");
+        (this.carouselImages[index - 1].style.borderColor = '#000000');
       break;
     }
-  };
+  }
 
   onClickImage(index) {
-    const mainImages = document.querySelectorAll(".carousel-main-images");
+    const mainImages = document.querySelectorAll('.carousel-main-images');
 
     if (mainImages) {
       const scrollDestination = mainImages[index].offsetTop - 95;
       scroll.scrollTo(scrollDestination, {
-        smooth: "easeInOutQuint"
+        smooth: 'easeInOutQuint'
       });
     }
   }
 
   render() {
-    const { images, products } = this.props;
+    const { images } = this.props;
 
     return (
       <div className="d-flex">
@@ -91,7 +91,7 @@ class CarouselImages extends Component {
               style={{
                 background: `url("${image}") center center/cover`,
                 border:
-                  index === 0 ? "2px solid #000000" : "2px solid #FFFFFF"
+                  index === 0 ? '2px solid #000000' : '2px solid #FFFFFF'
               }}
             />
           ))}

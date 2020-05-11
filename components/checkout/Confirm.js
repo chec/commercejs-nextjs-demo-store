@@ -1,9 +1,7 @@
-import React, { Component } from "react";
-import Root from "../../components/common/Root";
-import Link from "next/link";
-
-import { connect } from "react-redux";
-
+import React, { Component } from 'react';
+import Root from '../../components/common/Root';
+import Link from 'next/link';
+import { connect } from 'react-redux';
 
 class Confirm extends Component {
   constructor(props) {
@@ -29,7 +27,7 @@ class Confirm extends Component {
     return (
       <button onClick={this.handlePrint} className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0 no-print bg-transparent" role="button">
         <img src="/icon/print.svg" className="mr-2 w-20 no-print"/>
-        <div class="no-print">Print Receipt</div>
+        <div className="no-print">Print Receipt</div>
       </button>
     );
   }

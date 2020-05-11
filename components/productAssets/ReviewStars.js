@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function ReviewStars({ count }) {
   return (
@@ -9,7 +9,7 @@ export default function ReviewStars({ count }) {
         ))}
         <div
           className="d-flex position-absolute left-0 top-0 right-0 bottom-0 overflow-hidden"
-          style={{ flexWrap: "nowrap", width: `${count * 20}%` }}
+          style={{ flexWrap: 'nowrap', width: `${count * 20}%` }}
         >
           {[1, 2, 3, 4, 5].map(index => (
             <img key={index} src="/icon/star-solid.svg" className="w-16 d-block" />

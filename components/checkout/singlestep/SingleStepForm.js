@@ -1,11 +1,9 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Link from "next/link";
-
-import ShippingForm from "../common/ShippingForm";
-import PaymentDetails from "../common/PaymentDetails";
-import BillingDetails from "../common/BillingDetails";
-
+import Link from 'next/link';
+import ShippingForm from '../common/ShippingForm';
+import PaymentDetails from '../common/PaymentDetails';
+import BillingDetails from '../common/BillingDetails';
 
 export default class SingleStepForm extends Component {
   constructor(props) {

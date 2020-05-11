@@ -1,11 +1,8 @@
-import React, { Component } from "react";
-import { animateScroll as scroll } from "react-scroll";
-
-import ReviewStars from "./ReviewStars";
-import VariantSelector from "../productAssets/VariantSelector";
-
-import { connect } from "react-redux";
-
+import React, { Component } from 'react';
+import ReviewStars from './ReviewStars';
+import VariantSelector from '../productAssets/VariantSelector';
+import { animateScroll as scroll } from 'react-scroll';
+import { connect } from 'react-redux';
 import { addToCart } from '../../store/actions/cartActions';
 
 class ProductDetail extends Component {
@@ -26,21 +23,21 @@ class ProductDetail extends Component {
 
 
   /**
-  * Handle click to scroll to review section
-  */
+   * Handle click to scroll to review section
+   */
   handleReviewClick() {
-    const section = document.querySelector("#reviews");
+    const section = document.querySelector('#reviews');
 
     if (section) {
       scroll.scrollTo(section.offsetTop - 130, {
-        smooth: "easeInOutQuint"
+        smooth: 'easeInOutQuint'
       });
     }
   }
 
   /**
-  * On selecting variant
-  */
+   * On selecting variant
+   */
   handleSelectOption(variantId, optionId) {
     this.setState({
       selectedOptions: {
@@ -51,8 +48,8 @@ class ProductDetail extends Component {
   }
 
   /**
-  * Get price of selected option
-  */
+   * Get price of selected option
+   */
   getPrice() {
     const { price: { raw: base }, variants } = this.props.product;
     const { selectedOptions } = this.state;
@@ -77,8 +74,8 @@ class ProductDetail extends Component {
   }
 
   /**
-  * Add to Cart
-  */
+   * Add to Cart
+   */
   handleAddToCart() {
     const { product } = this.props
     const { selectedOptions } = this.state;
@@ -93,7 +90,6 @@ class ProductDetail extends Component {
 
     return (
       <div>
-
         {/* Product Summary */}
         <div onClick={this.handleReviewClick} className="cursor-pointer">
           <ReviewStars count={4.5} />
@@ -101,7 +97,7 @@ class ProductDetail extends Component {
         <p className="font-size-display3 font-family-secondary mt-2 mb-2">
           {name}
         </p>
-        <div className="mb-4 pb-3 font-size-subheader">{(description || '').replace(reg, "")}</div>
+        <div className="mb-4 pb-3 font-size-subheader">{(description || '').replace(reg, '')}</div>
 
         {/* Product Variant */}
           <div className="d-none d-sm-block">
@@ -125,11 +121,9 @@ class ProductDetail extends Component {
             </span>
           </button>
         </div>
-
       </div>
     );
   }
 }
-
 
 export default connect(state => state)(ProductDetail);

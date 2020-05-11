@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import Radiobox from "../../common/atoms/Radiobox";
-import ShippingForm from "../common/ShippingForm";
+import React, { Component } from 'react';
+import Radiobox from '../../common/atoms/Radiobox';
+import ShippingForm from '../common/ShippingForm';
 
-const options = ["Same as shipping Address", "Use a different billing address"];
+const options = ['Same as shipping Address', 'Use a different billing address'];
 
 export default class BillingDetails extends Component {
   constructor(props) {
@@ -26,7 +26,7 @@ export default class BillingDetails extends Component {
               key={index}
               onClick={() => this.setState({ selectedValue: value })}
               className={`p-3 d-flex align-items-center cursor-pointer ${index !==
-                options.length - 1 && "borderbottom border-color-gray500"}`}
+                options.length - 1 && 'borderbottom border-color-gray500'}`}
             >
               <Radiobox
                 checked={selectedValue === value}
@@ -37,7 +37,7 @@ export default class BillingDetails extends Component {
             </label>
           ))}
         </div>
-        {selectedValue === "Use a different billing address" && (
+        {selectedValue === 'Use a different billing address' && (
           <ShippingForm />
         )}
       </>
