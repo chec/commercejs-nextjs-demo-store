@@ -82,7 +82,7 @@ export default class Footer extends React.Component {
                   className="d-flex py-3 align-items-center font-color-black borderbottom border-color-black"
                 >
                   <p className="mr-3">Follow us</p>
-                  <img src="/icon/arrow-long-right.svg" />
+                  <img src="/icon/arrow-long-right.svg" alt="Icon arrow" />
                 </a>
               </div>
             </div>
@@ -112,12 +112,14 @@ export default class Footer extends React.Component {
                   <a
                     href="https://commercejs.com/docs/"
                     className="mb-3 d-block font-color-medium"
+                    target="_blank"
                   >
                     Documentation
                   </a>
                   <a
                     href="https://commercejs.com/features"
                     className="d-block font-color-medium"
+                    target="_blank"
                   >
                     Features
                   </a>
@@ -126,12 +128,14 @@ export default class Footer extends React.Component {
                   <a
                     href="https://commercejs.com/company/about"
                     className="mb-3 d-block font-color-medium"
+                    target="_blank"
                   >
                     About
                   </a>
                   <a
                     href="http://slack.commercejs.com/"
                     className="d-block font-color-medium"
+                    target="_blank"
                   >
                     Community
                   </a>
@@ -147,12 +151,14 @@ export default class Footer extends React.Component {
                   <a
                     href="https://twitter.com/commercejs"
                     className="mb-3 d-block font-color-medium"
+                    target="_blank"
                   >
                     Twitter
                   </a>
                   <a
                     href="https://www.instagram.com/commerce.js/"
                     className="d-block font-color-medium"
+                    target="_blank"
                   >
                     Instagram
                   </a>
@@ -161,12 +167,14 @@ export default class Footer extends React.Component {
                   <a
                     href="https://angel.co/company/chec"
                     className="mb-3 d-block font-color-medium"
+                    target="_blank"
                   >
                     Angel
                   </a>
                   <a
                     href="https://www.linkedin.com/company/chec-chec-commerce-inc.-/"
                     className="d-block font-color-medium"
+                    target="_blank"
                   >
                     LinkedIn
                   </a>
@@ -183,7 +191,7 @@ export default class Footer extends React.Component {
                   placeholder="email address"
                 />
                 <button className="bg-transparent position-absolute right-0 top-50 translateY--50 pr-2 h-48">
-                  <img src="/icon/arrow-long-right.svg" className="w-24" />
+                  <img src="/icon/arrow-long-right.svg" className="w-24" alt="Arrow icon"/>
                 </button>
               </div>
             </div>
@@ -196,6 +204,7 @@ export default class Footer extends React.Component {
                 <a
                   href="https://app.netlify.com/start/deploy?repository=https://github.com/chec/commercejs-nextjs-demo-store"
                   className="font-color-brand font-size-caption text-uppercase text-center"
+                  target="_blank"
                 >
                   Deploy to Netlify
                 </a>
@@ -203,6 +212,7 @@ export default class Footer extends React.Component {
                 <a
                   href="https://github.com/chec/commercejs-nextjs-demo-store"
                   className="font-color-brand font-size-caption text-uppercase text-center"
+                  target="_blank"
                 >
                   Clone in GitHub
                 </a>
@@ -210,15 +220,17 @@ export default class Footer extends React.Component {
                 <a
                   href="https://app.netlify.com/start/deploy?repository=https://github.com/chec/commercejs-nextjs-demo-store"
                   className="font-color-brand font-size-caption text-uppercase text-center"
+                  target="_blank"
                 >
                   Contribute
                 </a>
               </div>
               <div className="font-color-brand font-size-caption py-4 text-right">
               <a
-                  href="https://commercejs.com/"
-                  className="font-color-brand font-size-caption text-uppercase text-center"
-                >
+                href="https://commercejs.com/"
+                className="font-color-brand font-size-caption text-uppercase text-center"
+                target="_blank"
+              >
                   &copy; 2020 Chec/Commerce.js.
                 </a>
               </div>
