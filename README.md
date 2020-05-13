@@ -63,15 +63,15 @@ You can optionally skip the following steps for now, until after the deployment.
 
 ## One-click Deploy with Netlify (recommended)
 
-The one-click deploy allows you to connect Netlify to your GitHub account to clone the `commercejs-example-store` repository and deploy it automatically. Be sure to go to Netlify and sign up for an account before clicking the deploy button.
+The one-click deploy allows you to connect Netlify to your GitHub account to clone the `commercejs-nextjs-demo-store` repository and deploy it automatically. Be sure to go to Netlify and sign up for an account before clicking the deploy button.
 
  [![Deploy to Netlify button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/chec/commercejs-nextjs-demo-store)
 
-Please note that the site deploy will first fail as your have yet to enter in your environment variables for your Netlify site. Configure your site by going under the Build and Deploy settings then Environment to enter your API key. You can access your Chec public key here as explained in the manual setup below. 
+Please note that the site deploy will first fail as your have yet to enter in your environment variables for your Netlify site. Configure your site by going under the Build and Deploy settings then scroll down to Environment to enter your API key. You can access your Chec public key here as explained in the manual setup below. 
 
 ## Manual setup and Netlify deployment
 
-Manual setup involves cloning the repo into your local environment and using the Netlify CLI for deployment.
+Manual setup involves cloning the repo into your local environment and deploying to Netlify.
 
 **STEP 1.** Clone the repo
 
@@ -105,7 +105,7 @@ You can access your API key under in your Chec dashboard setup, then navigate to
 CHEC_PUBLIC_KEY=your_public_API_key_here
 ```
 
-This file is meant to not be committed to source control and also will be hidden in file browsers. Be sure to add your .env containing your API key to .gitignore. Lastly, commit your local repository to git.
+This file is meant to not be committed to source control and also will be hidden in file browsers. Be sure to add your `.env` containing your API key to `.gitignore`. Lastly, commit your local repository to git.
 
 **STEP 4.** Run your development environment on http://localhost:3000.
 ```bash
