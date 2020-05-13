@@ -14,12 +14,14 @@ const Footer = () => (
               <a
                 href="https://commercejs.com/docs/"
                 className="mb-3 d-block font-color-medium"
+                target="_blank"
               >
                 Documentation
               </a>
               <a
                 href="https://commercejs.com/features"
                 className="d-block font-color-medium"
+                target="_blank"
               >
                 Features
               </a>
@@ -28,12 +30,14 @@ const Footer = () => (
               <a
                 href="https://commercejs.com/company/about"
                 className="mb-3 d-block font-color-medium"
+                target="_blank"
               >
                 About
               </a>
               <a
                 href="http://slack.commercejs.com/"
                 className="d-block font-color-medium"
+                target="_blank"
               >
                 Community
               </a>
@@ -49,12 +53,14 @@ const Footer = () => (
               <a
                 href="https://twitter.com/commercejs"
                 className="mb-3 d-block font-color-medium"
+                target="_blank"
               >
                 Twitter
               </a>
               <a
                 href="https://www.instagram.com/commerce.js/"
                 className="d-block font-color-medium"
+                target="_blank"
               >
                 Instagram
               </a>
@@ -63,12 +69,14 @@ const Footer = () => (
               <a
                 href="https://angel.co/company/chec"
                 className="mb-3 d-block font-color-medium"
+                target="_blank"
               >
                 Angel
               </a>
               <a
                 href="https://www.linkedin.com/company/chec-chec-commerce-inc.-/"
                 className="d-block font-color-medium"
+                target="_blank"
               >
                 LinkedIn
               </a>
@@ -98,6 +106,7 @@ const Footer = () => (
             <a
               href="https://app.netlify.com/start/deploy?repository=https://github.com/chec/commercejs-nextjs-demo-store"
               className="font-color-brand font-size-caption text-uppercase text-center"
+              target="_blank"
             >
               Deploy to Netlify
             </a>
@@ -105,13 +114,15 @@ const Footer = () => (
             <a
               href="https://github.com/chec/commercejs-nextjs-demo-store"
               className="font-color-brand font-size-caption text-uppercase text-center"
+              target="_blank"
             >
               Clone in GitHub
             </a>
             <p className="px-2 font-color-brand font-size-caption">-</p>
             <a
-              href="https://app.netlify.com/start/deploy?repository=https://github.com/chec/commercejs-nextjs-demo-store"
+              href="https://github.com/chec/commercejs-nextjs-demo-store"
               className="font-color-brand font-size-caption text-uppercase text-center"
+              target="_blank"
             >
               Contribute
             </a>
@@ -120,6 +131,7 @@ const Footer = () => (
           <a
               href="https://commercejs.com/"
               className="font-color-brand font-size-caption text-uppercase text-center"
+              target="_blank"
             >
               &copy; 2020 Chec/Commerce.js.
             </a>
