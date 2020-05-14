@@ -40,9 +40,7 @@ class ProductDetail extends Component {
           ...acc,
           [variant.id]: variant.options[0].id,
         }), {}),
-        // Merge (with priority) any previously selected options
-        ...state.selectedOptions,
-      }
+      },
     }));
   }
 
