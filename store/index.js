@@ -33,7 +33,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case HYDRATE:
-      return { ...state, ...action.payload  };
+      return { ...state, categories: action.payload.categories, products: action.payload.products };
     // Dispatch in App SSR
     // Check if action dispatched is STORE_CATEGORIES and act on that
     case STORE_CATEGORIES:
@@ -58,16 +58,22 @@ const reducer = (state = initialState, action) => {
     // Check if action dispatched is REMOVE_FROM_CART and act on that
     case REMOVE_FROM_CART_SUCCESS:
       return { ...state, cart: action.payload.cart };
+    // Dispatch in Checkout client-side
     case GENERATE_CHECKOUT_TOKEN:
       return { ...state, checkout: { ...state.checkout, checkoutTokenObject: action.payload }};
+    // Dispatch in Checkout client-side
     case GET_SHIPPING_OPTIONS:
       return { ...state, checkout: { ...state.checkout, shippingOptions: action.payload }};
+    // Dispatch in Checkout client-side
     case REMOVE_SHIPPING_OPTIONS:
       return { ...state, checkout: { ...state.checkout, shippingOptions: [] }};
+    // Dispatch in Checkout client-side
     case UPDATE_CHECKOUT_LIVE_OBJECT:
       return { ...state, checkout: { ...state.checkout, checkoutTokenObject: { ...state.checkout.checkoutTokenObject, live: action.payload }}};
+    // Dispatch in Checkout client-side
     case ABORT_CHECKOUT:
       return { ...state, checkout: initialState.checkout };
+    // Dispatch in Checkout client-side
     case CAPTURE_ORDER_SUCCESS:
       return { ...state, checkout: initialState.checkout, orderReceipt: action.payload };
     default:
