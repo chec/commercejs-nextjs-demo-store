@@ -33,7 +33,16 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case HYDRATE:
-      return { ...state, categories: action.payload.categories, products: action.payload.products };
+      // These are server side rendered from MyApp.getInitialProps, everything else should
+      // come from client side state and should not be overwritten here by subsequent server
+      // side hydration actions.
+      const { categories, products } = action.payload;
+
+      return {
+        ...state,
+        categories,
+        products,
+      };
     // Dispatch in App SSR
     // Check if action dispatched is STORE_CATEGORIES and act on that
     case STORE_CATEGORIES:
@@ -84,7 +93,7 @@ const reducer = (state = initialState, action) => {
 // Enable Redux dev tools
 const devtools = (process.browser && window.__REDUX_DEVTOOLS_EXTENSION__)
   ? window.__REDUX_DEVTOOLS_EXTENSION__(
-    // { trace: true, traceLimit: 25 }
+    { trace: true, traceLimit: 25 }
   )
   : f => f;
 

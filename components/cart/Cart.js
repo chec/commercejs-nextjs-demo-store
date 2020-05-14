@@ -38,8 +38,8 @@ class Cart extends Component {
   }
 
   /**
-  * Retrieve cart and contents client-side to dispatch to store
-  */
+   * Retrieve cart and contents client-side to dispatch to store
+   */
   componentDidMount() {
     this.props.dispatchRetreiveCart()
   }
