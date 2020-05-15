@@ -10,10 +10,7 @@ class ProductDetail extends Component {
     super(props)
 
     this.state = {
-      selectedOptions: props.product.variants.reduce((acc, variant) => ({
-        ...acc,
-        [variant.id]: variant.options[0].id,
-      }), {}),
+      selectedOptions: [],
     }
 
     this.handleAddToCart = this.handleAddToCart.bind(this);
@@ -21,6 +18,31 @@ class ProductDetail extends Component {
     this.handleSelectOption = this.handleSelectOption.bind(this);
   }
 
+  componentDidMount() {
+    this.setSelectedOptions();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.product || prevProps.product.id !== this.props.product.id) {
+      // Product was changed, reset selected variant options
+      this.setSelectedOptions();
+    }
+  }
+
+  /**
+   * Work out which options should be selected by which variants
+   */
+  setSelectedOptions() {
+    this.setState((state, props) => ({
+      selectedOptions: {
+        // Assign the first option as the selected value for each variant
+        ...props.product.variants.reduce((acc, variant) => ({
+          ...acc,
+          [variant.id]: variant.options[0].id,
+        }), {}),
+      },
+    }));
+  }
 
   /**
    * Handle click to scroll to review section
