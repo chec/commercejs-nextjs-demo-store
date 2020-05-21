@@ -8,7 +8,8 @@
     "start": "next start",
     "deploy": "next build && next export",
     "lint": "eslint components lib pages store utils",
-    "lint:fix": "eslint --fix components lib pages store utils"
+    "lint:fix": "eslint --fix components lib pages store utils",
+    "seed": "chec-seed seeds"
   },
   "dependencies": {
     "@chec/commerce.js": "^2.0.1",
@@ -31,6 +32,7 @@
     "swiper": "^5.2.1"
   },
   "devDependencies": {
+    "@chec/seeder": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "2.x",
     "@typescript-eslint/parser": "2.x",
     "babel-eslint": "10.x",
