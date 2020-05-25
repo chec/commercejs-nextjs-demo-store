@@ -1,6 +1,6 @@
 root = true
 
-[*.{js,jsx,ts,tsx,vue}]
+[*.{js,json,jsx,ts,tsx,vue}]
 indent_style = space
 indent_size = 2
 end_of_line = lf
