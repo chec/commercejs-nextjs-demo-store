@@ -204,17 +204,10 @@ $desktop-1200: 1200px;
 // ----------------------------------
 // Media Query Mixin
 // ----------------------------------
-$xs-width: 400px;
 $sm-width: 576px;
 $md-width: 768px;
 $lg-width: 992px;
 $xl-width: 1200px;
-
-@mixin xs {
-  @media (max-width: #{$xs-width}) {
-    @content;
-  }
-}
 
 @mixin small-xs {
   @media (max-width: #{$sm-width}) {
