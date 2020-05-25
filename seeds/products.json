@@ -1,404 +1,248 @@
 [
-    {
-      "product": {
-        "permalink": "body-oil",
-        "name": "Face & Body Roller",
-        "description": "Enrich your morning and evening beauty ritual and to help reduce the appearance of puffiness and wrinkles",
-        "price": "18.00",
-        "media": {
-            "source": "https://cdn.chec.io/merchants/17851/images/f0c210f496a67c63c3137e6ef18d0fb0a70fd8a35e95127c85ea1|woman-using-facial-roller-3762666.jpg"
-        }
-
-      },
-      "variants": [
-        {
-          "name": "Size",
-          "options": [
-            {
-              "name": "200ml",
-              "price": "0.00"
-            },
-            {
-              "name": "500ml",
-              "price": "34.00"
-            }
-          ]
-        }
-      ],
-      "categories": [
-        {
-          "slug": "body-products",
-          "name": "Body Products"
-        }
-      ],
-      "assets": [
-        {
-          "url": "https://cdn.chec.io/merchants/17851/assets/rt75zhv0VNLzpKFv|face-body-3.jpg",
-          "is_image": true
-        },
-        {
-          "url": "https://cdn.chec.io/merchants/17851/assets/NJS36jqc1IVbGxkY|face-body-2.jpg",
-          "is_image": true
-        },
-        {
-          "url": "https://cdn.chec.io/merchants/17851/images/f0c210f496a67c63c3137e6ef18d0fb0a70fd8a35e95127c85ea1|woman-using-facial-roller-3762666.jpg",
-          "is_image": true
-        }
-      ]
+  {
+    "product": {
+      "name": "Face & Body Roller",
+      "description": "Enrich your morning and evening beauty ritual and to help reduce the appearance of puffiness and wrinkles",
+      "price": "18.00"
     },
-    {
-      "product": {
-        "permalink": "body-kit",
-        "name": "Cure Srub Kit",
-        "description": "Cleanse and rejuvenate your skin with bamboo bristle scrubbing brushes.",
-        "price": "51.00",
-        "media": {
-            "source": "https://cdn.chec.io/merchants/17851/images/4c68d7b6793017b8e07b149c2463a3d6fc6d76e15e95133031fd9|person-holding-brown-wooden-brush-3737606.jpg"
-        }
-      },
-      "variants": [
-        {
-          "name": "Size",
-          "options": [
-            {
-              "name": "100ml kit",
-              "price": "0.00"
-            },
-            {
-              "name": "500ml kit",
-              "price": "100.00"
-            }
-          ]
-        }
-      ],
-      "categories": [
-        {
-          "slug": "body-products",
-          "name": "Body Products"
-        }
-      ],
-      "assets": [
-        {
-          "url": "https://cdn.chec.io/merchants/17851/assets/aZ0bRFjBJfmlCkNA|scrub-3.jpg",
-          "is_image": true
-        },
-        {
-          "url": "https://cdn.chec.io/merchants/17851/assets/HWymH0YMp0k0PbXW|scrub-2.jpg",
-          "is_image": true
-        },
-        {
-          "url": "https://cdn.chec.io/merchants/17851/images/4c68d7b6793017b8e07b149c2463a3d6fc6d76e15e95133031fd9|person-holding-brown-wooden-brush-3737606.jpg",
-          "is_image": true
-        }
-      ]
+    "variants": [
+      {
+        "name": "Size",
+        "options": [
+          {
+            "name": "200ml",
+            "price": "0.00"
+          },
+          {
+            "name": "500ml",
+            "price": "34.00"
+          }
+        ]
+      }
+    ],
+    "categories": [
+      {
+        "slug": "body-products",
+        "name": "Body Products"
+      }
+    ]
+  },
+  {
+    "product": {
+      "name": "Cure Srub Kit",
+      "description": "Cleanse and rejuvenate your skin with bamboo bristle scrubbing brushes.",
+      "price": "51.00"
     },
-    {
-      "product": {
-        "permalink": "skin-milk",
-        "name": "Molecule Body Oil",
-        "description": "For a silky smooth finish, the Molecule Body Oil is a perfect addition for your post shower treatment.",
-        "price": "23.00",
-        "media": {
-            "source": "https://cdn.chec.io/merchants/17851/images/8c4b6f74e887d460cc5a9249eb4161ae8f4448e65e950e078cb3d|person-holding-serum-bottle-3762882.jpg"
-        }
-      },
-      "variants": [
-        {
-          "name": "Size",
-          "options": [
-            {
-              "name": "100ml",
-              "price": "0.00"
-            },
-            {
-              "name": "500ml",
-              "price": "40.00"
-            }
-          ]
-        }
-      ],
-      "categories": [
-        {
-          "slug": "body-products",
-          "name": "Body Products"
-        }
-      ],
-      "assets": [
-        {
-          "url": "https://cdn.chec.io/merchants/17851/assets/Q2BZEwFqMPQWp5Hz|oil-3.jpg",
-          "is_image": true
-        },
-        {
-          "url": "https://cdn.chec.io/merchants/17851/assets/jBWGCP2TdaaN3XMO|oil-2.jpg",
-          "is_image": true
-        },
-        {
-          "url": "https://cdn.chec.io/merchants/17851/images/8c4b6f74e887d460cc5a9249eb4161ae8f4448e65e950e078cb3d|person-holding-serum-bottle-3762882.jpg",
-          "is_image": true
-        }
-      ]
+    "variants": [
+      {
+        "name": "Size",
+        "options": [
+          {
+            "name": "100ml kit",
+            "price": "0.00"
+          },
+          {
+            "name": "500ml kit",
+            "price": "100.00"
+          }
+        ]
+      }
+    ],
+    "categories": [
+      {
+        "slug": "body-products",
+        "name": "Body Products"
+      }
+    ]
+  },
+  {
+    "product": {
+      "name": "Molecule Body Oil",
+      "description": "For a silky smooth finish, the Molecule Body Oil is a perfect addition for your post shower treatment.",
+      "price": "23.00"
     },
-    {
-      "product": {
-        "permalink": "lip-fantastic",
-        "name": "Lip Fantastic",
-        "description": "A limited-edition, nourishing lip gel to top off your look and feel fantastic.",
-        "price": "24.00",
-        "media": {
-            "source": "https://cdn.chec.io/merchants/17851/images/bd32bd535dc7fe85cff93f6b9d27e0bdc0453e785e950a5655528|LipFantastic.jpg"
-        }
-      },
-      "variants": [
-        {
-          "name": "Size",
-          "options": [
-            {
-              "name": "30ml",
-              "price": "0.00"
-            },
-            {
-              "name": "50ml",
-              "price": "35.00"
-            }
-          ]
-        }
-      ],
-      "categories": [
-        {
-          "slug": "facial-products",
-          "name": "Facial Products"
-        }
-      ],
-      "assets": [
-        {
-          "url": "https://cdn.chec.io/merchants/17851/assets/18tWaqssHwN91v5w|lips-3.jpg",
-          "is_image": true
-        },
-        {
-          "url": "https://cdn.chec.io/merchants/17851/assets/s5c8ytZqmuRnZ5eL|lips-2.jpg",
-          "is_image": true
-        },
-        {
-          "url": "https://cdn.chec.io/merchants/17851/images/bd32bd535dc7fe85cff93f6b9d27e0bdc0453e785e950a5655528|LipFantastic.jpg",
-          "is_image": true
-        }
-      ]
+    "variants": [
+      {
+        "name": "Size",
+        "options": [
+          {
+            "name": "100ml",
+            "price": "0.00"
+          },
+          {
+            "name": "500ml",
+            "price": "40.00"
+          }
+        ]
+      }
+    ],
+    "categories": [
+      {
+        "slug": "body-products",
+        "name": "Body Products"
+      }
+    ]
+  },
+  {
+    "product": {
+      "name": "Lip Fantastic",
+      "description": "A limited-edition, nourishing lip gel to top off your look and feel fantastic.",
+      "price": "24.00"
     },
-    {
-      "product": {
-        "permalink": "hair-beauty-bath",
-        "name": "Hair Beauty Bath",
-        "description": "Made for your hair, a bath foam that brings your hair back to life.",
-        "price": "25.00",
-        "media": {
-            "source": "https://cdn.chec.io/merchants/17851/images/39e12fc2423743fdfac3200f2c1fdecf44191e835e9514973ed64|photo-of-bottle-with-pink-liquid-2587175.jpg"
-        }
-      },
-      "variants": [
-        {
-          "name": "Size",
-          "options": [
-            {
-              "name": "100ml",
-              "price": "0.00"
-            },
-            {
-              "name": "300ml",
-              "price": "18.00"
-            }
-          ]
-        }
-      ],
-      "categories": [],
-      "assets": [
-        {
-          "url": "https://cdn.chec.io/merchants/17851/images/39e12fc2423743fdfac3200f2c1fdecf44191e835e9514973ed64|photo-of-bottle-with-pink-liquid-2587175.jpg",
-          "is_image": true
-        }
-      ]
+    "variants": [
+      {
+        "name": "Size",
+        "options": [
+          {
+            "name": "30ml",
+            "price": "0.00"
+          },
+          {
+            "name": "50ml",
+            "price": "35.00"
+          }
+        ]
+      }
+    ],
+    "categories": [
+      {
+        "slug": "facial-products",
+        "name": "Facial Products"
+      }
+    ]
+  },
+  {
+    "product": {
+      "name": "Hair Beauty Bath",
+      "description": "Made for your hair, a bath foam that brings your hair back to life.",
+      "price": "25.00"
     },
-    {
-      "product": {
-        "permalink": "shampoo-conditioner",
-        "name": "Shampoo & Conditioner Set",
-        "description": "Weightless, color safe, and cleansing Verb Ghost shampoo and conditioner set.",
-        "price": "65.00",
-        "media": {
-            "source": "https://cdn.chec.io/merchants/17851/images/b28e709f2c4eea94c4257616dfd96db297ca33715e8165fe2a2f2|9.jpg"
-        }
-      },
-      "variants": [
-        {
-          "name": "Size",
-          "options": [
-            {
-              "name": "500ml kit",
-              "price": "0.00"
-            },
-            {
-              "name": "750ml kit",
-              "price": "25.00"
-            }
-          ]
-        }
-      ],
-      "categories": [
-        {
-          "slug": "hair-products",
-          "name": "Hair Products"
-        }
-      ],
-      "assets": [
-        {
-          "url": "https://cdn.chec.io/merchants/17851/assets/hy8A9Cbf8mzgFvVW|hair-3.jpg",
-          "is_image": true
-        },
-        {
-          "url": "https://cdn.chec.io/merchants/17851/assets/AkEgkNsj91xOb7x6|hair-2.jpg",
-          "is_image": true
-        },
-        {
-          "url": "https://cdn.chec.io/merchants/17851/images/b28e709f2c4eea94c4257616dfd96db297ca33715e8165fe2a2f2|9.jpg",
-          "is_image": true
-        }
-      ]
+    "variants": [
+      {
+        "name": "Size",
+        "options": [
+          {
+            "name": "100ml",
+            "price": "0.00"
+          },
+          {
+            "name": "300ml",
+            "price": "18.00"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "product": {
+      "name": "Shampoo & Conditioner Set",
+      "description": "Weightless, color safe, and cleansing Verb Ghost shampoo and conditioner set.",
+      "price": "65.00"
     },
-    {
-      "product": {
-        "permalink": "hair-oil",
-        "name": "Rose Hair & Body Oil",
-        "description": "A multitasking oil for hair and body that’s perfect for those on the go.",
-        "price": "38.00",
-        "media": {
-            "source": "https://cdn.chec.io/merchants/17851/images/8efc6b1334a46a91d827cd385de0342d7eb2dbb95e816553ed396|8.jpg"
-        }
-      },
-      "variants": [
-        {
-          "name": "Size",
-          "options": [
-            {
-              "name": "50ml",
-              "price": "0.00"
-            },
-            {
-              "name": "75ml",
-              "price": "60.00"
-            }
-          ]
-        }
-      ],
-      "categories": [
-        {
-          "slug": "hair-products",
-          "name": "Hair Products"
-        }
-      ],
-      "assets": [
-        {
-          "url": "https://cdn.chec.io/merchants/17851/assets/X4TVoWC4fyrpslvx|hair-3.jpg",
-          "is_image": true
-        },
-        {
-          "url": "https://cdn.chec.io/merchants/17851/assets/4LWvRhLiDUFXr4Iw|hair-2.jpg",
-          "is_image": true
-        },
-        {
-          "url": "https://cdn.chec.io/merchants/17851/images/8efc6b1334a46a91d827cd385de0342d7eb2dbb95e816553ed396|8.jpg",
-          "is_image": true
-        }
-      ]
+    "variants": [
+      {
+        "name": "Size",
+        "options": [
+          {
+            "name": "500ml kit",
+            "price": "0.00"
+          },
+          {
+            "name": "750ml kit",
+            "price": "25.00"
+          }
+        ]
+      }
+    ],
+    "categories": [
+      {
+        "slug": "hair-products",
+        "name": "Hair Products"
+      }
+    ]
+  },
+  {
+    "product": {
+      "name": "Rose Hair & Body Oil",
+      "description": "A multitasking oil for hair and body that’s perfect for those on the go.",
+      "price": "38.00"
     },
-    {
-      "product": {
-        "permalink": "complexion-cream",
-        "name": "Complexion Cream",
-        "description": "Anti-aging complexion cream for medium to dry skin. Nourish your face with a natural vitamin burst for that perfectly balanced glow.",
-        "price": "32.00",
-        "media": {
-            "source": "https://cdn.chec.io/merchants/17851/images/90f8a8d6542f4aab1725328b3d6baed1e5e152485e95119356b07|woman-with-pink-lipstick-applying-facial-cream-3762877.jpg"
-        }
-      },
-      "variants": [
-        {
-          "name": "Size",
-          "options": [
-            {
-              "name": "100ml",
-              "price": "0.00"
-            },
-            {
-              "name": "500ml",
-              "price": "57.00"
-            }
-          ]
-        }
-      ],
-      "categories": [
-        {
-          "slug": "facial-products",
-          "name": "Facial Products"
-        }
-      ],
-      "assets": [
-        {
-          "url": "https://cdn.chec.io/merchants/17851/assets/buyMHs581egwbliD|cream-3.jpg",
-          "is_image": true
-        },
-        {
-          "url": "https://cdn.chec.io/merchants/17851/assets/f0w74xA5ryVMxbhd|cream-2.jpg",
-          "is_image": true
-        },
-        {
-          "url": "https://cdn.chec.io/merchants/17851/images/90f8a8d6542f4aab1725328b3d6baed1e5e152485e95119356b07|woman-with-pink-lipstick-applying-facial-cream-3762877.jpg",
-          "is_image": true
-        }
-      ]
+    "variants": [
+      {
+        "name": "Size",
+        "options": [
+          {
+            "name": "50ml",
+            "price": "0.00"
+          },
+          {
+            "name": "75ml",
+            "price": "60.00"
+          }
+        ]
+      }
+    ],
+    "categories": [
+      {
+        "slug": "hair-products",
+        "name": "Hair Products"
+      }
+    ]
+  },
+  {
+    "product": {
+      "name": "Complexion Cream",
+      "description": "Anti-aging complexion cream for medium to dry skin. Nourish your face with a natural vitamin burst for that perfectly balanced glow.",
+      "price": "32.00"
     },
-    {
-      "product": {
-        "permalink": "pore-cleanser",
-        "name": "Eye Purity Gels",
-        "description": "Treat your skin with active pore enzymes that replenish sun damaged skin.",
-        "price": "18.00",
-        "media": {
-            "source": "https://cdn.chec.io/merchants/17851/images/45feba5965f4048af3c94ddffd7d5d6416b1be6d5e950c190eaf9|woman-with-red-under-eye-mask-3762477.jpg"
-        }
-      },
-      "variants": [
-        {
-          "name": "Size",
-          "options": [
-            {
-              "name": "100ml",
-              "price": "0.00"
-            },
-            {
-              "name": "500ml",
-              "price": "32.00"
-            }
-          ]
-        }
-      ],
-      "categories": [
-        {
-          "slug": "facial-products",
-          "name": "Facial Products"
-        }
-      ],
-      "assets": [
-        {
-          "url": "https://cdn.chec.io/merchants/17851/assets/U2mgBEG8RC86k6AI|gel-3.jpg",
-          "is_image": true
-        },
-        {
-          "url": "https://cdn.chec.io/merchants/17851/assets/cNc2ELW6nNTxRu9q|gel-2.jpg",
-          "is_image": true
-        },
-        {
-          "url": "https://cdn.chec.io/merchants/17851/images/45feba5965f4048af3c94ddffd7d5d6416b1be6d5e950c190eaf9|woman-with-red-under-eye-mask-3762477.jpg",
-          "is_image": true
-        }
-      ]
-    }
-  ]
+    "variants": [
+      {
+        "name": "Size",
+        "options": [
+          {
+            "name": "100ml",
+            "price": "0.00"
+          },
+          {
+            "name": "500ml",
+            "price": "57.00"
+          }
+        ]
+      }
+    ],
+    "categories": [
+      {
+        "slug": "facial-products",
+        "name": "Facial Products"
+      }
+    ]
+  },
+  {
+    "product": {
+      "name": "Eye Purity Gels",
+      "description": "Treat your skin with active pore enzymes that replenish sun damaged skin.",
+      "price": "18.00"
+    },
+    "variants": [
+      {
+        "name": "Size",
+        "options": [
+          {
+            "name": "100ml",
+            "price": "0.00"
+          },
+          {
+            "name": "500ml",
+            "price": "32.00"
+          }
+        ]
+      }
+    ],
+    "categories": [
+      {
+        "slug": "facial-products",
+        "name": "Facial Products"
+      }
+    ]
+  }
+]

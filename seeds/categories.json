@@ -1,20 +1,14 @@
 [
-    {
-      "category": {
-        "slug": "facial-products",
-        "name": "Facial Products"
-      }  
-    },
-    {
-      "category": {
-        "slug": "hair-products",
-        "name": "Hair Products"
-      }    
-    },
-    {
-      "category": {
-        "slug": "body-products",
-        "name": "Body Products"
-      }    
-    }
+  {
+    "slug": "facial-products",
+    "name": "Facial Products"
+  },
+  {
+    "slug": "hair-products",
+    "name": "Hair Products"
+  },
+  {
+    "slug": "body-products",
+    "name": "Body Products"
+  }
 ]
