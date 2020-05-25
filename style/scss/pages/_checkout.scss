@@ -9,9 +9,5 @@
   .checkout-summary {
     position: sticky;
     top: 15%;
-
-    @include md-max {
-      width: 100%;
-    }
   }
 }

@@ -8,6 +8,10 @@
     display: block;
   }
 
+  @include small-xs {
+    padding: 0 1.5rem;
+  }
+
   .product-sidebar {
     display: flex;
     top: 6.5rem;
@@ -38,6 +42,8 @@
 
     @include small-xs {
       padding: 1.5rem 0 0;
+      min-width: 15rem;
+      align-self: flex-start;
     }
   }
 }

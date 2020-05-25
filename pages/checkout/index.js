@@ -417,7 +417,7 @@ class CheckoutPage extends Component {
               }
             </div>
 
-            <div className="col-12 col-md-5 offset-md-1">
+            <div className="col-12 col-lg-5 col-md-10 offset-md-1">
               <div className="bg-brand200 p-5 checkout-summary">
                 <div className="borderbottom font-size-subheader border-color-gray400 pb-2 font-weight-medium">
                   Your order
@@ -449,16 +449,16 @@ class CheckoutPage extends Component {
                     )
                   })}
                 </div>
-                <form className="d-flex py-3 borderbottom border-color-gray400">
+                <form className="row d-sm-inline-block py-3 borderbottom border-color-gray400">
                   <input
                     name="discountCode"
                     onChange={this.handleFormChanges}
                     value={this.state.discountCode}
                     placeholder="Gift card or discount code"
-                    className="mr-2 flex-grow-1"
+                    className="mr-2 col"
                   />
                   <button
-                    className="font-color-white border-none font-weight-medium px-4"
+                    className="font-color-white border-none font-weight-medium px-4 col-auto"
                     disable={!this.props.checkout}
                     onClick={this.handleDiscountChange}
                   >
