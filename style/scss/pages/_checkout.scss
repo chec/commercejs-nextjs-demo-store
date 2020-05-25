@@ -9,30 +9,5 @@
   .checkout-summary {
     position: sticky;
     top: 15%;
-
-    @include md {
-      width: 100%;
-    }
-
-    .discount {
-      display: flex;
-    }
-
-    @include xs {
-
-      .discount {
-        display: inline-block;
-
-        input {
-          width: 100%;
-        }
-
-        button {
-          width: 100%;
-          height: 3.5rem;
-          margin-top: 16px;
-        }
-      }
-    }
   }
 }
