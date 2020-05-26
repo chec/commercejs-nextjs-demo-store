@@ -449,7 +449,7 @@ class CheckoutPage extends Component {
                     )
                   })}
                 </div>
-                <form className="row d-sm-inline-block py-3 borderbottom border-color-gray400">
+                <form className="row py-3 borderbottom border-color-gray400">
                   <input
                     name="discountCode"
                     onChange={this.handleFormChanges}
