@@ -1007,10 +1007,10 @@
   dependencies:
     axios "^0.19.0"
 
-"@chec/seeder@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@chec/seeder/-/seeder-1.0.0.tgz#a426e2519863a574f564c31ce5b73336db28e6e5"
-  integrity sha512-lNyurIXTTPm43h8dwMmOw2iueApjTA9gEsZQd1wR6wL1bPZBji53q8HH2bz3iFlilKszXNLVV4URHFFJnYukSg==
+"@chec/seeder@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@chec/seeder/-/seeder-1.1.0.tgz#4d1accb620eb2ca073696f07c4fcd8e92a03dff7"
+  integrity sha512-0kpYY73E3JP7LhydKtcoNjH1KUZN0k1V3G+zg0twVTKqfyQ5swFmv2gpPHzvlSeJEz1QZ1+ItjBwvw+w6uJ/Zw==
   dependencies:
     chalk "^3.0.0"
     dotenv "^8.2.0"
