@@ -41,7 +41,7 @@ The one-click deploy allows you to connect Netlify to your GitHub account to clo
 
  [![Deploy to Netlify button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/chec/commercejs-nextjs-demo-store)
 
-Please note that the site deploy will first fail as we have yet to enter in the environment variables for your Netlify site. Configure your site by going under the **Build and Deploy** settings then **Environment** to enter the API key. The value is automatically encrypted and stored in Netlify’s system. The key input is **CHEC_PUBLIC_KEY** and the value input is the Public Key. Please note that for the purpose of getting you up and running with a live deploy preview of the demo store, we have provided you with the public_key from our demo merchant account. Access this key (here)[https://github.com/chec/commercejs-nextjs-demo-store/blob/master/.env.example] and copy over the `CHEC_PUBLIC_KEY` value.
+Please note that the site deploy will first fail as we have yet to enter in the environment variables for your Netlify site. Configure your site by going under the **Build and Deploy** settings then **Environment** to enter the API key. The value is automatically encrypted and stored in Netlify’s system. The key input is **CHEC_PUBLIC_KEY** and the value input is the Public Key. Please note that for the purpose of getting you up and running with a live deploy preview of the demo store, we have provided you with the public_key from our demo merchant account. Access this key [here](https://github.com/chec/commercejs-nextjs-demo-store/blob/master/.env.example) and copy over the `CHEC_PUBLIC_KEY` value.
 
 ## Manual setup and Netlify deployment
 
