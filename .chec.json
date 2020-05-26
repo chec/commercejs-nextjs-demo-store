@@ -1,6 +1,6 @@
 {
     "npm": "yarn",
-    "buildScripts": ["seed", "start"],
+    "buildScripts": ["seed", "dev"],
     "dotenv": {
         "NODE_ENV": "development",
         "CHEC_PUBLIC_KEY": "%chec_pkey%",
