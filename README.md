@@ -23,7 +23,7 @@ For a full detailed tutorial on building this JAMstack eCommerce application, pl
 
 ## Setup
 
-**STEP 1.** Create a Chec account 
+### Create a Chec account. 
 
 Now that you’ve installed Chec CLI globally, you will be able to access the list of `chec [COMMANDS]`, one of which is registering for a Chec account. Let’s go ahead and get that set up!
 
@@ -32,46 +32,20 @@ Now that you’ve installed Chec CLI globally, you will be able to access the li
 chec register
 ```
 
-Follow the rest of the walk-through to set up your merchant details. Alternatively, you can go here to register for a Chec account. 
-
-
-**STEP 2.** Upload the data necessary to power your Chec store
-
-You can optionally skip the following steps for now, until after the deployment. Otherwise, start with uploading the below data: 
-
-
-1. Shipping zone (at least one)
-
-- Sign into your Chec account once you’ve registered and go into the setup view in the sidebar. Navigate into the shipping tab and add a shipping zone. 
-
-
-2. Categories (at least three)
-
-- Under Products in the sidebar, click to navigate into the Categories view and fill in Category Name and Permalink/Slug. For the sake of getting the deploy up and running before customizing your data later on, please add in the categories: Body Products, Hair Products, and Facial Products. 
-
-
-3. Products (at least three) with:
-
-  - Product name
-  - Product description
-  - Price
-  - Enable shipping option
-  - Assign product to a category
-  - Custom permalink
-  - 1 variant with at least 2 options
+Follow the rest of the walk-through to set up your merchant details. Alternatively, you can go [here](https://authorize.chec.io/signup) to register for a Chec account. 
 
 
 ## One-click Deploy with Netlify (recommended)
 
-The one-click deploy allows you to connect Netlify to your GitHub account to clone the `commercejs-nextjs-demo-store` repository and deploy it automatically. Be sure to go to Netlify and sign up for an account before clicking the deploy button.
+The one-click deploy allows you to connect Netlify to your GitHub account to clone the `commercejs-nextjs-demo-store` repository and deploy it automatically. Be sure to go to [Netlify](https://app.netlify.com/signup) and sign up for an account before clicking the deploy button.
 
  [![Deploy to Netlify button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/chec/commercejs-nextjs-demo-store)
 
-Please note that the site deploy will first fail as your have yet to enter in your environment variables for your Netlify site. Configure your site by going under the Build and Deploy settings then scroll down to Environment to enter your API key. You can access your Chec public key here as explained in the manual setup below. 
+Please note that the site deploy will first fail as we have yet to enter in the environment variables for your Netlify site. Configure your site by going under the **Build and Deploy** settings then **Environment** to enter the API key. The value is automatically encrypted and stored in Netlify’s system. The key input is **CHEC_PUBLIC_KEY** and the value input is the Public Key. Please note that for the purpose of getting you up and running with a live deploy preview of the demo store, we have provided you with the public_key from our demo merchant account. Access this key (here)[https://github.com/chec/commercejs-nextjs-demo-store/blob/master/.env.example] and copy over the `CHEC_PUBLIC_KEY` value.
 
 ## Manual setup and Netlify deployment
 
-Manual setup involves cloning the repo into your local environment and deploying to Netlify.
+Manual setup involves cloning the repo into your local environment, seeding the provided sample data into your Chec account and deploying to Netlify.
 
 **STEP 1.** Clone the repo
 
@@ -90,33 +64,45 @@ yarn
 
 **STEP 3.** Set up your environment variables
 
-Replace the sample .env.example dotenv file at the root of the project to store your Chec public_key.
+Replace the sample `.env.example` dotenv file at the root of the project to store your Chec public_key as well as your secret_key.
 
 ```bash
-# Copy from source file to destination file
+# Copy from source file to destination file .env
 cp .env.example .env
 ```
 
-You can access your API key under in your Chec dashboard setup, then navigate to the Develop tab to copy your Public Key to your `.env` file.
+You can access your API key under in your Chec dashboard setup, then navigate to the Develop tab to copy your Public Key and Secret Key. Replace the provided `CHEC_PUBLIC_KEY` with your own and fill in your `CHEC_SECRET_KEY` in the `.env` file. The secret key is necessary for the seed script to have the proper permission to seed the sample data in `/seeds` into your Chec account. Remove the secret key once the data is seeded.
+
 ```js
 // .env
 
-// Replace with your Public API Key
-CHEC_PUBLIC_KEY=your_public_API_key_here
+# Fill in your public key and secret key
+CHEC_PUBLIC_KEY=
+CHEC_API_URL=https://api.chec.io
+# Secret key is used with chec/seeder to access your Chec account to seed it with sample data
+CHEC_SECRET_KEY=
+NODE_ENV=
 ```
 
 This file is meant to not be committed to source control and also will be hidden in file browsers. Be sure to add your `.env` containing your API key to `.gitignore`. Lastly, commit your local repository to git.
 
-**STEP 4.** Run your development environment on http://localhost:3000.
+**STEP 4.** Seed the data necessary to power your Chec store and start your development environment
 ```bash
+# Seed data in /seeds into your Chec account
+yarn seed
+# Run your development environment on http://localhost:3000
 yarn dev
 ```
 
+Your site should now be populated with the sample data!
+
 **STEP 5.** Make any necessary changes you need and push the code to a repository on Github or your choice of platform.
 
-**STEP 6.** Deploy
+**STEP 6.** Deploy your site
 
 Be sure to sign up for a Netlify account and log in to it. Navigate to “New site from Git” and give access to select your repo. Your build settings is automatically filled out for your from the `netlify.toml` in the template. Now go ahead and click the "deploy site" to see your live site!
+
+Please note that the site deploy will first fail as we have yet to enter in your environment variables for your Netlify site. Configure your site by going under the **Build and Deploy** settings then **Environment** to enter your API key. The value is automatically encrypted and stored in Netlify’s system. The *key* input is **CHEC_PUBLIC_KEY** and *value* input is your **Public Key**. You can access your Chec public key as explained in the manual setup above. 
 
 ## 🥞 Stack
 
@@ -127,9 +113,12 @@ Be sure to sign up for a Netlify account and log in to it. Navigate to “New si
 
 ## Customization and Extendability
 
-- Add new features
-- Customize styling
-- A/B test checkout designs
-- Extend on new features
-- Integrate other backend tools like CMS
-- Fetch reviews from other APIs
+- Add shipping zones and enable shipping options in each product
+- Adding new features or extending existing features
+- Customizing the styling
+    - All global styles are done using SASS and Bootstrap
+- A/B testing unique checkout designs and flow
+- Integrating other backend tools like Content Management Systems, Customer Support, Fulfillment services, and more.
+- Fetching real client reviews from reviews APIs
+- Adding search functionality
+- Leveraging webhooks to automate post checkout actions
