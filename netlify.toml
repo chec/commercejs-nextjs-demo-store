@@ -6,6 +6,4 @@
   package = "netlify-plugin-onboarding"
 
 [template.environment]
-  CHEC_PUBLIC_KEY = "Your Chec public key (under setup/developer)"
-  # For example, if you need a GitHub username:
-  GITHUB_USERNAME = ""
+  CHEC_PUBLIC_KEY = "Chec Public Key (under setup/developer)"
