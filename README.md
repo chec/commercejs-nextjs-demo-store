@@ -2,7 +2,7 @@
 
 A high-fidelity fully-fledged eCommerce demo store built using the Commerce.js SDK and Next.js with live deployment to Netlify.
 
-[![Chec see live demo button](https://cdn.chec.io/email/assets/marketing/chec-live-demo-btn.svg)](https://commercejs-demo-store.netlify.app)
+[![Chec see live demo button](https://cdn.chec.io/email/assets/marketing/chec-demo-btn.svg)](https://commercejs-demo-store.netlify.app)
 
 **Note**
 - This app is built using Commerce.js v2 SDK
