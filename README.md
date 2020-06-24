@@ -2,7 +2,7 @@
 
 A high-fidelity fully-fledged eCommerce demo store built using the Commerce.js SDK and Next.js with live deployment to Netlify.
 
-Checkout the live demo [here](https://commercejs-demo-store.netlify.app)
+[![Chec see live demo button](https://cdn.chec.io/email/assets/marketing/chec-live-demo-btn.svg)](https://commercejs-demo-store.netlify.app)
 
 **Note**
 - This app is built using Commerce.js v2 SDK
@@ -14,7 +14,7 @@ This README will guide you in getting up and running with a fully-fledged eComme
 For a full detailed tutorial on building this JAMstack eCommerce application, please head on over [here](tutorial-url).
 
 
-## Prequisites
+## Prerequisites
 
 - IDE or code editor of your choice
 - Node (v8.2.0 or higher)
@@ -41,30 +41,25 @@ The one-click deploy allows you to connect Netlify to your GitHub account to clo
 
  [![Deploy to Netlify button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/chec/commercejs-nextjs-demo-store)
 
-Please note that the site deploy will first fail as we have yet to enter in the environment variables for your Netlify site. Configure your site by going under the **Build and Deploy** settings then **Environment** to enter the API key. The value is automatically encrypted and stored in Netlify’s system. The key input is **CHEC_PUBLIC_KEY** and the value input is the Public Key. Please note that for the purpose of getting you up and running with a live deploy preview of the demo store, we have provided you with the public_key from our demo merchant account. Access this key [here](https://github.com/chec/commercejs-nextjs-demo-store/blob/master/.env.example) and copy over the `CHEC_PUBLIC_KEY` value.
+By clicking the above button, you will be navigated to the Netlify’s direct deploy page with the project’s repository passed as parameters in the url. Click the **Connect to GitHub** button, name your repository and enter in this [public key](https://github.com/chec/commercejs-nextjs-demo-store/blob/master/.env.example#L2) in the **Chec Public Key** input. Please note that for the purpose of getting you up and running with a live deploy preview of the demo store, we provided you with the Public Key from our demo merchant account. Now, save & deploy your site.
+
 
 ## Manual setup and Netlify deployment
 
 Manual setup involves cloning the repo into your local environment, seeding the provided sample data into your Chec account and deploying to Netlify.
 
-**STEP 1.** Clone the repo
+**STEP 1.** Clone the repo and install dependencies
 
 ```bash
 # Clone the repository locally, optionally rename the repo, change into the directory
 git clone https://github.com/chec/commercejs-nextjs-demo-store.git chec-store 
-cd chec-store
+# Change into the directory and install dependencies
+cd chec-store && yarn
 ```
 
-**STEP 2.** Install dependencies
+**STEP 2.** Set up your environment variables
 
-```bash
-# Install dependencies included in `package.json`.
-yarn
-```
-
-**STEP 3.** Set up your environment variables
-
-Replace the sample `.env.example` dotenv file at the root of the project to store your Chec public_key as well as your secret_key.
+Replace the sample `.env.example` dotenv file at the root of the project to store your Chec `public_key` as well as your `secret_key`.
 
 ```bash
 # Copy from source file to destination file .env
@@ -84,9 +79,9 @@ CHEC_SECRET_KEY=
 NODE_ENV=
 ```
 
-This file is meant to not be committed to source control and also will be hidden in file browsers. Be sure to add your `.env` containing your API key to `.gitignore`. Lastly, commit your local repository to git.
+This file is meant to not be committed to source control and also will be hidden in file browsers.
 
-**STEP 4.** Seed the data necessary to power your Chec store and start your development environment
+**STEP 3.** Seed the data necessary to power your Chec store and start your development environment
 ```bash
 # Seed data in /seeds into your Chec account
 yarn seed
@@ -94,15 +89,15 @@ yarn seed
 yarn dev
 ```
 
-Your site should now be populated with the sample data!
+Now head on over to http://localhost:3000 after starting your development, your site should now be populated with the sample data!Your site should now be populated with the sample data!
 
 **STEP 5.** Make any necessary changes you need and push the code to a repository on Github or your choice of platform.
 
 **STEP 6.** Deploy your site
 
-Be sure to sign up for a Netlify account and log in to it. Navigate to “New site from Git” and give access to select your repo. Your build settings is automatically filled out for your from the `netlify.toml` in the template. Now go ahead and click the "deploy site" to see your live site!
+Be sure to sign up for a Netlify account and log in to it. Click the **New site from Git** button and give access to select your repo. Your build settings are automatically filled out for your from the `netlify.toml` in the template. To enter your environment variables, click **Show advanced** then **New variable** and fill in the key input as CHEC_PUBLIC_KEY and the value input with your Public Key. You can access your API key in your Chec dashboard under Setup, then navigate to the Developer tab to copy your Public Key
 
-Please note that the site deploy will first fail as we have yet to enter in your environment variables for your Netlify site. Configure your site by going under the **Build and Deploy** settings then **Environment** to enter your API key. The value is automatically encrypted and stored in Netlify’s system. The *key* input is **CHEC_PUBLIC_KEY** and *value* input is your **Public Key**. You can access your Chec public key as explained in the manual setup above. 
+Now go ahead and click the "deploy site" to see your live site!
 
 ## 🥞 Stack
 
@@ -114,11 +109,10 @@ Please note that the site deploy will first fail as we have yet to enter in your
 ## Customization and Extendability
 
 - Add shipping zones and enable shipping options in each product
-- Adding new features or extending existing features
 - Customizing the styling
     - All global styles are done using SASS and Bootstrap
 - A/B testing unique checkout designs and flow
 - Integrating other backend tools like Content Management Systems, Customer Support, Fulfillment services, and more.
 - Fetching real client reviews from reviews APIs
 - Adding search functionality
-- Leveraging webhooks to automate post checkout actions
+- Leveraging [webhooks](https://commercejs.com/blog/webhooks-pizza-and-order-notifications-via-twilio) to automate post checkout actions
