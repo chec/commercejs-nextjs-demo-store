@@ -1,5 +1,7 @@
 # Demo Store with Commerce.js and Next.js 🛍️💳
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/157bb2e2-611e-4bbd-9a59-c876f8c3c58a/deploy-status)](https://app.netlify.com/sites/commercejs-demo-store/deploys)
+
 A high-fidelity fully-fledged eCommerce demo store built using the Commerce.js SDK and Next.js with live deployment to Netlify.
 
 [![Chec see live demo button](https://cdn.chec.io/email/assets/marketing/chec-demo-btn.svg)](https://commercejs-demo-store.netlify.app)
