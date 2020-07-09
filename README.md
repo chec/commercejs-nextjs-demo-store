@@ -13,7 +13,7 @@ A high-fidelity fully-fledged eCommerce demo store built using the Commerce.js S
 
 This README will guide you in getting up and running with a fully-fledged eCommerce template. We have configured this template for you to one-click deploy directly to Netlify. Alternatively, you can manually deploy to your choice of hosting platform.
 
-For a full detailed tutorial on building this JAMstack eCommerce application, please head on over [here](tutorial-url).
+For a full detailed tutorial on building this JAMstack eCommerce application, please head on over [here](https://www.netlify.com/blog/2020/07/09/create-a-fully-fledged-jamstack-commerce-store-with-commerce.js-and-netlify/).
 
 
 ## Prerequisites
