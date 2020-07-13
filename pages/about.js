@@ -108,7 +108,11 @@ const About = () => (
               Read the full technical tutorial here if you want to get into the nitty gritty!
             </h4>
             <div className="mt-3">
-              <a className="px-5 py-3 flex-grow-1 font-color-white about-blog" href="https://commercejs.com/blog" target="_blank">
+              <a
+                className="px-5 py-3 flex-grow-1 font-color-white about-blog"
+                href="https://www.netlify.com/blog/2020/07/09/create-a-fully-fledged-jamstack-commerce-store-with-commerce.js-and-netlify/"
+                target="_blank"
+              >
                 Read Blog
               </a>
             </div>
