@@ -3,7 +3,7 @@ import React from 'react';
 import Lottie from 'react-lottie';
 import animationData from '../../lotties/checkout.json';
 
-export default function Loading() {
+export default function Loader() {
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -14,7 +14,7 @@ export default function Loading() {
   };
 
   return (
-    <div class="">
+    <div class="loader-animation">
       <Lottie
         options={defaultOptions}
         height={500}
