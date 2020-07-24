@@ -18,6 +18,8 @@ import {
 import { connect } from 'react-redux';
 import { withRouter } from 'next/router';
 
+import Loader from '../../components/checkout/Loader';
+
 class CheckoutPage extends Component {
   constructor(props) {
     super(props);
@@ -60,6 +62,8 @@ class CheckoutPage extends Component {
       discountCode: 'CUSTOMCOMMERCE',
 
       selectedGateway: 'test_gateway',
+
+      loading: false,
     }
 
     this.captureOrder = this.captureOrder.bind(this);
@@ -196,6 +200,7 @@ class CheckoutPage extends Component {
         'shipping[name]': null,
         'shipping[street]': null,
       },
+      loading: true,
     });
 
     // set up line_items object and inner variant object for order object below
@@ -319,6 +324,11 @@ class CheckoutPage extends Component {
     const { checkout, shippingOptions } = this.props;
     const { line_items = [] } = checkout;
     const selectedShippingOption = shippingOptions.find(({id}) => id === this.state['fulfillment[shipping_method]']);
+
+    if (this.state.loading) {
+      return <Loader />;
+    }
+
     return (
       <Root>
         <Head>
@@ -326,6 +336,7 @@ class CheckoutPage extends Component {
         </Head>
 
         <div className="custom-container py-5 my-4 my-sm-5">
+
           {/* Breadcrums Mobile */}
           <div
             className="d-flex d-sm-none px-4 py-3 borderbottom border-color-gray400 justify-content-center"
@@ -336,7 +347,7 @@ class CheckoutPage extends Component {
                 Cart
               </div>
             </Link>
-            <img src="/icon/arrow-right.svg" className="w-16 mx-1" />
+            <img src="/icon/arrow-right.svg" className="w-16 mx-1" alt="Arrow icon"/>
             <div className="font-size-caption cursor-pointer">
               Checkout
             </div>
@@ -352,7 +363,7 @@ class CheckoutPage extends Component {
                     Cart
                   </div>
                 </Link>
-                <img src="/icon/arrow-right.svg" className="w-16 mx-1" />
+                <img src="/icon/arrow-right.svg" className="w-16 mx-1" alt="Arrow icon"/>
                 <div className="font-size-caption font-weight-bold cursor-pointer">
                   Checkout
                 </div>
@@ -431,7 +442,7 @@ class CheckoutPage extends Component {
                         className="d-flex mb-2"
                       >
                         { (_item && _item.image)
-                          ? (<img className="checkout__line-item-image mr-2" src={_item.image} />)
+                          ? (<img className="checkout__line-item-image mr-2" src={_item.image} alt={_item.product_name}/>)
                           : ''
                         }
                         <div className="d-flex flex-grow-1">

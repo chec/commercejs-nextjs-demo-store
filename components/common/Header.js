@@ -4,6 +4,8 @@ import Cart from '../cart/Cart';
 import { Transition } from 'react-transition-group';
 import { connect } from 'react-redux'
 
+import Animation from '../cart/Animation';
+
 const duration = 300;
 
 const defaultStyle = {
@@ -40,7 +42,8 @@ class Header extends Component {
 
     this.state = {
       showMobileMenu: false,
-      showCart: false
+      showCart: false,
+      playAddToCartAnimation: false,
     };
 
     this.header = React.createRef();
@@ -49,14 +52,22 @@ class Header extends Component {
     this.handleScroll = this.handleScroll.bind(this);
     this.toggleCart = this.toggleCart.bind(this);
     this.toggleMobileMenu = this.toggleMobileMenu.bind(this);
+    this.toggleAddToCartAnimation = this.toggleAddToCartAnimation.bind(this);
+    this.handleAddToCartToggle = this.handleAddToCartToggle.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener('Commercejs.Cart.Item.Added', () => {
+      this.handleAddToCartToggle();
+    })
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('Commercejs.Cart.Item.Added', () => {
+      this.handleAddToCartToggle();
+    })
   }
 
   toggleCart() {
@@ -93,9 +104,29 @@ class Header extends Component {
     }
   }
 
+  /**
+   * Toggle add to cart animation to true
+   */
+  toggleAddToCartAnimation() {
+    const { playAddToCartAnimation } = this.state;
+
+    this.setState({ playAddToCartAnimation: !playAddToCartAnimation });
+  }
+
+  /**
+   * Call toggle of add to cart animation and set time out to false
+   */
+  handleAddToCartToggle() {
+    this.toggleAddToCartAnimation();
+    setTimeout(() => {
+      this.toggleAddToCartAnimation();
+    }, 3000)
+  }
+
   render() {
     const { showMobileMenu, showCart } = this.state;
     const { transparent, cart } = this.props;
+
 
     return (
       <header className="position-fixed top-0 left-0 right-0 font-weight-semibold no-print">
@@ -108,7 +139,7 @@ class Header extends Component {
         >
           <div className="d-none d-sm-flex">
             <Link href="/collection">
-              <a className="mr-4 font-color-black">Shop</a>
+              <a href="/collection" className="mr-4 font-color-black">Shop</a>
             </Link>
             <Link href="/about">
               <a href="/about" className="font-color-black">
@@ -121,12 +152,14 @@ class Header extends Component {
               src={`/icon/${showMobileMenu ? 'cross' : 'menu'}.svg`}
               onClick={this.toggleMobileMenu}
               className="w-32 mr-1 d-block d-sm-none"
+              alt="Menu icon"
             />
             <Link href="/">
               <a>
                 <img
                   src="/images/commerce.svg"
                   className="logo cursor-pointer"
+                  alt="Logo"
                 />
               </a>
             </Link>
@@ -136,7 +169,7 @@ class Header extends Component {
               className="position-relative cursor-pointer"
               onClick={this.toggleCart}
             >
-              <img src="/icon/cart.svg" className="w-32" />
+              <Animation isStopped={ this.state.playAddToCartAnimation } />
               <div className="cart-count position-absolute font-size-tiny font-weight-bold">
                 {cart.total_items}
               </div>
