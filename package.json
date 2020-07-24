@@ -25,6 +25,7 @@
     "react-collapse": "^5.0.1",
     "react-dom": "16.12.0",
     "react-id-swiper": "^2.4.0",
+    "react-lottie": "^1.2.3",
     "react-redux": "^7.2.0",
     "react-scroll": "^1.7.16",
     "react-transition-group": "^4.3.0",
