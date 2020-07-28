@@ -294,6 +294,9 @@ class CheckoutPage extends Component {
           alert(errorToAlert);
         }
       })
+      .finally(() => {
+        this.setState({ loading: false });
+      })
   }
 
   /**
