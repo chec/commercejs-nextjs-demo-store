@@ -45,6 +45,8 @@ The one-click deploy allows you to connect Netlify to your GitHub account to clo
 
 By clicking the above button, you will be navigated to the Netlify’s direct deploy page with the project’s repository passed as parameters in the url. Click the **Connect to GitHub** button, name your repository and enter in this [public key](https://github.com/chec/commercejs-nextjs-demo-store/blob/master/.env.example#L2) in the **Chec Public Key** input. Please note that for the purpose of getting you up and running with a live deploy preview of the demo store, we provided you with the Public Key from our demo merchant account. Now, save & deploy your site.
 
+*Please note the initial build will fail if you enter in your public key instead of the provided demo merchant [key](https://github.com/chec/commercejs-nextjs-demo-store/blob/master/.env.example#L2). The one-click deploy is meant for presentation purposes to spin up a quick deploy. Using your merchant account would mean you would need to have the appropriate data such as multiple assets and categories associated with your products. If you would like to use your merchant account, please follow the manual setup steps below.*
+
 
 ## Manual setup and Netlify deployment
 
@@ -92,6 +94,8 @@ yarn dev
 ```
 
 Now head on over to http://localhost:3000 after starting your development, your site should now be populated with the sample data!Your site should now be populated with the sample data!
+
+If you are replacing the sample products, be sure to add new categories in the dashboard, associate your products with them and lastly replace the `slug` and `link` values [here](https://github.com/chec/commercejs-nextjs-demo-store/blob/master/lib/collections.js).
 
 **STEP 5.** Make any necessary changes you need and push the code to a repository on Github or your choice of platform.
 
