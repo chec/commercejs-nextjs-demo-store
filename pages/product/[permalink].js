@@ -47,6 +47,7 @@ class Product extends Component {
 
     const images = reduceProductImages(product);
 
+
     return (
       <Root>
         <Head>
@@ -66,13 +67,15 @@ class Product extends Component {
 
           <div className="product-images">
             <div className="flex-grow-1">
-              {images.map((image, i) => (
+              {Array.isArray(images) ? (images.map((image, i) => (
                 <img
                   key={i}
                   src={image}
                   className="w-100 mb-3 carousel-main-images"
                 />
-              ))}
+              ))) : (
+                ''
+              )}
             </div>
           </div>
 

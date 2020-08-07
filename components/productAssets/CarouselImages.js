@@ -81,7 +81,7 @@ class CarouselImages extends Component {
     return (
       <div className="d-flex">
         <div className="ml-lg-3 mr-3">
-          {images.map((image, index) => (
+          {Array.isArray(images) ? (images.map((image, index) => (
             <div
               ref={image => this.carouselImages.push(image)}
               key={`carousel-side-images-${index}`}
@@ -94,7 +94,9 @@ class CarouselImages extends Component {
                   index === 0 ? '2px solid #000000' : '2px solid #FFFFFF'
               }}
             />
-          ))}
+          ))) : (
+            ''
+          )}
         </div>
       </div>
     );
