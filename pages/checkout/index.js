@@ -77,6 +77,10 @@ class CheckoutPage extends Component {
   }
 
   componentDidMount() {
+    // if cart is empty then redirect out of checkout;
+    if (this.props.cart && this.props.cart.total_items === 0) {
+      this.redirectOutOfCheckout()
+    }
     // on initial mount generate checkout token object from the cart,
     // and then subsequently below in componentDidUpdate if the props.cart.total_items has changed
     this.generateToken();
@@ -85,11 +89,6 @@ class CheckoutPage extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // if cart is empty then redirect out of checkout;
-    if (this.props.cart && this.props.cart.total_items === 0) {
-      this.redirectOutOfCheckout()
-    }
-
     // if cart items have changed then regenerate checkout token object to reflect changes.
     if (prevProps.cart && prevProps.cart.total_items !== this.props.cart.total_items) {
       // reset selected shipping option
@@ -533,6 +532,10 @@ class CheckoutPage extends Component {
 }
 
 CheckoutPage.propTypes = {
+  orderReceipt: PropTypes.oneOfType([
+    PropTypes.object,
+    null
+  ]),
   checkout: PropTypes.object,
   cart: PropTypes.object,
   shippingOptions: PropTypes.array,
@@ -541,7 +544,8 @@ CheckoutPage.propTypes = {
   dispatchSetDiscountCodeInCheckout: PropTypes.func,
 }
 
-export default withRouter(connect(({ checkout: { checkoutTokenObject, shippingOptions }, cart }) => ({ checkout: checkoutTokenObject, shippingOptions, cart }), {
+export default withRouter(
+  connect(({ checkout: { checkoutTokenObject, shippingOptions }, cart, orderReceipt }) => ({ checkout: checkoutTokenObject, shippingOptions, cart, orderReceipt }), {
   dispatchGenerateCheckout,
   dispatchGetShippingOptions,
   dispatchSetShippingOptionsInCheckout,
