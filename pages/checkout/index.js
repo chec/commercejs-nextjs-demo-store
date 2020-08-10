@@ -90,7 +90,7 @@ class CheckoutPage extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     // if cart items have changed then regenerate checkout token object to reflect changes.
-    if (prevProps.cart && prevProps.cart.total_items !== this.props.cart.total_items) {
+    if (prevProps.cart && prevProps.cart.total_items !== this.props.cart.total_items && !this.props.orderReceipt) {
       // reset selected shipping option
       this.setState({
         'fulfillment[shipping_method]': '',
