@@ -472,7 +472,7 @@ class CheckoutPage extends Component {
                   />
                   <button
                     className="font-color-white border-none font-weight-medium px-4 col-auto"
-                    disable={!this.props.checkout}
+                    disable={!this.props.checkout || undefined}
                     onClick={this.handleDiscountChange}
                   >
                     Apply
@@ -534,7 +534,7 @@ class CheckoutPage extends Component {
 CheckoutPage.propTypes = {
   orderReceipt: PropTypes.oneOfType([
     PropTypes.object,
-    null
+    PropTypes.oneOf([null]),
   ]),
   checkout: PropTypes.object,
   cart: PropTypes.object,
