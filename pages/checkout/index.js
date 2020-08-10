@@ -262,6 +262,7 @@ class CheckoutPage extends Component {
         this.props.router.push('/checkout/confirm');
       })
       .catch(({ data: { error = {} }}) => {
+        this.setState({ loading: false });
         let errorToAlert = '';
         if (error.type === 'validation') {
           console.log('error while capturing order', error.message)
@@ -292,10 +293,7 @@ class CheckoutPage extends Component {
         if (errorToAlert) {
           alert(errorToAlert);
         }
-      })
-      .finally(() => {
-        this.setState({ loading: false });
-      })
+      });
   }
 
   /**
