@@ -26,7 +26,7 @@ const initialState = {
     shippingOptions: [],
     checkoutTokenObject: {},
   },
-  orderReceipt: null,
+  orderReceipt: {},
 };
 
 // Create reducer

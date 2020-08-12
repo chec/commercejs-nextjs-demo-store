@@ -58,12 +58,16 @@ class Header extends Component {
 
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
-    window.addEventListener('Commercejs.Cart.Item.Added', this.handleAddToCartToggle);
+    window.addEventListener('Commercejs.Cart.Item.Added', () => {
+      this.handleAddToCartToggle();
+    })
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
-    window.removeEventListener('Commercejs.Cart.Item.Added', this.handleAddToCartToggle);
+    window.removeEventListener('Commercejs.Cart.Item.Added', () => {
+      this.handleAddToCartToggle();
+    })
   }
 
   toggleCart() {
@@ -122,6 +126,7 @@ class Header extends Component {
   render() {
     const { showMobileMenu, showCart } = this.state;
     const { transparent, cart } = this.props;
+
 
     return (
       <header className="position-fixed top-0 left-0 right-0 font-weight-semibold no-print">

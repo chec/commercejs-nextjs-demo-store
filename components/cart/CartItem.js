@@ -38,7 +38,7 @@ class CartItem extends Component {
             <div className="d-flex justify-content-between mb-2">
               <p>{item.name}</p>
               <p className="text-right font-weight-medium">
-                {item.line_total.formatted_with_symbol}
+                ${item.line_total.formatted_with_symbol}
               </p>
             </div>
             <div className="d-flex justify-content-between mb-2">
