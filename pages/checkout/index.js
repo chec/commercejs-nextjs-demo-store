@@ -77,6 +77,10 @@ class CheckoutPage extends Component {
   }
 
   componentDidMount() {
+    // if cart is empty then redirect out of checkout;
+    if (this.props.cart && this.props.cart.total_items === 0) {
+      this.redirectOutOfCheckout()
+    }
     // on initial mount generate checkout token object from the cart,
     // and then subsequently below in componentDidUpdate if the props.cart.total_items has changed
     this.generateToken();
@@ -85,13 +89,8 @@ class CheckoutPage extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // if cart is empty then redirect out of checkout;
-    if (this.props.cart && this.props.cart.total_items === 0) {
-      this.redirectOutOfCheckout()
-    }
-
     // if cart items have changed then regenerate checkout token object to reflect changes.
-    if (prevProps.cart && prevProps.cart.total_items !== this.props.cart.total_items) {
+    if (prevProps.cart && prevProps.cart.total_items !== this.props.cart.total_items && !this.props.orderReceipt) {
       // reset selected shipping option
       this.setState({
         'fulfillment[shipping_method]': '',
@@ -263,6 +262,7 @@ class CheckoutPage extends Component {
         this.props.router.push('/checkout/confirm');
       })
       .catch(({ data: { error = {} }}) => {
+        this.setState({ loading: false });
         let errorToAlert = '';
         if (error.type === 'validation') {
           console.log('error while capturing order', error.message)
@@ -293,10 +293,7 @@ class CheckoutPage extends Component {
         if (errorToAlert) {
           alert(errorToAlert);
         }
-      })
-      .finally(() => {
-        this.setState({ loading: false });
-      })
+      });
   }
 
   /**
@@ -473,7 +470,7 @@ class CheckoutPage extends Component {
                   />
                   <button
                     className="font-color-white border-none font-weight-medium px-4 col-auto"
-                    disable={!this.props.checkout}
+                    disable={!this.props.checkout || undefined}
                     onClick={this.handleDiscountChange}
                   >
                     Apply
@@ -533,6 +530,10 @@ class CheckoutPage extends Component {
 }
 
 CheckoutPage.propTypes = {
+  orderReceipt: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.oneOf([null]),
+  ]),
   checkout: PropTypes.object,
   cart: PropTypes.object,
   shippingOptions: PropTypes.array,
@@ -541,7 +542,8 @@ CheckoutPage.propTypes = {
   dispatchSetDiscountCodeInCheckout: PropTypes.func,
 }
 
-export default withRouter(connect(({ checkout: { checkoutTokenObject, shippingOptions }, cart }) => ({ checkout: checkoutTokenObject, shippingOptions, cart }), {
+export default withRouter(
+  connect(({ checkout: { checkoutTokenObject, shippingOptions }, cart, orderReceipt }) => ({ checkout: checkoutTokenObject, shippingOptions, cart, orderReceipt }), {
   dispatchGenerateCheckout,
   dispatchGetShippingOptions,
   dispatchSetShippingOptionsInCheckout,

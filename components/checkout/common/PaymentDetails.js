@@ -99,21 +99,6 @@ export default class PaymentDetails extends Component {
             </div>)
             : ''
           }
-          {(gateways && gateways.available['paypal']) ?
-            (<div>
-              <label
-                onClick={() => onChangeGateway('paypal')}
-                className={'p-3 d-flex align-items-center cursor-pointer'}
-              >
-                <Radiobox
-                  checked={selectedGateway === 'paypal'}
-                  className="mr-3"
-                />
-                <p className="font-weight-medium">PayPal</p>
-              </label>
-            </div>)
-            : ''
-          }
         </div>
       </>
     );

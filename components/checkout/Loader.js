@@ -14,7 +14,7 @@ export default function Loader() {
   };
 
   return (
-    <div class="loader-animation">
+    <div className="loader-animation">
       <Lottie
         options={defaultOptions}
         height={500}
