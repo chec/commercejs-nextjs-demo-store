@@ -42,7 +42,11 @@ class Confirm extends Component {
   render() {
     const { orderReceipt } = this.props;
 
-    return !orderReceipt ? '' : (
+    if (!orderReceipt) {
+      return '';
+    }
+
+    return (
       <Root>
         <div className="pt-5 mt-2 checkout-confirm receipt">
           {/* Row */}
