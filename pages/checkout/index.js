@@ -453,7 +453,7 @@ class CheckoutPage extends Component {
                             <p className="font-color-light">Quantity: {item.quantity}</p>
                           </div>
                           <div className="text-right font-weight-semibold">
-                            ${item.price.formatted_with_code}
+                            ${item.line_total.formatted_with_code}
                           </div>
                         </div>
                       </div>
