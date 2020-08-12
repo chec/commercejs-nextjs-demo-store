@@ -2,19 +2,12 @@ import React, { Component } from 'react';
 import Root from '../../components/common/Root';
 import Link from 'next/link';
 import { connect } from 'react-redux';
-import { withRouter } from 'next/router';
 
 class Confirm extends Component {
   constructor(props) {
     super(props);
 
     this.handlePrint = this.handlePrint.bind(this);
-  }
-
-  componentDidMount() {
-    if (!this.props.orderReceipt) {
-      this.props.router.push('/');
-    }
   }
 
   /**
@@ -41,10 +34,6 @@ class Confirm extends Component {
 
   render() {
     const { orderReceipt } = this.props;
-
-    if (!orderReceipt) {
-      return '';
-    }
 
     return (
       <Root>
@@ -105,20 +94,22 @@ class Confirm extends Component {
                     </div>
                   </div>
                   <div className="py-4 borderbottom border-color-gray400">
-                    {orderReceipt.order.line_items.map((item) => (
-                      <div key={item.id} className="d-flex flex-grow-1 mb-3">
-                        <div className="flex-grow-1">
-                          <p className="mb-2 font-weight-medium">
-                            {item.quantity} x {item.product_name}
-                          </p>
-                          <p className="font-color-light">
-                            {item.variants[0].variant_name}: {item.variants[0].option_name}
-                          </p>
+                    {orderReceipt.order.line_items.map((item, index) => (
+                      <>
+                        <div className="d-flex flex-grow-1 mb-3">
+                          <div className="flex-grow-1">
+                            <p className="mb-2 font-weight-medium">
+                              {item.quantity} x {item.product_name}
+                            </p>
+                            <p className="font-color-light">
+                              {item.variants[0].variant_name}: {item.variants[0].option_name}
+                            </p>
+                          </div>
+                          <div className="text-right font-weight-semibold">
+                            {item.line_total.formatted_with_symbol}
+                          </div>
                         </div>
-                        <div className="text-right font-weight-semibold">
-                          {item.line_total.formatted_with_symbol}
-                        </div>
-                      </div>
+                        </>
                     ))}
                   </div>
 
@@ -144,4 +135,4 @@ class Confirm extends Component {
   }
 }
 
-export default withRouter(connect(state => state)(Confirm));
+export default connect(state => state)(Confirm);
