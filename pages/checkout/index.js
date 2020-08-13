@@ -215,7 +215,6 @@ class CheckoutPage extends Component {
     // construct order object
     const newOrder = {
       line_items,
-      discount_code: this.state.discountCode,
       customer: {
         firstname: this.state.firstName,
         lastname: this.state.lastName,
