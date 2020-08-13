@@ -125,7 +125,7 @@ class Confirm extends Component {
                   <div className="py-3 borderbottom border-color-black">
                       <div className="d-flex justify-content-between align-items-center mb-2">
                         <p>Subtotal</p>
-                        <p className="text-right font-weight-medium">${orderReceipt.order.total_with_tax.formatted_with_code}</p>
+                        <p className="text-right font-weight-medium">${orderReceipt.order.subtotal.formatted_with_code}</p>
                       </div>
                   </div>
                   <div className="d-flex justify-content-between align-items-center mb-2 pt-3">
