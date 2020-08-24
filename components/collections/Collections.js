@@ -23,6 +23,10 @@ class Collections extends Component {
 
   handleScroll() {
     const animate = () => {
+      if (!this.page.current) {
+        return;
+      }
+
       const distance =
         this.page.current.getBoundingClientRect().bottom -
         window.innerHeight;

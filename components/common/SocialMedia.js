@@ -48,6 +48,9 @@ export default class SocialMedia extends React.Component {
   };
 
   animate() {
+    if (!this.followContainer.current) {
+      return;
+    }
     const dimensions = this.followContainer.current.getBoundingClientRect();
 
     if (dimensions.top - window.innerHeight < 0 && dimensions.bottom > 0) {
