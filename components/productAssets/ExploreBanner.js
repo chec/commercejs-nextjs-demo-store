@@ -26,6 +26,9 @@ export default class ExploreBanner extends React.Component {
   }
 
   animate() {
+    if (!this.exploreContainer.current) {
+      return;
+    }
     const dimensions = this.exploreContainer.current.getBoundingClientRect();
     const x = window.matchMedia('(min-width: 768px)');
 
