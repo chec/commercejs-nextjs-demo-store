@@ -107,7 +107,7 @@ Now go ahead and click the "deploy site" to see your live site!
 
 ### Caveats with data customization
 
-Because this project is a fully fledged storefront showcasing a custom design and user flow, there are certain caveats you will run into if you customize your data in your Chec backend. The one gotcha is with the categories data in the UI: additional collections data was added [here](https://github.com/chec/commercejs-nextjs-demo-store/blob/master/lib/collections.js) and merged with the categories data in the API. If you add new or edit the seeded sample categories data, make sure to match up the slugs/permalink values in the collections data file.
+Because this project is a fully fledged storefront showcasing a custom design and user flow, there are certain caveats you will run into if you customize your data in the Chec Dashboard. One gotcha is with the categories data in the UI: additional collections data was added [here](https://github.com/chec/commercejs-nextjs-demo-store/blob/master/lib/collections.js) and merged with the categories data in the API. If you add new or edit the seeded sample categories data, make sure to match up the slugs/permalink values in the collections data file.
 
 ## 🥞 Stack
 
