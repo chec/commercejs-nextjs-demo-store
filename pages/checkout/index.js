@@ -450,6 +450,13 @@ class CheckoutPage extends Component {
                               {item.product_name}
                             </p>
                             <p className="font-color-light">Quantity: {item.quantity}</p>
+                            <div className="d-flex justify-content-between mb-2">
+                              {item.variants.map((variant, i) =>
+                                <p key={i} className="font-color-light font-weight-small">
+                                  {variant.variant_name}: {variant.option_name}
+                                </p>
+                              )}
+                            </div>
                           </div>
                           <div className="text-right font-weight-semibold">
                             ${item.line_total.formatted_with_code}
