@@ -19,8 +19,8 @@ const About = () => (
                 <a className="px-4 py-3 font-color-white about-doc" href="https://commercejs.com/docs/" target="_blank">
                   Documentation
                 </a>
-                <a className="px-4 py-3 about-dev" href="https://commercejs.com/resources" target="_blank">
-                  Developer resources
+                <a className="px-4 py-3 about-dev" href="https://commercejs.com/docs/community/" target="_blank">
+                  Guides from the community
                 </a>
               </div>
             </div>
