@@ -13,9 +13,18 @@ class MyApp extends App {
 
     // Match static data record to API data to find category name
     const categories = categoriesResponse.data.map(item => ({
-      ...collections.find(data => data.slug === item.slug),
+      ...collections.find(data => {
+        if(data.slug === item.slug) {
+          return true;
+        }
+        return [];
+      }),
       ...item,
     }));
+
+    if(!categories.length) {
+      console.log('Replace the slug and link values at /lib/collections.js with your created categories in order to render the category banner in the homepage and the collections in the collection page.');
+    }
 
     // Fetch products
     const { data: products } = await commerce.products.list();
