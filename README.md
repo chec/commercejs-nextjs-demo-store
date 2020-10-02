@@ -47,7 +47,6 @@ By clicking the above button, you will be navigated to the Netlify’s direct de
 
 *Please note the initial build will fail if you enter in your public key instead of the provided demo merchant [key](https://github.com/chec/commercejs-nextjs-demo-store/blob/master/.env.example#L2). The one-click deploy is meant for presentation purposes to spin up a quick deploy. Using your merchant account would mean you would need to have the appropriate data such as multiple assets and categories associated with your products. If you would like to use your merchant account, please follow the manual setup steps below.*
 
-
 ## Manual setup and Netlify deployment
 
 Manual setup involves cloning the repo into your local environment, seeding the provided sample data into your Chec account and deploying to Netlify.
@@ -85,7 +84,7 @@ NODE_ENV=
 
 This file is meant to not be committed to source control and also will be hidden in file browsers.
 
-**STEP 3.** Seed the data necessary to power your Chec store and start your development environment
+**STEP 3.** Seed the data necessary to power your Chec store and start your development environment (necessary for initial setup).
 ```bash
 # Seed data in /seeds into your Chec account
 yarn seed
@@ -105,9 +104,12 @@ Be sure to sign up for a Netlify account and log in to it. Click the **New site 
 
 Now go ahead and click the "deploy site" to see your live site!
 
-### Caveats with data customization
+### Caveats with data customization (IMPORTANT)
 
-Because this project is a fully fledged storefront showcasing a custom design and user flow, there are certain caveats you will run into if you customize your data in the Chec Dashboard. One gotcha is with the categories data in the UI: additional collections data was added [here](https://github.com/chec/commercejs-nextjs-demo-store/blob/master/lib/collections.js) and merged with the categories data in the API. If you add new or edit the seeded sample categories data, make sure to match up the slugs/permalink values in the collections data file.
+Because this project is a fully fledged storefront showcasing a custom design and user flow, there are certain caveats you will run into if you customize your data in the Chec Dashboard. One gotcha is with the categories data in the UI: additional collections data was added [here](https://github.com/chec/commercejs-nextjs-demo-store/blob/master/lib/collections.js) and merged with the categories data in the API. If you add new or edit the seeded sample categories data, make sure to match up the slugs/permalink values in the collections data file. The app will expect the below inventory setup in order to build, so if you'd like to customize with your inventory in the backend make sure you:
+- Create your categories in the [dashboard](https://dashboard.chec.io/categories/new)
+- Replace the [collections data](https://github.com/chec/commercejs-nextjs-demo-store/blob/master/lib/collections.js) with the associated slugs and link paths to your created categories (this makes sure the collections images get merged into the collections data by matching the slugs).
+- If you want multiple assets to your products similar to the demo stores, you can [create assets](https://commercejs.com/docs/api/#create-new-asset) and [assign them to your products](https://commercejs.com/docs/api/#add-asset-to-product). [This guide](https://commercejs.com/blog/adding-assets-via-the-chec-api) walks through how to achieve this.
 
 ## 🥞 Stack
 
