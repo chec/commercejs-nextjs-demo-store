@@ -434,14 +434,13 @@ class CheckoutPage extends Component {
                 </div>
                 <div className="pt-3 borderbottom border-color-gray400">
                   {(checkout.live ? checkout.live.line_items : []).map((item, index, items) => {
-                    const _item = line_items.find(i => i.id === item.id); // from root checkout token object, not checkout.live, since it includes an image property
                     return (
                       <div
                         key={item.id}
                         className="d-flex mb-2"
                       >
-                        { (_item && _item.image)
-                          ? (<img className="checkout__line-item-image mr-2" src={_item.image} alt={_item.product_name}/>)
+                        { (item && item.media)
+                          ? (<img className="checkout__line-item-image mr-2" src={item.media.source} alt={item.product_name}/>)
                           : ''
                         }
                         <div className="d-flex flex-grow-1">
