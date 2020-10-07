@@ -94,7 +94,7 @@ yarn seed
 yarn dev
 ```
 
-Now head on over to http://localhost:3000 after starting your development, your site should now be populated with the sample data!Your site should now be populated with the sample data!
+Now head on over to http://localhost:3000 after starting your development, your site should now be populated with the sample data!
 
 If you are replacing the sample products, be sure to add new categories in the dashboard, associate your products with them and lastly replace the `slug` and `link` values [here](https://github.com/chec/commercejs-nextjs-demo-store/blob/master/lib/collections.js).
 
