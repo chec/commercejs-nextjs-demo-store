@@ -12,10 +12,16 @@ class MyApp extends App {
     const categoriesResponse = await commerce.categories.list();
 
     // Match static data record to API data to find category name
-    const categories = categoriesResponse.data.map(item => ({
-      ...collections.find(data => data.slug === item.slug),
-      ...item,
-    }));
+    const categories = categoriesResponse.data.map(item => {
+      const category = collections.find(data => data.slug === item.slug);
+      if (!category) {
+        throw Error('Replace the slug and link values at /lib/collections.js with your created categories.');
+      }
+      return {
+        ...category,
+        ...item,
+      };
+  });
 
     // Fetch products
     const { data: products } = await commerce.products.list();
