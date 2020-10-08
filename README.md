@@ -106,6 +106,28 @@ Be sure to sign up for a Netlify account and log in to it. Click the **New site 
 
 Now go ahead and click the "deploy site" to see your live site!
 
+## Setup using Chec CLI demo-store command
+
+This command will download this example project from GitHub and initialise it on your machine. You will be free to edit
+the downloaded code and play around with Commerce.js afterwards.
+
+**STEP 1.** Install the Chec CLI
+
+```bash
+npm install -g @chec/cli
+# or
+yarn add -g @chec/cli
+```
+
+**STEP 2.** Create a demo store
+
+```
+chec demo-store
+```
+
+When prompted to choose a demo store from the list, choose "commercejs-nextjs-demo-store". This command will also
+seed some sample data to your Chec account. For more information, see [the Chec CLI documentation](https://github.com/chec/cli).
+
 ### Caveats with data customization (IMPORTANT)
 
 Because this project is a fully fledged storefront showcasing a custom design and user flow, there are certain caveats you will run into if you customize your data in the Chec Dashboard. One gotcha is with the categories data in the UI: additional collections data was added [here](https://github.com/chec/commercejs-nextjs-demo-store/blob/master/lib/collections.js) and merged with the categories data in the API. If you add new or edit the seeded sample categories data, make sure to match up the slugs/permalink values in the collections data file. The app will expect the below inventory setup in order to build, so if you'd like to customize with your inventory in the backend make sure you:
