@@ -106,6 +106,44 @@ Be sure to sign up for a Netlify account and log in to it. Click the **New site 
 
 Now go ahead and click the "deploy site" to see your live site!
 
+## Setup using Chec CLI demo-store command
+
+This command will download an example project from GitHub and initialise it on your machine. You will be free to edit 
+the downloaded code and play around with Commerce.js in client code.
+
+**STEP 1.** Usage
+
+```bash
+$ npm install -g @chec/cli
+$ chec COMMAND
+running command...
+$ chec (-v|--version|version)
+@chec/cli/1.0.0 darwin-x64 node-v10.16.3
+$ chec --help [COMMAND]
+USAGE
+  $ chec COMMAND
+...
+```
+
+**STEP 2.** Create a demo store using Chec and Commerce.js
+
+```
+USAGE
+  $ chec demo-store [STORE] [TARGETDIRECTORY]
+
+ARGUMENTS
+  STORE            The store that you want your example based off of
+  TARGETDIRECTORY  The destination directory name to download the example to. The defaults to the store name
+
+OPTIONS
+  --env=env   Extra env variables to set for a .env file in the installed project
+
+  --no-login  Optionally skip the login requirement. This is likely to be incompatible with example stores that are
+              available for download
+```
+
+_See code: [src/commands/demo-store.js](https://github.com/chec/cli/blob/1.0.0/src/commands/demo-store.js)_
+
 ### Caveats with data customization (IMPORTANT)
 
 Because this project is a fully fledged storefront showcasing a custom design and user flow, there are certain caveats you will run into if you customize your data in the Chec Dashboard. One gotcha is with the categories data in the UI: additional collections data was added [here](https://github.com/chec/commercejs-nextjs-demo-store/blob/master/lib/collections.js) and merged with the categories data in the API. If you add new or edit the seeded sample categories data, make sure to match up the slugs/permalink values in the collections data file. The app will expect the below inventory setup in order to build, so if you'd like to customize with your inventory in the backend make sure you:
