@@ -108,41 +108,25 @@ Now go ahead and click the "deploy site" to see your live site!
 
 ## Setup using Chec CLI demo-store command
 
-This command will download an example project from GitHub and initialise it on your machine. You will be free to edit 
-the downloaded code and play around with Commerce.js in client code.
+This command will download this example project from GitHub and initialise it on your machine. You will be free to edit
+the downloaded code and play around with Commerce.js afterwards.
 
-**STEP 1.** Usage
+**STEP 1.** Install the Chec CLI
 
 ```bash
-$ npm install -g @chec/cli
-$ chec COMMAND
-running command...
-$ chec (-v|--version|version)
-@chec/cli/1.0.0 darwin-x64 node-v10.16.3
-$ chec --help [COMMAND]
-USAGE
-  $ chec COMMAND
-...
+npm install -g @chec/cli
+# or
+yarn add -g @chec/cli
 ```
 
-**STEP 2.** Create a demo store using Chec and Commerce.js
+**STEP 2.** Create a demo store
 
 ```
-USAGE
-  $ chec demo-store [STORE] [TARGETDIRECTORY]
-
-ARGUMENTS
-  STORE            The store that you want your example based off of
-  TARGETDIRECTORY  The destination directory name to download the example to. The defaults to the store name
-
-OPTIONS
-  --env=env   Extra env variables to set for a .env file in the installed project
-
-  --no-login  Optionally skip the login requirement. This is likely to be incompatible with example stores that are
-              available for download
+chec demo-store
 ```
 
-_See code: [src/commands/demo-store.js](https://github.com/chec/cli/blob/1.0.0/src/commands/demo-store.js)_
+When prompted to choose a demo store from the list, choose "commercejs-nextjs-demo-store". This command will also
+seed some sample data to your Chec account. For more information, see [the Chec CLI documentation](https://github.com/chec/cli).
 
 ### Caveats with data customization (IMPORTANT)
 
