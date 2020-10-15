@@ -78,7 +78,16 @@ const reducer = (state = initialState, action) => {
       return { ...state, checkout: { ...state.checkout, shippingOptions: [] }};
     // Dispatch in Checkout client-side
     case UPDATE_CHECKOUT_LIVE_OBJECT:
-      return { ...state, checkout: { ...state.checkout, checkoutTokenObject: { ...state.checkout.checkoutTokenObject, live: action.payload }}};
+      return {
+        ...state,
+        checkout: {
+          ...state.checkout,
+          checkoutTokenObject: {
+            ...state.checkout.checkoutTokenObject,
+            live: action.payload
+          },
+        },
+      };
     // Dispatch in Checkout client-side
     case ABORT_CHECKOUT:
       return { ...state, checkout: initialState.checkout };

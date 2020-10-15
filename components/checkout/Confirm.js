@@ -32,7 +32,11 @@ class Confirm extends Component {
     }
 
     return (
-      <button onClick={this.handlePrint} className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0 no-print bg-transparent" role="button">
+      <button
+        onClick={this.handlePrint}
+        className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0 no-print bg-transparent"
+        role="button"
+      >
         <img src="/icon/print.svg" className="mr-2 w-20 no-print"/>
         <div className="no-print">Print Receipt</div>
       </button>

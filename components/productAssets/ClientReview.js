@@ -64,6 +64,7 @@ export default class ClientReview extends Component {
 
   render() {
     const { open } = this.state;
+
     return (
       <div id="reviews" className="custom-container pb-5">
         <Modal
@@ -94,6 +95,7 @@ export default class ClientReview extends Component {
             </div>
             <ReviewList reviews={reviews}>
               <button
+                type="button"
                 onClick={this.handleOpen}
                 className="text-center bg-transparent w-100 h-72 px-3 text-decoration-underline"
               >

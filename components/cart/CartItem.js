@@ -11,15 +11,15 @@ class CartItem extends Component {
   }
 
   /**
-  * Update cart item
-  */
+   * Update cart item
+   */
   handleUpdateCartItem(lineItem, quantity) {
     this.props.dispatch(updateCartItem(lineItem, quantity));
   }
 
   /**
-  * Remove item from cart
-  */
+   * Remove item from cart
+   */
   handleRemoveFromCart(lineItem) {
     this.props.dispatch(removeFromCart(lineItem));
   }
@@ -33,7 +33,7 @@ class CartItem extends Component {
           <div
             className="cart-item--image mr-4"
             style={{ backgroundImage: `url("${item.media.source}")` }}
-          ></div>
+          />
           <div className="flex-grow-1 borderbottom border-color-gray400 h-100">
             <div className="d-flex justify-content-between mb-2">
               <p>{item.name}</p>

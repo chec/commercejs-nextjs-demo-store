@@ -56,7 +56,6 @@ class Cart extends Component {
     enableBodyScroll(this.cartScroll.current);
   }
 
-
   render() {
     const { isOpen, toggle } = this.props;
     const { cart } = this.props;

@@ -5,10 +5,10 @@
  * @returns {string}
  */
 function cc_format(value) {
-  var v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
-  var matches = v.match(/\d{4,16}/g);
-  var match = (matches && matches[0]) || ''
-  var parts = []
+  const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
+  const matches = v.match(/\d{4,16}/g);
+  const match = (matches && matches[0]) || ''
+  const parts = []
   for (let i = 0, len = match.length; i < len; i += 4) {
     parts.push(match.substring(i, i + 4))
   }

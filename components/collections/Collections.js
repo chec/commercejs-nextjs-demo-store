@@ -46,40 +46,40 @@ class Collections extends Component {
 
     return (
       <>
-      {categories.map(category => (
-      <div key={category.id} className="custom-container">
-        <div className="row">
-          <div className="col-2 d-none d-lg-block position-relative">
-            <p className="font-size-title font-weight-medium mb-3">
-              {category.name}
-            </p>
-            <Link href={`/collection#${category.slug}`}>
-              <div className="mb-5">
-                <div className="d-flex">
-                  <p className="mb-2 position-relative cursor-pointer">
-                    Products
-                    <span
-                      className="position-absolute font-size-tiny text-right"
-                      style={{ right: '-12px', top: '-4px' }}
-                    >
-                      {category.count}
-                    </span>
-                  </p>
-                </div>
+        {categories.map(category => (
+          <div key={category.id} className="custom-container">
+            <div className="row">
+              <div className="col-2 d-none d-lg-block position-relative">
+                <p className="font-size-title font-weight-medium mb-3">
+                  {category.name}
+                </p>
+                <Link href={`/collection#${category.slug}`}>
+                  <div className="mb-5">
+                    <div className="d-flex">
+                      <p className="mb-2 position-relative cursor-pointer">
+                        Products
+                        <span
+                          className="position-absolute font-size-tiny text-right"
+                          style={{ right: '-12px', top: '-4px' }}
+                        >
+                          {category.count}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </Link>
               </div>
-            </Link>
+            </div>
           </div>
-        </div>
-      </div>
-      ))}
-    </>
-    )
+        ))}
+      </>
+    );
   }
 
   /**
-  * Filter products by category
-  */
-   filterProductsByCat(catSlug) {
+   * Filter products by category
+   */
+  filterProductsByCat(catSlug) {
     const { categories, products } = this.props;
 
     const cat = categories.find(category => category.slug === catSlug);
@@ -90,8 +90,8 @@ class Collections extends Component {
   }
 
   /**
-  * Render collections based on categories available in data
-  */
+   * Render collections based on categories available in data
+   */
   renderCollection() {
     const { categories } = this.props;
     const reg = /(<([^>]+)>)/ig;
@@ -159,7 +159,6 @@ class Collections extends Component {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     );

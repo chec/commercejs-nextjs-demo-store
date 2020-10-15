@@ -8,11 +8,11 @@ class Dropdown extends Component {
     this.state = {
       isOpen: false
     };
-
   }
+
   render() {
     const { isOpen } = this.state;
-    const { children, menu } = this.props;
+    const { children } = this.props;
 
     return (
       <div
