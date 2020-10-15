@@ -299,7 +299,7 @@ class CheckoutPage extends Component {
    * Fetch all available countries for shipping
    */
   getAllCountries() {
-    commerce.services.localeListCountries().then(resp => {
+    commerce.services.localeListShippingCountries().then(resp => {
       this.setState({
         countries: resp.countries
       })
