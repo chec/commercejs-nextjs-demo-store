@@ -44,11 +44,6 @@ class Collections extends Component {
   renderSidebar() {
     const { categories } = this.props;
 
-    if(!categories.length) {
-      console.error('Add categories and assign products to the categories');
-      return;
-    }
-
     return (
       <>
       {categories.map(category => (
@@ -100,11 +95,6 @@ class Collections extends Component {
   renderCollection() {
     const { categories } = this.props;
     const reg = /(<([^>]+)>)/ig;
-
-    if(!categories.length) {
-      console.error('Add categories and assign products to the categories');
-      return;
-    }
 
     return (
       <div className="collection">
