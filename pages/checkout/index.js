@@ -119,9 +119,17 @@ class CheckoutPage extends Component {
     }
 
     // if selected shippiing option changes, regenerate checkout token object to reflect changes
-    if (prevState['fulfillment[shipping_method]'] !== this.state['fulfillment[shipping_method]'] && this.state['fulfillment[shipping_method]'] && this.props.checkout) {
+    if (
+      prevState['fulfillment[shipping_method]'] !== this.state['fulfillment[shipping_method]']
+      && this.state['fulfillment[shipping_method]'] && this.props.checkout
+    ) {
       // update checkout token object with shipping information
-      this.props.dispatchSetShippingOptionsInCheckout(this.props.checkout.id, this.state['fulfillment[shipping_method]'], this.state.deliveryCountry, this.state.deliveryRegion);
+      this.props.dispatchSetShippingOptionsInCheckout(
+        this.props.checkout.id,
+        this.state['fulfillment[shipping_method]'],
+        this.state.deliveryCountry,
+        this.state.deliveryRegion
+      );
     }
   }
 
@@ -321,7 +329,6 @@ class CheckoutPage extends Component {
 
   render() {
     const { checkout, shippingOptions } = this.props;
-    const { line_items = [] } = checkout;
     const selectedShippingOption = shippingOptions.find(({id}) => id === this.state['fulfillment[shipping_method]']);
 
     if (this.state.loading) {
@@ -369,7 +376,7 @@ class CheckoutPage extends Component {
               </div>
               {
                 checkout
-                ? (
+                && (
                 <form onChange={this.handleChangeForm}>
                   {/* ShippingDetails */}
                   <p className="font-size-subheader font-weight-semibold mb-4">
@@ -421,9 +428,8 @@ class CheckoutPage extends Component {
                     >
                       Make payment
                     </button>
-                </form>
+                  </form>
                 )
-                : ''
               }
             </div>
 
@@ -440,8 +446,7 @@ class CheckoutPage extends Component {
                         className="d-flex mb-2"
                       >
                         { (item && item.media)
-                          ? (<img className="checkout__line-item-image mr-2" src={item.media.source} alt={item.product_name}/>)
-                          : ''
+                          && (<img className="checkout__line-item-image mr-2" src={item.media.source} alt={item.product_name}/>)
                         }
                         <div className="d-flex flex-grow-1">
                           <div className="flex-grow-1">
@@ -475,7 +480,7 @@ class CheckoutPage extends Component {
                   />
                   <button
                     className="font-color-white border-none font-weight-medium px-4 col-auto"
-                    disable={!this.props.checkout || undefined}
+                    disabled={!this.props.checkout || undefined}
                     onClick={this.handleDiscountChange}
                   >
                     Apply
@@ -517,14 +522,13 @@ class CheckoutPage extends Component {
                   </p>
                 </div>
 
-
-              <button
-                type="submit"
-                className="bg-black mt-4 font-color-white w-100 border-none h-56 font-weight-semibold d-lg-none"
-                onClick={this.captureOrder}
-              >
-                Make payment
-              </button>
+                <button
+                  type="submit"
+                  className="bg-black mt-4 font-color-white w-100 border-none h-56 font-weight-semibold d-lg-none"
+                  onClick={this.captureOrder}
+                >
+                  Make payment
+                </button>
               </div>
             </div>
           </div>
@@ -548,7 +552,12 @@ CheckoutPage.propTypes = {
 }
 
 export default withRouter(
-  connect(({ checkout: { checkoutTokenObject, shippingOptions }, cart, orderReceipt }) => ({ checkout: checkoutTokenObject, shippingOptions, cart, orderReceipt }), {
+  connect(({ checkout: { checkoutTokenObject, shippingOptions }, cart, orderReceipt }) => ({
+    checkout: checkoutTokenObject,
+    shippingOptions,
+    cart,
+    orderReceipt,
+  }), {
   dispatchGenerateCheckout,
   dispatchGetShippingOptions,
   dispatchSetShippingOptionsInCheckout,

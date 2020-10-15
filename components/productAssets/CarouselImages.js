@@ -27,8 +27,7 @@ class CarouselImages extends Component {
   animate() {
     const mainImages = document.querySelectorAll('.carousel-main-images');
 
-    var x = window.matchMedia('(min-width: 768px)');
-
+    const x = window.matchMedia('(min-width: 768px)');
     if (!x.matches) {
       return;
     }
@@ -81,7 +80,7 @@ class CarouselImages extends Component {
     return (
       <div className="d-flex">
         <div className="ml-lg-3 mr-3">
-          {Array.isArray(images) ? (images.map((image, index) => (
+          {Array.isArray(images) && (images.map((image, index) => (
             <div
               ref={image => this.carouselImages.push(image)}
               key={`carousel-side-images-${index}`}
@@ -94,9 +93,7 @@ class CarouselImages extends Component {
                   index === 0 ? '2px solid #000000' : '2px solid #FFFFFF'
               }}
             />
-          ))) : (
-            ''
-          )}
+          )))}
         </div>
       </div>
     );

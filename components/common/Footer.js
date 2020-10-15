@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Footer = () => (
-
   <footer className="pt-5">
     <div className="custom-container mb-5 pb-5 pt-5">
       <div className="row">
@@ -133,7 +132,7 @@ const Footer = () => (
               className="font-color-brand font-size-caption text-uppercase text-center"
               target="_blank"
             >
-              &copy; 2020 Chec/Commerce.js.
+              &copy; { new Date().getFullYear() } Chec/Commerce.js.
             </a>
           </div>
         </div>

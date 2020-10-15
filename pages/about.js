@@ -89,8 +89,8 @@ const About = () => (
         </div>
       </div>
 
-        {/* Row 4 */}
-        <div className="row">
+      {/* Row 4 */}
+      <div className="row">
         <div className="col-12 col-lg-6">
           <div className="about-image h-100">
             <div className="d-flex align-items-center justify-content-center h-100">
@@ -119,11 +119,9 @@ const About = () => (
           </div>
         </div>
       </div>
-
     </div>
     <Footer />
   </Root>
 );
-
 
 export default About;
