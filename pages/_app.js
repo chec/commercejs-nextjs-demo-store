@@ -17,10 +17,6 @@ class MyApp extends App {
       ...item,
     }));
 
-    if(!categories.length) {
-      console.log('Replace the slug and link values at /lib/collections.js with your created categories in order to render the category banner in the homepage and the collections in the collection page.');
-    }
-
     // Fetch products
     const { data: products } = await commerce.products.list();
 
