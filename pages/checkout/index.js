@@ -103,9 +103,7 @@ class CheckoutPage extends Component {
     const hasDeliveryRegionChanged = prevState.deliveryRegion !== this.state.deliveryRegion;
 
     // refresh list of regions when delivery country has changed
-    if (hasDeliveryCountryChanged) {
-      this.getRegions(this.state.deliveryCountry);
-    }
+    if (hasDeliveryCountryChanged) this.getRegions(this.state.deliveryCountry);
 
     // if delivery country or region have changed, and we still have a checkout token object, then refresh the token,
     // and reset the previously selected shipping method
@@ -165,7 +163,8 @@ class CheckoutPage extends Component {
     if (!this.state.discountCode.trim() || !this.props.checkout) {
       return;
     }
-
+    
+    // If there is any discount code
     this.props.dispatchSetDiscountCodeInCheckout(this.props.checkout.id, this.state.discountCode)
       .then(resp => {
         if (resp.valid) {
@@ -220,7 +219,7 @@ class CheckoutPage extends Component {
       return obj;
     }, {});
 
-    // construct order object
+    // construct order object and set customer detail in state
     const newOrder = {
       line_items,
       customer: {
