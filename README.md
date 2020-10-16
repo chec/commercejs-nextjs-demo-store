@@ -11,6 +11,20 @@ A high-fidelity fully-fledged eCommerce demo store built using the Commerce.js S
 **Note**
 - This app is built using Commerce.js v2 SDK
 
+# Table of Contents
+
+ * [Overview](#overview)
+ * [Prerequisites](#prerequisites)
+ * [Setup](#setup) 
+     * [Create a Chec account](#create-a-chec-account)
+ * [One-click Deploy with Netlify (recommended)](#one-click-deploy-with-netlify-recommended)
+ * [Manual setup and Netlify deployment](#manual-setup-and-netlify-deployment)
+ * [Setup using Chec CLI demo-store command](#setup-using-chec-cli-demo-store-command)
+   * [Caveats with data customization (IMPORTANT)](#caveats-with-data-customization-important)
+ * [🥞 Stack](#-stack)
+ * [Customization and Extendability](#customization-and-extendability)
+
+
 ## Overview
 
 This README will guide you in getting up and running with a fully-fledged eCommerce template. We have configured this template for you to one-click deploy directly to Netlify. Alternatively, you can manually deploy to your choice of hosting platform.
