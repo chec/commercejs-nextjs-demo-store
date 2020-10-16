@@ -39,7 +39,7 @@ export default class ShippingForm extends Component {
       shippingPostalZipCode,
       customerEmail,
       orderNotes,
-      shippingValidationMessage = 'Please select a shipping method!';
+      shippingValidationMessage = 'Please select a shipping method!',
     } = this.props;
     return (
       <>
