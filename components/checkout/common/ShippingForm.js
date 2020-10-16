@@ -134,8 +134,6 @@ export default class ShippingForm extends Component {
               <Dropdown
                 name="deliveryRegion"
                 value={deliveryRegion}
-                required={true}
-                validationMessage={shippingValidationMessage}
                 placeholder="Select a region"
               >
                 {
@@ -191,6 +189,8 @@ export default class ShippingForm extends Component {
               </p>
               <Dropdown
                 name="fulfillment[shipping_method]"
+                required={true}
+                validationMessage={shippingValidationMessage}
                 value={
                   selectedShippingOption
                   ? (`${selectedShippingOption.description} - ${selectedShippingOption.price.formatted_with_code}`)
