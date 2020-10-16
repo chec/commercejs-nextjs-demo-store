@@ -20,7 +20,7 @@ A high-fidelity fully-fledged eCommerce demo store built using the Commerce.js S
  * [One-click Deploy with Netlify (recommended)](#one-click-deploy-with-netlify-recommended)
  * [Manual setup and Netlify deployment](#manual-setup-and-netlify-deployment)
  * [Setup using Chec CLI demo-store command](#setup-using-chec-cli-demo-store-command)
- * [Caveats with data customization (IMPORTANT)](#caveats-with-data-customization-important)
+   * [Caveats with data customization (IMPORTANT)](#caveats-with-data-customization-important)
  * [🥞 Stack](#-stack)
  * [Customization and Extendability](#customization-and-extendability)
 
