@@ -39,6 +39,7 @@ export default class ShippingForm extends Component {
       shippingPostalZipCode,
       customerEmail,
       orderNotes,
+      shippingValidationMessage = 'Please select a shipping method!';
     } = this.props;
     return (
       <>
@@ -133,6 +134,8 @@ export default class ShippingForm extends Component {
               <Dropdown
                 name="deliveryRegion"
                 value={deliveryRegion}
+                required={true}
+                validationMessage={shippingValidationMessage}
                 placeholder="Select a region"
               >
                 {
