@@ -64,6 +64,8 @@ class CheckoutPage extends Component {
       selectedGateway: 'test_gateway',
 
       loading: false,
+
+      checkoutToken: '',
     }
 
     this.captureOrder = this.captureOrder.bind(this);
@@ -142,6 +144,9 @@ class CheckoutPage extends Component {
 
     return dispatchGenerateCheckout(cart.id)
       .then((checkout) => {
+        this.setState({
+          "checkoutToken": checkout.id,
+        })
         // continue and dispatch getShippingOptionsForCheckout to get shipping options based on checkout.id
         return dispatchGetShippingOptions(checkout.id, country, region)
       })
@@ -307,7 +312,7 @@ class CheckoutPage extends Component {
    * Fetch all available countries for shipping
    */
   getAllCountries() {
-    commerce.services.localeListCountries().then(resp => {
+    commerce.services.localeListShippingCountries(this.state["checkoutToken"]).then(resp => {
       this.setState({
         countries: resp.countries
       })
