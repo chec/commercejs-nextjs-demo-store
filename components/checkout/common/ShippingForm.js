@@ -39,7 +39,6 @@ export default class ShippingForm extends Component {
       shippingPostalZipCode,
       customerEmail,
       orderNotes,
-      shippingValidationMessage = 'Please select a shipping method!',
     } = this.props;
     return (
       <>
@@ -189,8 +188,6 @@ export default class ShippingForm extends Component {
               </p>
               <Dropdown
                 name="fulfillment[shipping_method]"
-                required={true}
-                validationMessage={shippingValidationMessage}
                 value={
                   selectedShippingOption
                   ? (`${selectedShippingOption.description} - ${selectedShippingOption.price.formatted_with_code}`)
