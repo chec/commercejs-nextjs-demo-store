@@ -1,15 +1,21 @@
-# Demo Store with Commerce.js and Next.js 🛍️💳
+<p align="center">
+  <img src="https://raw.githubusercontent.com/chec/commercejs-examples/master/assets/logo.svg" width="500" height="100" /> 
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/800px-Nextjs-logo.svg.png" width="20%" /></p>
 
+<h1 align="center"> Demo Store with Commerce.js and Next.js 🛍️💳 </h1>
+
+    
 [![Netlify Status](https://img.shields.io/netlify/157bb2e2-611e-4bbd-9a59-c876f8c3c58a?style=for-the-badge)](https://app.netlify.com/sites/commercejs-demo-store/deploys)
 [![Stars](https://img.shields.io/github/stars/chec/commercejs-nextjs-demo-store?style=for-the-badge)](https://github.com/chec/commercejs-nextjs-demo-store)
 [![Forks](https://img.shields.io/github/forks/chec/commercejs-nextjs-demo-store?style=for-the-badge)](https://github.com/chec/commercejs-nextjs-demo-store/fork)
 
-A high-fidelity fully-fledged eCommerce demo store built using the Commerce.js SDK and Next.js with live deployment to Netlify.
+
+A high-fidelity fully-fledged eCommerce demo store built using the [Commerce.js](https://commercejs.com/) SDK and Next.js with live deployment to Netlify.
 
 [![Chec see live demo button](https://cdn.chec.io/email/assets/marketing/chec-demo-btn.svg)](https://commercejs-demo-store.netlify.app)
 
 **Note**
-- This app is built using Commerce.js v2 SDK
+- This app is built using [Commerce.js](https://commercejs.com/) v2 SDK
 
 # Table of Contents
 
