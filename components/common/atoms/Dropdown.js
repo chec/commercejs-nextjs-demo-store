@@ -28,6 +28,7 @@ class Dropdown extends Component {
             className="w-20"
           />
           <select
+            required
             name={this.props.name}
             disabled={this.props.disabled || undefined}
             value={this.props.value}
