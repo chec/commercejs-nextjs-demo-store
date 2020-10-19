@@ -307,11 +307,15 @@ class CheckoutPage extends Component {
    * Fetch all available countries for shipping
    */
   getAllCountries() {
-    commerce.services.localeListCountries().then(resp => {
-      this.setState({
-        countries: resp.countries
-      })
-    }).catch(error => console.log(error))
+    const { cart, dispatchGenerateCheckout } = this.props;
+    
+    dispatchGenerateCheckout(cart.id).then(item => {
+      commerce.services.localeListShippingCountries(item.id).then(resp => {
+        this.setState({
+          countries: resp.countries
+        })
+      }).catch(error => console.log(error))
+    })
   }
 
   /**
