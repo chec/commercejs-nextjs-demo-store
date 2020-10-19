@@ -84,7 +84,6 @@ class CheckoutPage extends Component {
     // on initial mount generate checkout token object from the cart,
     // and then subsequently below in componentDidUpdate if the props.cart.total_items has changed
     this.generateToken();
-    this.getAllCountries();
     this.getRegions(this.state.deliveryCountry)
   }
 
@@ -143,6 +142,7 @@ class CheckoutPage extends Component {
     return dispatchGenerateCheckout(cart.id)
       .then((checkout) => {
         // continue and dispatch getShippingOptionsForCheckout to get shipping options based on checkout.id
+        this.getAllCountries(checkout);
         return dispatchGetShippingOptions(checkout.id, country, region)
       })
       .catch(error => {
@@ -306,8 +306,8 @@ class CheckoutPage extends Component {
   /**
    * Fetch all available countries for shipping
    */
-  getAllCountries() {
-    commerce.services.localeListCountries().then(resp => {
+  getAllCountries(checkout) {
+    commerce.services.localeListShippingCountries(checkout.id).then(resp => {
       this.setState({
         countries: resp.countries
       })
