@@ -421,7 +421,7 @@ class CheckoutPage extends Component {
                     <BillingDetails />
                     : ''
                   }
-                    <p>{ !selectedShippingOption ? 'Select a shipping option!' : '' }</p>
+                    <p class="checkout-error">{ !selectedShippingOption ? 'Select a shipping option!' : '' }</p>
                     <button
                       type="submit"
                       className="bg-black font-color-white w-100 border-none h-56 font-weight-semibold d-none d-lg-block checkout-btn"
