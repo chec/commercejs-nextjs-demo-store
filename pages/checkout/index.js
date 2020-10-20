@@ -421,20 +421,10 @@ class CheckoutPage extends Component {
                     <BillingDetails />
                     : ''
                   }
-                    <p 
-                    style={{
-                      'font-size' : '30px',
-                      'color' : '#e6005c'
-                    }}
-                    className="font-weight-semibold mb-4">
-                      <span
-                      >
-                      {!selectedShippingOption ? "Select a shipping option!" : ""}
-                      </span>
-                    </p>
+                    <p>{ !selectedShippingOption ? 'Select a shipping option!' : '' }</p>
                     <button
                       type="submit"
-                      className="bg-black font-color-white w-100 border-none h-56 font-weight-semibold d-none d-lg-block"
+                      className="bg-black font-color-white w-100 border-none h-56 font-weight-semibold d-none d-lg-block checkout-btn"
                       disabled={!selectedShippingOption}
                       onClick={this.captureOrder}
                     >
@@ -538,6 +528,7 @@ class CheckoutPage extends Component {
                   type="submit"
                   className="bg-black mt-4 font-color-white w-100 border-none h-56 font-weight-semibold d-lg-none"
                   onClick={this.captureOrder}
+                  disabled={!selectedShippingOption}
                 >
                   Make payment
                 </button>
