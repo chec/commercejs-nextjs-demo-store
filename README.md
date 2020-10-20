@@ -4,12 +4,12 @@
 [![Stars](https://img.shields.io/github/stars/chec/commercejs-nextjs-demo-store?style=for-the-badge)](https://github.com/chec/commercejs-nextjs-demo-store)
 [![Forks](https://img.shields.io/github/forks/chec/commercejs-nextjs-demo-store?style=for-the-badge)](https://github.com/chec/commercejs-nextjs-demo-store/fork)
 
-A high-fidelity fully-fledged eCommerce demo store built using the Commerce.js SDK and Next.js with live deployment to Netlify.
+A high-fidelity fully-fledged eCommerce demo store built using the [Commerce.js](https://commercejs.com/) SDK and Next.js with live deployment to Netlify.
 
 [![Chec see live demo button](https://cdn.chec.io/email/assets/marketing/chec-demo-btn.svg)](https://commercejs-demo-store.netlify.app)
 
 **Note**
-- This app is built using Commerce.js v2 SDK
+- This app is built using [Commerce.js](https://commercejs.com/) v2 SDK
 
 # Table of Contents
 
@@ -123,7 +123,7 @@ Now go ahead and click the "deploy site" to see your live site!
 ## Setup using Chec CLI demo-store command
 
 This command will download this example project from GitHub and initialise it on your machine. You will be free to edit
-the downloaded code and play around with Commerce.js afterwards.
+the downloaded code and play around with [Commerce.js](https://commercejs.com/) afterwards.
 
 **STEP 1.** Install the Chec CLI
 
