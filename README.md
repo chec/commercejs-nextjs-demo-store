@@ -4,7 +4,7 @@
 [![Stars](https://img.shields.io/github/stars/chec/commercejs-nextjs-demo-store?style=for-the-badge)](https://github.com/chec/commercejs-nextjs-demo-store)
 [![Forks](https://img.shields.io/github/forks/chec/commercejs-nextjs-demo-store?style=for-the-badge)](https://github.com/chec/commercejs-nextjs-demo-store/fork)
 
-A high-fidelity fully-fledged eCommerce demo store built using the [Commerce.js](https://commercejs.com/) SDK and Next.js with live deployment to Netlify.
+A high-fidelity fully-fledged eCommerce demo store built using the [Commerce.js](https://commercejs.com/) SDK and [Next.js](https://nextjs.org) with live deployment to Netlify.
 
 [![Chec see live demo button](https://cdn.chec.io/email/assets/marketing/chec-demo-btn.svg)](https://commercejs-demo-store.netlify.app)
 
@@ -154,7 +154,7 @@ Because this project is a fully fledged storefront showcasing a custom design an
 - Framework - [Next.js](https://nextjs.org)
 - eCommerce - [Chec/Commerce.js](https://commercejs.com)
 - Hosting - [Netlify](https://netlify.com)
-- Styling - Bootstrap and SASS
+- Styling - [Bootstrap](https://getbootstrap.com) and [SASS](https://sass-lang.com)
 
 ## Customization and Extendability
 
