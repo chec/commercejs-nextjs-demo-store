@@ -147,7 +147,7 @@ seed some sample data to your Chec account. For more information, see [the Chec 
 Because this project is a fully fledged storefront showcasing a custom design and user flow, there are certain caveats you will run into if you customize your data in the Chec Dashboard. One gotcha is with the categories data in the UI: additional collections data was added [here](https://github.com/chec/commercejs-nextjs-demo-store/blob/master/lib/collections.js) and merged with the categories data in the API. If you add new or edit the seeded sample categories data, make sure to match up the slugs/permalink values in the collections data file. The app will expect the below inventory setup in order to build, so if you'd like to customize with your inventory in the backend make sure you:
 - Create your categories in the [dashboard](https://dashboard.chec.io/categories/new)
 - Replace the [collections data](https://github.com/chec/commercejs-nextjs-demo-store/blob/master/lib/collections.js) with the associated slugs and link paths to your created categories (this makes sure the collections images get merged into the collections data by matching the slugs).
-- If you want multiple assets to your products similar to the demo stores, you can [create assets](https://commercejs.com/docs/api/#create-new-asset) and [assign them to your products](https://commercejs.com/docs/api/#add-asset-to-product). [This guide](https://commercejs.com/blog/adding-assets-via-the-chec-api) walks through how to achieve this.
+- If you want multiple assets to your products similar to the demo stores, you can [create assets](https://commercejs.com/docs/api/#create-new-asset) and [assign them to your products](https://commercejs.com/docs/api/#add-asset-to-product). [This guide](https://commercejs.com/blog/adding-assets-via-the-chec-api) walks you through the way in achieving this.
 
 ## 🥞 Stack
 
@@ -158,11 +158,11 @@ Because this project is a fully fledged storefront showcasing a custom design an
 
 ## Customization and Extendability
 
-- Add shipping zones and enable shipping options in each product
-- Customizing the styling
-    - All global styles are done using SASS and Bootstrap
-- A/B testing unique checkout designs and flow
+- Add shipping zones and enable shipping options in each product.
+- Customizing the styling.
+    - All global styles are done using SASS and Bootstrap.
+- A/B testing unique checkout designs and flow.
 - Integrating other backend tools like Content Management Systems, Customer Support, Fulfillment services, and more.
-- Fetching real client reviews from reviews APIs
-- Adding search functionality
-- Leveraging [webhooks](https://commercejs.com/blog/webhooks-pizza-and-order-notifications-via-twilio) to automate post checkout actions
+- Fetching real client reviews from reviews APIs.
+- Adding search functionality.
+- Leveraging [webhooks](https://commercejs.com/blog/webhooks-pizza-and-order-notifications-via-twilio) to automate post checkout actions.
