@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@chec/commerce.js": "^v2.3.0-beta1",
+    "@stripe/react-stripe-js": "^1.1.2",
+    "@stripe/stripe-js": "^1.11.0",
     "@zeit/next-sass": "^1.0.1",
     "body-scroll-lock": "^2.6.4",
     "dotenv": "^8.2.0",
