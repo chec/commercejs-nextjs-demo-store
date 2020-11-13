@@ -3,6 +3,8 @@ import Head from 'next/head';
 import Root from '../components/common/Root';
 import Footer from '../components/common/Footer';
 import commerce from '../lib/commerce';
+import Router from 'next/router';
+import LoginAnimation from '../../components/customer/LoginAnimation';
 
 class LoginPage extends Component {
   constructor(props) {
@@ -12,10 +14,36 @@ class LoginPage extends Component {
       email: '',
       isError: false,
       message: null,
+      loading: false,
+      linkInvalid: false,
+      linkErrorMessage: null,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.loginCustomer = this.loginCustomer.bind(this);
+  }
+
+  componentDidMount() {
+    // Search URL for param
+    const urlParam = new URLSearchParams(window.location.search);
+    // Get the 'token' param from the URL
+    const token = urlParam.get('token');
+
+    if(!token) {
+      return;
+    }
+
+    this.setState({ loading: true });
+
+    commerce.customer.getToken('', token).then(() => {
+      Router.push('/account');
+    }).catch((error) => {
+      this.setState({
+        loading: false,
+        linkInvalid: true,
+        linkErrorMessage: error,
+      })
+    })
   }
 
   handleChange(event) {
@@ -31,9 +59,6 @@ class LoginPage extends Component {
    */
   loginCustomer(e) {
     e.preventDefault();
-    const urlParams = new URLSearchParams(window.location.search);
-    const myParam = urlParams.get('token');
-    console.log(myParam);
 
     const userEmail = this.state.email
     // Reset messaging.
@@ -44,7 +69,7 @@ class LoginPage extends Component {
 
     return commerce.customer.login(
       userEmail,
-      `${window.location.origin}/login/callback?token={token}` //@TODO: verify this is correct with Auth handler.
+      `${window.location.origin}/login?token={token}`
     )
       .then(() => {
         this.setState({
@@ -85,6 +110,11 @@ class LoginPage extends Component {
   }
 
   render() {
+
+    if (this.state.loading) {
+      return <LoginAnimation />;
+    }
+
     return (
       <Root>
         <Head>

@@ -6,6 +6,7 @@ import { wrapper } from '../store';
 import commerce from '../lib/commerce';
 import collections from '../lib/collections';
 import { loadStripe } from '@stripe/stripe-js';
+import Router from 'next/router';
 
 class MyApp extends App {
   constructor(props) {
@@ -35,9 +36,21 @@ class MyApp extends App {
     // Fetch products
     const { data: products } = await commerce.products.list();
 
+    // Check if user/customer is logged in
+    const isLoggedIn = await commerce.customer.isLoggedIn();
+
+    if (!isLoggedIn) {
+      Router.push('/login');
+    }
+
+    // Get customer details
+    const customer = await commerce.customer.about();
+
     // Allows store to be updated via the dispatch action
     ctx.store.dispatch({ type: 'STORE_CATEGORIES', payload: categories });
     ctx.store.dispatch({ type: 'STORE_PRODUCTS', payload: products });
+    ctx.store.dispatch({ type: 'SET_CUSTOMER', payload: customer });
+
 
     return {
       pageProps: {

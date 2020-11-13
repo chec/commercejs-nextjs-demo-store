@@ -147,6 +147,7 @@ class CheckoutPage extends Component {
   generateToken() {
     const { cart, dispatchGenerateCheckout, dispatchGetShippingOptions } = this.props;
     const { deliveryCountry: country, deliveryRegion: region } = this.state;
+    console.log(process.env)
 
     return dispatchGenerateCheckout(cart.id)
       .then((checkout) => {

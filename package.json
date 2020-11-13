@@ -12,12 +12,13 @@
     "seed": "chec-seed seeds"
   },
   "dependencies": {
-    "@chec/commerce.js": "^v2.3.0-beta1",
+    "@chec/commerce.js": "^2.3.0-beta2",
     "@stripe/react-stripe-js": "^1.1.2",
     "@stripe/stripe-js": "^1.11.0",
     "@zeit/next-sass": "^1.0.1",
     "body-scroll-lock": "^2.6.4",
     "dotenv": "^8.2.0",
+    "jwt-decode": "^3.1.2",
     "netlify-plugin-onboarding": "^1.0.0",
     "next": "9.5.5",
     "next-redux-wrapper": "^6.0.0",

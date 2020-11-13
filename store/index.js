@@ -15,6 +15,7 @@ import {
   REMOVE_SHIPPING_OPTIONS,
   UPDATE_CHECKOUT_LIVE_OBJECT,
   ABORT_CHECKOUT,
+  SET_CUSTOMER,
 } from './actions/actionTypes';
 
 // Declare initial state
@@ -27,6 +28,7 @@ const initialState = {
     checkoutTokenObject: {},
   },
   orderReceipt: null,
+  customer: {},
 };
 
 // Create reducer
@@ -36,12 +38,13 @@ const reducer = (state = initialState, action) => {
       // These are server side rendered from MyApp.getInitialProps, everything else should
       // come from client side state and should not be overwritten here by subsequent server
       // side hydration actions.
-      const { categories, products } = action.payload;
+      const { categories, products, customer } = action.payload;
 
       return {
         ...state,
         categories,
         products,
+        customer
       };
     // Dispatch in App SSR
     // Check if action dispatched is STORE_CATEGORIES and act on that
@@ -51,6 +54,10 @@ const reducer = (state = initialState, action) => {
     // Check if action dispatched is STORE_PRODUCTS and act on that
     case STORE_PRODUCTS:
       return { ...state, products: action.payload };
+    // Dispatch in App SSR
+    // Check if action dispatched is SET_CUSTOMER and act on that
+    case SET_CUSTOMER:
+      return { ...state, customer: action.payload };
     // Dispatch in Product client-side
     // Check if action dispatched is STORE_CART and act on that
     case RETRIEVE_CART_SUCCESS:
@@ -100,7 +107,7 @@ const reducer = (state = initialState, action) => {
 };
 
 // Enable Redux dev tools
-const devtools = (process.browser && window.__REDUX_DEVTOOLS_EXTENSION__)
+const devtools = (process.browser && window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
   ? window.__REDUX_DEVTOOLS_EXTENSION__(
     { trace: true, traceLimit: 25 }
   )
