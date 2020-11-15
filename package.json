@@ -20,6 +20,7 @@
     "dotenv": "^8.2.0",
     "jwt-decode": "^3.1.2",
     "netlify-plugin-onboarding": "^1.0.0",
+    "moment": "^2.29.1",
     "next": "9.5.5",
     "next-redux-wrapper": "^6.0.0",
     "node-sass": "^4.13.0",
