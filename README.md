@@ -85,13 +85,13 @@ Replace the sample `.env.example` dotenv file at the root of the project to stor
 cp .env.example .env
 ```
 
-You can access your API key under in your Chec dashboard setup, then navigate to the Develop tab to copy your Public Key and Secret Key. Replace the provided `CHEC_PUBLIC_KEY` with your own and fill in your `CHEC_SECRET_KEY` in the `.env` file. The secret key is necessary for the seed script to have the proper permission to seed the sample data in `/seeds` into your Chec account. Remove the secret key once the data is seeded.
+You can access your API key under in your Chec dashboard setup, then navigate to the Develop tab to copy your Public Key and Secret Key. Replace the provided `NEXT_PUBLIC_CHEC_PUBLIC_KEY` with your own and fill in your `CHEC_SECRET_KEY` in the `.env` file. The secret key is necessary for the seed script to have the proper permission to seed the sample data in `/seeds` into your Chec account. Remove the secret key once the data is seeded.
 
-```js
-// .env
+```dotenv
+# .env
 
 # Fill in your public key and secret key
-CHEC_PUBLIC_KEY=
+NEXT_PUBLIC_CHEC_PUBLIC_KEY=
 CHEC_API_URL=https://api.chec.io
 # Secret key is used with chec/seeder to access your Chec account to seed it with sample data
 CHEC_SECRET_KEY=
@@ -116,7 +116,7 @@ If you are replacing the sample products, be sure to add new categories in the d
 
 **STEP 6.** Deploy your site
 
-Be sure to sign up for a Netlify account and log in to it. Click the **New site from Git** button and give access to select your repo. Your build settings are automatically filled out for your from the `netlify.toml` in the template. To enter your environment variables, click **Show advanced** then **New variable** and fill in the key input as CHEC_PUBLIC_KEY and the value input with your Public Key. You can access your API key in your Chec dashboard under Setup, then navigate to the Developer tab to copy your Public Key
+Be sure to sign up for a Netlify account and log in to it. Click the **New site from Git** button and give access to select your repo. Your build settings are automatically filled out for your from the `netlify.toml` in the template. To enter your environment variables, click **Show advanced** then **New variable** and fill in the key input as `NEXT_PUBLIC_CHEC_PUBLIC_KEY` and the value input with your Public Key. You can access your API key in your Chec dashboard under Setup, then navigate to the Developer tab to copy your Public Key
 
 Now go ahead and click the "deploy site" to see your live site!
 

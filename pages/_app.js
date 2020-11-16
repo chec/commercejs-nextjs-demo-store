@@ -1,11 +1,26 @@
+/* global process */
 import App from 'next/app';
 import React from 'react';
 import '../style/scss/style.scss';
 import { wrapper } from '../store';
 import commerce from '../lib/commerce';
 import collections from '../lib/collections';
+import { loadStripe } from '@stripe/stripe-js';
 
 class MyApp extends App {
+  constructor(props) {
+    super(props);
+
+    // If using Stripe, initialise it here. This allows Stripe to track behaviour
+    // as much as possible in order to determine fraud risk.
+    this.stripePromise = null;
+    if (process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) { // has API key
+        this.stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+    }
+  }
+
+  stripePromise = null;
+
   static async getInitialProps({ Component, ctx }) {
     // Fetch data on load
     // Fetch categories
@@ -34,7 +49,8 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps } = this.props;
-    return <Component {...pageProps} />;
+
+    return <Component {...pageProps} stripe={this.stripePromise} />;
   }
 }
 

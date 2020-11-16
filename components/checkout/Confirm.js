@@ -38,8 +38,56 @@ class Confirm extends Component {
         role="button"
       >
         <img src="/icon/print.svg" className="mr-2 w-20 no-print"/>
-        <div className="no-print">Print Receipt</div>
+        <div className="no-print">Print receipt</div>
       </button>
+    );
+  }
+
+  renderSubtotal() {
+    const { orderReceipt } = this.props;
+
+    return (
+      <div className="py-3">
+        <div className="d-flex justify-content-between align-items-center mb-2">
+          <p>Subtotal</p>
+          <p className="text-right font-weight-medium">
+            ${orderReceipt.order.subtotal.formatted_with_code}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  renderShippingTotal() {
+    const { orderReceipt } = this.props;
+    if (!orderReceipt.order.shipping) {
+      return;
+    }
+
+    return (
+      <div className="pb-3">
+        <div className="d-flex justify-content-between align-items-center mb-2">
+          <p>Shipping</p>
+          <p className="text-right font-weight-medium">
+            ${orderReceipt.order.shipping.price.formatted_with_code}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  renderTotal() {
+    const { orderReceipt } = this.props;
+
+    return (
+      <div className="d-flex justify-content-between align-items-center mb-2 pt-3 border-top border-color-black">
+        <p className="font-size-title font-weight-semibold">
+          Order total
+        </p>
+        <p className="text-right font-weight-semibold font-size-title">
+          ${orderReceipt.order.total.formatted_with_code}
+        </p>
+      </div>
     );
   }
 
@@ -67,7 +115,7 @@ class Confirm extends Component {
                 Your order completed successfully
                 </h4>
                 <p className="text-center font-color-light mb-5">
-                  Here is your order number for reference : {orderReceipt.customer_reference}
+                  Here is your order number for reference: {orderReceipt.customer_reference}
                 </p>
                 <div className="d-flex w-100 justify-content-center flex-column flex-sm-row">
                   <Link href="/">
@@ -90,9 +138,9 @@ class Confirm extends Component {
                   <div className="border-bottom border-color-gray400 d-flex justify-content-between align-items-start pb-3 flex-column flex-sm-row">
                     <div>
                       <p className="font-color-light mb-2">
-                        Receipt Number: {orderReceipt.customer_reference}
+                        Receipt number: {orderReceipt.customer_reference}
                       </p>
-                      <p className="font-size-subheader">Order Details</p>
+                      <p className="font-size-subheader">Order details</p>
                     </div>
                     { this.renderPrintButton() }
                   </div>
@@ -115,9 +163,12 @@ class Confirm extends Component {
                           <p className="mb-2 font-weight-medium">
                             {item.quantity} x {item.product_name}
                           </p>
-                          <p className="font-color-light">
-                            {item.variants[0].variant_name}: {item.variants[0].option_name}
-                          </p>
+                          { item.variants.length > 0 && (
+                            /* todo support multiple variants here */
+                            <p className="font-color-light">
+                              {item.variants[0].variant_name}: {item.variants[0].option_name}
+                            </p>
+                          ) }
                         </div>
                         <div className="text-right font-weight-semibold">
                           {item.line_total.formatted_with_symbol}
@@ -126,18 +177,9 @@ class Confirm extends Component {
                     ))}
                   </div>
 
-                  <div className="py-3 borderbottom border-color-black">
-                      <div className="d-flex justify-content-between align-items-center mb-2">
-                        <p>Subtotal</p>
-                        <p className="text-right font-weight-medium">${orderReceipt.order.subtotal.formatted_with_code}</p>
-                      </div>
-                  </div>
-                  <div className="d-flex justify-content-between align-items-center mb-2 pt-3">
-                    <p className="font-size-title font-weight-semibold">
-                      Order total
-                    </p>
-                    <p className="text-right font-weight-semibold font-size-title">${orderReceipt.order.total.formatted_with_code}</p>
-                  </div>
+                  { this.renderSubtotal() }
+                  { this.renderShippingTotal() }
+                  { this.renderTotal() }
                 </div>
               </div>
             </div>
