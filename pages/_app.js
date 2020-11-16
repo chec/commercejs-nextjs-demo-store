@@ -13,9 +13,10 @@ class MyApp extends App {
 
     // If using Stripe, initialise it here. This allows Stripe to track behaviour
     // as much as possible in order to determine fraud risk.
-    // if (has API key) { // has API key
-        this.stripePromise = loadStripe('pk_test_olpBAfYCgcE7AZrDiNCX2tTs0004OPGisI');
-    // }
+    this.stripePromise = null;
+    if (process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) { // has API key
+        this.stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+    }
   }
 
   stripePromise = null;

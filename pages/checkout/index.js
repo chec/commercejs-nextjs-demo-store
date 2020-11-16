@@ -93,7 +93,7 @@ class CheckoutPage extends Component {
     // on initial mount generate checkout token object from the cart,
     // and then subsequently below in componentDidUpdate if the props.cart.total_items has changed
     this.generateToken();
-    this.getRegions(this.state.deliveryCountry)
+    this.getRegions(this.state.deliveryCountry);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -327,6 +327,10 @@ class CheckoutPage extends Component {
 
     // If test gateway selected add necessary card data for the order to be completed.
     if (this.state.selectedGateway === 'test_gateway') {
+      this.setState({
+        loading: true,
+      });
+
       newOrder.payment.card = {
         number: this.state.cardNumber,
         expiry_month: this.state.expMonth,
@@ -498,7 +502,7 @@ class CheckoutPage extends Component {
           {/* Row */}
           <div className="row mt-4">
             <div className="col-12 col-md-10 col-lg-6 offset-md-1 offset-lg-0">
-              {/* Breadcrums Desktop */}
+              {/* Breadcrumbs Desktop */}
               <div className="d-none d-sm-flex pb-4">
                 <Link href="/collection">
                   <div className="font-size-caption text-decoration-underline cursor-pointer">
@@ -513,39 +517,36 @@ class CheckoutPage extends Component {
               {
                 checkout
                 && (
-                <form onChange={this.handleChangeForm}>
-                  {/* ShippingDetails */}
-                  <p className="font-size-subheader font-weight-semibold mb-4">
-                    Customer and Shipping Details
-                  </p>
-                  <div className="mb-5">
-                    <ShippingForm
-                      firstName={this.state.firstName}
-                      lastName={this.state.lastName}
-                      customerEmail={this.state['customer[email]']}
-                      shippingOptions={shippingOptions}
-                      countries={this.state.countries}
-                      subdivisions={this.state.subdivisions}
-                      deliveryCountry={this.state.deliveryCountry}
-                      deliveryRegion={this.state.deliveryRegion}
-                      selectedShippingOptionId={this.state['fulfillment[shipping_method]']}
-                      selectedShippingOption={selectedShippingOption}
-                      shippingStreet={this.state['shipping[street]']}
-                      shippingStreet2={this.state.street2}
-                      shippingTownCity={this.state['shipping[town_city]']}
-                      shippingPostalZipCode={this.state['shipping[postal_zip_code]']}
-                      orderNotes={this.state.orderNotes}
-                    />
-                  </div>
+                  <form onChange={this.handleChangeForm}>
+                    {/* ShippingDetails */}
+                    <p className="font-size-subheader font-weight-semibold mb-4">
+                      Customer and shipping details
+                    </p>
+                    <div className="mb-5">
+                      <ShippingForm
+                        firstName={this.state.firstName}
+                        lastName={this.state.lastName}
+                        customerEmail={this.state['customer[email]']}
+                        shippingOptions={shippingOptions}
+                        countries={this.state.countries}
+                        subdivisions={this.state.subdivisions}
+                        deliveryCountry={this.state.deliveryCountry}
+                        deliveryRegion={this.state.deliveryRegion}
+                        selectedShippingOptionId={this.state['fulfillment[shipping_method]']}
+                        selectedShippingOption={selectedShippingOption}
+                        shippingStreet={this.state['shipping[street]']}
+                        shippingStreet2={this.state.street2}
+                        shippingTownCity={this.state['shipping[town_city]']}
+                        shippingPostalZipCode={this.state['shipping[postal_zip_code]']}
+                        orderNotes={this.state.orderNotes}
+                      />
+                    </div>
 
-                  { this.renderPaymentDetails() }
+                    { this.renderPaymentDetails() }
 
-                  {/* Billing Address */}
-                  {
-                    checkout.collectsBillingAddress ?
-                    <BillingDetails />
-                    : ''
-                  }
+                    {/* Billing Address */}
+                    { checkout.collects && checkout.collects.billing_address && <BillingDetails /> }
+
                     <p className="checkout-error">
                       { !selectedShippingOption ? 'Select a shipping option!' : '' }
                     </p>

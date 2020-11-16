@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { CardElement } from '@stripe/react-stripe-js';
 import PropTypes from 'prop-types';
 import Radiobox from '../../common/atoms/Radiobox';
-import {CardElement, Elements, ElementsConsumer} from "@stripe/react-stripe-js";
 
 export default class PaymentDetails extends Component {
   /**
