@@ -160,6 +160,11 @@ class Header extends Component {
             </Link>
           </div>
           <div className="d-flex">
+            <Link href="/login">
+              <a className="font-color-black login">
+                Login
+              </a>
+            </Link>
             <div
               className="position-relative cursor-pointer"
               onClick={this.toggleCart}
