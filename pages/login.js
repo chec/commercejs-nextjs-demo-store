@@ -36,8 +36,8 @@ class LoginPage extends Component {
     }).catch((error) => {
       this.setState({
         loading: false,
-        linkInvalid: true,
-        linkErrorMessage: error,
+        isError: true,
+        message: ['The login link has expired. Please try again'],
       })
     })
   }
