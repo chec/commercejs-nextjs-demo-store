@@ -21,5 +21,6 @@ export const REMOVE_SHIPPING_OPTIONS = 'REMOVE_SHIPPING_OPTIONS';
 export const UPDATE_CHECKOUT_LIVE_OBJECT = 'UPDATE_CHECKOUT_LIVE_OBJECT';
 export const ABORT_CHECKOUT = 'ABORT_CHECKOUT';
 
-// Define customer action types
+
+// Define customer/authentication action types
 export const SET_CUSTOMER = 'SET_CUSTOMER';

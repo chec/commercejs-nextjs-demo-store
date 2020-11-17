@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Lottie from 'react-lottie';
-import animationData from '../../lotties/login.json.json';
+import animationData from '../../lotties/login.json';
 
 export default function LoginAnimation() {
   const defaultOptions = {
@@ -14,13 +14,13 @@ export default function LoginAnimation() {
   };
 
   return (
-    <div className="loader-animation">
+    <div className="login-animation pt-20">
       <Lottie
         options={defaultOptions}
-        height={500}
-        width={400}
+        height={175}
+        width={200}
       />
-      <h1 className="text-center font-family-secondary">Logging in...</h1>
+      <h2 className="login-animation__title text-center font-family-secondary">Logging in...</h2>
     </div>
   );
 }

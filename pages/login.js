@@ -3,8 +3,8 @@ import Head from 'next/head';
 import Root from '../components/common/Root';
 import Footer from '../components/common/Footer';
 import commerce from '../lib/commerce';
-import Router from 'next/router';
-import LoginAnimation from '../../components/customer/LoginAnimation';
+import Router, { withRouter } from 'next/router';
+import LoginAnimation from '../components/customer/LoginAnimation';
 
 class LoginPage extends Component {
   constructor(props) {
@@ -15,8 +15,6 @@ class LoginPage extends Component {
       isError: false,
       message: null,
       loading: false,
-      linkInvalid: false,
-      linkErrorMessage: null,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -24,10 +22,8 @@ class LoginPage extends Component {
   }
 
   componentDidMount() {
-    // Search URL for param
-    const urlParam = new URLSearchParams(window.location.search);
-    // Get the 'token' param from the URL
-    const token = urlParam.get('token');
+    // Get the 'token' from router
+    const { token } = this.props.router.query;
 
     if(!token) {
       return;
@@ -35,7 +31,7 @@ class LoginPage extends Component {
 
     this.setState({ loading: true });
 
-    commerce.customer.getToken('', token).then(() => {
+    commerce.customer.getToken(token).then(() => {
       Router.push('/account');
     }).catch((error) => {
       this.setState({
@@ -160,4 +156,4 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+export default withRouter(LoginPage);
