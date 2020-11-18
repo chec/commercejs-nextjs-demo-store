@@ -163,7 +163,7 @@ Because this project is a fully fledged storefront showcasing a custom design an
 
 ## Commerce.js features
 
-This demo store uses a range of features provided by Commerce.js and powered by the Chec dsashboard.
+This demo store uses a range of features provided by Commerce.js and powered by the Chec Dashboard.
 
 ### Carts
 
@@ -187,12 +187,12 @@ used to pre-populate the checkout with known customer details.
 ### Payment gateways
 
 This demo store is configured with the Chec "test gateway" out of the box, which provides a handy payment option while
-testing your storefront. Additionally, support for Stripe elements is included if Stripe is configured on the Chec
+testing your storefront. Additionally, support for Stripe Elements is included if Stripe is configured on the Chec
 Dashboard.
 
 #### Enabling Stripe
 
-You must enable Stripe in the Chec dashboard by following the instructions in the dashboard. You may add your sandbox
+You must enable Stripe in the Chec Dashboard by following the instructions provided. You may add your sandbox
 keys for Stripe, and use a sandbox Chec public API key to test with Stripe. Both the Chec public API key, and the Stripe
 "publishable" key are configured in the `.env` file. See step two of 
 "[Manual setup and Netlify deployment](#manual-setup-and-netlify-deployment)"
