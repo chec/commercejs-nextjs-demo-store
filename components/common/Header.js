@@ -146,6 +146,7 @@ class Header extends Component {
           </span>) }
           <button
             className="bg-transparent mr-2 font-color-black font-weight-semibold"
+            type="button"
             onClick={this.handleLogout}
           >
             Logout
