@@ -16,6 +16,7 @@ import {
   UPDATE_CHECKOUT_LIVE_OBJECT,
   ABORT_CHECKOUT,
   SET_CUSTOMER,
+  CLEAR_CUSTOMER,
 } from './actions/actionTypes';
 
 // Declare initial state
@@ -55,6 +56,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, products: action.payload };
     // Dispatch in App client-side
     // Check if action dispatched is SET_CUSTOMER and act on that
+    case CLEAR_CUSTOMER:
+      return { ...state, customer: null };
     case SET_CUSTOMER:
       return { ...state, customer: action.payload };
     // Dispatch in Product client-side

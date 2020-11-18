@@ -3,6 +3,8 @@ import Link from 'next/link';
 import Cart from '../cart/Cart';
 import { Transition } from 'react-transition-group';
 import { connect } from 'react-redux'
+import commerce from '../../lib/commerce';
+import { clearCustomer } from '../../store/actions/authenticateActions';
 
 import Animation from '../cart/Animation';
 
@@ -44,6 +46,7 @@ class Header extends Component {
       showMobileMenu: false,
       showCart: false,
       playAddToCartAnimation: false,
+      loggedIn: false,
     };
 
     this.header = React.createRef();
@@ -54,11 +57,16 @@ class Header extends Component {
     this.toggleMobileMenu = this.toggleMobileMenu.bind(this);
     this.toggleAddToCartAnimation = this.toggleAddToCartAnimation.bind(this);
     this.handleAddToCartToggle = this.handleAddToCartToggle.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
     window.addEventListener('Commercejs.Cart.Item.Added', this.handleAddToCartToggle);
+
+    this.setState({
+      loggedIn: commerce.customer.isLoggedIn(),
+    });
   }
 
   componentWillUnmount() {
@@ -75,6 +83,14 @@ class Header extends Component {
 
   handleScroll() {
     window.requestAnimationFrame(this.animate);
+  }
+
+  handleLogout() {
+    commerce.customer.logout();
+    this.props.clearCustomer();
+    this.setState({
+      loggedIn: false,
+    });
   }
 
   animate() {
@@ -119,6 +135,34 @@ class Header extends Component {
     }, 3000)
   }
 
+  renderLoginLogout() {
+    const { customer } = this.props;
+
+    if (this.state.loggedIn) {
+      return (
+        <div className="d-flex align-items-center">
+          { customer && customer.firstname && (<span className="mr-2 font-weight-regular">
+            Hi, { customer.firstname }!
+          </span>) }
+          <button
+            className="bg-transparent mr-2 font-color-black font-weight-semibold"
+            onClick={this.handleLogout}
+          >
+            Logout
+          </button>
+        </div>
+      );
+    }
+
+    return (
+      <Link href="/login">
+        <a className="font-color-black login">
+          Login
+        </a>
+      </Link>
+    );
+  }
+
   render() {
     const { showMobileMenu, showCart } = this.state;
     const { transparent, cart } = this.props;
@@ -160,11 +204,7 @@ class Header extends Component {
             </Link>
           </div>
           <div className="d-flex">
-            <Link href="/login">
-              <a className="font-color-black login">
-                Login
-              </a>
-            </Link>
+            { process.browser && this.renderLoginLogout() }
             <div
               className="position-relative cursor-pointer"
               onClick={this.toggleCart}
@@ -206,4 +246,7 @@ class Header extends Component {
   }
 }
 
-export default connect(state => state)(Header);
+export default connect(
+  state => state,
+  { clearCustomer },
+)(Header);
