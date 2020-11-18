@@ -3,9 +3,12 @@ import App from 'next/app';
 import React from 'react';
 import '../style/scss/style.scss';
 import { wrapper } from '../store';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import commerce from '../lib/commerce';
 import collections from '../lib/collections';
 import { loadStripe } from '@stripe/stripe-js';
+import { setCustomer } from '../store/actions/authenticateActions';
 
 class MyApp extends App {
   constructor(props) {
@@ -20,6 +23,10 @@ class MyApp extends App {
   }
 
   stripePromise = null;
+
+  componentDidMount() {
+    this.props.setCustomer();
+  }
 
   static async getInitialProps({ Component, ctx }) {
     // Fetch data on load
@@ -43,15 +50,25 @@ class MyApp extends App {
       pageProps: {
         // Call page-level getInitialProps
         ...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {}),
-      },
+      }
     };
   }
 
   render() {
     const { Component, pageProps } = this.props;
 
-    return <Component {...pageProps} stripe={this.stripePromise} />;
+    return (
+      <Component
+        {...pageProps}
+        stripe={this.stripePromise}
+      />
+    );
   }
 }
 
-export default wrapper.withRedux(MyApp);
+//export default wrapper.withRedux(connect(null, { setCustomer })(MyApp));
+
+export default compose(
+  wrapper.withRedux, // HOC wrapper
+  connect(null, { setCustomer }) // function that returns wrapper
+)(MyApp);

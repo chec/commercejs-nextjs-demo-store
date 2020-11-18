@@ -3,6 +3,8 @@ import Head from 'next/head';
 import Root from '../components/common/Root';
 import Footer from '../components/common/Footer';
 import commerce from '../lib/commerce';
+import Router, { withRouter } from 'next/router';
+import LoginAnimation from '../components/customer/LoginAnimation';
 
 class LoginPage extends Component {
   constructor(props) {
@@ -12,10 +14,32 @@ class LoginPage extends Component {
       email: '',
       isError: false,
       message: null,
+      loading: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.loginCustomer = this.loginCustomer.bind(this);
+  }
+
+  componentDidMount() {
+    // Get the 'token' from router
+    const { token } = this.props.router.query;
+
+    if(!token) {
+      return;
+    }
+
+    this.setState({ loading: true });
+
+    commerce.customer.getToken(token).then(() => {
+      Router.push('/account');
+    }).catch((error) => {
+      this.setState({
+        loading: false,
+        isError: true,
+        message: ['The login link has expired. Please try again'],
+      })
+    })
   }
 
   handleChange(event) {
@@ -31,9 +55,6 @@ class LoginPage extends Component {
    */
   loginCustomer(e) {
     e.preventDefault();
-    const urlParams = new URLSearchParams(window.location.search);
-    const myParam = urlParams.get('token');
-    console.log(myParam);
 
     const userEmail = this.state.email
     // Reset messaging.
@@ -44,7 +65,7 @@ class LoginPage extends Component {
 
     return commerce.customer.login(
       userEmail,
-      `${window.location.origin}/login/callback?token={token}` //@TODO: verify this is correct with Auth handler.
+      `${window.location.origin}/login?token={token}`
     )
       .then(() => {
         this.setState({
@@ -85,6 +106,11 @@ class LoginPage extends Component {
   }
 
   render() {
+
+    if (this.state.loading) {
+      return <LoginAnimation />;
+    }
+
     return (
       <Root>
         <Head>
@@ -130,4 +156,4 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+export default withRouter(LoginPage);
