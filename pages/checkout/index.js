@@ -36,6 +36,7 @@ class CheckoutPage extends Component {
       firstName: 'John',
       lastName: 'Doe',
       'customer[email]': 'john@doe.com',
+      'customer[id]': null,
       'shipping[name]': 'John Doe',
       'shipping[street]': '318 Homer Street',
       street2: '',
@@ -90,6 +91,8 @@ class CheckoutPage extends Component {
     if (this.props.cart && this.props.cart.total_items === 0) {
       this.redirectOutOfCheckout()
     }
+
+    this.updateCustomerFromRedux();
     // on initial mount generate checkout token object from the cart,
     // and then subsequently below in componentDidUpdate if the props.cart.total_items has changed
     this.generateToken();
@@ -107,6 +110,10 @@ class CheckoutPage extends Component {
       this.generateToken();
     }
 
+    if (this.props.customer && !prevProps.customer) {
+      this.updateCustomerFromRedux();
+    }
+
     const hasDeliveryCountryChanged = prevState.deliveryCountry !== this.state.deliveryCountry;
     const hasDeliveryRegionChanged = prevState.deliveryRegion !== this.state.deliveryRegion;
 
@@ -117,7 +124,7 @@ class CheckoutPage extends Component {
 
     // if delivery country or region have changed, and we still have a checkout token object, then refresh the token,
     // and reset the previously selected shipping method
-    if (hasDeliveryCountryChanged || hasDeliveryRegionChanged && this.props.checkout) {
+    if ((hasDeliveryCountryChanged || hasDeliveryRegionChanged) && this.props.checkout) {
       // reset selected shipping option since previous checkout token live object shipping info
       // was set based off delivery country, deliveryRegion
       this.setState({
@@ -139,6 +146,44 @@ class CheckoutPage extends Component {
         this.state.deliveryRegion
       );
     }
+  }
+
+  /**
+   * Uses the customer provided by redux and updates local state with customer detail (if present)
+   */
+  updateCustomerFromRedux() {
+    // Pull the customer object from prop (provided by redux)
+    const { customer } = this.props;
+
+    // Exit early if the customer doesn't exist
+    if (!customer) {
+      return;
+    }
+
+    // Build a some new state to use with "setState" below
+    const newState = {
+      firstName: '',
+      lastName: '',
+      'customer[email]': customer.email,
+      'customer[id]': customer.id,
+      'shipping[name]': '',
+    };
+
+    if (customer.firstname) {
+      newState.firstName = customer.firstname;
+      newState['shipping[name]'] = customer.firstname;
+    }
+
+    if (customer.lastname) {
+      newState.lastName = customer.lastname;
+
+      // Fill in the rest of the full name for shipping if the first name was also available
+      if (customer.firstname) {
+        newState['shipping[name]'] += ` ${customer.lastname}`;
+      }
+    }
+
+    this.setState(newState);
   }
 
   /**
@@ -698,8 +743,9 @@ const InjectedCheckoutPage = (passProps) => {
 
 export default withRouter(
   connect(
-    ({ checkout: { checkoutTokenObject, shippingOptions }, cart, orderReceipt }) => ({
+    ({ checkout: { checkoutTokenObject, shippingOptions }, cart, customer, orderReceipt }) => ({
       checkout: checkoutTokenObject,
+      customer,
       shippingOptions,
       cart,
       orderReceipt,
