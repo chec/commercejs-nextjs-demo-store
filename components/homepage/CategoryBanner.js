@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 class CategoryBanner extends Component {
   render() {
-    const { categories } = this.props;
+    const categories = this.props.categories.filter(category => category.link);
 
     return (
       <div className="bg-brand300 py-5 collection-banner">
