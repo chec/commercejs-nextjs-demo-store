@@ -14,6 +14,10 @@ export const setCustomer = () => (dispatch) => {
   }
   return commerce.customer.about().then((customer) => {
     dispatch({ type: SET_CUSTOMER, payload: customer.data })
+  }).catch(() => {
+    // Most likely a 404, meaning the customer doesn't exist. It should be logged out
+    commerce.customer.logout();
+    dispatch({ type: SET_CUSTOMER, payload: null })
   });
 }
 

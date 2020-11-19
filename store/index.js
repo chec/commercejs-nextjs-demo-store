@@ -29,7 +29,7 @@ const initialState = {
     checkoutTokenObject: {},
   },
   orderReceipt: null,
-  customer: {},
+  customer: null,
 };
 
 // Create reducer
