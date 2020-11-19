@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import commerce from '../../lib/commerce';
 import Head from 'next/head';
+import Link from 'next/link';
 import Root from '../../components/common/Root';
 import Footer from '../../components/common/Footer';
 import moment from 'moment';
@@ -55,7 +56,7 @@ export default function SingleOrderPage() {
     return (
       <div>
         <h5>Billing address</h5>
-        <div className="card p-2">
+        <div className="card p-2 mb-4">
           <div>
             <div><strong>{ data.name }</strong></div>
             <div>{ data.street }</div>
@@ -133,14 +134,45 @@ export default function SingleOrderPage() {
   return (
     <Root>
       <Head>
-        <title>{ data.id } | commerce</title>
+        <title>{ data.customer_reference } | commerce</title>
       </Head>
       <div className="account-container">
-          <div className="container">
+          <div className="custom-container py-5 my-4 my-sm-5">
+          {/* Breadcrums Mobile */}
+            <div
+              className="d-flex d-sm-none px-4 py-3 borderbottom border-color-gray400 justify-content-center"
+              style={{ margin: '0 -1.5rem' }}
+            >
+              <Link href="/account">
+                <div className="font-size-caption text-decoration-underline cursor-pointer">
+                  Account
+                </div>
+              </Link>
+              <img src="/icon/arrow-right.svg" className="w-16 mx-1" alt="Arrow icon"/>
+              <div className="font-size-caption cursor-pointer">
+              { data.customer_reference }
+              </div>
+            </div>
+            <div className="row mt-4">
+              <div className="col-12">
+                {/* Breadcrumbs Desktop */}
+                <div className="d-none d-sm-flex pb-4">
+                  <Link href="/account">
+                    <div className="font-size-caption text-decoration-underline cursor-pointer">
+                      Account
+                    </div>
+                  </Link>
+                  <img src="/icon/arrow-right.svg" className="w-16 mx-1" alt="Arrow icon"/>
+                  <div className="font-size-caption font-weight-bold cursor-pointer">
+                  { data.customer_reference }
+                  </div>
+                </div>
+              </div>
+            </div>
             <div className="row mt-5 pt-5">
               <div className="col-12">
                 <h2 className="font-size-header mb-4 pt-5 text-center">
-                  Order: #{ data.id }
+                  Order: #{ data.customer_reference }
                 </h2>
                 {alert}
               </div>

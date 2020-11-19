@@ -143,7 +143,7 @@ class customerAccountPage extends Component {
               <td>
                 <div>
                   <Link href={`account/${order.id}`}>
-                    <a href={`account/${order.id}`}>#{ order.id }</a>
+                    <a href={`account/${order.id}`}>#{ order.customer_reference }</a>
                   </Link>
                 </div>
                 <small className="text-muted">{ moment.unix(order.created).format('MMM Do Y') }</small>
@@ -197,8 +197,8 @@ class customerAccountPage extends Component {
           <title>Account</title>
         </Head>
         <div className="account-container">
-          <div className="container">
-            <div className="row mt-5 pt-5">
+          <div className="custom-container py-5 my-4 my-sm-5">
+            <div className="row mt-4">
               <div className="col-12">
                 <h2 className="font-size-header mb-4 pt-5 text-center">
                   My account
