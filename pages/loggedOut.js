@@ -1,6 +1,7 @@
 import React from 'react';
 import Root from '../components/common/Root';
 import Head from 'next/head';
+import Link from 'next/link';
 import Footer from '../components/common/Footer';
 
 const LoggedOut = () => (
