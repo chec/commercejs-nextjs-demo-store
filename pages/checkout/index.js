@@ -527,28 +527,11 @@ class CheckoutPage extends Component {
         </Head>
 
         <div className="custom-container py-5 my-4 my-sm-5">
-
-          {/* Breadcrums Mobile */}
-          <div
-            className="d-flex d-sm-none px-4 py-3 borderbottom border-color-gray400 justify-content-center"
-            style={{ margin: '0 -1.5rem' }}
-          >
-            <Link href="/collection">
-              <div className="font-size-caption text-decoration-underline cursor-pointer">
-                Cart
-              </div>
-            </Link>
-            <img src="/icon/arrow-right.svg" className="w-16 mx-1" alt="Arrow icon"/>
-            <div className="font-size-caption cursor-pointer">
-              Checkout
-            </div>
-          </div>
-
           {/* Row */}
           <div className="row mt-4">
             <div className="col-12 col-md-10 col-lg-6 offset-md-1 offset-lg-0">
-              {/* Breadcrumbs Desktop */}
-              <div className="d-none d-sm-flex pb-4">
+              {/* Breadcrumbs */}
+              <div className="d-flex pb-4 breadcrumb-container">
                 <Link href="/collection">
                   <div className="font-size-caption text-decoration-underline cursor-pointer">
                     Cart

@@ -48,7 +48,7 @@ export default function SingleOrderPage() {
     return (
       <small><strong>Ordered placed on:</strong> { moment(date).format('MMM Do Y') }</small>
     )
-  }
+  };
 
   /**
    * Create thumbnail if available
@@ -59,9 +59,9 @@ export default function SingleOrderPage() {
     }
 
     return (
-      <img className="img-thumbnail h-72 mr-4" alt={data.product_name} src={data.media.source}></img>
+      <img className="img-thumbnail h-72 mr-4" alt={data.product_name} src={data.media.source} />
     )
-  }
+  };
 
   /**
    * Create the billing card
@@ -84,7 +84,7 @@ export default function SingleOrderPage() {
         </div>
       </div>
     )
-  }
+  };
 
   /**
    * Create the shipping card
@@ -107,23 +107,24 @@ export default function SingleOrderPage() {
         </div>
       </div>
     )
-  }
+  };
 
   /**
    * Create error/loading page
    */
   const TemplatePage = ({ page: data }) => {
     return (
-    <Root>
-      <Head>
-        <title>commerce</title>
-      </Head>
-      <div className="py-5 my-5 text-center">
-        <h4 className="mt-4">{ data.message }</h4>
-      </div>
-      <Footer />
-    </Root>
-  )}
+      <Root>
+        <Head>
+          <title>commerce</title>
+        </Head>
+        <div className="py-5 my-5 text-center">
+          <h4 className="mt-4">{ data.message }</h4>
+        </div>
+        <Footer />
+      </Root>
+    )
+  };
 
   /**
    * Render a page if an error occured
@@ -156,25 +157,10 @@ export default function SingleOrderPage() {
       </Head>
       <div className="account-container">
           <div className="custom-container py-5 my-4 my-sm-5">
-          {/* Breadcrums Mobile */}
-            <div
-              className="d-flex d-sm-none px-4 py-3 borderbottom border-color-gray400 justify-content-center"
-              style={{ margin: '0 -1.5rem' }}
-            >
-              <Link href="/account">
-                <div className="font-size-caption text-decoration-underline cursor-pointer">
-                  Account
-                </div>
-              </Link>
-              <img src="/icon/arrow-right.svg" className="w-16 mx-1" alt="Arrow icon"/>
-              <div className="font-size-caption cursor-pointer">
-              { data.customer_reference }
-              </div>
-            </div>
             <div className="row mt-4">
               <div className="col-12">
-                {/* Breadcrumbs Desktop */}
-                <div className="d-none d-sm-flex pb-4">
+                {/* Breadcrumbs */}
+                <div className="d-flex pb-4 breadcrumb-container">
                   <Link href="/account">
                     <div className="font-size-caption text-decoration-underline cursor-pointer">
                       Account
@@ -225,42 +211,44 @@ export default function SingleOrderPage() {
                       )
                     })}
                   </tbody>
-                  <tbody>
+                  <tfoot>
                     <tr>
-                      <td colSpan="4">
+                      <td colSpan="3" className="border-right-0">
                         Subtotal
-                        <span className="float-right">
-                          { data.order.subtotal.formatted_with_symbol}
-                        </span>
+                      </td>
+                      <td className="border-left-0 text-right">
+                        { data.order.subtotal.formatted_with_symbol}
                       </td>
                     </tr>
                     <tr>
-                      <td colSpan="4">
+                      <td colSpan="3" className="border-right-0">
                         Shipping
-                        <span className="float-right">
-                          { data.order.shipping.price.formatted_with_symbol}
-                        </span>
+                      </td>
+                      <td className="border-left-0 text-right">
+                        { data.order.shipping.price.formatted_with_symbol}
                       </td>
                     </tr>
                     <tr>
-                      <td colSpan="4">
+                      <td colSpan="3" className="border-right-0">
                         Tax
-                        <span className="float-right">
-                          { data.order.tax.amount.formatted_with_symbol}
-                        </span>
+                      </td>
+                      <td className="border-left-0 text-right">
+                        { data.order.tax.amount.formatted_with_symbol}
                       </td>
                     </tr>
                     <tr>
-                      <td colSpan="4">
+                      <td colSpan="3" className="border-right-0">
                         <strong>
                           Total
-                          <span className="float-right">
-                            { data.order.total.formatted_with_symbol}
-                          </span>
+                        </strong>
+                      </td>
+                      <td className="border-left-0 text-right">
+                        <strong>
+                          { data.order.total.formatted_with_symbol}
                         </strong>
                       </td>
                     </tr>
-                  </tbody>
+                  </tfoot>
                 </table>
               </div>
               <div className="col-12 col-md-4 col-lg-4 row-content">

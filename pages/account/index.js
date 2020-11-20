@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Head from 'next/head';
 import Root from '../../components/common/Root';
 import Footer from '../../components/common/Footer';
+import LoggedOut from '../loggedOut';
 import Link from 'next/link';
 import commerce from '../../lib/commerce';
 import moment from 'moment';
@@ -9,9 +10,10 @@ import { connect } from 'react-redux';
 import Router, { withRouter } from 'next/router';
 
 
-class customerAccountPage extends Component {
+class CustomerAccountPage extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       isError: false,
       message: null,
@@ -20,49 +22,49 @@ class customerAccountPage extends Component {
   }
 
   componentDidMount() {
-    this.verifyAuth()
+    this.verifyAuth();
   }
 
   /**
    * Verify the user is logged in, if true retrieve orders
    */
-  async verifyAuth() {
-    const isLogged = await commerce.customer.isLoggedIn();
+  verifyAuth() {
+    const isLogged = commerce.customer.isLoggedIn();
     if (!isLogged) {
       return Router.push('/');
     }
     this.getOrders()
-  }
+  };
 
   /**
    * Check if date is valid and format
    */
-  dateFormatter(dateTime, prepend) {
+  formatDate(dateTime, prepend) {
     const date = moment.unix(dateTime);
 
     if (date.isValid) {
       return date.format('MMM Do Y');
     }
     return null;
-  }
+  };
 
   /**
    * Build customer since tag.
    */
   customerSince() {
-    if (this.dateFormatter(this.props.customer.created) === null) {
+    if (this.formatDate(this.props.customer.created) === null) {
       return null;
     }
     return (
-      <small><strong>Customer since:</strong> { this.dateFormatter(this.props.customer.created) }</small>
+      <small><strong>Customer since:</strong> { this.formatDate(this.props.customer.created) }</small>
     );
-  }
+  };
 
   /**
    * Get the orders
    */
   getOrders() {
-    return commerce.customer.getOrders(this.props.customer.id)
+    return commerce.customer.getOrders()
       .then((response) => {
         this.setState({
           isError: false,
@@ -73,18 +75,20 @@ class customerAccountPage extends Component {
         this.setState({
           isError: true,
           message: [
-            'Opps, looks like an error occured!'
+            'Opps, looks like an error occurred!'
           ],
         });
       });
-  }
+  };
 
   /**
-   * Get the fulfillmeng status
+   * Get the fulfillment status
    */
   getFulfillmentStatus(status) {
     if (!status) {
-      return null;
+      return (
+        <span className="badge badge-secondary">Processing</span>
+      );
     }
     if (status === 'fulfilled') {
       return (
@@ -97,15 +101,28 @@ class customerAccountPage extends Component {
         <span className="badge badge-secondary">Processing</span>
       );
     }
-  }
+
+    return (
+      <span className="badge badge-secondary">Processing</span>
+    );
+  };
 
   /**
    * Get the payment status
    */
   getPaymentStatus(status) {
     if (!status) {
-      return null;
+      return (
+        <span className="badge badge-secondary">Pending</span>
+      );
     }
+
+    if (status === 'not-paid') {
+      return (
+        <span className="badge badge-warning">Not paid</span>
+      );
+    }
+
     if (status === 'paid') {
       return (
         <span className="badge badge-success">Paid</span>
@@ -117,19 +134,32 @@ class customerAccountPage extends Component {
         <span className="badge badge-danger">Refunded</span>
       );
     }
-  }
+
+    return (
+      <span className="badge badge-secondary">Pending</span>
+    );
+  };
+
   /**
-   * Get the last used shipping address
+   * Get the customer's shipping address
    */
-  getLastUsedAddress() {
-    if (this.state.orders.length === 0) {
+  renderShippingAddress() {
+    const { orders } = this.state;
+
+    if (!orders || !orders.length) {
       return (
         <div>
           You havent placed an order yet!
         </div>
-      )
+      );
     }
+
     const { shipping } = this.state.orders.data[0];
+
+    if (!shipping) {
+      return null;
+    }
+
     return (
       <div>
         <div>{ shipping.name }</div>
@@ -137,16 +167,18 @@ class customerAccountPage extends Component {
         <div>{ shipping.town_city}{(shipping.town_city && shipping.county_state) ? ',':'' } { shipping.county_state }</div>
         <div>{ shipping.country}{(shipping.country && shipping.postal_zip_code) ? ',':'' } { shipping.postal_zip_code }</div>
       </div>
-    )
-  }
+    );
+  };
 
-  ordersTable() {
-    if(this.state.orders.length === 0) {
+  renderOrdersTable() {
+    const { orders } = this.state;
+
+    if (!orders || orders.length) {
       return (
         <div className="card text-center p-2">
           <p>You havent placed any orders yet!</p>
         </div>
-      )
+      );
     }
 
     return (
@@ -167,10 +199,10 @@ class customerAccountPage extends Component {
               <td>
                 <div>
                   <Link href={`account/${order.id}`}>
-                    <a href={`account/${order.id}`}>#{ order.customer_reference }</a>
+                    <a>#{ order.customer_reference }</a>
                   </Link>
                 </div>
-                <small className="text-muted">{ this.dateFormatter(order.created) }</small>
+                <small className="text-muted">{ this.formatDate(order.created) }</small>
               </td>
               <td>
                 { this.getPaymentStatus(order.status_payment) }
@@ -181,7 +213,7 @@ class customerAccountPage extends Component {
               <td>{ order.order_value.formatted_with_symbol }</td>
               <td>
                 <Link href={`account/${order.id}`}>
-                  <a href={`account/${order.id}`} className="">View order</a>
+                  <a>View order</a>
                 </Link>
               </td>
             </tr>
@@ -189,8 +221,8 @@ class customerAccountPage extends Component {
         })}
       </tbody>
     </table>
-    )
-  }
+    );
+  };
 
   renderAlert() {
     const { isError, message } = this.state;
@@ -218,28 +250,15 @@ class customerAccountPage extends Component {
     // Displays message when the customer logs out.
     if (!this.props.customer) {
       return (
-        <Root>
-          <Head>
-            <title>commerce</title>
-          </Head>
-          <div className="account-container">
-            <div className="custom-container py-5 my-4 my-sm-5">
-              <div className="row mt-4">
-                <div className="col-12 text-center">
-                  <h2 className="font-size-header mb-4 pt-5">
-                    You have successfully logged out.
-                  </h2>
-                  <Link href="/">
-                    <a href="/" className="mt-4">Continue shopping</a>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-          <Footer />
-        </Root>
+        <LoggedOut />
       );
     }
+    const {
+      firstname,
+      lastname,
+      email,
+    } = this.props.customer;
+
     return (
       <Root>
         <Head>
@@ -261,26 +280,25 @@ class customerAccountPage extends Component {
                   <h5>Order history</h5>
                   { this.customerSince() }
                 </div>
-                { this.ordersTable() }
+                { this.renderOrdersTable() }
               </div>
               <div className="col-12 col-md-4 col-lg-4 row-content">
                 <div className="card p-2 mt-6">
                   <h5 className="mb-2">
-                  { this.props.customer.firstname }
-                  { this.props.customer.lastname }
+                  { firstname } { lastname }
                   </h5>
                   <a
-                    href={`mailto:${this.props.customer.email}`}
+                    href={`mailto:${email}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mb-2"
                   >
-                    { this.props.customer.email }
+                    { email }
                   </a>
                   <h6>
                     Shipping address
                   </h6>
-                  { this.getLastUsedAddress() }
+                  { this.renderShippingAddress() }
                 </div>
               </div>
             </div>
@@ -292,14 +310,14 @@ class customerAccountPage extends Component {
   }
 }
 
-const mapStateToProps = function(state) {
+const mapStateToProps = (state) => {
   return {
     customer: state.customer,
-  }
-}
+  };
+};
 
 export default withRouter(
   connect(
-    mapStateToProps
-  )(customerAccountPage),
+    mapStateToProps,
+  )(CustomerAccountPage),
 );
