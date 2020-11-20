@@ -35,6 +35,30 @@ class customerAccountPage extends Component {
   }
 
   /**
+   * Check if date is valid and format
+   */
+  dateFormatter(dateTime, prepend) {
+    const date = moment.unix(dateTime);
+
+    if (date.isValid) {
+      return date.format('MMM Do Y');
+    }
+    return null;
+  }
+
+  /**
+   * Build customer since tag.
+   */
+  customerSince() {
+    if (this.dateFormatter(this.props.customer.created) === null) {
+      return null;
+    }
+    return (
+      <small><strong>Customer since:</strong> { this.dateFormatter(this.props.customer.created) }</small>
+    );
+  }
+
+  /**
    * Get the orders
    */
   getOrders() {
@@ -110,8 +134,8 @@ class customerAccountPage extends Component {
       <div>
         <div>{ shipping.name }</div>
         <div>{ shipping.street }</div>
-        <div>{`${ shipping.town_city}, ${ shipping.county_state }`}</div>
-        <div>{`${ shipping.country}, ${ shipping.postal_zip_code }`}</div>
+        <div>{ shipping.town_city}{(shipping.town_city && shipping.county_state) ? ',':'' } { shipping.county_state }</div>
+        <div>{ shipping.country}{(shipping.country && shipping.postal_zip_code) ? ',':'' } { shipping.postal_zip_code }</div>
       </div>
     )
   }
@@ -146,7 +170,7 @@ class customerAccountPage extends Component {
                     <a href={`account/${order.id}`}>#{ order.customer_reference }</a>
                   </Link>
                 </div>
-                <small className="text-muted">{ moment.unix(order.created).format('MMM Do Y') }</small>
+                <small className="text-muted">{ this.dateFormatter(order.created) }</small>
               </td>
               <td>
                 { this.getPaymentStatus(order.status_payment) }
@@ -157,7 +181,7 @@ class customerAccountPage extends Component {
               <td>{ order.order_value.formatted_with_symbol }</td>
               <td>
                 <Link href={`account/${order.id}`}>
-                  <a href={`account/${order.id}`} className="">View Order</a>
+                  <a href={`account/${order.id}`} className="">View order</a>
                 </Link>
               </td>
             </tr>
@@ -191,6 +215,28 @@ class customerAccountPage extends Component {
   }
 
   render() {
+    // Displays message when the customer logs out.
+    if (!this.props.customer) {
+      return (
+        <Root>
+          <Head>
+            <title>commerce</title>
+          </Head>
+          <div className="account-container">
+            <div className="custom-container py-5 my-4 my-sm-5">
+              <div className="row mt-4">
+                <div className="col-12">
+                  <h2 className="font-size-header mb-4 pt-5 text-center">
+                    You have successfully logged out.
+                  </h2>
+                </div>
+              </div>
+            </div>
+          </div>
+          <Footer />
+        </Root>
+      );
+    }
     return (
       <Root>
         <Head>
@@ -210,7 +256,7 @@ class customerAccountPage extends Component {
               <div className="col-12 col-md-8 col-lg-8">
                 <div className="d-flex flex-row justify-content-between">
                   <h5>Order history</h5>
-                  <small><strong>Customer since:</strong> { moment.unix(this.props.customer.created).format('MMM Do Y') }</small>
+                  { this.customerSince() }
                 </div>
                 { this.ordersTable() }
               </div>

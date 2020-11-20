@@ -33,6 +33,24 @@ export default function SingleOrderPage() {
   }, [id]);
 
   /**
+   * Create order date if available
+   */
+  const OrderDate = ({ date: data }) => {
+    if (!data) {
+      return null;
+    }
+
+    const date = moment.unix(data);
+
+    if (!date.isValid) {
+      return null
+    }
+    return (
+      <small><strong>Ordered On:</strong> { moment(date).format('MMM Do Y') }</small>
+    )
+  }
+
+  /**
    * Create thumbnail if available
    */
   const ImageThumb = ({ image: data }) => {
@@ -60,8 +78,8 @@ export default function SingleOrderPage() {
           <div>
             <div><strong>{ data.name }</strong></div>
             <div>{ data.street }</div>
-            <div>{`${ data.town_city}, ${ data.county_state }`}</div>
-            <div>{`${ data.country}, ${ data.postal_zip_code }`}</div>
+            <div>{ data.town_city}{(data.town_city && data.county_state) ? ',':'' } { data.county_state }</div>
+            <div>{ data.country}{(data.town_city && data.county_state) ? ',':'' } { data.postal_zip_code }</div>
           </div>
         </div>
       </div>
@@ -83,8 +101,8 @@ export default function SingleOrderPage() {
           <div>
             <div><strong>{ data.name }</strong></div>
             <div>{ data.street }</div>
-            <div>{`${ data.town_city}, ${ data.county_state }`}</div>
-            <div>{`${ data.country}, ${ data.postal_zip_code }`}</div>
+            <div>{ data.town_city}{(data.town_city && data.county_state) ? ',':'' }  { data.county_state }</div>
+            <div>{ data.country}{(data.town_city && data.county_state) ? ',':'' }  { data.postal_zip_code }</div>
           </div>
         </div>
       </div>
@@ -181,7 +199,7 @@ export default function SingleOrderPage() {
               <div className="col-12 col-md-8 col-lg-8">
                 <div className="d-flex flex-row justify-content-between">
                   <h5>Items</h5>
-                  <small><strong>Ordered On:</strong> { moment.unix(data.created).format('MMM Do Y') }</small>
+                  <OrderDate date={data.created}/>
                 </div>
                 <table className="table table-bordered">
                   <thead>
