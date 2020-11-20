@@ -162,11 +162,8 @@ class CheckoutPage extends Component {
 
     // Build a some new state to use with "setState" below
     const newState = {
-      firstName: '',
-      lastName: '',
       'customer[email]': customer.email,
       'customer[id]': customer.id,
-      'shipping[name]': '',
     };
 
     if (customer.firstname) {
@@ -277,14 +274,18 @@ class CheckoutPage extends Component {
     if (error.type === 'validation') {
       console.error('Error while capturing order!', error.message);
 
-      const messageStack = typeof error.message === 'string' ? [error.message] : error.message;
-      messageStack.forEach(({param, error}, i) => {
+      if (typeof error.message === 'string') {
+        alert(error.message);
+        return;
+      }
+
+      error.message.forEach(({param, error}, i) => {
         this.setState({
           errors: {
             ...this.state.errors,
             [param]: error
-          }
-        })
+          },
+        });
       })
 
       errorToAlert = messageStack.reduce((string, error) => {
