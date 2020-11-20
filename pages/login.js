@@ -25,10 +25,6 @@ class LoginPage extends Component {
     // Get the 'token' from router
     const { token } = this.props.router.query;
 
-    if(!token) {
-      return;
-    }
-
     this.setState({ loading: true });
 
     commerce.customer.getToken(token).then(() => {

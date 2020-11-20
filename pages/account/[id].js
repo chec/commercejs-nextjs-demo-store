@@ -46,7 +46,7 @@ export default function SingleOrderPage() {
       return null
     }
     return (
-      <small><strong>Ordered On:</strong> { moment(date).format('MMM Do Y') }</small>
+      <small><strong>Ordered placed on:</strong> { moment(date).format('MMM Do Y') }</small>
     )
   }
 

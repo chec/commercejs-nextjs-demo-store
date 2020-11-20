@@ -225,10 +225,13 @@ class customerAccountPage extends Component {
           <div className="account-container">
             <div className="custom-container py-5 my-4 my-sm-5">
               <div className="row mt-4">
-                <div className="col-12">
-                  <h2 className="font-size-header mb-4 pt-5 text-center">
+                <div className="col-12 text-center">
+                  <h2 className="font-size-header mb-4 pt-5">
                     You have successfully logged out.
                   </h2>
+                  <Link href="/">
+                    <a href="/" className="mt-4">Continue shopping</a>
+                  </Link>
                 </div>
               </div>
             </div>

@@ -146,7 +146,7 @@ class Header extends Component {
           </span>) }
           <Link href="/account">
             <a className="font-color-black mx-2">
-              My Account
+              My account
             </a>
           </Link>
           <button
