@@ -144,6 +144,11 @@ class Header extends Component {
           { customer && customer.firstname && (<span className="mr-2 font-weight-regular">
             Hi, { customer.firstname }!
           </span>) }
+          <Link href="/account">
+            <a className="font-color-black mx-2">
+              My account
+            </a>
+          </Link>
           <button
             className="bg-transparent mr-2 font-color-black font-weight-semibold"
             type="button"

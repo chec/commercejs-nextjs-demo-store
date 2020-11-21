@@ -1,0 +1,8 @@
+.breadcrumb-container {
+  @include small-xs {
+    border-bottom: 1px solid $gray-400; 
+    justify-content: center;
+    margin-right: -1.5rem;
+    margin-left: -1.5rem;
+  }
+}
