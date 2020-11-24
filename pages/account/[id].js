@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import commerce from '../../lib/commerce';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux'
+import moment from 'moment';
+import commerce from '../../lib/commerce';
 import Root from '../../components/common/Root';
 import Footer from '../../components/common/Footer';
-import moment from 'moment';
-import { useSelector } from 'react-redux'
+import LoggedOut from '../loggedOut';
 
 export default function SingleOrderPage() {
   const router = useRouter();
@@ -127,7 +128,14 @@ export default function SingleOrderPage() {
   };
 
   /**
-   * Render a page if an error occured
+   * Render logged out message if no customer is available
+   */
+  if (!customer) {
+    return <LoggedOut />;
+  }
+
+  /**
+   * Render a page if an error occurred
    */
   if (error) {
     return <TemplatePage page={ {message: 'Sorry something went wrong.'} } />

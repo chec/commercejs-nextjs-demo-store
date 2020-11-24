@@ -253,6 +253,7 @@ class CustomerAccountPage extends Component {
         <LoggedOut />
       );
     }
+
     const {
       firstname,
       lastname,
