@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import commerce from '../../lib/commerce';
 import Head from 'next/head';
 import Link from 'next/link';
+import Router, { useRouter } from 'next/router';
+import { useSelector } from 'react-redux'
+import moment from 'moment';
+import commerce from '../../lib/commerce';
 import Root from '../../components/common/Root';
 import Footer from '../../components/common/Footer';
-import moment from 'moment';
-import { useSelector } from 'react-redux'
+import LoggedOut from '../loggedOut';
 
 export default function SingleOrderPage() {
   const router = useRouter();
@@ -14,7 +15,18 @@ export default function SingleOrderPage() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const customer = useSelector(state => state.customer)
+  const customer = useSelector(state => state.customer);
+
+  /**
+   * Verify the user is logged in, if not send them back to home. Only runs when in the
+   * browser.
+   */
+  const verifyAuth = () => {
+    if (typeof window !== 'undefined' && !commerce.customer.isLoggedIn()) {
+      return Router.push('/');
+    }
+  };
+  verifyAuth();
 
   useEffect(() => {
     const fetchOrderById = async (id) => {
@@ -127,7 +139,14 @@ export default function SingleOrderPage() {
   };
 
   /**
-   * Render a page if an error occured
+   * Render logged out message if no customer is available
+   */
+  if (!customer) {
+    return <LoggedOut />;
+  }
+
+  /**
+   * Render a page if an error occurred
    */
   if (error) {
     return <TemplatePage page={ {message: 'Sorry something went wrong.'} } />

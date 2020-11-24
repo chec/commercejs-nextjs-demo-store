@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
 import Cart from '../cart/Cart';
+import Router from 'next/router';
+import commerce from '../../lib/commerce';
+import Animation from '../cart/Animation';
 import { Transition } from 'react-transition-group';
 import { connect } from 'react-redux'
-import commerce from '../../lib/commerce';
 import { clearCustomer } from '../../store/actions/authenticateActions';
-
-import Animation from '../cart/Animation';
 
 const duration = 300;
 
@@ -86,7 +86,6 @@ class Header extends Component {
   }
 
   handleLogout() {
-    commerce.customer.logout();
     this.props.clearCustomer();
     this.setState({
       loggedIn: false,
@@ -137,13 +136,16 @@ class Header extends Component {
 
   renderLoginLogout() {
     const { customer } = this.props;
+    const { loggedIn } = this.state;
 
-    if (this.state.loggedIn) {
+    if (loggedIn) {
       return (
         <div className="d-flex align-items-center">
-          { customer && customer.firstname && (<span className="mr-2 font-weight-regular">
-            Hi, { customer.firstname }!
-          </span>) }
+          { customer && customer.firstname && (
+            <span className="mr-2 font-weight-regular">
+              Hi, { customer.firstname }!
+            </span>
+          ) }
           <Link href="/account">
             <a className="font-color-black mx-2">
               My account

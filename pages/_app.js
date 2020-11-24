@@ -66,8 +66,6 @@ class MyApp extends App {
   }
 }
 
-//export default wrapper.withRedux(connect(null, { setCustomer })(MyApp));
-
 export default compose(
   wrapper.withRedux, // HOC wrapper
   connect(null, { setCustomer }) // function that returns wrapper

@@ -34,7 +34,7 @@ class CustomerAccountPage extends Component {
       return Router.push('/');
     }
     this.getOrders()
-  };
+  }
 
   /**
    * Check if date is valid and format
@@ -46,7 +46,7 @@ class CustomerAccountPage extends Component {
       return date.format('MMM Do Y');
     }
     return null;
-  };
+  }
 
   /**
    * Build customer since tag.
@@ -58,7 +58,7 @@ class CustomerAccountPage extends Component {
     return (
       <small><strong>Customer since:</strong> { this.formatDate(this.props.customer.created) }</small>
     );
-  };
+  }
 
   /**
    * Get the orders
@@ -79,7 +79,7 @@ class CustomerAccountPage extends Component {
           ],
         });
       });
-  };
+  }
 
   /**
    * Get the fulfillment status
@@ -105,7 +105,7 @@ class CustomerAccountPage extends Component {
     return (
       <span className="badge badge-secondary">Processing</span>
     );
-  };
+  }
 
   /**
    * Get the payment status
@@ -138,7 +138,7 @@ class CustomerAccountPage extends Component {
     return (
       <span className="badge badge-secondary">Pending</span>
     );
-  };
+  }
 
   /**
    * Get the customer's shipping address
@@ -168,7 +168,7 @@ class CustomerAccountPage extends Component {
         <div>{ shipping.country}{(shipping.country && shipping.postal_zip_code) ? ',':'' } { shipping.postal_zip_code }</div>
       </div>
     );
-  };
+  }
 
   renderOrdersTable() {
     const { orders } = this.state;
@@ -176,7 +176,7 @@ class CustomerAccountPage extends Component {
     if (!orders || orders.length) {
       return (
         <div className="card text-center p-2">
-          <p>You havent placed any orders yet!</p>
+          <p>You haven't placed any orders yet!</p>
         </div>
       );
     }
@@ -222,7 +222,7 @@ class CustomerAccountPage extends Component {
       </tbody>
     </table>
     );
-  };
+  }
 
   renderAlert() {
     const { isError, message } = this.state;
@@ -253,6 +253,7 @@ class CustomerAccountPage extends Component {
         <LoggedOut />
       );
     }
+
     const {
       firstname,
       lastname,
