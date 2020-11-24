@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { useSelector } from 'react-redux'
 import moment from 'moment';
 import commerce from '../../lib/commerce';
@@ -15,7 +15,18 @@ export default function SingleOrderPage() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const customer = useSelector(state => state.customer)
+  const customer = useSelector(state => state.customer);
+
+  /**
+   * Verify the user is logged in, if not send them back to home. Only runs when in the
+   * browser.
+   */
+  const verifyAuth = () => {
+    if (typeof window !== 'undefined' && !commerce.customer.isLoggedIn()) {
+      return Router.push('/');
+    }
+  };
+  verifyAuth();
 
   useEffect(() => {
     const fetchOrderById = async (id) => {
