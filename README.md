@@ -187,8 +187,10 @@ used to pre-populate the checkout with known customer details.
 ### Payment gateways
 
 This demo store is configured with the Chec "test gateway" out of the box, which provides a handy payment option while
-testing your storefront. Additionally, support for Stripe Elements is included if Stripe is configured on the Chec
+testing your storefront. Additionally, Stripe Elements support is included if Stripe is configured on the Chec
 Dashboard.
+
+[Commerce.js <> Stripe integration documentation](https://commercejs.com/docs/guides/stripe-integration)
 
 #### Enabling Stripe
 
