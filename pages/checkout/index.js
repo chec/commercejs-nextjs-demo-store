@@ -190,6 +190,11 @@ class CheckoutPage extends Component {
     const { cart, dispatchGenerateCheckout, dispatchGetShippingOptions } = this.props;
     const { deliveryCountry: country, deliveryRegion: region } = this.state;
 
+    // Wait for a future update when a cart ID exists
+    if (typeof cart.id === 'undefined') {
+      return;
+    }
+
     return dispatchGenerateCheckout(cart.id)
       .then((checkout) => {
         // continue and dispatch getShippingOptionsForCheckout to get shipping options based on checkout.id
