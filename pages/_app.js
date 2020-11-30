@@ -6,7 +6,6 @@ import { wrapper } from '../store';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import commerce from '../lib/commerce';
-import collections from '../lib/collections';
 import { loadStripe } from '@stripe/stripe-js';
 import { setCustomer } from '../store/actions/authenticateActions';
 
@@ -29,18 +28,10 @@ class MyApp extends App {
   }
 
   static async getInitialProps({ Component, ctx }) {
-    // Fetch data on load
-    // Fetch categories
-    const categoriesResponse = await commerce.categories.list();
-
-    // Match static data record to API data to find category name
-    const categories = categoriesResponse.data.map(item => ({
-      ...collections.find(data => data.slug === item.slug),
-      ...item,
-    }));
-
     // Fetch products
+    // Fetch categories
     const { data: products } = await commerce.products.list();
+    const { data: categories } = await commerce.categories.list();
 
     // Allows store to be updated via the dispatch action
     ctx.store.dispatch({ type: 'STORE_CATEGORIES', payload: categories });
