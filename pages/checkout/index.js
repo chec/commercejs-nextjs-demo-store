@@ -1,24 +1,24 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Head from 'next/head';
-import Link from 'next/link';
-import ccFormat from '../../utils/ccFormat';
-import commerce from '../../lib/commerce';
-import Root from '../../components/common/Root';
-import ShippingForm from '../../components/checkout/common/ShippingForm';
-import PaymentDetails from '../../components/checkout/common/PaymentDetails';
-import BillingDetails from '../../components/checkout/common/BillingDetails';
-import Loader from '../../components/checkout/Loader';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import Head from "next/head";
+import Link from "next/link";
+import ccFormat from "../../utils/ccFormat";
+import commerce from "../../lib/commerce";
+import Root from "../../components/common/Root";
+import ShippingForm from "../../components/checkout/common/ShippingForm";
+import PaymentDetails from "../../components/checkout/common/PaymentDetails";
+import BillingDetails from "../../components/checkout/common/BillingDetails";
+import Loader from "../../components/checkout/Loader";
 import {
   generateCheckoutTokenFromCart as dispatchGenerateCheckout,
   getShippingOptionsForCheckout as dispatchGetShippingOptions,
   setShippingOptionInCheckout as dispatchSetShippingOptionsInCheckout,
   setDiscountCodeInCheckout as dispatchSetDiscountCodeInCheckout,
   captureOrder as dispatchCaptureOrder,
-} from '../../store/actions/checkoutActions';
-import { connect } from 'react-redux';
-import { withRouter } from 'next/router';
-import { CardElement, Elements, ElementsConsumer } from '@stripe/react-stripe-js';
+} from "../../store/actions/checkoutActions";
+import { connect } from "react-redux";
+import { withRouter } from "next/router";
+import { CardElement, Elements, ElementsConsumer } from "@stripe/react-stripe-js";
 
 /**
  * Render the checkout page
@@ -28,51 +28,51 @@ class CheckoutPage extends Component {
     super(props);
 
     this.state = {
-      deliveryCountry: 'CA',
-      deliveryRegion: 'BC',
+      deliveryCountry: "CA",
+      deliveryRegion: "BC",
 
       // string property names to conveniently identify inputs related to commerce.js validation errors
       // e.g error { param: "shipping[name]"}
-      firstName: 'John',
-      lastName: 'Doe',
-      'customer[email]': 'john@doe.com',
-      'customer[id]': null,
-      'shipping[name]': 'John Doe',
-      'shipping[street]': '318 Homer Street',
-      street2: '',
-      'shipping[town_city]': 'Vancouver',
-      'shipping[postal_zip_code]': 'V6B 2V2',
-      orderNotes: '',
+      firstName: "John",
+      lastName: "Doe",
+      "customer[email]": "john@doe.com",
+      "customer[id]": null,
+      "shipping[name]": "John Doe",
+      "shipping[street]": "318 Homer Street",
+      street2: "",
+      "shipping[town_city]": "Vancouver",
+      "shipping[postal_zip_code]": "V6B 2V2",
+      orderNotes: "",
       countries: {},
       subdivisions: {},
 
-      'fulfillment[shipping_method]': '',
-      cardNumber: ccFormat('4242424242424242'),
-      expMonth: '11',
-      expYear: '22',
-      cvc: '123',
-      billingPostalZipcode: 'V6B 2V2',
+      "fulfillment[shipping_method]": "",
+      cardNumber: ccFormat("4242424242424242"),
+      expMonth: "11",
+      expYear: "22",
+      cvc: "123",
+      billingPostalZipcode: "V6B 2V2",
 
       errors: {
-        'fulfillment[shipping_method]': null,
+        "fulfillment[shipping_method]": null,
         gateway_error: null,
-        'customer[email]': null,
-        'shipping[name]': null,
-        'shipping[street]': null,
-        'shipping[town_city]': null,
-        'shipping[postal_zip_code]': null
+        "customer[email]": null,
+        "shipping[name]": null,
+        "shipping[street]": null,
+        "shipping[town_city]": null,
+        "shipping[postal_zip_code]": null,
       },
 
-      discountCode: 'CUSTOMCOMMERCE',
+      discountCode: "",
 
-      selectedGateway: 'test_gateway',
+      selectedGateway: "",
       loading: false,
       // Optional if using Stripe, used to track steps of checkout using Stripe.js
       stripe: {
         paymentMethodId: null,
         paymentIntentId: null,
       },
-    }
+    };
 
     this.captureOrder = this.captureOrder.bind(this);
     this.generateToken = this.generateToken.bind(this);
@@ -89,7 +89,7 @@ class CheckoutPage extends Component {
   componentDidMount() {
     // if cart is empty then redirect out of checkout;
     if (this.props.cart && this.props.cart.total_items === 0) {
-      this.redirectOutOfCheckout()
+      this.redirectOutOfCheckout();
     }
 
     this.updateCustomerFromRedux();
@@ -101,11 +101,15 @@ class CheckoutPage extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     // if cart items have changed then regenerate checkout token object to reflect changes.
-    if (prevProps.cart && prevProps.cart.total_items !== this.props.cart.total_items && !this.props.orderReceipt) {
+    if (
+      prevProps.cart &&
+      prevProps.cart.total_items !== this.props.cart.total_items &&
+      !this.props.orderReceipt
+    ) {
       // reset selected shipping option
       this.setState({
-        'fulfillment[shipping_method]': '',
-      })
+        "fulfillment[shipping_method]": "",
+      });
       // regenerate checkout token object since cart has been updated
       this.generateToken();
     }
@@ -128,20 +132,21 @@ class CheckoutPage extends Component {
       // reset selected shipping option since previous checkout token live object shipping info
       // was set based off delivery country, deliveryRegion
       this.setState({
-        'fulfillment[shipping_method]': '',
-      })
+        "fulfillment[shipping_method]": "",
+      });
       this.generateToken();
     }
 
     // if selected shippiing option changes, regenerate checkout token object to reflect changes
     if (
-      prevState['fulfillment[shipping_method]'] !== this.state['fulfillment[shipping_method]']
-      && this.state['fulfillment[shipping_method]'] && this.props.checkout
+      prevState["fulfillment[shipping_method]"] !== this.state["fulfillment[shipping_method]"] &&
+      this.state["fulfillment[shipping_method]"] &&
+      this.props.checkout
     ) {
       // update checkout token object with shipping information
       this.props.dispatchSetShippingOptionsInCheckout(
         this.props.checkout.id,
-        this.state['fulfillment[shipping_method]'],
+        this.state["fulfillment[shipping_method]"],
         this.state.deliveryCountry,
         this.state.deliveryRegion
       );
@@ -162,13 +167,13 @@ class CheckoutPage extends Component {
 
     // Build a some new state to use with "setState" below
     const newState = {
-      'customer[email]': customer.email,
-      'customer[id]': customer.id,
+      "customer[email]": customer.email,
+      "customer[id]": customer.id,
     };
 
     if (customer.firstname) {
       newState.firstName = customer.firstname;
-      newState['shipping[name]'] = customer.firstname;
+      newState["shipping[name]"] = customer.firstname;
     }
 
     if (customer.lastname) {
@@ -176,7 +181,7 @@ class CheckoutPage extends Component {
 
       // Fill in the rest of the full name for shipping if the first name was also available
       if (customer.firstname) {
-        newState['shipping[name]'] += ` ${customer.lastname}`;
+        newState["shipping[name]"] += ` ${customer.lastname}`;
       }
     }
 
@@ -191,7 +196,7 @@ class CheckoutPage extends Component {
     const { deliveryCountry: country, deliveryRegion: region } = this.state;
 
     // Wait for a future update when a cart ID exists
-    if (typeof cart.id === 'undefined') {
+    if (typeof cart.id === "undefined") {
       return;
     }
 
@@ -199,15 +204,15 @@ class CheckoutPage extends Component {
       .then((checkout) => {
         // continue and dispatch getShippingOptionsForCheckout to get shipping options based on checkout.id
         this.getAllCountries(checkout);
-        return dispatchGetShippingOptions(checkout.id, country, region)
+        return dispatchGetShippingOptions(checkout.id, country, region);
       })
-      .catch(error => {
-        console.log('error caught in checkout/index.js in generateToken', error);
-      })
+      .catch((error) => {
+        console.log("error caught in checkout/index.js in generateToken", error);
+      });
   }
 
   redirectOutOfCheckout() {
-    this.props.router.push('/');
+    this.props.router.push("/");
   }
 
   handleGatewayChange(selectedGateway) {
@@ -222,24 +227,25 @@ class CheckoutPage extends Component {
       return;
     }
 
-    this.props.dispatchSetDiscountCodeInCheckout(this.props.checkout.id, this.state.discountCode)
-      .then(resp => {
+    this.props
+      .dispatchSetDiscountCodeInCheckout(this.props.checkout.id, this.state.discountCode)
+      .then((resp) => {
         if (resp.valid) {
           return this.setState({
-            discountCode: '',
+            discountCode: "",
           });
         }
         return Promise.reject(resp);
       })
-      .catch(error => {
-        alert('Sorry, the discount code could not be applied');
+      .catch((error) => {
+        alert("Sorry, the discount code could not be applied");
       });
   }
 
   handleChangeForm(e) {
     // when input cardNumber changes format using ccFormat helper
-    if (e.target.name === 'cardNumber') {
-      e.target.value = ccFormat(e.target.value)
+    if (e.target.name === "cardNumber") {
+      e.target.value = ccFormat(e.target.value);
     }
     // update form's input by name in state
     this.setState({
@@ -253,8 +259,8 @@ class CheckoutPage extends Component {
    * @param {object} result
    */
   handleCaptureSuccess(result) {
-    this.props.router.push('/checkout/confirm');
-  };
+    this.props.router.push("/checkout/confirm");
+  }
 
   /**
    * Handle an error during a `checkout.capture()` request
@@ -265,55 +271,57 @@ class CheckoutPage extends Component {
     // Clear the initial loading state
     this.setState({ loading: false });
 
-    let errorToAlert = '';
+    let errorToAlert = "";
 
     // If errors are passed as strings, output them immediately
-    if (typeof result === 'string') {
+    if (typeof result === "string") {
       alert(result);
       return;
     }
 
-    const { data: { error = {} } } = result;
+    const {
+      data: { error = {} },
+    } = result;
 
     // Handle any validation errors
-    if (error.type === 'validation') {
-      console.error('Error while capturing order!', error.message);
+    if (error.type === "validation") {
+      console.error("Error while capturing order!", error.message);
 
-      if (typeof error.message === 'string') {
+      if (typeof error.message === "string") {
         alert(error.message);
         return;
       }
 
-      error.message.forEach(({param, error}, i) => {
+      error.message.forEach(({ param, error }, i) => {
         this.setState({
           errors: {
             ...this.state.errors,
-            [param]: error
+            [param]: error,
           },
         });
-      })
+      });
 
       errorToAlert = messageStack.reduce((string, error) => {
-        return `${string} ${error.error}`
-      }, '');
+        return `${string} ${error.error}`;
+      }, "");
     }
 
     // Handle internal errors from the Chec API
-    if (['gateway_error', 'not_valid', 'bad_request'].includes(error.type)) {
+    if (["gateway_error", "not_valid", "bad_request"].includes(error.type)) {
       this.setState({
         errors: {
           ...this.state.errors,
-          [(error.type === 'not_valid' ? 'fulfillment[shipping_method]' : error.type)]: error.message
+          [error.type === "not_valid" ? "fulfillment[shipping_method]" : error.type]: error.message,
         },
-      })
-      errorToAlert = error.message
+      });
+      errorToAlert = error.message;
     }
 
     // Surface any errors to the customer
     if (errorToAlert) {
       alert(errorToAlert);
     }
-  };
+  }
 
   /**
    * Capture the order
@@ -326,10 +334,10 @@ class CheckoutPage extends Component {
     // reset error states
     this.setState({
       errors: {
-        'fulfillment[shipping_method]': null,
+        "fulfillment[shipping_method]": null,
         gateway_error: null,
-        'shipping[name]': null,
-        'shipping[street]': null,
+        "shipping[name]": null,
+        "shipping[street]": null,
       },
     });
 
@@ -349,7 +357,7 @@ class CheckoutPage extends Component {
       customer: {
         firstname: this.state.firstName,
         lastname: this.state.lastName,
-        email: this.state['customer[email]']
+        email: this.state["customer[email]"],
       },
       // collected 'order notes' data for extra field configured in the Chec Dashboard
       extrafields: {
@@ -361,23 +369,23 @@ class CheckoutPage extends Component {
         name: `${this.state.firstName} ${this.state.lastName}`,
       },
       shipping: {
-        name: this.state['shipping[name]'],
+        name: this.state["shipping[name]"],
         country: this.state.deliveryCountry,
-        street: this.state['shipping[street]'] + this.state.street2,
-        town_city: this.state['shipping[town_city]'],
+        street: this.state["shipping[street]"] + this.state.street2,
+        town_city: this.state["shipping[town_city]"],
         county_state: this.state.deliveryRegion,
-        postal_zip_code: this.state['shipping[postal_zip_code]']
+        postal_zip_code: this.state["shipping[postal_zip_code]"],
       },
       fulfillment: {
-        shipping_method: this.state['fulfillment[shipping_method]']
+        shipping_method: this.state["fulfillment[shipping_method]"],
       },
       payment: {
         gateway: this.state.selectedGateway,
       },
-    }
+    };
 
     // If test gateway selected add necessary card data for the order to be completed.
-    if (this.state.selectedGateway === 'test_gateway') {
+    if (this.state.selectedGateway === "test_gateway") {
       this.setState({
         loading: true,
       });
@@ -388,7 +396,64 @@ class CheckoutPage extends Component {
         expiry_year: this.state.expYear,
         cvc: this.state.cvc,
         postal_zip_code: this.state.billingPostalZipcode,
-      }
+      };
+    }
+
+    if (this.state.selectedGateway === "manual") {
+      this.setState({
+        loading: true,
+      });
+
+      // newOrder.payment.manual = {
+      //   id: this.checkout.gateways.manual[0].id,
+      // };
+
+      this.props
+      .dispatchCaptureOrder(this.props.checkout.id, {
+        ...newOrder,
+        payment: {
+          ...newOrder.payment,
+          manual: {
+            id: this.props.checkout.gateways.manual[0].id,
+          },
+        },
+      })
+        // If no further verification is required, go straight to the "success" handler
+        .then(this.handleCaptureSuccess)
+        .catch((error) => {
+          // Look for "requires further verification" from the Commerce.js backend. This
+          // will be surfaced as a 402 Payment Required error, with a unique type, and
+          // the secret you need to continue verifying the transaction on the frontend.
+          if (error.data.error.type !== "requires_verification") {
+            this.handleCaptureError(error);
+            return;
+          }
+
+          this.props.stripe.handleCardAction(error.data.error.param).then((result) => {
+            // Check for errors from Stripe, e.g. failure to confirm verification of the
+            // payment method, or the card was declined etc
+            if (result.error) {
+              this.handleCaptureError(result.error.message);
+              return;
+            }
+
+            // Verification has successfully been completed. Get the payment intent ID
+            // from the Stripe.js response and re-submit the Commerce.js
+            // `checkout.capture()` request with it
+            this.props
+              .dispatchCaptureOrder(this.props.checkout.id, {
+                ...newOrder,
+                payment: {
+                  ...newOrder.payment,
+                  stripe: {
+                    payment_intent_id: result.paymentIntent.id,
+                  },
+                },
+              })
+              .then(this.handleCaptureSuccess)
+              .catch(this.handleCaptureError);
+          });
+        });
     }
 
     // If Stripe gateway is selected, register a payment method, call checkout.capture(),
@@ -396,12 +461,13 @@ class CheckoutPage extends Component {
     // case we allow Stripe.js to handle this verification, then re-submit
     // `checkout.capture()` using the payment method ID or payment intent ID returned at
     // each step.
-    if (this.state.selectedGateway === 'stripe') {
+    if (this.state.selectedGateway === "stripe") {
       // Create a new Payment Method in Stripe.js
-      return this.props.stripe.createPaymentMethod({
-        type: 'card',
-        card: this.props.elements.getElement(CardElement),
-      })
+      return this.props.stripe
+        .createPaymentMethod({
+          type: "card",
+          card: this.props.elements.getElement(CardElement),
+        })
         .then((response) => {
           // Check for errors from using Stripe.js, surface to the customer if found
           if (response.error) {
@@ -415,39 +481,40 @@ class CheckoutPage extends Component {
           });
 
           // Get the payment method ID and continue with the capture request
-          this.props.dispatchCaptureOrder(this.props.checkout.id, {
-            ...newOrder,
-            payment: {
-              ...newOrder.payment,
-              stripe: {
-                payment_method_id: response.paymentMethod.id,
+          this.props
+            .dispatchCaptureOrder(this.props.checkout.id, {
+              ...newOrder,
+              payment: {
+                ...newOrder.payment,
+                stripe: {
+                  payment_method_id: response.paymentMethod.id,
+                },
               },
-            },
-          })
+            })
             // If no further verification is required, go straight to the "success" handler
             .then(this.handleCaptureSuccess)
             .catch((error) => {
               // Look for "requires further verification" from the Commerce.js backend. This
               // will be surfaced as a 402 Payment Required error, with a unique type, and
               // the secret you need to continue verifying the transaction on the frontend.
-              if (error.data.error.type !== 'requires_verification') {
+              if (error.data.error.type !== "requires_verification") {
                 this.handleCaptureError(error);
                 return;
               }
 
-              this.props.stripe.handleCardAction(error.data.error.param)
-                .then((result) => {
-                  // Check for errors from Stripe, e.g. failure to confirm verification of the
-                  // payment method, or the card was declined etc
-                  if (result.error) {
-                    this.handleCaptureError(result.error.message);
-                    return;
-                  }
+              this.props.stripe.handleCardAction(error.data.error.param).then((result) => {
+                // Check for errors from Stripe, e.g. failure to confirm verification of the
+                // payment method, or the card was declined etc
+                if (result.error) {
+                  this.handleCaptureError(result.error.message);
+                  return;
+                }
 
-                  // Verification has successfully been completed. Get the payment intent ID
-                  // from the Stripe.js response and re-submit the Commerce.js
-                  // `checkout.capture()` request with it
-                  this.props.dispatchCaptureOrder(this.props.checkout.id, {
+                // Verification has successfully been completed. Get the payment intent ID
+                // from the Stripe.js response and re-submit the Commerce.js
+                // `checkout.capture()` request with it
+                this.props
+                  .dispatchCaptureOrder(this.props.checkout.id, {
                     ...newOrder,
                     payment: {
                       ...newOrder.payment,
@@ -456,16 +523,17 @@ class CheckoutPage extends Component {
                       },
                     },
                   })
-                    .then(this.handleCaptureSuccess)
-                    .catch(this.handleCaptureError);
-                });
+                  .then(this.handleCaptureSuccess)
+                  .catch(this.handleCaptureError);
               });
-            })
+            });
+        })
         .catch(this.handleCaptureError);
     }
 
     // Capture the order
-    this.props.dispatchCaptureOrder(this.props.checkout.id, newOrder)
+    this.props
+      .dispatchCaptureOrder(this.props.checkout.id, newOrder)
       .then(this.handleCaptureSuccess)
       .catch(this.handleCaptureError);
   }
@@ -474,11 +542,14 @@ class CheckoutPage extends Component {
    * Fetch all available countries for shipping
    */
   getAllCountries(checkout) {
-    commerce.services.localeListShippingCountries(checkout.id).then(resp => {
-      this.setState({
-        countries: resp.countries
+    commerce.services
+      .localeListShippingCountries(checkout.id)
+      .then((resp) => {
+        this.setState({
+          countries: resp.countries,
+        });
       })
-    }).catch(error => console.log(error))
+      .catch((error) => console.log(error));
   }
 
   /**
@@ -487,11 +558,14 @@ class CheckoutPage extends Component {
    * @param {string} deliveryCountry
    */
   getRegions(deliveryCountry) {
-    commerce.services.localeListSubdivisions(deliveryCountry).then(resp => {
-      this.setState({
-        subdivisions: resp.subdivisions
+    commerce.services
+      .localeListSubdivisions(deliveryCountry)
+      .then((resp) => {
+        this.setState({
+          subdivisions: resp.subdivisions,
+        });
       })
-    }).catch(error => console.log(error))
+      .catch((error) => console.log(error));
   }
 
   /**
@@ -520,7 +594,9 @@ class CheckoutPage extends Component {
 
   render() {
     const { checkout, shippingOptions } = this.props;
-    const selectedShippingOption = shippingOptions.find(({id}) => id === this.state['fulfillment[shipping_method]']);
+    const selectedShippingOption = shippingOptions.find(
+      ({ id }) => id === this.state["fulfillment[shipping_method]"]
+    );
 
     if (this.state.loading) {
       return <Loader />;
@@ -543,58 +619,53 @@ class CheckoutPage extends Component {
                     Cart
                   </div>
                 </Link>
-                <img src="/icon/arrow-right.svg" className="w-16 mx-1" alt="Arrow icon"/>
-                <div className="font-size-caption font-weight-bold cursor-pointer">
-                  Checkout
-                </div>
+                <img src="/icon/arrow-right.svg" className="w-16 mx-1" alt="Arrow icon" />
+                <div className="font-size-caption font-weight-bold cursor-pointer">Checkout</div>
               </div>
-              {
-                checkout
-                && (
-                  <form onChange={this.handleChangeForm}>
-                    {/* ShippingDetails */}
-                    <p className="font-size-subheader font-weight-semibold mb-4">
-                      Customer and shipping details
-                    </p>
-                    <div className="mb-5">
-                      <ShippingForm
-                        firstName={this.state.firstName}
-                        lastName={this.state.lastName}
-                        customerEmail={this.state['customer[email]']}
-                        shippingOptions={shippingOptions}
-                        countries={this.state.countries}
-                        subdivisions={this.state.subdivisions}
-                        deliveryCountry={this.state.deliveryCountry}
-                        deliveryRegion={this.state.deliveryRegion}
-                        selectedShippingOptionId={this.state['fulfillment[shipping_method]']}
-                        selectedShippingOption={selectedShippingOption}
-                        shippingStreet={this.state['shipping[street]']}
-                        shippingStreet2={this.state.street2}
-                        shippingTownCity={this.state['shipping[town_city]']}
-                        shippingPostalZipCode={this.state['shipping[postal_zip_code]']}
-                        orderNotes={this.state.orderNotes}
-                      />
-                    </div>
+              {checkout && (
+                <form onChange={this.handleChangeForm}>
+                  {/* ShippingDetails */}
+                  <p className="font-size-subheader font-weight-semibold mb-4">
+                    Customer and shipping details
+                  </p>
+                  <div className="mb-5">
+                    <ShippingForm
+                      firstName={this.state.firstName}
+                      lastName={this.state.lastName}
+                      customerEmail={this.state["customer[email]"]}
+                      shippingOptions={shippingOptions}
+                      countries={this.state.countries}
+                      subdivisions={this.state.subdivisions}
+                      deliveryCountry={this.state.deliveryCountry}
+                      deliveryRegion={this.state.deliveryRegion}
+                      selectedShippingOptionId={this.state["fulfillment[shipping_method]"]}
+                      selectedShippingOption={selectedShippingOption}
+                      shippingStreet={this.state["shipping[street]"]}
+                      shippingStreet2={this.state.street2}
+                      shippingTownCity={this.state["shipping[town_city]"]}
+                      shippingPostalZipCode={this.state["shipping[postal_zip_code]"]}
+                      orderNotes={this.state.orderNotes}
+                    />
+                  </div>
 
-                    { this.renderPaymentDetails() }
+                  {this.renderPaymentDetails()}
 
-                    {/* Billing Address */}
-                    { checkout.collects && checkout.collects.billing_address && <BillingDetails /> }
+                  {/* Billing Address */}
+                  {checkout.collects && checkout.collects.billing_address && <BillingDetails />}
 
-                    <p className="checkout-error">
-                      { !selectedShippingOption ? 'Select a shipping option!' : '' }
-                    </p>
-                    <button
-                      type="submit"
-                      className="bg-black font-color-white w-100 border-none h-56 font-weight-semibold d-none d-lg-block checkout-btn"
-                      disabled={!selectedShippingOption}
-                      onClick={this.captureOrder}
-                    >
-                      Make payment
-                    </button>
-                  </form>
-                )
-              }
+                  <p className="checkout-error">
+                    {!selectedShippingOption ? "Select a shipping option!" : ""}
+                  </p>
+                  <button
+                    type="submit"
+                    className="bg-black font-color-white w-100 border-none h-56 font-weight-semibold d-none d-lg-block checkout-btn"
+                    disabled={!selectedShippingOption}
+                    onClick={this.captureOrder}
+                  >
+                    Make payment
+                  </button>
+                </form>
+              )}
             </div>
 
             <div className="col-12 col-lg-5 col-md-10 offset-md-1">
@@ -605,25 +676,27 @@ class CheckoutPage extends Component {
                 <div className="pt-3 borderbottom border-color-gray400">
                   {(checkout.live ? checkout.live.line_items : []).map((item, index, items) => {
                     return (
-                      <div
-                        key={item.id}
-                        className="d-flex mb-2"
-                      >
-                        { (item && item.media)
-                          && (<img className="checkout__line-item-image mr-2" src={item.media.source} alt={item.product_name}/>)
-                        }
+                      <div key={item.id} className="d-flex mb-2">
+                        {item && item.media && (
+                          <img
+                            className="checkout__line-item-image mr-2"
+                            src={item.media.source}
+                            alt={item.product_name}
+                          />
+                        )}
                         <div className="d-flex flex-grow-1">
                           <div className="flex-grow-1">
-                            <p className="font-weight-medium">
-                              {item.product_name}
-                            </p>
+                            <p className="font-weight-medium">{item.product_name}</p>
                             <p className="font-color-light">Quantity: {item.quantity}</p>
                             <div className="d-flex justify-content-between mb-2">
-                              {item.variants.map((variant) =>
-                                <p key={variant.variant_id} className="font-color-light font-weight-small">
+                              {item.variants.map((variant) => (
+                                <p
+                                  key={variant.variant_id}
+                                  className="font-color-light font-weight-small"
+                                >
                                   {variant.variant_name}: {variant.option_name}
                                 </p>
-                              )}
+                              ))}
                             </div>
                           </div>
                           <div className="text-right font-weight-semibold">
@@ -631,7 +704,7 @@ class CheckoutPage extends Component {
                           </div>
                         </div>
                       </div>
-                    )
+                    );
                   })}
                 </div>
                 <form className="row py-3 borderbottom border-color-gray400">
@@ -653,36 +726,37 @@ class CheckoutPage extends Component {
                 <div className="py-3 borderbottom border-color-black">
                   {[
                     {
-                      name: 'Subtotal',
-                      amount: checkout.live ? checkout.live.subtotal.formatted_with_symbol : '',
+                      name: "Subtotal",
+                      amount: checkout.live ? checkout.live.subtotal.formatted_with_symbol : "",
                     },
                     {
-                      name: 'Tax',
-                      amount: checkout.live ? checkout.live.tax.amount.formatted_with_symbol : '',
+                      name: "Tax",
+                      amount: checkout.live ? checkout.live.tax.amount.formatted_with_symbol : "",
                     },
                     {
-                      name: 'Shipping',
-                      amount: selectedShippingOption ? `${selectedShippingOption.description} - ${selectedShippingOption.price.formatted_with_symbol}` : 'No shipping method selected',
+                      name: "Shipping",
+                      amount: selectedShippingOption
+                        ? `${selectedShippingOption.description} - ${selectedShippingOption.price.formatted_with_symbol}`
+                        : "No shipping method selected",
                     },
                     {
-                      name: 'Discount',
-                      amount: (checkout.live && checkout.live.discount && checkout.live.discount.code) ? `Saved ${checkout.live.discount.amount_saved.formatted_with_symbol}` : 'No discount code applied',
-                    }
+                      name: "Discount",
+                      amount:
+                        checkout.live && checkout.live.discount && checkout.live.discount.code
+                          ? `Saved ${checkout.live.discount.amount_saved.formatted_with_symbol}`
+                          : "No discount code applied",
+                    },
                   ].map((item, i) => (
                     <div key={i} className="d-flex justify-content-between align-items-center mb-2">
                       <p>{item.name}</p>
-                      <p className="text-right font-weight-medium">
-                        {item.amount}
-                      </p>
+                      <p className="text-right font-weight-medium">{item.amount}</p>
                     </div>
                   ))}
                 </div>
                 <div className="d-flex justify-content-between align-items-center mb-2 pt-3">
-                  <p className="font-size-title font-weight-semibold">
-                    Total amount
-                  </p>
+                  <p className="font-size-title font-weight-semibold">Total amount</p>
                   <p className="text-right font-weight-semibold font-size-title">
-                    $ { checkout.live ? checkout.live.total.formatted_with_code : '' }
+                    $ {checkout.live ? checkout.live.total.formatted_with_code : ""}
                   </p>
                 </div>
 
@@ -704,17 +778,14 @@ class CheckoutPage extends Component {
 }
 
 CheckoutPage.propTypes = {
-  orderReceipt: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.oneOf([null]),
-  ]),
+  orderReceipt: PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf([null])]),
   checkout: PropTypes.object,
   cart: PropTypes.object,
   shippingOptions: PropTypes.array,
   dispatchGenerateCheckout: PropTypes.func,
   dispatchGetShippingOptions: PropTypes.func,
   dispatchSetDiscountCodeInCheckout: PropTypes.func,
-}
+};
 
 // If using Stripe, this provides context to the page so we can use `stripe` and
 // `elements` as props.
@@ -722,9 +793,9 @@ const InjectedCheckoutPage = (passProps) => {
   return (
     <Elements stripe={passProps.stripe}>
       <ElementsConsumer>
-        { ({ elements, stripe }) => (
+        {({ elements, stripe }) => (
           <CheckoutPage {...passProps} stripe={stripe} elements={elements} />
-        ) }
+        )}
       </ElementsConsumer>
     </Elements>
   );
@@ -745,6 +816,6 @@ export default withRouter(
       dispatchSetShippingOptionsInCheckout,
       dispatchSetDiscountCodeInCheckout,
       dispatchCaptureOrder,
-    },
-  )(InjectedCheckoutPage),
+    }
+  )(InjectedCheckoutPage)
 );
