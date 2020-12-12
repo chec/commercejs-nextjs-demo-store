@@ -229,7 +229,7 @@ class Header extends Component {
         <Transition in={showMobileMenu} timeout={duration}>
           {state => (
             <div
-              className="d-sm-none position-fixed top-0 left-0 right-0 overflow-hidden"
+              className="d-sm-none position-fixed left-0 right-0 overflow-hidden"
               style={{
                 ...defaultStyle,
                 ...transitionStyles[state],
