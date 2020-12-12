@@ -238,7 +238,7 @@ class Header extends Component {
               }}
             >
               <div
-                className="position-absolute top-0 left-0 right-0 h-100vh mobile-menu-inner bg-black700 d-flex flex-column justify-content-center"
+                className="position-absolute left-0 right-0 h-100vh mobile-menu-inner bg-black700 d-flex flex-column justify-content-center"
                 style={{
                   // Prevent mobile menu items (e.g. Home) being hidden behind navbar on small screen heights (e.g. iPhone4 landscape of 320px height)
                   top: '4em'
