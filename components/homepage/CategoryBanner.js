@@ -7,8 +7,8 @@ class CategoryBanner extends Component {
 
   renderCategoryImage(item) {
 
-      return (
-        <div
+    return (
+      <div
         className="mb-4 w-100 collection-item-image"
         style={{
           background: `url("${item}") center center/cover`
@@ -34,9 +34,9 @@ class CategoryBanner extends Component {
                 className="col-12 col-md-4 collection-item mb-5"
               >
                 <Link href={`/collection#${item.slug}`}>
-                <a className="align-items-center font-color-black flex-column cursor-pointer mb-5">
-                  <div>
-                    { item.meta.image ? this.renderCategoryImage(item.meta.image) : null }
+                  <a className="align-items-center font-color-black flex-column cursor-pointer mb-5">
+                    <div>
+                      { item.meta.image && this.renderCategoryImage(item.meta.image) }
                       <p className="mb-2 font-size-heading text-center" key={item.id}>
                         {item.name}
                       </p>

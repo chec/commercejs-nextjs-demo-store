@@ -115,7 +115,7 @@ yarn dev
 
 Now head on over to http://localhost:3000 after starting your development, your site should now be populated with the sample data!
 
-If you are replacing the sample products, be sure to add new categories in the dashboard, associate your products with them and lastly replace the `slug` and `link` values [here](https://github.com/chec/commercejs-nextjs-demo-store/blob/master/lib/collections.js).
+If you are replacing the sample products or categories, you can customize your own categories images under `public/images/collection. See [more info on data customization](#caveats-with-data-customization-important) below.
 
 **STEP 5.** Make any necessary changes you need and push the code to a repository on Github or your choice of platform.
 
@@ -149,9 +149,9 @@ seed some sample data to your Chec account. For more information, see [the Chec 
 
 ### Caveats with data customization (IMPORTANT)
 
-Because this project is a fully fledged storefront showcasing a custom design and user flow, there are certain caveats you will run into if you customize your data in the Chec Dashboard. One gotcha is with the categories data in the UI: additional collections data was added [here](https://github.com/chec/commercejs-nextjs-demo-store/blob/master/lib/collections.js) and merged with the categories data in the API. If you add new or edit the seeded sample categories data, make sure to match up the slugs/permalink values in the collections data file. The app will expect the below inventory setup in order to build, so if you'd like to customize with your inventory in the backend make sure you:
+Because this project is a fully fledged storefront showcasing a custom design and user flow, there are certain caveats you will run into if you customize your data in the Chec Dashboard. One gotcha is with the categories data in the UI: The categories feature images are added in the Chec API as meta data. If you add new or edit the seeded sample categories data, you can customize the categories feature image by replacing your image assets under `public/images/collection`. The file names will need to remain the same. If you plan on changing the files names or add new categories, you'll need to add new meta data. The app will expect the below inventory setup in order to build and render the components, so if you'd like to customize with your inventory in the backend make sure you:
 - Create your categories in the [dashboard](https://dashboard.chec.io/categories/new)
-- Replace the [collections data](https://github.com/chec/commercejs-nextjs-demo-store/blob/master/lib/collections.js) with the associated slugs and link paths to your created categories (this makes sure the collections images get merged into the collections data by matching the slugs).
+- Replace categories feature images under `public/images/collection` with your own images
 - If you want multiple assets to your products similar to the demo stores, you can [create assets](https://commercejs.com/docs/api/#create-new-asset) and [assign them to your products](https://commercejs.com/docs/api/#add-asset-to-product). [This guide](https://commercejs.com/blog/adding-assets-via-the-chec-api) walks through how to achieve this.
 
 ## 🥞 Stack
