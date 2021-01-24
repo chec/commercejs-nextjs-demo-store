@@ -409,51 +409,52 @@ class CheckoutPage extends Component {
       // };
 
       this.props
-      .dispatchCaptureOrder(this.props.checkout.id, {
-        ...newOrder,
-        payment: {
-          ...newOrder.payment,
-          manual: {
-            id: this.props.checkout.gateways.manual[0].id,
+        .dispatchCaptureOrder(this.props.checkout.id, {
+          ...newOrder,
+          payment: {
+            ...newOrder.payment,
+            manual: {
+              id: this.props.checkout.gateways.manual[0].id,
+            },
           },
-        },
-      })
-        // If no further verification is required, go straight to the "success" handler
-        .then(this.handleCaptureSuccess)
-        .catch((error) => {
-          // Look for "requires further verification" from the Commerce.js backend. This
-          // will be surfaced as a 402 Payment Required error, with a unique type, and
-          // the secret you need to continue verifying the transaction on the frontend.
-          if (error.data.error.type !== "requires_verification") {
-            this.handleCaptureError(error);
-            return;
-          }
+        })
+        .then(this.handleCaptureSuccess);
+      // If no further verification is required, go straight to the "success" handler
+      // .then(this.handleCaptureSuccess)
+      // .catch((error) => {
+      //   // Look for "requires further verification" from the Commerce.js backend. This
+      //   // will be surfaced as a 402 Payment Required error, with a unique type, and
+      //   // the secret you need to continue verifying the transaction on the frontend.
+      //   if (error.data.error.type !== "requires_verification") {
+      //     this.handleCaptureError(error);
+      //     return;
+      //   }
 
-          this.props.stripe.handleCardAction(error.data.error.param).then((result) => {
-            // Check for errors from Stripe, e.g. failure to confirm verification of the
-            // payment method, or the card was declined etc
-            if (result.error) {
-              this.handleCaptureError(result.error.message);
-              return;
-            }
+      //   this.props.stripe.handleCardAction(error.data.error.param).then((result) => {
+      //     // Check for errors from Stripe, e.g. failure to confirm verification of the
+      //     // payment method, or the card was declined etc
+      //     if (result.error) {
+      //       this.handleCaptureError(result.error.message);
+      //       return;
+      //     }
 
-            // Verification has successfully been completed. Get the payment intent ID
-            // from the Stripe.js response and re-submit the Commerce.js
-            // `checkout.capture()` request with it
-            this.props
-              .dispatchCaptureOrder(this.props.checkout.id, {
-                ...newOrder,
-                payment: {
-                  ...newOrder.payment,
-                  stripe: {
-                    payment_intent_id: result.paymentIntent.id,
-                  },
-                },
-              })
-              .then(this.handleCaptureSuccess)
-              .catch(this.handleCaptureError);
-          });
-        });
+      //     // Verification has successfully been completed. Get the payment intent ID
+      //     // from the Stripe.js response and re-submit the Commerce.js
+      //     // `checkout.capture()` request with it
+      //     this.props
+      //       .dispatchCaptureOrder(this.props.checkout.id, {
+      //         ...newOrder,
+      //         payment: {
+      //           ...newOrder.payment,
+      //           stripe: {
+      //             payment_intent_id: result.paymentIntent.id,
+      //           },
+      //         },
+      //       })
+      //       .then(this.handleCaptureSuccess)
+      //       .catch(this.handleCaptureError);
+      //   });
+      // });
     }
 
     // If Stripe gateway is selected, register a payment method, call checkout.capture(),
