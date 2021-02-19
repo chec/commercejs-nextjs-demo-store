@@ -193,7 +193,7 @@ class CustomerAccountPage extends Component {
         </tr>
       </thead>
       <tbody>
-        {(this.state.orders.length !== 0 ? this.state.orders.data : []).map((order) => {
+        {(this.state.orders && this.state.orders.data ? this.state.orders.data : []).map((order) => {
           return (
             <tr key={ order.id }>
               <td>
