@@ -94,6 +94,13 @@ class ProductDetail extends Component {
       return acc + optionDetail.price.raw;
     }, 0);
   }
+  
+  /**
+   * Get symbol of formatted price
+   */
+  getCurrencySymbol(priceFormattedWithSymbol) {
+    return priceFormattedWithSymbol.substring(1, 0);
+  }
 
   /**
    * Add to Cart
@@ -106,7 +113,8 @@ class ProductDetail extends Component {
 
   render() {
     const { product } = this.props;
-    const { name, description, variants, formatted_with_symbol: price } = product;
+    const { name, description, variants, price } = product;
+    const priceSymbol = this.getCurrencySymbol(price.formatted_with_symbol);
     const { selectedOptions } = this.state;
     const reg = /(<([^>]+)>)/ig;
 
@@ -139,7 +147,7 @@ class ProductDetail extends Component {
               Add to cart
             </span>
             <span className="border-left border-color-white pl-3">
-            ${this.getPrice()}
+            {priceSymbol}{this.getPrice()}
             </span>
           </button>
         </div>
