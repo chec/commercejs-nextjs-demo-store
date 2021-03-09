@@ -1,5 +1,6 @@
+import { useMemo } from 'react'
 import { createStore, applyMiddleware, compose } from 'redux';
-import { createWrapper, HYDRATE } from 'next-redux-wrapper';
+import { HYDRATE } from 'next-redux-wrapper';
 import thunk from 'redux-thunk';
 
 import {
@@ -19,6 +20,7 @@ import {
   CLEAR_CUSTOMER,
 } from './actions/actionTypes';
 
+let store
 // Declare initial state
 const initialState = {
   categories: [],
@@ -108,6 +110,8 @@ const reducer = (state = initialState, action) => {
   }
 };
 
+
+
 // Enable Redux dev tools
 const devtools = (process.browser && window.__REDUX_DEVTOOLS_EXTENSION__)
   ? window.__REDUX_DEVTOOLS_EXTENSION__(
@@ -124,7 +128,36 @@ const makeStore = () => {
   );
 };
 
-const debug = !process.env.NETLIFY;
 
-// Export an assembled wrapper with store's data
-export const wrapper = createWrapper(makeStore, { debug });
+export const initializeStore = (initialState) => {
+  let _store = store ?? makeStore(initialState)
+
+  // After navigating to a page with an initial Redux state, merge that state
+  // with the current state in the store, and create a new store
+  if (initialState && store) {
+    _store = makeStore({
+      ...store.getState(),
+      ...initialState,
+    })
+    // Reset the current store
+    store = undefined
+  }
+
+  // For SSG and SSR always create a new store
+  if (typeof window === 'undefined') {
+    return _store
+  }
+  // Create the store once in the client
+  if (!store) {
+    store = _store
+  }
+
+  return _store
+}
+
+
+export function useStore(initialState) {
+  const store = useMemo(() => initializeStore(initialState), [initialState])
+  return store
+}
+
