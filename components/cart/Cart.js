@@ -97,7 +97,7 @@ class Cart extends Component {
                     className="bg-transparent p-0"
                     onClick={() => toggle(false)}
                   >
-                    <img src="/icon/cross.svg" />
+                    <img src="/icon/cross.svg" title="Times icon" alt="" />
                   </button>
                 </div>
               </div>
@@ -143,7 +143,7 @@ class Cart extends Component {
               ) : (
                 <div className="d-flex align-items-center justify-content-center bg-brand300 flex-grow-1 p-4 p-md-5 flex-column">
                   <div className="position-relative cursor-pointer mb-3">
-                    <img src="/icon/cart.svg" className="w-32" />
+                    <img src="/icon/cart.svg" title="Cart icon" alt="" className="w-32" />
                     <div
                       className="position-absolute font-size-tiny font-weight-bold"
                       style={{ right: '-4px', top: '-4px' }}

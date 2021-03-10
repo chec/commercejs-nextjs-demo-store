@@ -333,13 +333,13 @@ class CheckoutPage extends Component {
       },
     });
 
-    // set up line_items object and inner variant object for order object below
+    // set up line_items object and inner variant group object for order object below
     const line_items = this.props.checkout.live.line_items.reduce((obj, lineItem) => {
-      const variants = lineItem.variants.reduce((obj, variant) => {
-        obj[variant.variant_id] = variant.option_id;
+      const variantGroups = lineItem.selected_options.reduce((obj, option) => {
+        obj[option.group_id] = option.option_id;
         return obj;
       }, {});
-      obj[lineItem.id] = { ...lineItem, variants };
+      obj[lineItem.id] = { ...lineItem, variantGroups };
       return obj;
     }, {});
 
@@ -619,9 +619,9 @@ class CheckoutPage extends Component {
                             </p>
                             <p className="font-color-light">Quantity: {item.quantity}</p>
                             <div className="d-flex justify-content-between mb-2">
-                              {item.variants.map((variant) =>
-                                <p key={variant.variant_id} className="font-color-light font-weight-small">
-                                  {variant.variant_name}: {variant.option_name}
+                              {item.selected_options.map((option) =>
+                                <p key={option.group_id} className="font-color-light font-weight-small">
+                                  {option.group_name}: {option.option_name}
                                 </p>
                               )}
                             </div>

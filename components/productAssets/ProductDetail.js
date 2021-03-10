@@ -24,21 +24,21 @@ class ProductDetail extends Component {
 
   componentDidUpdate(prevProps) {
     if (!prevProps.product || prevProps.product.id !== this.props.product.id) {
-      // Product was changed, reset selected variant options
+      // Product was changed, reset selected variant group options
       this.setSelectedOptions();
     }
   }
 
   /**
-   * Work out which options should be selected by which variants
+   * Work out which options should be selected by which variant groups
    */
   setSelectedOptions() {
     this.setState((state, props) => ({
       selectedOptions: {
         // Assign the first option as the selected value for each variant
-        ...props.product.variants.reduce((acc, variant) => ({
+        ...props.product.variant_groups.reduce((acc, variantGroup) => ({
           ...acc,
-          [variant.id]: variant.options[0].id,
+          [variantGroup.id]: variantGroup.options[0].id,
         }), {}),
       },
     }));
@@ -60,11 +60,11 @@ class ProductDetail extends Component {
   /**
    * On selecting variant
    */
-  handleSelectOption(variantId, optionId) {
+  handleSelectOption(variantGroupId, optionId) {
     this.setState({
       selectedOptions: {
         ...this.state.selectedOptions,
-        [variantId]: optionId,
+        [variantGroupId]: optionId,
       },
     });
   }
@@ -73,7 +73,10 @@ class ProductDetail extends Component {
    * Get price of selected option
    */
   getPrice() {
-    const { price: { raw: base }, variants } = this.props.product;
+    const {
+      price: { raw: base },
+      variant_groups: variantGroups,
+    } = this.props.product;
     const { selectedOptions } = this.state;
 
     if (!selectedOptions || typeof selectedOptions !== 'object') {
@@ -81,8 +84,8 @@ class ProductDetail extends Component {
     }
 
     const options = Object.entries(selectedOptions);
-    return base + options.reduce((acc, [variant, option]) => {
-      const variantDetail = variants.find(candidate => candidate.id === variant);
+    return base + options.reduce((acc, [variantGroup, option]) => {
+      const variantDetail = variantGroups.find(candidate => candidate.id === variantGroup);
       if (!variantDetail) {
         return acc;
       }
@@ -94,7 +97,7 @@ class ProductDetail extends Component {
       return acc + optionDetail.price.raw;
     }, 0);
   }
-  
+
   /**
    * Get symbol of formatted price
    */
@@ -112,8 +115,12 @@ class ProductDetail extends Component {
   }
 
   render() {
-    const { product } = this.props;
-    const { name, description, variants, price } = product;
+    const {
+      name,
+      description,
+      price,
+      variant_groups: variantGroups,
+    } = this.props.product;
     const priceSymbol = this.getCurrencySymbol(price.formatted_with_symbol);
     const { selectedOptions } = this.state;
     const reg = /(<([^>]+)>)/ig;
@@ -133,7 +140,7 @@ class ProductDetail extends Component {
           <div className="d-none d-sm-block">
             <VariantSelector
               className="mb-3"
-              variants={variants}
+              variantGroups={variantGroups}
               onSelectOption={this.handleSelectOption}
               selectedOptions={selectedOptions}
             />

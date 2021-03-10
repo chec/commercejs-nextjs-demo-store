@@ -42,20 +42,20 @@ class CartItem extends Component {
               </p>
             </div>
             <div className="d-flex justify-content-between mb-2">
-              {item.variants.map((variant, i) =>
+              {item.selected_options.map((option, i) =>
                 <p key={i} className="font-color-light font-weight-small">
-                  {variant.variant_name}: {variant.option_name}
+                  {option.group_name}: {option.option_name}
                 </p>
               )}
             </div>
             <div className="d-flex align-items-center justify-content-between pt-2 pb-4">
               <div className="d-flex align-items-center">
                 <button className="p-0 bg-transparent" onClick={() => item.quantity > 1 ? this.handleUpdateCartItem(item.id, item.quantity -1) : this.handleRemoveFromCart(item.id)}>
-                  <img src="/icon/minus.svg" className="w-16" />
+                  <img src="/icon/minus.svg" className="w-16" title="Minus icon" alt="" />
                 </button>
                 <p className="text-center px-3">{item.quantity}</p>
                 <button className="p-0 bg-transparent" onClick={() => this.handleUpdateCartItem(item.id, item.quantity +1)} >
-                  <img src="/icon/plus.svg" className="w-16" />
+                  <img src="/icon/plus.svg" className="w-16" title="Plus icon" alt=""/>
                 </button>
               </div>
               <p className="text-right text-decoration-underline font-color-medium cursor-pointer" onClick={() => this.handleRemoveFromCart(item.id)}>

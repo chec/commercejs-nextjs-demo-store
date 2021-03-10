@@ -35,9 +35,8 @@ class Confirm extends Component {
       <button
         onClick={this.handlePrint}
         className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0 no-print bg-transparent"
-        role="button"
       >
-        <img src="/icon/print.svg" className="mr-2 w-20 no-print"/>
+        <img src="/icon/print.svg" className="mr-2 w-20 no-print" title="Printer icon" alt=""/>
         <div className="no-print">Print receipt</div>
       </button>
     );
@@ -106,7 +105,7 @@ class Confirm extends Component {
             <div className="col-12 col-md-10 col-lg-6 offset-md-1 offset-lg-0">
               <div className="h-100 d-flex flex-column align-items-center justify-content-center py-5 px-4 px-sm-5">
                 <div className="bg-success700 h-64 w-64 d-flex rounded-circle align-items-center justify-content-center mb-4">
-                  <img src="/icon/check.svg" className="w-40"/>
+                  <img src="/icon/check.svg" className="w-40" title="Checkmark icon" alt="" />
                 </div>
                 <h3 className="text-center font-family-secondary mb-3">
                   Thank you for your purchase!
@@ -166,7 +165,7 @@ class Confirm extends Component {
                           { item.variants.length > 0 && (
                             /* todo support multiple variants here */
                             <p className="font-color-light">
-                              {item.variants[0].variant_name}: {item.variants[0].option_name}
+                              {item.variants[0].group_name}: {item.variants[0].option_name}
                             </p>
                           ) }
                         </div>
