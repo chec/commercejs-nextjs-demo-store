@@ -1,16 +1,16 @@
 import React from 'react';
 
-const VariantSelector = ({ variants, onSelectOption, selectedOptions, ...passthrough }) => (
+const VariantSelector = ({ variantGroups, onSelectOption, selectedOptions, ...passthrough }) => (
   <div {...passthrough}>
-    {variants.map(variant => (
-      <div key={variant.id}>
-      <span className="mr-3 font-weight-semibold">{variant.name}</span>
-      {variant.options.map(option => (
+    {variantGroups.map(group => (
+      <div key={group.id}>
+      <span className="mr-3 font-weight-semibold">{group.name}</span>
+      {group.options.map(option => (
         <span
           key={option.id}
-          onClick={() => onSelectOption(variant.id, option.id)}
+          onClick={() => onSelectOption(group.id, option.id)}
           className={`mr-3 cursor-pointer ${
-            selectedOptions[variant.id] && selectedOptions[variant.id] === option.id
+            selectedOptions[group.id] && selectedOptions[group.id] === option.id
               ? 'text-decoration-underline'
               : 'text-decoration-none'
           }`}
