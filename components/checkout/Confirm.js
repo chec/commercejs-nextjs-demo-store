@@ -36,7 +36,7 @@ class Confirm extends Component {
         onClick={this.handlePrint}
         className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0 no-print bg-transparent"
       >
-        <img src="/icon/print.svg" className="mr-2 w-20 no-print" title="Printer icon" alt=""/>
+        <img src="/icon/print.svg" className="mr-2 w-20 no-print" alt=""/>
         <div className="no-print">Print receipt</div>
       </button>
     );
@@ -105,7 +105,7 @@ class Confirm extends Component {
             <div className="col-12 col-md-10 col-lg-6 offset-md-1 offset-lg-0">
               <div className="h-100 d-flex flex-column align-items-center justify-content-center py-5 px-4 px-sm-5">
                 <div className="bg-success700 h-64 w-64 d-flex rounded-circle align-items-center justify-content-center mb-4">
-                  <img src="/icon/check.svg" className="w-40" title="Checkmark icon" alt="" />
+                  <img src="/icon/check.svg" className="w-40" alt="" />
                 </div>
                 <h3 className="text-center font-family-secondary mb-3">
                   Thank you for your purchase!
