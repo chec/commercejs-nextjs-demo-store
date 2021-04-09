@@ -27,7 +27,7 @@ const Footer = () => (
             </div>
             <div>
               <a
-                href="https://commercejs.com/company/about"
+                href="https://commercejs.com/about"
                 className="mb-3 d-block font-color-medium"
                 target="_blank"
               >
