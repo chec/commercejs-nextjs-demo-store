@@ -207,8 +207,8 @@ directions you can take eCommerce.
 - Add shipping zones and enable shipping options in each product
 - Customizing the styling
     - All global styles are done using SASS and Bootstrap
-- A/B testing unique checkout designs and flow
-- Integrating other backend tools like Content Management Systems, Customer Support, Fulfillment services, and more.
-- Fetching real client reviews from reviews APIs
+- [A/B testing checkout designs](https://commercejs.com/blog/split-ab-testing-checkouts-with-netlify) and flows
+- Integrating other backend tools like Content Management Systems, Customer Support, Fulfillment services, and more
+- Fetching real client reviews from review APIs
 - Adding search functionality
 - Leveraging [webhooks](https://commercejs.com/blog/webhooks-pizza-and-order-notifications-via-twilio) to automate post checkout actions
