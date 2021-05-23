@@ -637,7 +637,7 @@ class CheckoutPage extends Component {
                 <form className="row py-3 borderbottom border-color-gray400">
                   <input
                     name="discountCode"
-                    onChange={this.handleFormChanges}
+                    onChange={this.handleChangeForm}
                     value={this.state.discountCode}
                     placeholder="Gift card or discount code"
                     className="mr-2 col"
