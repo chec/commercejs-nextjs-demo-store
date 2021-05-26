@@ -29,11 +29,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900&display=swap"
             rel="stylesheet"
           />
-          <script src="https://unpkg.com/react-id-swiper@2.4.0/lib/react-id-swiper.min.js"></script>
-          <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css"
-          />
+          <link rel="stylesheet" href="https://unpkg.com/swiper@6.6.2/swiper-bundle.min.css" />
           <meta property="og:title" content="Commerce.js | Demo storefront" />
           <meta property="og:image" content="https://cdn.chec.io/email/assets/marketing/demo-preview.png" />
           <meta property="og:description" content="A custom, open source demo storefront built with Next.js and Commerce.js. Take a look!" />
