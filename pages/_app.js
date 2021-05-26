@@ -6,6 +6,7 @@ import { Provider  } from 'react-redux';
 import commerce from '../lib/commerce';
 import { loadStripe } from '@stripe/stripe-js';
 import { setCustomer } from '../store/actions/authenticateActions';
+import 'swiper/components/effect-fade/effect-fade.scss';
 
 const MyApp = ({Component, pageProps}) => {
 
@@ -27,7 +28,6 @@ const MyApp = ({Component, pageProps}) => {
     });
 
     commerce.categories.list().then((res) => {
-      console.log(res.data)
       store.dispatch({
         type: 'STORE_CATEGORIES',
         payload: res.data
