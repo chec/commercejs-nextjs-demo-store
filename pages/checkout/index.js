@@ -363,7 +363,8 @@ class CheckoutPage extends Component {
       shipping: {
         name: this.state['shipping[name]'],
         country: this.state.deliveryCountry,
-        street: this.state['shipping[street]'] + this.state.street2,
+        street: this.state['shipping[street]'],
+        street_2: this.state.street2,
         town_city: this.state['shipping[town_city]'],
         county_state: this.state.deliveryRegion,
         postal_zip_code: this.state['shipping[postal_zip_code]']
