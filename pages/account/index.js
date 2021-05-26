@@ -164,6 +164,7 @@ class CustomerAccountPage extends Component {
       <div>
         <div>{ shipping.name }</div>
         <div>{ shipping.street }</div>
+        { shipping.street_2 && <div>{ shipping.street_2 }</div> }
         <div>{ shipping.town_city}{(shipping.town_city && shipping.county_state) ? ',':'' } { shipping.county_state }</div>
         <div>{ shipping.country}{(shipping.country && shipping.postal_zip_code) ? ',':'' } { shipping.postal_zip_code }</div>
       </div>

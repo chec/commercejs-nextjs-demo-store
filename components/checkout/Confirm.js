@@ -151,6 +151,7 @@ class Confirm extends Component {
                     </div>
                     <div className="flex-grow-1">
                       <p className="font-color-medium">{orderReceipt.shipping.street}</p>
+                      {orderReceipt.shipping.street_2 && <p className="font-color-medium">{orderReceipt.shipping.street_2}</p>}
                       <p className="font-color-medium">{orderReceipt.shipping.town_city}, {orderReceipt.shipping.country_state}</p>
                       <p className="font-color-medium">{orderReceipt.shipping.postal_zip_code}, {orderReceipt.shipping.country}</p>
                     </div>

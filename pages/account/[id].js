@@ -90,6 +90,7 @@ export default function SingleOrderPage() {
           <div>
             <div><strong>{ data.name }</strong></div>
             <div>{ data.street }</div>
+            { data.street_2 && <div>{ data.street_2 }</div> }
             <div>{ data.town_city}{(data.town_city && data.county_state) ? ',':'' } { data.county_state }</div>
             <div>{ data.country}{(data.town_city && data.county_state) ? ',':'' } { data.postal_zip_code }</div>
           </div>
@@ -113,6 +114,7 @@ export default function SingleOrderPage() {
           <div>
             <div><strong>{ data.name }</strong></div>
             <div>{ data.street }</div>
+            { data.street_2 && <div>{ data.street_2 }</div> }
             <div>{ data.town_city}{(data.town_city && data.county_state) ? ',':'' }  { data.county_state }</div>
             <div>{ data.country}{(data.town_city && data.county_state) ? ',':'' }  { data.postal_zip_code }</div>
           </div>
