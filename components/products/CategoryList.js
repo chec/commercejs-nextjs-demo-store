@@ -17,7 +17,7 @@ export default connect(({ categories }) => ({ categories }))(
               style={{ 'fontWeight': current === category.id && 'bold' }}
               key={category.id} className="pb-2 cursor-pointer"
             >
-              { category.name }<sup>{ category.count }</sup>
+              { category.name }<sup>{ category.products }</sup>
             </li>
           </Link>
         ))}
