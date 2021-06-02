@@ -136,7 +136,7 @@ export default function SingleOrderPage() {
    * Render loading state
    */
   if (customerLoading) {
-    return <TemplatePage page={ {message: 'Loading'} } />
+    return <TemplatePage page={  { message: 'Loading...' }  } />
   }
 
   /**
