@@ -7,6 +7,7 @@ import moment from 'moment';
 import commerce from '../../lib/commerce';
 import Root from '../../components/common/Root';
 import Footer from '../../components/common/Footer';
+import TemplatePage from '../../components/common/TemplatePage';
 import LoggedOut from '../loggedOut';
 
 export default function SingleOrderPage() {
@@ -15,7 +16,10 @@ export default function SingleOrderPage() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const customer = useSelector(state => state.customer);
+  const [customer, customerLoading] = useSelector((state) => [
+    state.customer,
+    state.loading.customer,
+  ]);
 
   /**
    * Verify the user is logged in, if not send them back to home. Only runs when in the
@@ -29,6 +33,11 @@ export default function SingleOrderPage() {
   verifyAuth();
 
   useEffect(() => {
+
+    if (!customer) {
+      return;
+    }
+
     const fetchOrderById = async (id) => {
       try {
         const order = await commerce.customer.getOrder(id, customer.id);
@@ -42,7 +51,7 @@ export default function SingleOrderPage() {
     };
 
     fetchOrderById(id);
-  }, [id]);
+  }, [id, customer]);
 
   /**
    * Create order date if available
@@ -124,21 +133,11 @@ export default function SingleOrderPage() {
   };
 
   /**
-   * Create error/loading page
+   * Render loading state
    */
-  const TemplatePage = ({ page: data }) => {
-    return (
-      <Root>
-        <Head>
-          <title>commerce</title>
-        </Head>
-        <div className="py-5 my-5 text-center">
-          <h4 className="mt-4">{ data.message }</h4>
-        </div>
-        <Footer />
-      </Root>
-    )
-  };
+  if (customerLoading) {
+    return <TemplatePage page={ {message: 'Loading'} } />
+  }
 
   /**
    * Render logged out message if no customer is available
@@ -165,7 +164,7 @@ export default function SingleOrderPage() {
    * Render a page if no order found
    */
   if (!data) {
-    return <TemplatePage page={ {message: 'Sorry we cannot find an order witht that number, if you think this is in error please contact us!'} } />
+    return <TemplatePage page={ {message: 'Sorry we cannot find an order with that number, if you think this is in error please contact us!'} } />
   }
 
   /**

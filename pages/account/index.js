@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import Head from 'next/head';
 import Root from '../../components/common/Root';
 import Footer from '../../components/common/Footer';
+import TemplatePage from '../../components/common/TemplatePage';
 import LoggedOut from '../loggedOut';
 import Link from 'next/link';
 import commerce from '../../lib/commerce';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import Router, { withRouter } from 'next/router';
-
 
 class CustomerAccountPage extends Component {
   constructor(props) {
@@ -248,6 +248,11 @@ class CustomerAccountPage extends Component {
   }
 
   render() {
+
+    if (this.props.loading.customer) {
+      return <TemplatePage page={ {message: 'Loading'} } />
+    }
+
     // Displays message when the customer logs out.
     if (!this.props.customer) {
       return (
@@ -315,6 +320,7 @@ class CustomerAccountPage extends Component {
 const mapStateToProps = (state) => {
   return {
     customer: state.customer,
+    loading: state.loading,
   };
 };
 

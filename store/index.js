@@ -32,6 +32,9 @@ const initialState = {
   },
   orderReceipt: null,
   customer: null,
+  loading: {
+    customer: true,
+  },
 };
 
 // Create reducer
@@ -59,9 +62,9 @@ const reducer = (state = initialState, action) => {
     // Dispatch in App client-side
     // Check if action dispatched is SET_CUSTOMER and act on that
     case CLEAR_CUSTOMER:
-      return { ...state, customer: null };
+      return { ...state, customer: null, loading: { ...state.loading, customer: false } };
     case SET_CUSTOMER:
-      return { ...state, customer: action.payload };
+      return { ...state, customer: action.payload, loading: { ...state.loading, customer: false } };
     // Dispatch in Product client-side
     // Check if action dispatched is STORE_CART and act on that
     case RETRIEVE_CART_SUCCESS:
