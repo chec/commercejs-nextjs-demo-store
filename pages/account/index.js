@@ -250,7 +250,7 @@ class CustomerAccountPage extends Component {
   render() {
 
     if (this.props.loading.customer) {
-      return <TemplatePage page={ {message: 'Loading'} } />
+      return <TemplatePage page={  { message: 'Loading...' }  } />
     }
 
     // Displays message when the customer logs out.
