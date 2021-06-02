@@ -18,7 +18,7 @@ const MyApp = ({Component, pageProps}) => {
       setStripePromise(loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY));
     }
 
-    setCustomer();
+    store.dispatch(setCustomer());
 
     commerce.products.list().then((res) => {
       store.dispatch({
