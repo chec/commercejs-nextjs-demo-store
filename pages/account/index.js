@@ -68,7 +68,7 @@ class CustomerAccountPage extends Component {
       .then((response) => {
         this.setState({
           isError: false,
-          orders: response.data,
+          orders: response.data.data,
         });
       })
       .catch((error)=>{
@@ -154,7 +154,7 @@ class CustomerAccountPage extends Component {
       );
     }
 
-    const { shipping } = this.state.orders.data[0];
+    const { shipping } = this.state.orders[0];
 
     if (!shipping) {
       return null;
@@ -174,7 +174,7 @@ class CustomerAccountPage extends Component {
   renderOrdersTable() {
     const { orders } = this.state;
 
-    if (!orders || orders.length) {
+    if (!orders || !orders.length) {
       return (
         <div className="card text-center p-2">
           <p>You haven't placed any orders yet!</p>
@@ -194,7 +194,7 @@ class CustomerAccountPage extends Component {
         </tr>
       </thead>
       <tbody>
-        {(this.state.orders && this.state.orders.data ? this.state.orders.data : []).map((order) => {
+        {this.state.orders.map((order) => {
           return (
             <tr key={ order.id }>
               <td>

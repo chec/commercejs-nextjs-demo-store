@@ -62,7 +62,7 @@ class Collections extends Component {
                           className="position-absolute font-size-tiny text-right"
                           style={{ right: '-12px', top: '-4px' }}
                         >
-                          {category.count}
+                          {category.products}
                         </span>
                       </p>
                     </div>
