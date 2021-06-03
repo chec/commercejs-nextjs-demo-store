@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import { connect } from 'react-redux';
+import ProductCard from '../products/ProductCard';
 
 class Collections extends Component {
   constructor(props) {
@@ -106,26 +107,14 @@ class Collections extends Component {
               <div className="row mb-5 collection-1">
                 { this.filterProductsByCat(category.slug).map(product => (
                   <div key={product.id} className="col-6 col-sm-4 col-md-3">
-                    <Link href="/product/[permalink]" as={`/product/${product.permalink}`}>
-                      <a className="mb-5 d-block font-color-black cursor-pointer">
-                        <div
-                          className="mb-3"
-                          style={{
-                            paddingBottom: '125%',
-                            background: `url("${product.media.source}") center center/cover`
-                          }}
-                        />
-                        <p className="font-size-subheader mb-2 font-weight-medium">
-                          {product.name}
-                        </p>
-                        <p className="mb-2 font-color-medium">
-                          {product.description.replace(reg, '')}
-                        </p>
-                        <p className="font-size-subheader font-weight-medium pb-2 borderbottom border-color-black">
-                          {product.price.formatted_with_symbol}
-                        </p>
-                      </a>
-                    </Link>
+                    <ProductCard
+                      permalink={product.permalink}
+                      image={product.media.source}
+                      name={product.name}
+                      price={product.price.formatted_with_symbol}
+                      description={product.description && product.description.replace(reg, '')}
+                      soldOut={product.is.sold_out}
+                    />
                   </div>
                 ))}
               </div>

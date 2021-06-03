@@ -9,15 +9,15 @@ class ProductRow extends Component {
 
     return (
       <div className="row mb-5">
-        {products.map(({ id, permalink, media, name, price, description }) => (
-          <div key={id} className="col-6 col-sm-6 col-lg-3">
+        {products.map((product) => (
+          <div key={product.id} className="col-6 col-sm-6 col-lg-3">
             <ProductCard
-              id={id}
-              permalink={permalink}
-              image={media.source}
-              name={name}
-              price={price.formatted_with_symbol}
-              description={description && description.replace(reg, '')}
+              permalink={product.permalink}
+              image={product.media.source}
+              name={product.name}
+              price={product.price.formatted_with_symbol}
+              description={product.description && product.description.replace(reg, '')}
+              soldOut={product.is.sold_out}
             />
           </div>
         ))}
