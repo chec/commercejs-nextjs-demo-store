@@ -163,7 +163,7 @@ class Confirm extends Component {
                           <p className="mb-2 font-weight-medium">
                             {item.quantity} x {item.product_name}
                           </p>
-                          { item.selected_options.length > 0 && (
+                          { item.selected_options && item.selected_options.length > 0 && (
                             /* todo support multiple variants here */
                             <p className="font-color-light">
                               {item.selected_options[0].group_name}: {item.selected_options[0].option_name}
