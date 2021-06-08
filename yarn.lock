@@ -121,6 +121,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.7.4":
+  version "7.14.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.14.0.tgz#46794bc20b612c5f75e62dd071e24dfd95f1cbe6"
+  integrity sha512-JELkvo/DlpNdJ7dlyw/eY7E0suy5i5GQH+Vlxaq1nsNJ+H7f4Vtv3jMeCEgRhZZQFXTjldYfQgv2qmM6M1v5wA==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/template@^7.8.3":
   version "7.8.6"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.8.6.tgz#86b22af15f828dfb086474f964dcc3e39c43ce2b"
@@ -172,12 +179,13 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@chec/commerce.js@^2.3.0-beta2":
-  version "2.3.0-beta2"
-  resolved "https://registry.yarnpkg.com/@chec/commerce.js/-/commerce.js-2.3.0-beta2.tgz#4824a6cefe0a3483869c510becbc91eabd1d8eac"
-  integrity sha512-oU/coTV1b1NR5wihLcO/du/zEKtg0eW3Rhh7AuVaRX208mXUVeZV5Qbpq6FS9uepP9kqix8lcy22nqnL6+TmqA==
+"@chec/commerce.js@^2.6.1":
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/@chec/commerce.js/-/commerce.js-2.6.1.tgz#26765f252ac066fea3afcbf26e0dc8180dcfaa59"
+  integrity sha512-N/x+V1/miJf1ICE8E/EbD9RT9sHPPnv/qncGQpQYsMkCvHgcfGsA085HypDgzNWNRoHgy5WwuRNSWmpVTLelDw==
   dependencies:
-    axios "^0.20.0"
+    "@babel/runtime" "^7.7.4"
+    axios "^0.21.1"
 
 "@chec/seeder@^1.1.0":
   version "1.1.0"
@@ -492,10 +500,10 @@ available-typed-arrays@^1.0.2:
   resolved "https://registry.yarnpkg.com/available-typed-arrays/-/available-typed-arrays-1.0.4.tgz#9e0ae84ecff20caae6a94a1c3bc39b955649b7a9"
   integrity sha512-SA5mXJWrId1TaQjfxUYghbqQ/hYioKmLJvPJyDuYRtXXenFNMjj4hSSt1Cf1xsuXSXrtxrVC5Ot4eU6cOtBDdA==
 
-axios@^0.20.0:
-  version "0.20.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.20.0.tgz#057ba30f04884694993a8cd07fa394cff11c50bd"
-  integrity sha512-ANA4rr2BDcmmAQLOKft2fufrtuvlqR+cXNNinUmvfeSNCOF98PZL+7M/v1zIdGo7OLjEA9J2gXJL+j4zGsl0bA==
+axios@^0.21.1:
+  version "0.21.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
+  integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
   dependencies:
     follow-redirects "^1.10.0"
 

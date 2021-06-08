@@ -33,7 +33,6 @@ export default function SingleOrderPage() {
   verifyAuth();
 
   useEffect(() => {
-
     if (!customer) {
       return;
     }
@@ -43,7 +42,7 @@ export default function SingleOrderPage() {
         const order = await commerce.customer.getOrder(id, customer.id);
 
         setLoading(false);
-        setData(order.data);
+        setData(order);
       } catch (err) {
         setLoading(false);
         setError(err?.message);
@@ -198,7 +197,6 @@ export default function SingleOrderPage() {
                 <h2 className="font-size-header mb-4 pt-5 text-center">
                   Order: #{ data.customer_reference }
                 </h2>
-                {alert}
               </div>
             </div>
             <div className="row mt-5 pt-5">

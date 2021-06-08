@@ -33,7 +33,7 @@ class CustomerAccountPage extends Component {
     if (!isLogged) {
       return Router.push('/');
     }
-    this.getOrders()
+    this.getOrders();
   }
 
   /**
@@ -68,7 +68,7 @@ class CustomerAccountPage extends Component {
       .then((response) => {
         this.setState({
           isError: false,
-          orders: response.data.data,
+          orders: response.data,
         });
       })
       .catch((error)=>{
