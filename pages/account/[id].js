@@ -62,7 +62,7 @@ export default function SingleOrderPage() {
 
     const date = moment.unix(data);
 
-    if (!date.isValid) {
+    if (!date.isValid()) {
       return null
     }
     return (
