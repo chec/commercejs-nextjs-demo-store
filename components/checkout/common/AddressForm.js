@@ -58,7 +58,7 @@ export default class AddressForm extends Component {
     return (
       <>
         <div className="row">
-          <div className="col-12">
+          <div className="col-12 mb-3">
             <label className="w-100">
               <p className="mb-1 font-size-caption font-color-light">
                 Full name*
@@ -108,7 +108,7 @@ export default class AddressForm extends Component {
                 name={`${type}[street]`}
                 value={street}
                 className="rounded-0 w-100"
-                placeholder="House number, steet, etc."
+                placeholder="House number, steet address, etc."
               />
             </label>
           </div>
@@ -121,7 +121,7 @@ export default class AddressForm extends Component {
                 name={`${type}[street_2]`}
                 value={street2}
                 className="rounded-0 w-100"
-                placeholder="Appartment, buero, etc."
+                placeholder="Apartment, suite number, etc."
               />
             </label>
           </div>
@@ -151,7 +151,7 @@ export default class AddressForm extends Component {
           <div className="col-12 col-sm-6 mb-3">
             <label className="w-100">
               <p className="mb-1 font-size-caption font-color-light">
-                Postal code*
+                Postal code/zip code*
               </p>
               <input
                 required
