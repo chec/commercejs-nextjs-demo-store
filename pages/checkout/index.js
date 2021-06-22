@@ -369,7 +369,7 @@ class CheckoutPage extends Component {
         firstname: this.state['customer[first_name]'],
         lastname: this.state['customer[last_name]'],
         email: this.state['customer[email]'],
-        phone: this.state['customer[phone]']
+        phone: this.state['customer[phone]'] || undefined
       },
       // collected 'order notes' data for extra field configured in the Chec Dashboard
       extrafields: {
