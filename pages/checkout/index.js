@@ -332,9 +332,6 @@ class CheckoutPage extends Component {
   captureOrder(e) {
     e.preventDefault();
 
-    alert('test');
-    return;
-
     // reset error states
     this.setState({
       errors: {
