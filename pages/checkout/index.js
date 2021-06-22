@@ -733,7 +733,7 @@ class CheckoutPage extends Component {
             </div>
 
             <div className="col-12 col-lg-5 col-md-10 offset-md-1 mt-4 mt-lg-0">
-              <div className="bg-brand200 p-3 checkout-summary">
+              <div className="bg-brand200 p-lg-5 p-3 checkout-summary">
                 <div className="borderbottom font-size-subheader border-color-gray400 pb-2 font-weight-medium">
                   Your order
                 </div>
