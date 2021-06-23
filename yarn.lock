@@ -187,10 +187,10 @@
     "@babel/runtime" "^7.7.4"
     axios "^0.21.1"
 
-"@chec/seeder@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@chec/seeder/-/seeder-1.1.0.tgz#4d1accb620eb2ca073696f07c4fcd8e92a03dff7"
-  integrity sha512-0kpYY73E3JP7LhydKtcoNjH1KUZN0k1V3G+zg0twVTKqfyQ5swFmv2gpPHzvlSeJEz1QZ1+ItjBwvw+w6uJ/Zw==
+"@chec/seeder@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@chec/seeder/-/seeder-1.1.1.tgz#b5972229f6861cab8df6dcf184567f0458615bb2"
+  integrity sha512-g1fpM0ufLBJn6Zpaz2CclJkhrgpdSeYCVqfqmryD70Iv6+Gnr/8vccwrL7dsqrqMcxr2f1+P/sWePpXi1PjyjA==
   dependencies:
     chalk "^3.0.0"
     dotenv "^8.2.0"

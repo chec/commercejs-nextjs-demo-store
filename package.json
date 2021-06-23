@@ -36,7 +36,7 @@
     "swiper": "^6.6.2"
   },
   "devDependencies": {
-    "@chec/seeder": "^1.1.0",
+    "@chec/seeder": "^1.1.1",
     "@typescript-eslint/eslint-plugin": "2.x",
     "@typescript-eslint/parser": "2.x",
     "babel-eslint": "10.x",
