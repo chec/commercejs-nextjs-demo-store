@@ -47,7 +47,7 @@ export default class PaymentDetails extends Component {
                   </p>
                   <input
                     name="cardNumber"
-                    pattern="[0-9.]+"
+                    pattern="[0-9. ]+"
                     value={cardNumber}
                     maxLength="16"
                     className="rounded-0 w-100"

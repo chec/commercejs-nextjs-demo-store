@@ -42,7 +42,7 @@ class CustomerAccountPage extends Component {
   formatDate(dateTime, prepend) {
     const date = moment.unix(dateTime);
 
-    if (date.isValid) {
+    if (date.isValid()) {
       return date.format('MMM Do Y');
     }
     return null;

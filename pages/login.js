@@ -1,5 +1,5 @@
 import React from 'react';
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 
 // Import the login handler/form dynamically with SSR disabled to prevent Next.js
 // from "optimising" it with static rendering, which means it doesn't have access
