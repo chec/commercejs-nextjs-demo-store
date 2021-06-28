@@ -30,10 +30,10 @@ class CartItem extends Component {
     return (
       <div className="px-4 px-md-5 mb-2">
         <div className="cart-item d-flex">
-          <div
+          {item.media && <div
             className="cart-item--image mr-4"
             style={{ backgroundImage: `url("${item.media.source}")` }}
-          />
+          />}
           <div className="flex-grow-1 borderbottom border-color-gray400 h-100">
             <div className="d-flex justify-content-between mb-2">
               <p>{item.name}</p>
