@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import commerce from '../../lib/commerce';
 import { Collapse } from 'react-collapse';
 import Head from 'next/head';
@@ -23,10 +23,10 @@ const detailView = `<p>
 export default function Product() {
   const router = useRouter();
   const { permalink } = router.query;
-  const [showShipping, setShowShipping] = React.useState(false);
-  const [showDetails, setShowDetails] = React.useState(false);
-  const [product, setProduct] = React.useState(null);
-  const [loading, setLoading] = React.useState(true);
+  const [showShipping, setShowShipping] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const toggleShipping = () => {
     setShowShipping(!showShipping);
