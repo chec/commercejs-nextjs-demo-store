@@ -4,7 +4,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import Link from 'next/link';
 
 const params = {
-  modules: [EffectFade, Autoplay],
   slidesPerView: 1,
   watchOverflow: false,
   autoplay: {
