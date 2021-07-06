@@ -144,7 +144,6 @@ export async function getStaticProps({ params: { permalink } }) {
     // Pass product data to the page via props
     return product ? { props: { product } } : { notFound: true };
   } catch (error) {
-    console.error(error);
     return { notFound: true };
   }
 }
