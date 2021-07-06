@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import commerce from '../../lib/commerce';
 import { Collapse } from 'react-collapse';
 import Head from 'next/head';
+import ErrorPage from 'next/error'
+import { useRouter } from 'next/router';
 import Root from '../../components/common/Root';
+import TemplatePage from '../../components/common/TemplatePage';
 import CarouselImages from '../../components/productAssets/CarouselImages';
 import ProductDetail from '../../components/productAssets/ProductDetail';
 import ClientReview from '../../components/productAssets/ClientReview';
@@ -17,9 +20,13 @@ const detailView = `<p>
   Slightly textured fabric with tonal geometric design and a bit of shine
 </p>`;
 
-export default function Product({ product }) {
+export default function Product() {
+  const router = useRouter();
+  const { permalink } = router.query;
   const [showShipping, setShowShipping] = React.useState(false);
   const [showDetails, setShowDetails] = React.useState(false);
+  const [product, setProduct] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
 
   const toggleShipping = () => {
     setShowShipping(!showShipping);
@@ -29,9 +36,30 @@ export default function Product({ product }) {
     setShowDetails(!showDetails);
   }
 
-  // For rendering /product/[permalink]
-  if (!product) {
-    return null;
+  useEffect(() => {
+    if (!permalink) {
+      return;
+    }
+
+    const fetchProductByPermalink = async (permalink) => {
+      try {
+        const product = await commerce.products.retrieve(permalink, { type: 'permalink '});
+        setProduct(product);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+      }
+    };
+
+    fetchProductByPermalink(permalink);
+  }, [permalink]);
+
+  if (loading) {
+    return <TemplatePage page={ {message: 'Loading...'} } />
+  }
+
+  if (product === null) {
+    return <ErrorPage statusCode={404} />
   }
 
   const images = reduceProductImages(product);
@@ -111,39 +139,4 @@ export default function Product({ product }) {
     <Footer />
   </Root>
   );
-}
-
-/**
- * Use getStaticPaths() to pre-render PDP (product display page) according to page path
- */
-export async function getStaticPaths() {
-  const { data: products } = await commerce.products.list();
-
-  // Get the paths we want to pre-render based on product
-  const paths = products.map(product => ({
-    params: {
-      permalink: product.permalink,
-    },
-  }));
-
-  // We'll pre-render only these paths at build time.
-  return {
-    paths,
-    // { fallback: false } means other routes should 404.
-    fallback: true,
-  }
-}
-
-// This also gets called at build time, and fetches the product to view
-export async function getStaticProps({ params: { permalink } }) {
-  // params contains the product `permalink`.
-  // If the route is like /product/shampoo-conditioner, then params.permalink is shampoo-conditioner
-  try {
-    const product = await commerce.products.retrieve(permalink, { type: 'permalink '});
-
-    // Pass product data to the page via props
-    return product ? { props: { product } } : { notFound: true };
-  } catch (error) {
-    return { notFound: true };
-  }
 }
