@@ -30,6 +30,8 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
           <link rel="stylesheet" href="https://unpkg.com/swiper@6.6.2/swiper-bundle.min.css" />
+          <meta name="title" content="Headless Commerce example with Netlify" key="title" />
+          <meta name="description" content="This open source, headless commerce example is powered by Commerce.js and Netlify. Use it to build a headless commerce eCommerce application." />
           <meta property="og:title" content="Commerce.js | Demo storefront" />
           <meta property="og:image" content="https://cdn.chec.io/email/assets/marketing/demo-preview.png" />
           <meta property="og:description" content="A custom, open source demo storefront built with Next.js and Commerce.js. Take a look!" />
