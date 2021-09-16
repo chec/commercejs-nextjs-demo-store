@@ -4,7 +4,6 @@ import commerce from '../../../lib/commerce';
 import Dropdown from '../../common/atoms/Dropdown';
 
 export default class AddressForm extends Component {
-
   constructor(props) {
     super(props);
 
@@ -33,14 +32,14 @@ export default class AddressForm extends Component {
    *
    * @param {string} country
    */
-     getRegions(country) {
-      commerce.services.localeListSubdivisions(country).then(resp => {
-        this.setState({
-          subdivisions: resp.subdivisions
-        })
-      }).catch(error => console.log(error))
-    }
-  
+   getRegions(country) {
+    commerce.services.localeListSubdivisions(country).then(resp => {
+      this.setState({
+        subdivisions: resp.subdivisions
+      })
+    }).catch(error => console.log(error))
+  }
+
 
   render() {
     const {
@@ -170,7 +169,7 @@ export default class AddressForm extends Component {
 
 AddressForm.propTypes = {
   type: PropTypes.string,
-  countries: PropTypes.object,
+  countries: PropTypes.any,
   country: PropTypes.string,
   region: PropTypes.string,
   name: PropTypes.string,

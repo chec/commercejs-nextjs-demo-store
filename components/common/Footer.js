@@ -14,6 +14,7 @@ const Footer = () => (
                 href="https://commercejs.com/docs/"
                 className="mb-3 d-block font-color-medium"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Documentation
               </a>
@@ -21,6 +22,7 @@ const Footer = () => (
                 href="https://commercejs.com/features"
                 className="d-block font-color-medium"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Features
               </a>
@@ -30,6 +32,7 @@ const Footer = () => (
                 href="https://commercejs.com/about"
                 className="mb-3 d-block font-color-medium"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 About
               </a>
@@ -37,6 +40,7 @@ const Footer = () => (
                 href="http://slack.commercejs.com/"
                 className="d-block font-color-medium"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Community
               </a>
@@ -53,6 +57,7 @@ const Footer = () => (
                 href="https://twitter.com/commercejs"
                 className="mb-3 d-block font-color-medium"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Twitter
               </a>
@@ -60,6 +65,7 @@ const Footer = () => (
                 href="https://www.instagram.com/commerce.js/"
                 className="d-block font-color-medium"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Instagram
               </a>
@@ -69,6 +75,7 @@ const Footer = () => (
                 href="https://angel.co/company/chec"
                 className="mb-3 d-block font-color-medium"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Angel
               </a>
@@ -76,6 +83,7 @@ const Footer = () => (
                 href="https://www.linkedin.com/company/chec-chec-commerce-inc.-/"
                 className="d-block font-color-medium"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 LinkedIn
               </a>
@@ -106,6 +114,7 @@ const Footer = () => (
               href="https://app.netlify.com/start/deploy?repository=https://github.com/chec/commercejs-nextjs-demo-store"
               className="font-color-brand font-size-caption text-uppercase text-center"
               target="_blank"
+              rel="noopener noreferrer"
             >
               Deploy to Netlify
             </a>
@@ -114,6 +123,7 @@ const Footer = () => (
               href="https://github.com/chec/commercejs-nextjs-demo-store"
               className="font-color-brand font-size-caption text-uppercase text-center"
               target="_blank"
+              rel="noopener noreferrer"
             >
               Clone in GitHub
             </a>
@@ -122,6 +132,7 @@ const Footer = () => (
               href="https://github.com/chec/commercejs-nextjs-demo-store"
               className="font-color-brand font-size-caption text-uppercase text-center"
               target="_blank"
+              rel="noopener noreferrer"
             >
               Contribute
             </a>
@@ -131,6 +142,7 @@ const Footer = () => (
               href="https://commercejs.com/"
               className="font-color-brand font-size-caption text-uppercase text-center"
               target="_blank"
+              rel="noopener noreferrer"
             >
               &copy; { new Date().getFullYear() } Chec/Commerce.js.
             </a>
