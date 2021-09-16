@@ -185,12 +185,10 @@ class Header extends Component {
         >
           <div className="d-none d-sm-flex">
             <Link href="/collection">
-              <a href="/collection" className="mr-4 font-color-black">Shop</a>
+              <a className="mr-4 font-color-black">Shop</a>
             </Link>
             <Link href="/about">
-              <a href="/about" className="font-color-black">
-                About
-              </a>
+              <a className="font-color-black">About</a>
             </Link>
           </div>
           <div className="logo-container">
@@ -244,13 +242,11 @@ class Header extends Component {
                 }}
               >
                 {mobileMenuLinks.map((item, i) => (
-                  <a
-                    key={i}
-                    href={item.link}
-                    className="d-block mb-4 font-size-heading font-color-white text-center"
-                  >
-                    {item.name}
-                  </a>
+                  <Link key={i} href={item.link}>
+                    <a className="d-block mb-4 font-size-heading font-color-white text-center">
+                      {item.name}
+                    </a>
+                  </Link>
                 ))}
               </div>
             </div>

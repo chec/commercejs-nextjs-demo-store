@@ -177,7 +177,7 @@ class CustomerAccountPage extends Component {
     if (!orders || !orders.length) {
       return (
         <div className="card text-center p-2">
-          <p>You haven't placed any orders yet!</p>
+          <p>You haven&apos;t placed any orders yet!</p>
         </div>
       );
     }

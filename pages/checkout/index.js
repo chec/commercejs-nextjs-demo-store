@@ -551,9 +551,9 @@ class CheckoutPage extends Component {
               {/* Breadcrumbs */}
               <div className="d-flex pb-4 breadcrumb-container">
                 <Link href="/collection">
-                  <div className="font-size-caption text-decoration-underline cursor-pointer">
+                  <a className="font-color-dark font-size-caption text-decoration-underline cursor-pointer">
                     Cart
-                  </div>
+                  </a>
                 </Link>
                 <img src="/icon/arrow-right.svg" className="w-16 mx-1" alt="Arrow icon"/>
                 <div className="font-size-caption font-weight-bold cursor-pointer">

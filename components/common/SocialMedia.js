@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 const imagesInfo = [
   {
@@ -81,13 +82,12 @@ export default class SocialMedia extends React.Component {
                 Follow us on Instagram for more updates
               </p>
               <div className="d-flex">
-                <a
-                  href="/about"
-                  className="d-flex py-3 align-items-center font-color-black borderbottom border-color-black"
-                >
-                  <p className="mr-3">Follow us</p>
-                  <img src="/icon/arrow-long-right.svg" alt="Arrow icon"/>
-                </a>
+                <Link href="/about">
+                  <a className="d-flex py-3 align-items-center font-color-black borderbottom border-color-black">
+                    <p className="mr-3">Follow us</p>
+                    <img src="/icon/arrow-long-right.svg" alt="Arrow icon"/>
+                  </a>
+                </Link>
               </div>
             </div>
           </div>

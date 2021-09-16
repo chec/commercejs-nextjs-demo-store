@@ -20,10 +20,10 @@ const About = () => (
                 This is an open source storefront built using Chec’s headless architecture and the Commerce.js SDK. Commerce.js is a smarter, more efficient way to build eCommerce projects, and we hope you can see that as you explore the world custom eCommerce. Please build on top of, or pick apart this project for your own use. Everything in this project, from the storefront, to the cart, checkout and receipt, is 100% customizable. To build more custom eCommerce projects, using any frontend framework or platform, head over to <a href="https://commercejs.com/" target="_blank" className="cjs-link" rel="noopener noreferrer">commercejs.com</a>.
               </h4>
               <div className="about-cjs mt-3 d-flex flex-row">
-                <a className="px-4 py-3 font-color-white about-doc" href="https://commercejs.com/docs/" target="_blank">
+                <a className="px-4 py-3 font-color-white about-doc" href="https://commercejs.com/docs/" target="_blank" rel="noopener noreferrer">
                   Documentation
                 </a>
-                <a className="px-4 py-3 about-dev" href="https://commercejs.com/docs/community/" target="_blank">
+                <a className="px-4 py-3 about-dev" href="https://commercejs.com/docs/community/" target="_blank" rel="noopener noreferrer">
                   Guides from the community
                 </a>
               </div>
@@ -58,7 +58,12 @@ const About = () => (
               If you would like to deploy this project live today, click the button below and watch the magic happen!
             </h4>
             <div className="mt-3">
-              <a className="px-4 py-3 flex-grow-1 font-color-white about-net" href="https://app.netlify.com/start/deploy?repository=https://github.com/chec/commercejs-nextjs-demo-store" target="_blank">
+              <a
+                className="px-4 py-3 flex-grow-1 font-color-white about-net"
+                href="https://app.netlify.com/start/deploy?repository=https://github.com/chec/commercejs-nextjs-demo-store"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Deploy to Netlify
               </a>
             </div>
@@ -77,7 +82,12 @@ const About = () => (
             If you would like to clone this project and do a manual setup, go to the repository below!
             </h4>
             <div className="mt-3">
-              <a className="px-4 py-3 flex-grow-1 font-color-white about-gb" href="https://github.com/chec/commercejs-nextjs-demo-store" target="_blank">
+              <a
+                className="px-4 py-3 flex-grow-1 font-color-white about-gb"
+                href="https://github.com/chec/commercejs-nextjs-demo-store"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Clone in GitHub
               </a>
             </div>
@@ -116,6 +126,7 @@ const About = () => (
                 className="px-5 py-3 flex-grow-1 font-color-white about-blog"
                 href="https://www.netlify.com/blog/2020/07/09/create-a-fully-fledged-jamstack-commerce-store-with-commerce.js-and-netlify/"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Read Blog
               </a>
