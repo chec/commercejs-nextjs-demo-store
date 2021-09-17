@@ -118,14 +118,14 @@ class Confirm extends Component {
                 </p>
                 <div className="d-flex w-100 justify-content-center flex-column flex-sm-row">
                   <Link href="/">
-                    <button className="checkout-confirm-buttons h-48 px-3 flex-grow-1 border bg-white border-color-gray500 font-color-light mb-2 mb-sm-0 mr-sm-2 no-print">
+                    <a className="checkout-confirm-buttons px-3 py-3 text-center flex-grow-1 border bg-white border-color-gray500 font-color-light mb-2 mb-sm-0 mr-sm-2 no-print">
                       Go back home
-                    </button>
+                    </a>
                   </Link>
                   <Link href="/collection">
-                    <button className="checkout-confirm-buttons h-48 px-3 flex-grow-1 bg-black font-color-white no-print">
+                    <a className="checkout-confirm-buttons px-3 py-3 text-center flex-grow-1 bg-black font-color-white no-print">
                       Continue shopping
-                    </button>
+                    </a>
                   </Link>
                 </div>
               </div>

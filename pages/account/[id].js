@@ -181,9 +181,9 @@ export default function SingleOrderPage() {
                 {/* Breadcrumbs */}
                 <div className="d-flex pb-4 breadcrumb-container">
                   <Link href="/account">
-                    <div className="font-size-caption text-decoration-underline cursor-pointer">
+                    <a className="font-size-caption text-decoration-underline cursor-pointer font-color-black">
                       Account
-                    </div>
+                    </a>
                   </Link>
                   <img src="/icon/arrow-right.svg" className="w-16 mx-1" alt="Arrow icon"/>
                   <div className="font-size-caption font-weight-bold cursor-pointer">
