@@ -13,7 +13,6 @@ const Home = () => (
   <Root transparentHeader={true}>
     <Head>
       <title>Home | commerce</title>
-      <meta name="google-site-verification" content="p8VRTWvFo5YWrtDwBWubFM45suUUUqEWVtVIU0qrdd4" />
     </Head>
 
     <HeroSection />
