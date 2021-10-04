@@ -138,7 +138,7 @@ class ProductDetail extends Component {
         <div className="mb-4 pb-3 font-size-subheader">{(description || '').replace(reg, '')}</div>
 
         {/* Product Variant */}
-          <div className="d-none d-sm-block">
+          <div className="d-sm-block">
             <VariantSelector
               className="mb-3"
               variantGroups={variantGroups}
