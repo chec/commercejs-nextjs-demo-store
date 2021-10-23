@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ProductRow from '../products/ProductRow';
 import { connect } from 'react-redux';
+import ProductsRow from '../products/ProductsRow';
 
 class SuggestedProducts extends Component {
   render() {
@@ -20,7 +20,7 @@ class SuggestedProducts extends Component {
             You may also like to check out these products.
           </p>
         </div>
-        <ProductRow products={products.slice(0, 4)} />
+        <ProductsRow products={products.slice(0, 4)} />
       </div>
     );
   }
@@ -34,4 +34,4 @@ SuggestedProducts.defaultProps = {
   products: [],
 };
 
-export default connect(state => state)(SuggestedProducts);
+export default connect((state) => state)(SuggestedProducts);

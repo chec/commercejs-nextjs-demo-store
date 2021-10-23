@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
+import { Transition } from 'react-transition-group';
+import { connect } from 'react-redux';
 import Cart from '../cart/Cart';
 import commerce from '../../lib/commerce';
 import Animation from '../cart/Animation';
-import { Transition } from 'react-transition-group';
-import { connect } from 'react-redux'
 import { clearCustomer } from '../../store/actions/authenticateActions';
 
 const duration = 300;
@@ -12,29 +12,29 @@ const duration = 300;
 const defaultStyle = {
   zIndex: '-1',
   transition: `height ${duration}ms ease-in-out`,
-  height: 0
+  height: 0,
 };
 
 const transitionStyles = {
   entering: { height: '100vh' },
   entered: { height: '100vh' },
   exiting: { height: 0 },
-  exited: { height: 0 }
+  exited: { height: 0 },
 };
 
 const mobileMenuLinks = [
   {
     name: 'Home',
-    link: '/'
+    link: '/',
   },
   {
     name: 'Shop',
-    link: '/collection'
+    link: '/collection',
   },
   {
     name: 'About',
-    link: '/about'
-  }
+    link: '/about',
+  },
 ];
 
 class Header extends Component {
@@ -94,7 +94,7 @@ class Header extends Component {
   animate() {
     const { transparent } = this.props;
 
-    if (!transparent) {return;}
+    if (!transparent) { return; }
 
     if (window.scrollY > 10) {
       this.header.current.classList.add('invert');
@@ -130,7 +130,7 @@ class Header extends Component {
     this.toggleAddToCartAnimation();
     setTimeout(() => {
       this.toggleAddToCartAnimation();
-    }, 3000)
+    }, 3000);
   }
 
   renderLoginLogout() {
@@ -176,7 +176,10 @@ class Header extends Component {
 
     return (
       <header className="position-fixed top-0 left-0 right-0 font-weight-semibold no-print">
-        <Cart isOpen={showCart} toggle={value => this.toggleCart(value)} />
+        <Cart
+          isOpen={showCart}
+          toggle={(value) => this.toggleCart(value)}
+        />
         <div
           ref={this.header}
           className={`d-flex header align-items-center justify-content-between position-relative ${
@@ -214,7 +217,7 @@ class Header extends Component {
               className="position-relative cursor-pointer"
               onClick={this.toggleCart}
             >
-              <Animation isStopped={ this.state.playAddToCartAnimation } />
+              <Animation isStopped={this.state.playAddToCartAnimation} />
               <div className="cart-count position-absolute font-size-tiny font-weight-bold">
                 {cart.total_items}
               </div>
@@ -223,26 +226,32 @@ class Header extends Component {
         </div>
 
         {/* Mobile Menu */}
-        <Transition in={showMobileMenu} timeout={duration}>
-          {state => (
+        <Transition
+          in={showMobileMenu}
+          timeout={duration}
+        >
+          {(state) => (
             <div
               className="d-sm-none position-fixed left-0 right-0 overflow-hidden"
               style={{
                 ...defaultStyle,
                 ...transitionStyles[state],
                 // Prevent gap being shown at bottom of mobile menu
-                top: '1em'
+                top: '1em',
               }}
             >
               <div
                 className="position-absolute left-0 right-0 h-100vh mobile-menu-inner bg-black700 d-flex flex-column justify-content-center"
                 style={{
                   // Prevent mobile menu items (e.g. Home) being hidden behind navbar on small screen heights (e.g. iPhone4 landscape of 320px height)
-                  top: '4em'
+                  top: '4em',
                 }}
               >
                 {mobileMenuLinks.map((item, i) => (
-                  <Link key={i} href={item.link}>
+                  <Link
+                    key={i}
+                    href={item.link}
+                  >
                     <a className="d-block mb-4 font-size-heading font-color-white text-center">
                       {item.name}
                     </a>
@@ -258,6 +267,6 @@ class Header extends Component {
 }
 
 export default connect(
-  state => state,
+  (state) => state,
   { clearCustomer },
 )(Header);

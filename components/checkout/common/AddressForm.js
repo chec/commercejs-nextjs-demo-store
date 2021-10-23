@@ -32,14 +32,13 @@ export default class AddressForm extends Component {
    *
    * @param {string} country
    */
-   getRegions(country) {
-    commerce.services.localeListSubdivisions(country).then(resp => {
+  getRegions(country) {
+    commerce.services.localeListSubdivisions(country).then((resp) => {
       this.setState({
-        subdivisions: resp.subdivisions
-      })
-    }).catch(error => console.log(error))
+        subdivisions: resp.subdivisions,
+      });
+    }).catch((error) => console.log(error));
   }
-
 
   render() {
     const {
@@ -62,7 +61,13 @@ export default class AddressForm extends Component {
               <p className="mb-1 font-size-caption font-color-light">
                 Full name*
               </p>
-              <input required name={`${type}[name]`} autoComplete="name" value={name} className="rounded-0 w-100" />
+              <input
+                required
+                name={`${type}[name]`}
+                autoComplete="name"
+                value={name}
+                className="rounded-0 w-100"
+              />
             </label>
           </div>
         </div>
@@ -80,7 +85,10 @@ export default class AddressForm extends Component {
               >
                 {
                   Object.entries(countries).map(([code, name]) => (
-                    <option value={code} key={code}>
+                    <option
+                      value={code}
+                      key={code}
+                    >
                       { name }
                     </option>
                   ))
@@ -91,7 +99,13 @@ export default class AddressForm extends Component {
           <div className="col-12 col-sm-6 mb-3">
             <label className="w-100">
               <p className="mb-1 font-size-caption font-color-light">City*</p>
-              <input required name={`${type}[town_city]`} autoComplete="address-level2" value={townCity} className="rounded-0 w-100" />
+              <input
+                required
+                name={`${type}[town_city]`}
+                autoComplete="address-level2"
+                value={townCity}
+                className="rounded-0 w-100"
+              />
             </label>
           </div>
         </div>
@@ -139,8 +153,11 @@ export default class AddressForm extends Component {
               >
                 {
                   Object.entries(this.state.subdivisions).map(([code, name]) => (
-                    <option key={code} value={code}>
-                    { name }
+                    <option
+                      key={code}
+                      value={code}
+                    >
+                      { name }
                     </option>
                   ))
                 }
@@ -177,4 +194,4 @@ AddressForm.propTypes = {
   street: PropTypes.string,
   street2: PropTypes.string,
   postalZipCode: PropTypes.string,
-}
+};

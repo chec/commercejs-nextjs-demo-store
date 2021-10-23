@@ -1,7 +1,7 @@
 import React from 'react';
-import Root from '../components/common/Root';
 import Head from 'next/head';
 import Link from 'next/link';
+import Root from '../components/common/Root';
 import Footer from '../components/common/Footer';
 
 const LoggedOut = () => (
@@ -16,7 +16,10 @@ const LoggedOut = () => (
             <h2 className="font-size-header mb-4 pt-5">
               You have successfully logged out.
             </h2>
-            <Link href="/" className="mt-4">
+            <Link
+              href="/"
+              className="mt-4"
+            >
               <a>Continue shopping</a>
             </Link>
           </div>

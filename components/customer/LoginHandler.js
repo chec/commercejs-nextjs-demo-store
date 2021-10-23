@@ -5,9 +5,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { setCustomer } from '../../store/actions/authenticateActions';
 import commerce from '../../lib/commerce';
-import Root from '../../components/common/Root';
-import Footer from '../../components/common/Footer';
-import LoginAnimation from '../../components/customer/LoginAnimation';
+import Root from '../common/Root';
+import Footer from '../common/Footer';
+import LoginAnimation from './LoginAnimation';
 
 class LoginHandler extends Component {
   constructor(props) {
@@ -39,10 +39,9 @@ class LoginHandler extends Component {
     });
 
     commerce.customer.getToken(token)
-      .then(() => {
+      .then(() =>
         // Fetch customer details
-        return setCustomer().then(() => Router.push('/account'));
-      })
+        setCustomer().then(() => Router.push('/account')))
       .catch(() => {
         this.setState({
           loading: false,
@@ -57,7 +56,7 @@ class LoginHandler extends Component {
    */
   handleChangeEmail(event) {
     this.setState({
-      email: event.target.value
+      email: event.target.value,
     });
   }
 
@@ -81,18 +80,18 @@ class LoginHandler extends Component {
 
     return commerce.customer.login(
       email,
-      `${window.location.origin}/login?token={token}`
+      `${window.location.origin}/login?token={token}`,
     )
       .then(() => {
         this.setState({
           isError: false,
           email: '',
           message: [
-            'If that email address exists in our system, we\'ve just sent you a link to continue logging in!'
-          ]
+            'If that email address exists in our system, we\'ve just sent you a link to continue logging in!',
+          ],
         });
       })
-      .catch((error)=>{
+      .catch((error) => {
         this.setState({
           isError: true,
           message: error.data.error.errors.email,
@@ -197,5 +196,5 @@ class LoginHandler extends Component {
 
 export default compose(
   withRouter,
-  connect(null, { setCustomer }) // function that returns wrapper
+  connect(null, { setCustomer }), // function that returns wrapper
 )(LoginHandler);

@@ -6,8 +6,8 @@ const ReviewList = ({ children, reviews }) => (
     {reviews.map((item, index) => (
       <div
         key={index}
-        className={`p-4 p-lg-5 w-100 borderbottom ${index % 2 === 0 &&
-          'border-md-right'} border-color-black col-12 col-md-6`}
+        className={`p-4 p-lg-5 w-100 borderbottom ${index % 2 === 0
+          && 'border-md-right'} border-color-black col-12 col-md-6`}
       >
         <ReviewStars count={item.stars} />
         <p className="font-size-title mb-2 mt-3">{item.title}</p>

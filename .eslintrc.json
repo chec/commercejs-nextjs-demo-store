@@ -1,7 +1,37 @@
 {
-  "extends": "next/core-web-vitals",
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parser": "babel-eslint",
+  "extends": [
+    "plugin:react/recommended",
+    "@chec/eslint-config",
+    "airbnb"
+  ],
   "rules": {
     "curly": "error",
-    "quotes": ["error", "single"]
+    "quotes": ["error", "single"],
+    // Disabled as eslint can't understand ~/path syntax
+    "import/no-unresolved": 0,
+    // Disabled as it gets confused with paths that it can't resolve.
+    "import/extensions": 0,
+    "react/no-danger": "off",
+    "react/jsx-max-props-per-line": ["error", {
+      "singleline": 3
+    }],
+    "semi": [2, "always"],
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prop-types": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "jsx-a11y/label-has-associated-control": [ 2, {
+      "labelComponents": [],
+      "labelAttributes": [],
+      "controlComponents": [],
+      "depth": 3
+    }]
   }
 }

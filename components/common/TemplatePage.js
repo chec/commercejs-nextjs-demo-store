@@ -13,6 +13,6 @@ const TemplatePage = ({ page: data }) => (
     </div>
     <Footer />
   </Root>
-)
+);
 
 export default TemplatePage;

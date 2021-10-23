@@ -12,28 +12,47 @@ const About = () => (
       {/* Row */}
       <div className="row mt-5 pt-5 about-hero">
         <div className="col-12 col-md-10 col-lg-6 offset-md-1 offset-lg-0 row-content">
-            <div className="h-100 d-flex flex-column py-5 px-4 px-sm-5 justify-content-center">
-              <h2 className="font-size-header mb-4">
-                Commerce.js Demo Store
-              </h2>
-              <h4 className="font-size-subheader mb-4">
-                This is an open source storefront built using Chec’s headless architecture and the Commerce.js SDK. Commerce.js is a smarter, more efficient way to build eCommerce projects, and we hope you can see that as you explore the world custom eCommerce. Please build on top of, or pick apart this project for your own use. Everything in this project, from the storefront, to the cart, checkout and receipt, is 100% customizable. To build more custom eCommerce projects, using any frontend framework or platform, head over to <a href="https://commercejs.com/" target="_blank" className="cjs-link" rel="noopener noreferrer">commercejs.com</a>.
-              </h4>
-              <div className="about-cjs mt-3 d-flex flex-row">
-                <a className="px-4 py-3 font-color-white about-doc" href="https://commercejs.com/docs/" target="_blank" rel="noopener noreferrer">
-                  Documentation
-                </a>
-                <a className="px-4 py-3 about-dev" href="https://commercejs.com/docs/community/" target="_blank" rel="noopener noreferrer">
-                  Guides from the community
-                </a>
-              </div>
+          <div className="h-100 d-flex flex-column py-5 px-4 px-sm-5 justify-content-center">
+            <h2 className="font-size-header mb-4">
+              Commerce.js Demo Store
+            </h2>
+            <h4 className="font-size-subheader mb-4">
+              This is an open source storefront built using Chec’s headless architecture and the Commerce.js SDK. Commerce.js is a smarter, more efficient way to build eCommerce projects, and we hope you can see that as you explore the world custom eCommerce. Please build on top of, or pick apart this project for your own use. Everything in this project, from the storefront, to the cart, checkout and receipt, is 100% customizable. To build more custom eCommerce projects, using any frontend framework or platform, head over to <a
+                href="https://commercejs.com/"
+                target="_blank"
+                className="cjs-link"
+                rel="noopener noreferrer"
+              >commercejs.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   </a>.
+            </h4>
+            <div className="about-cjs mt-3 d-flex flex-row">
+              <a
+                className="px-4 py-3 font-color-white about-doc"
+                href="https://commercejs.com/docs/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Documentation
+              </a>
+              <a
+                className="px-4 py-3 about-dev"
+                href="https://commercejs.com/docs/community/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Guides from the community
+              </a>
             </div>
           </div>
+        </div>
 
         <div className="col-12 col-lg-6">
           <div className="about-image h-100">
             <div className="d-flex align-items-center justify-content-center h-100">
-              <img src="/cjs-illustration.svg" alt="Commerce.js illustration"/>
+              <img
+                src="/cjs-illustration.svg"
+                alt="Commerce.js illustration"
+              />
             </div>
           </div>
         </div>
@@ -44,7 +63,10 @@ const About = () => (
         <div className="col-12 col-lg-6">
           <div className="about-image h-100">
             <div className="d-flex align-items-center justify-content-center h-100">
-              <img src="/netlify-illustration.svg" alt="Netlify illustration"/>
+              <img
+                src="/netlify-illustration.svg"
+                alt="Netlify illustration"
+              />
             </div>
           </div>
         </div>
@@ -79,7 +101,7 @@ const About = () => (
               Clone in GitHub
             </h3>
             <h4 className="font-size-subheader mb-4">
-            If you would like to clone this project and do a manual setup, go to the repository below!
+              If you would like to clone this project and do a manual setup, go to the repository below!
             </h4>
             <div className="mt-3">
               <a
@@ -97,7 +119,10 @@ const About = () => (
         <div className="col-12 col-lg-6">
           <div className="about-image h-100">
             <div className="d-flex align-items-center justify-content-center h-100">
-              <img src="/github-illustration.svg" alt="GitHub illustration"/>
+              <img
+                src="/github-illustration.svg"
+                alt="GitHub illustration"
+              />
             </div>
           </div>
         </div>
@@ -108,7 +133,10 @@ const About = () => (
         <div className="col-12 col-lg-6">
           <div className="about-image h-100">
             <div className="d-flex align-items-center justify-content-center h-100">
-              <img src="/blog-illustration.svg" alt="Commerce.js blog illustration"/>
+              <img
+                src="/blog-illustration.svg"
+                alt="Commerce.js blog illustration"
+              />
             </div>
           </div>
         </div>

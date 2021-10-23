@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
-import Link from 'next/link'
+import Link from 'next/link';
 import { Transition } from 'react-transition-group';
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
-import CartItem from '../cart/CartItem';
 import { connect } from 'react-redux';
+import CartItem from './CartItem';
 // Cart redux action creators
 import { retrieveCart as dispatchRetreiveCart } from '../../store/actions/cartActions';
 
 const duration = 300;
 
 const defaultStyle = {
-  transition: `transform ${duration}ms ease-in-out`
+  transition: `transform ${duration}ms ease-in-out`,
 };
 
 const transitionStyles = {
   entering: { transform: 'translateX(100%)' },
   entered: { transform: 'translateX(0)' },
   exiting: { transform: 'translateX(100%)' },
-  exited: { transform: 'translateX(100%)' }
+  exited: { transform: 'translateX(100%)' },
 };
 
 const backdropTransitionStyles = {
   entering: { opacity: '0' },
   entered: { opacity: '0.56' },
   exiting: { opacity: '0' },
-  exited: { opacity: '0' }
+  exited: { opacity: '0' },
 };
 
 class Cart extends Component {
@@ -41,7 +41,7 @@ class Cart extends Component {
    * Retrieve cart and contents client-side to dispatch to store
    */
   componentDidMount() {
-    this.props.dispatchRetreiveCart()
+    this.props.dispatchRetreiveCart();
   }
 
   componentWillUnmount() {
@@ -68,13 +68,13 @@ class Cart extends Component {
         onEntering={this.onEntering}
         onExiting={this.onExiting}
       >
-        {state => (
+        {(state) => (
           <div className="cart-modal font-weight-regular">
             <div
               className="backdrop"
               style={{
                 transition: `opacity ${duration}ms ease-in-out`,
-                ...backdropTransitionStyles[state]
+                ...backdropTransitionStyles[state],
               }}
               onClick={() => toggle(false)}
             />
@@ -84,7 +84,7 @@ class Cart extends Component {
               className="main-cart-content d-flex flex-column"
               style={{
                 ...defaultStyle,
-                ...transitionStyles[state]
+                ...transitionStyles[state],
               }}
             >
               {/* Cart Header */}
@@ -97,7 +97,11 @@ class Cart extends Component {
                     className="bg-transparent p-0"
                     onClick={() => toggle(false)}
                   >
-                    <img src="/icon/cross.svg" title="Times icon" alt="" />
+                    <img
+                      src="/icon/cross.svg"
+                      title="Times icon"
+                      alt=""
+                    />
                   </button>
                 </div>
               </div>
@@ -107,7 +111,7 @@ class Cart extends Component {
                     className="flex-grow-1 overflow-auto pt-4"
                     ref={this.cartScroll}
                   >
-                    {cart.line_items.map(item => (
+                    {cart.line_items.map((item) => (
                       <CartItem
                         key={item.id}
                         item={item}
@@ -143,7 +147,12 @@ class Cart extends Component {
               ) : (
                 <div className="d-flex align-items-center justify-content-center bg-brand300 flex-grow-1 p-4 p-md-5 flex-column">
                   <div className="position-relative cursor-pointer mb-3">
-                    <img src="/icon/cart.svg" title="Cart icon" alt="" className="w-32" />
+                    <img
+                      src="/icon/cart.svg"
+                      title="Cart icon"
+                      alt=""
+                      className="w-32"
+                    />
                     <div
                       className="position-absolute font-size-tiny font-weight-bold"
                       style={{ right: '-4px', top: '-4px' }}
@@ -164,6 +173,6 @@ class Cart extends Component {
   }
 }
 
-export default connect(state => state, {
+export default connect((state) => state, {
   dispatchRetreiveCart,
 })(Cart);

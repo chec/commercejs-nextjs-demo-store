@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import ReviewStars from './ReviewStars';
-import VariantSelector from '../productAssets/VariantSelector';
 import { animateScroll as scroll } from 'react-scroll';
 import { connect } from 'react-redux';
+import ReviewStars from './ReviewStars';
+import VariantSelector from './VariantSelector';
 import { addToCart } from '../../store/actions/cartActions';
 
 class ProductDetail extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       selectedOptions: [],
-    }
+    };
 
     this.handleAddToCart = this.handleAddToCart.bind(this);
     this.handleReviewClick = this.handleReviewClick.bind(this);
@@ -52,7 +52,7 @@ class ProductDetail extends Component {
 
     if (section) {
       scroll.scrollTo(section.offsetTop - 130, {
-        smooth: 'easeInOutQuint'
+        smooth: 'easeInOutQuint',
       });
     }
   }
@@ -85,11 +85,11 @@ class ProductDetail extends Component {
 
     const options = Object.entries(selectedOptions);
     return base + options.reduce((acc, [variantGroup, option]) => {
-      const variantDetail = variantGroups.find(candidate => candidate.id === variantGroup);
+      const variantDetail = variantGroups.find((candidate) => candidate.id === variantGroup);
       if (!variantDetail) {
         return acc;
       }
-      const optionDetail = variantDetail.options.find(candidate => candidate.id === option);
+      const optionDetail = variantDetail.options.find((candidate) => candidate.id === option);
       if (!optionDetail) {
         return acc;
       }
@@ -109,9 +109,9 @@ class ProductDetail extends Component {
    * Add to Cart
    */
   handleAddToCart() {
-    const { product } = this.props
+    const { product } = this.props;
     const { selectedOptions } = this.state;
-    this.props.dispatch(addToCart(product.id, 1, selectedOptions))
+    this.props.dispatch(addToCart(product.id, 1, selectedOptions));
   }
 
   render() {
@@ -129,7 +129,10 @@ class ProductDetail extends Component {
     return (
       <div>
         {/* Product Summary */}
-        <div onClick={this.handleReviewClick} className="cursor-pointer">
+        <div
+          onClick={this.handleReviewClick}
+          className="cursor-pointer"
+        >
           <ReviewStars count={4.5} />
         </div>
         <p className="font-size-display3 font-family-secondary mt-2 mb-2">
@@ -138,24 +141,28 @@ class ProductDetail extends Component {
         <div className="mb-4 pb-3 font-size-subheader">{(description || '').replace(reg, '')}</div>
 
         {/* Product Variant */}
-          <div className="d-sm-block">
-            <VariantSelector
-              className="mb-3"
-              variantGroups={variantGroups}
-              onSelectOption={this.handleSelectOption}
-              selectedOptions={selectedOptions}
-            />
-          </div>
+        <div className="d-sm-block">
+          <VariantSelector
+            className="mb-3"
+            variantGroups={variantGroups}
+            onSelectOption={this.handleSelectOption}
+            selectedOptions={selectedOptions}
+          />
+        </div>
 
         {/* Add to Cart & Price */}
         <div className="d-flex py-4">
-          <button onClick={this.handleAddToCart} disabled={soldOut}
-              className="h-56 bg-black font-color-white pl-3 pr-4 d-flex align-items-center flex-grow-1" type="button">
+          <button
+            onClick={this.handleAddToCart}
+            disabled={soldOut}
+            className="h-56 bg-black font-color-white pl-3 pr-4 d-flex align-items-center flex-grow-1"
+            type="button"
+          >
             <span className="flex-grow-1 mr-3 text-center">
               { soldOut ? 'Sold out' : 'Add to cart' }
             </span>
             <span className="border-left border-color-white pl-3">
-            {priceSymbol}{this.getPrice()}
+              {priceSymbol}{this.getPrice()}
             </span>
           </button>
         </div>
@@ -164,4 +171,4 @@ class ProductDetail extends Component {
   }
 }
 
-export default connect(state => state)(ProductDetail);
+export default connect((state) => state)(ProductDetail);

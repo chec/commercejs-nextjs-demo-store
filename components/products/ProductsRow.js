@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ProductCard from '../products/ProductCard';
+import ProductCard from '../product/ProductCard';
 
-class ProductRow extends Component {
+class ProductsRow extends Component {
   render() {
     const { products } = this.props;
     const reg = /(<([^>]+)>)/ig;
@@ -10,10 +10,13 @@ class ProductRow extends Component {
     return (
       <div className="row mb-5">
         {products.map((product) => (
-          <div key={product.id} className="col-6 col-sm-6 col-lg-3">
+          <div
+            key={product.id}
+            className="col-6 col-sm-6 col-lg-3"
+          >
             <ProductCard
               permalink={product.permalink}
-              image={product.media.source}
+              image={product.image.url}
               name={product.name}
               price={product.price.formatted_with_symbol}
               description={product.description && product.description.replace(reg, '')}
@@ -26,12 +29,12 @@ class ProductRow extends Component {
   }
 }
 
-ProductRow.propTypes = {
+ProductsRow.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object),
 };
 
-ProductRow.defaultProps = {
+ProductsRow.defaultProps = {
   products: [],
 };
 
-export default ProductRow;
+export default ProductsRow;

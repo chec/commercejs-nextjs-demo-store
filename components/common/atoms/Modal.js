@@ -12,7 +12,7 @@ const duration = 300;
 const defaultStyle = {
   transition: `opacity ${duration}ms ease-in-out`,
   opacity: 0,
-  zIndex: 1000
+  zIndex: 1000,
 };
 
 /**
@@ -22,7 +22,7 @@ const transitionStyles = {
   entering: { opacity: 0 },
   entered: { opacity: 1 },
   exiting: { opacity: 0 },
-  exited: { opacity: 0 }
+  exited: { opacity: 0 },
 };
 
 export default class Modal extends Component {
@@ -34,21 +34,23 @@ export default class Modal extends Component {
   }
 
   handleEntering() {
-    const body = document.querySelector('body').body;
+    const { body } = document.querySelector('body');
     if (body) {
       body.classList.add('modal-open');
     }
   }
 
   handleExiting() {
-    const body = document.querySelector('body').body;
+    const { body } = document.querySelector('body');
     if (body) {
       body.classList.remove('modal-open');
     }
   }
 
   render() {
-    const { isOpen, children, onClose, maxW, className } = this.props;
+    const {
+      isOpen, children, onClose, maxW, className,
+    } = this.props;
 
     return (
       <Transition
@@ -58,12 +60,12 @@ export default class Modal extends Component {
         onExiting={this.handleExiting}
         unmountOnExit
       >
-        {state => (
+        {(state) => (
           <div
             className="position-fixed d-flex align-items-center justify-content-center top-0 left-0 right-0 bottom-0"
             style={{
               ...defaultStyle,
-              ...transitionStyles[state]
+              ...transitionStyles[state],
             }}
           >
             <div
@@ -88,5 +90,5 @@ export default class Modal extends Component {
 
 Modal.defaultProps = {
   maxW: '480px',
-  className: 'p-4 p-md-5'
+  className: 'p-4 p-md-5',
 };

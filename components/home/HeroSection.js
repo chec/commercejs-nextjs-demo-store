@@ -7,15 +7,15 @@ const params = {
   slidesPerView: 1,
   watchOverflow: false,
   autoplay: {
-    delay: 5000
+    delay: 5000,
   },
   loop: true,
   allowTouchMove: false,
   speed: 1000,
   effect: 'fade',
   fadeEffect: {
-    crossFade: true
-  }
+    crossFade: true,
+  },
 };
 const images = [
   '/images/home-1.jpg',
@@ -34,7 +34,7 @@ export default function HeroSection() {
             <div
               className="hero-slide d-flex align-items-center justify-content-center flex-column font-color-white py-5"
               style={{
-                backgroundImage: `url("${image}")`
+                backgroundImage: `url("${image}")`,
               }}
             >
               <p className="font-size-display5 font-family-secondary mb-4 text-center hero-header">

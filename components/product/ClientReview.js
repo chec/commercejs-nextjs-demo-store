@@ -8,7 +8,7 @@ const reviews = [
     title: 'Perfect',
     description: 'Great fit and feel. They elevate lounging to the next level!',
     reviewBy: 'Heidi C.',
-    date: 'December, 2019'
+    date: 'December, 2019',
   },
   {
     stars: '3.5',
@@ -16,7 +16,7 @@ const reviews = [
     description:
       'I sized up just in case and kind of wished I hadn’t. Very comfortable and I live in them exclusively during the weekend.',
     reviewBy: 'Heidi C.',
-    date: 'December, 2019'
+    date: 'December, 2019',
   },
   {
     stars: '4',
@@ -24,7 +24,7 @@ const reviews = [
     description:
       'Comfortable but kinda thin for a pant. I typically wear a 32/33 pant and had to size up to XL for these to not fit like a legging. Have been wearing pretty solid for a month of so and there\'s some pilling, but not a lot. Good price for OK product.',
     reviewBy: 'Heidi C.',
-    date: 'December, 2019'
+    date: 'December, 2019',
   },
   {
     stars: '5',
@@ -32,8 +32,8 @@ const reviews = [
     description:
       'I sized up just in case and kind of wished I hadn’t. Very comfortable and I live in them exclusively during the weekend.',
     reviewBy: 'Heidi C.',
-    date: 'December, 2019'
-  }
+    date: 'December, 2019',
+  },
 ];
 
 export default class ClientReview extends Component {
@@ -41,7 +41,7 @@ export default class ClientReview extends Component {
     super(props);
 
     this.state = {
-      open: false
+      open: false,
     };
 
     this.handleClose = this.handleClose.bind(this);
@@ -66,7 +66,10 @@ export default class ClientReview extends Component {
     const { open } = this.state;
 
     return (
-      <div id="reviews" className="custom-container pb-5">
+      <div
+        id="reviews"
+        className="custom-container pb-5"
+      >
         <Modal
           isOpen={open}
           onClose={this.handleClose}

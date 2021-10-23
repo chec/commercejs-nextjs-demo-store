@@ -1,15 +1,14 @@
 /* global process */
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import '../style/scss/style.scss';
-import { useStore } from '../store';
-import { Provider  } from 'react-redux';
-import commerce from '../lib/commerce';
+import { Provider } from 'react-redux';
 import { loadStripe } from '@stripe/stripe-js';
+import { useStore } from '../store';
+import commerce from '../lib/commerce';
 import { setCustomer } from '../store/actions/authenticateActions';
 import 'swiper/components/effect-fade/effect-fade.scss';
 
-const MyApp = ({Component, pageProps}) => {
-
+const MyApp = ({ Component, pageProps }) => {
   const store = useStore(pageProps.initialState);
   const [stripePromise, setStripePromise] = useState(null);
 
@@ -23,18 +22,17 @@ const MyApp = ({Component, pageProps}) => {
     commerce.products.list().then((res) => {
       store.dispatch({
         type: 'STORE_PRODUCTS',
-        payload: res.data
-      })
+        payload: res.data,
+      });
     });
 
     commerce.categories.list().then((res) => {
       store.dispatch({
         type: 'STORE_CATEGORIES',
-        payload: res.data
-      })
+        payload: res.data,
+      });
     });
-
-  }, [store])
+  }, [store]);
 
   return (
     <Provider store={store}>
@@ -44,7 +42,6 @@ const MyApp = ({Component, pageProps}) => {
       />
     </Provider>
   );
-
-}
+};
 
 export default MyApp;

@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Link from 'next/link';
+import { connect } from 'react-redux';
+import { withRouter } from 'next/router';
+import { CardElement, Elements, ElementsConsumer } from '@stripe/react-stripe-js';
 import ccFormat from '../../utils/ccFormat';
 import commerce from '../../lib/commerce';
 import Checkbox from '../../components/common/atoms/Checkbox';
@@ -18,9 +21,6 @@ import {
   setDiscountCodeInCheckout as dispatchSetDiscountCodeInCheckout,
   captureOrder as dispatchCaptureOrder,
 } from '../../store/actions/checkoutActions';
-import { connect } from 'react-redux';
-import { withRouter } from 'next/router';
-import { CardElement, Elements, ElementsConsumer } from '@stripe/react-stripe-js';
 
 const billingOptions = ['Same as shipping Address', 'Use a different billing address'];
 
@@ -73,7 +73,7 @@ class CheckoutPage extends Component {
         'shipping[name]': null,
         'shipping[street]': null,
         'shipping[town_city]': null,
-        'shipping[postal_zip_code]': null
+        'shipping[postal_zip_code]': null,
       },
 
       discountCode: 'CUSTOMCOMMERCE',
@@ -85,7 +85,7 @@ class CheckoutPage extends Component {
         paymentMethodId: null,
         paymentIntentId: null,
       },
-    }
+    };
 
     this.captureOrder = this.captureOrder.bind(this);
     this.generateToken = this.generateToken.bind(this);
@@ -102,7 +102,7 @@ class CheckoutPage extends Component {
   componentDidMount() {
     // if cart is empty then redirect out of checkout;
     if (this.props.cart && this.props.cart.total_items === 0) {
-      this.redirectOutOfCheckout()
+      this.redirectOutOfCheckout();
     }
 
     this.updateCustomerFromRedux();
@@ -117,7 +117,7 @@ class CheckoutPage extends Component {
       // reset selected shipping option
       this.setState({
         'fulfillment[shipping_method]': '',
-      })
+      });
       // regenerate checkout token object since cart has been updated
       this.generateToken();
     }
@@ -136,7 +136,7 @@ class CheckoutPage extends Component {
       // was set based off delivery country, deliveryRegion
       this.setState({
         'fulfillment[shipping_method]': '',
-      })
+      });
       this.generateToken();
     }
 
@@ -150,7 +150,7 @@ class CheckoutPage extends Component {
         this.props.checkout.id,
         this.state['fulfillment[shipping_method]'],
         this.state['shipping[country]'],
-        this.state['shipping[region]']
+        this.state['shipping[region]'],
       );
     }
   }
@@ -208,11 +208,11 @@ class CheckoutPage extends Component {
       .then((checkout) => {
         // continue and dispatch getShippingOptionsForCheckout to get shipping options based on checkout.id
         this.getAllCountries(checkout);
-        return dispatchGetShippingOptions(checkout.id, country, region)
+        return dispatchGetShippingOptions(checkout.id, country, region);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log('error caught in checkout/index.js in generateToken', error);
-      })
+      });
   }
 
   redirectOutOfCheckout() {
@@ -232,7 +232,7 @@ class CheckoutPage extends Component {
     }
 
     this.props.dispatchSetDiscountCodeInCheckout(this.props.checkout.id, this.state.discountCode)
-      .then(resp => {
+      .then((resp) => {
         if (resp.valid) {
           return this.setState({
             discountCode: '',
@@ -240,7 +240,7 @@ class CheckoutPage extends Component {
         }
         return Promise.reject(resp);
       })
-      .catch(error => {
+      .catch((error) => {
         alert('Sorry, the discount code could not be applied');
       });
   }
@@ -248,7 +248,7 @@ class CheckoutPage extends Component {
   handleChangeForm(e) {
     // when input cardNumber changes format using ccFormat helper
     if (e.target.name === 'cardNumber') {
-      e.target.value = ccFormat(e.target.value)
+      e.target.value = ccFormat(e.target.value);
     }
     // update form's input by name in state
     this.setState({
@@ -263,7 +263,7 @@ class CheckoutPage extends Component {
    */
   handleCaptureSuccess(result) {
     this.props.router.push('/checkout/confirm');
-  };
+  }
 
   /**
    * Handle an error during a `checkout.capture()` request
@@ -293,18 +293,16 @@ class CheckoutPage extends Component {
         return;
       }
 
-      error.message.forEach(({param, error}, i) => {
+      error.message.forEach(({ param, error }, i) => {
         this.setState({
           errors: {
             ...this.state.errors,
-            [param]: error
+            [param]: error,
           },
         });
-      })
+      });
 
-      errorToAlert = error.message.reduce((string, error) => {
-        return `${string} ${error.error}`
-      }, '');
+      errorToAlert = error.message.reduce((string, error) => `${string} ${error.error}`, '');
     }
 
     // Handle internal errors from the Chec API
@@ -312,17 +310,17 @@ class CheckoutPage extends Component {
       this.setState({
         errors: {
           ...this.state.errors,
-          [(error.type === 'not_valid' ? 'fulfillment[shipping_method]' : error.type)]: error.message
+          [(error.type === 'not_valid' ? 'fulfillment[shipping_method]' : error.type)]: error.message,
         },
-      })
-      errorToAlert = error.message
+      });
+      errorToAlert = error.message;
     }
 
     // Surface any errors to the customer
     if (errorToAlert) {
       alert(errorToAlert);
     }
-  };
+  }
 
   /**
    * Capture the order
@@ -359,8 +357,8 @@ class CheckoutPage extends Component {
       street_2: this.state['shipping[street_2]'],
       town_city: this.state['shipping[town_city]'],
       county_state: this.state['shipping[region]'],
-      postal_zip_code: this.state['shipping[postal_zip_code]']
-    }
+      postal_zip_code: this.state['shipping[postal_zip_code]'],
+    };
 
     // construct order object
     const newOrder = {
@@ -369,7 +367,7 @@ class CheckoutPage extends Component {
         firstname: this.state['customer[first_name]'],
         lastname: this.state['customer[last_name]'],
         email: this.state['customer[email]'],
-        phone: this.state['customer[phone]'] || undefined
+        phone: this.state['customer[phone]'] || undefined,
       },
       // collected 'order notes' data for extra field configured in the Chec Dashboard
       extrafields: {
@@ -384,16 +382,16 @@ class CheckoutPage extends Component {
         street_2: this.state['billing[street_2]'],
         town_city: this.state['billing[town_city]'],
         county_state: this.state['billing[region]'],
-        postal_zip_code: this.state['billing[postal_zip_code]']
+        postal_zip_code: this.state['billing[postal_zip_code]'],
       },
       shipping: shippingAddress,
       fulfillment: {
-        shipping_method: this.state['fulfillment[shipping_method]']
+        shipping_method: this.state['fulfillment[shipping_method]'],
       },
       payment: {
         gateway: this.state.selectedGateway,
       },
-    }
+    };
 
     // If test gateway selected add necessary card data for the order to be completed.
     if (this.state.selectedGateway === 'test_gateway') {
@@ -407,7 +405,7 @@ class CheckoutPage extends Component {
         expiry_year: this.state.expYear,
         cvc: this.state.cvc,
         postal_zip_code: this.state.billingPostalZipcode,
-      }
+      };
     }
 
     // If Stripe gateway is selected, register a payment method, call checkout.capture(),
@@ -478,8 +476,8 @@ class CheckoutPage extends Component {
                     .then(this.handleCaptureSuccess)
                     .catch(this.handleCaptureError);
                 });
-              });
-            })
+            });
+        })
         .catch(this.handleCaptureError);
     }
 
@@ -493,11 +491,11 @@ class CheckoutPage extends Component {
    * Fetch all available countries for shipping
    */
   getAllCountries(checkout) {
-    commerce.services.localeListShippingCountries(checkout.id).then(resp => {
+    commerce.services.localeListShippingCountries(checkout.id).then((resp) => {
       this.setState({
-        countries: resp.countries
-      })
-    }).catch(error => console.log(error))
+        countries: resp.countries,
+      });
+    }).catch((error) => console.log(error));
   }
 
   toggleNewsletter() {
@@ -513,7 +511,9 @@ class CheckoutPage extends Component {
    */
   renderPaymentDetails() {
     const { checkout, stripe, elements } = this.props;
-    const { selectedGateway, cardNumber, expMonth, expYear, cvc } = this.state;
+    const {
+      selectedGateway, cardNumber, expMonth, expYear, cvc,
+    } = this.state;
 
     return (
       <PaymentDetails
@@ -532,7 +532,7 @@ class CheckoutPage extends Component {
 
   render() {
     const { checkout, shippingOptions } = this.props;
-    const selectedShippingOption = shippingOptions.find(({id}) => id === this.state['fulfillment[shipping_method]']);
+    const selectedShippingOption = shippingOptions.find(({ id }) => id === this.state['fulfillment[shipping_method]']);
 
     if (this.state.loading) {
       return <Loader />;
@@ -555,7 +555,11 @@ class CheckoutPage extends Component {
                     Cart
                   </a>
                 </Link>
-                <img src="/icon/arrow-right.svg" className="w-16 mx-1" alt="Arrow icon"/>
+                <img
+                  src="/icon/arrow-right.svg"
+                  className="w-16 mx-1"
+                  alt="Arrow icon"
+                />
                 <div className="font-size-caption font-weight-bold cursor-pointer">
                   Checkout
                 </div>
@@ -563,7 +567,10 @@ class CheckoutPage extends Component {
               {
                 checkout
                 && (
-                  <form onChange={this.handleChangeForm} onSubmit={this.captureOrder}>
+                  <form
+                    onChange={this.handleChangeForm}
+                    onSubmit={this.captureOrder}
+                  >
                     <p className="font-size-subheader font-weight-semibold mb-4">
                       Customer
                     </p>
@@ -573,7 +580,13 @@ class CheckoutPage extends Component {
                           <p className="mb-1 font-size-caption font-color-light">
                             First name*
                           </p>
-                          <input required name="customer[first_name]" autoComplete="given-name" value={this.state['customer[first_name]']} className="rounded-0 w-100" />
+                          <input
+                            required
+                            name="customer[first_name]"
+                            autoComplete="given-name"
+                            value={this.state['customer[first_name]']}
+                            className="rounded-0 w-100"
+                          />
                         </label>
                       </div>
                       <div className="col-12 col-sm-6 mb-3">
@@ -581,7 +594,13 @@ class CheckoutPage extends Component {
                           <p className="mb-1 font-size-caption font-color-light">
                             Last name*
                           </p>
-                          <input required name="customer[last_name]" autoComplete="family-name" value={this.state['customer[last_name]']} className="rounded-0 w-100" />
+                          <input
+                            required
+                            name="customer[last_name]"
+                            autoComplete="family-name"
+                            value={this.state['customer[last_name]']}
+                            className="rounded-0 w-100"
+                          />
                         </label>
                       </div>
                     </div>
@@ -622,7 +641,7 @@ class CheckoutPage extends Component {
                         type="shipping"
                         countries={this.state.countries}
                         name={this.state['shipping[name]']}
-                        country={ this.state['shipping[country]']}
+                        country={this.state['shipping[country]']}
                         region={this.state['shipping[region]']}
                         street={this.state['shipping[street]']}
                         street2={this.state['shipping[street_2]']}
@@ -639,15 +658,18 @@ class CheckoutPage extends Component {
                               name="fulfillment[shipping_method]"
                               value={
                                 selectedShippingOption
-                                ? (`${selectedShippingOption.description} - ${selectedShippingOption.price.formatted_with_code}`)
-                                : ''
+                                  ? (`${selectedShippingOption.description} - ${selectedShippingOption.price.formatted_with_code}`)
+                                  : ''
                               }
                               placeholder="Select a shipping method"
                             >
                               {
-                                shippingOptions && shippingOptions.map(option => (
-                                  <option key={option.id} value={option.id}>
-                                  { `${option.description} - $${option.price.formatted_with_code}` }
+                                shippingOptions && shippingOptions.map((option) => (
+                                  <option
+                                    key={option.id}
+                                    value={option.id}
+                                  >
+                                    { `${option.description} - $${option.price.formatted_with_code}` }
                                   </option>
                                 ))
                               }
@@ -674,14 +696,19 @@ class CheckoutPage extends Component {
                         <p className="mb-1 font-size-caption font-color-light">
                           Order notes (optional)
                         </p>
-                        <textarea name="orderNotes" value={this.state.orderNotes} className="rounded-0 w-100" />
+                        <textarea
+                          name="orderNotes"
+                          value={this.state.orderNotes}
+                          className="rounded-0 w-100"
+                        />
                       </label>
                     </div>
 
                     { this.renderPaymentDetails() }
 
                     {/* Billing Address */}
-                    { checkout.collects && checkout.collects.billing_address && <>
+                    { checkout.collects && checkout.collects.billing_address && (
+                    <>
                       <p className="font-size-subheader font-weight-semibold mb-3">
                         Billing Address
                       </p>
@@ -690,8 +717,8 @@ class CheckoutPage extends Component {
                           <label
                             key={index}
                             onClick={() => this.setState({ selectedBillingOption: value })}
-                            className={`p-3 d-flex align-items-center cursor-pointer ${index !==
-                              billingOptions.length - 1 && 'borderbottom border-color-gray500'}`}
+                            className={`p-3 d-flex align-items-center cursor-pointer ${index
+                              !== billingOptions.length - 1 && 'borderbottom border-color-gray500'}`}
                           >
                             <Radiobox
                               checked={this.state.selectedBillingOption === value}
@@ -703,19 +730,20 @@ class CheckoutPage extends Component {
                         ))}
                       </div>
                       {this.state.selectedBillingOption === 'Use a different billing address' && (
-                        <AddressForm
-                          type="billing"
-                          countries={this.state.countries}
-                          name={this.state['billing[name]']}
-                          country={ this.state['billing[country]']}
-                          region={this.state['billing[region]']}
-                          street={this.state['billing[street]']}
-                          street2={this.state['billing[street_2]']}
-                          townCity={this.state['billing[town_city]']}
-                          postalZipCode={this.state['billing[postal_zip_code]']}
-                        />
+                      <AddressForm
+                        type="billing"
+                        countries={this.state.countries}
+                        name={this.state['billing[name]']}
+                        country={this.state['billing[country]']}
+                        region={this.state['billing[region]']}
+                        street={this.state['billing[street]']}
+                        street2={this.state['billing[street_2]']}
+                        townCity={this.state['billing[town_city]']}
+                        postalZipCode={this.state['billing[postal_zip_code]']}
+                      />
                       )}
-                    </>}
+                    </>
+                    )}
 
                     <p className="checkout-error">
                       { !selectedShippingOption ? 'Select a shipping option!' : '' }
@@ -738,36 +766,42 @@ class CheckoutPage extends Component {
                   Your order
                 </div>
                 <div className="pt-3 borderbottom border-color-gray400">
-                  {(checkout.live ? checkout.live.line_items : []).map((item, index, items) => {
-                    return (
-                      <div
-                        key={item.id}
-                        className="d-flex mb-2"
-                      >
-                        { (item && item.media)
-                          && (<img className="checkout__line-item-image mr-2" src={item.media.source} alt={item.product_name}/>)
-                        }
-                        <div className="d-flex flex-grow-1">
-                          <div className="flex-grow-1">
-                            <p className="font-weight-medium">
-                              {item.product_name}
-                            </p>
-                            <p className="font-color-light">Quantity: {item.quantity}</p>
-                            <div className="d-flex justify-content-between mb-2">
-                              {item.selected_options.map((option) =>
-                                <p key={option.group_id} className="font-color-light font-weight-small">
-                                  {option.group_name}: {option.option_name}
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                          <div className="text-right font-weight-semibold">
-                            ${item.line_total.formatted_with_code}
+                  {(checkout.live ? checkout.live.line_items : []).map((item, index, items) => (
+                    <div
+                      key={item.id}
+                      className="d-flex mb-2"
+                    >
+                      { (item && item.image)
+                          && (
+                          <img
+                            className="checkout__line-item-image mr-2"
+                            src={item.image.url}
+                            alt={item.product_name}
+                          />
+                          )}
+                      <div className="d-flex flex-grow-1">
+                        <div className="flex-grow-1">
+                          <p className="font-weight-medium">
+                            {item.product_name}
+                          </p>
+                          <p className="font-color-light">Quantity: {item.quantity}</p>
+                          <div className="d-flex justify-content-between mb-2">
+                            {item.selected_options.map((option) => (
+                              <p
+                                key={option.group_id}
+                                className="font-color-light font-weight-small"
+                              >
+                                {option.group_name}: {option.option_name}
+                              </p>
+                            ))}
                           </div>
                         </div>
+                        <div className="text-right font-weight-semibold">
+                          ${item.line_total.formatted_with_code}
+                        </div>
                       </div>
-                    )
-                  })}
+                    </div>
+                  ))}
                 </div>
                 <div className="row py-3 borderbottom border-color-gray400">
                   <input
@@ -802,9 +836,12 @@ class CheckoutPage extends Component {
                     {
                       name: 'Discount',
                       amount: (checkout.live && checkout.live.discount && checkout.live.discount.code) ? `Saved ${checkout.live.discount.amount_saved.formatted_with_symbol}` : 'No discount code applied',
-                    }
+                    },
                   ].map((item, i) => (
-                    <div key={i} className="d-flex justify-content-between align-items-center mb-2">
+                    <div
+                      key={i}
+                      className="d-flex justify-content-between align-items-center mb-2"
+                    >
                       <p>{item.name}</p>
                       <p className="text-right font-weight-medium">
                         {item.amount}
@@ -840,25 +877,29 @@ CheckoutPage.propTypes = {
   dispatchGenerateCheckout: PropTypes.func,
   dispatchGetShippingOptions: PropTypes.func,
   dispatchSetDiscountCodeInCheckout: PropTypes.func,
-}
+};
 
 // If using Stripe, this provides context to the page so we can use `stripe` and
 // `elements` as props.
-const InjectedCheckoutPage = (passProps) => {
-  return (
-    <Elements stripe={passProps.stripe}>
-      <ElementsConsumer>
-        { ({ elements, stripe }) => (
-          <CheckoutPage {...passProps} stripe={stripe} elements={elements} />
-        ) }
-      </ElementsConsumer>
-    </Elements>
-  );
-};
+const InjectedCheckoutPage = (passProps) => (
+  <Elements stripe={passProps.stripe}>
+    <ElementsConsumer>
+      { ({ elements, stripe }) => (
+        <CheckoutPage
+          {...passProps}
+          stripe={stripe}
+          elements={elements}
+        />
+      ) }
+    </ElementsConsumer>
+  </Elements>
+);
 
 export default withRouter(
   connect(
-    ({ checkout: { checkoutTokenObject, shippingOptions }, cart, customer, orderReceipt }) => ({
+    ({
+      checkout: { checkoutTokenObject, shippingOptions }, cart, customer, orderReceipt,
+    }) => ({
       checkout: checkoutTokenObject,
       customer,
       shippingOptions,

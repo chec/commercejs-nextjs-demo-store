@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Root from '../../components/common/Root';
 import Link from 'next/link';
 import { connect } from 'react-redux';
 import { withRouter } from 'next/router';
+import Root from '../common/Root';
 
 class Confirm extends Component {
   constructor(props) {
@@ -36,7 +36,11 @@ class Confirm extends Component {
         onClick={this.handlePrint}
         className="d-flex align-items-center text-decoration-underline cursor-pointer mt-3 mt-sm-0 no-print bg-transparent"
       >
-        <img src="/icon/print.svg" className="mr-2 w-20 no-print" alt=""/>
+        <img
+          src="/icon/print.svg"
+          className="mr-2 w-20 no-print"
+          alt=""
+        />
         <div className="no-print">Print receipt</div>
       </button>
     );
@@ -105,13 +109,17 @@ class Confirm extends Component {
             <div className="col-12 col-md-10 col-lg-6 offset-md-1 offset-lg-0">
               <div className="h-100 d-flex flex-column align-items-center justify-content-center py-5 px-4 px-sm-5">
                 <div className="bg-success700 h-64 w-64 d-flex rounded-circle align-items-center justify-content-center mb-4">
-                  <img src="/icon/check.svg" className="w-40" alt="" />
+                  <img
+                    src="/icon/check.svg"
+                    className="w-40"
+                    alt=""
+                  />
                 </div>
                 <h3 className="text-center font-family-secondary mb-3">
                   Thank you for your purchase!
                 </h3>
                 <h4 className="text-center font-size-subheader mb-3">
-                Your order completed successfully
+                  Your order completed successfully
                 </h4>
                 <p className="text-center font-color-light mb-5">
                   Here is your order number for reference: {orderReceipt.customer_reference}
@@ -158,7 +166,10 @@ class Confirm extends Component {
                   </div>
                   <div className="py-4 borderbottom border-color-gray400">
                     {orderReceipt.order.line_items.map((item) => (
-                      <div key={item.id} className="d-flex flex-grow-1 mb-3">
+                      <div
+                        key={item.id}
+                        className="d-flex flex-grow-1 mb-3"
+                      >
                         <div className="flex-grow-1">
                           <p className="mb-2 font-weight-medium">
                             {item.quantity} x {item.product_name}
@@ -190,4 +201,4 @@ class Confirm extends Component {
   }
 }
 
-export default withRouter(connect(state => state)(Confirm));
+export default withRouter(connect((state) => state)(Confirm));

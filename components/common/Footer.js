@@ -100,7 +100,11 @@ const Footer = () => (
               placeholder="email address"
             />
             <button className="bg-transparent position-absolute right-0 top-50 translateY--50 pr-2 h-48">
-              <img src="/icon/arrow-long-right.svg" className="w-24" alt="Arrow icon"/>
+              <img
+                src="/icon/arrow-long-right.svg"
+                className="w-24"
+                alt="Arrow icon"
+              />
             </button>
           </div>
         </div>
@@ -138,7 +142,7 @@ const Footer = () => (
             </a>
           </div>
           <div className="font-color-brand font-size-caption py-4 text-right">
-          <a
+            <a
               href="https://commercejs.com/"
               className="font-color-brand font-size-caption text-uppercase text-center"
               target="_blank"

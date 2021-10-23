@@ -20,7 +20,7 @@ export default class PaymentDetails extends Component {
       cvc,
     } = this.props;
 
-    if (!gateways || !gateways.available['test_gateway']) {
+    if (!gateways || !gateways.available.test_gateway) {
       return null;
     }
 
@@ -111,7 +111,7 @@ export default class PaymentDetails extends Component {
   renderStripe() {
     const { gateways, onChangeGateway, selectedGateway } = this.props;
 
-    if (!gateways || !gateways.available['stripe']) {
+    if (!gateways || !gateways.available.stripe) {
       return null;
     }
 
@@ -127,8 +127,8 @@ export default class PaymentDetails extends Component {
         invalid: {
           color: '#9e2146',
         },
-      }
-    }
+      },
+    };
 
     return (
       <div className="borderbottom border-color-gray500">
@@ -177,4 +177,4 @@ PaymentDetails.propTypes = {
   gateways: PropTypes.object,
   onChangeGateway: PropTypes.func,
   selectedGateway: PropTypes.string,
-}
+};

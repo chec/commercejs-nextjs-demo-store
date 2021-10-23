@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
+import moment from 'moment';
+import { connect } from 'react-redux';
+import Router, { withRouter } from 'next/router';
 import Root from '../../components/common/Root';
 import Footer from '../../components/common/Footer';
 import TemplatePage from '../../components/common/TemplatePage';
 import LoggedOut from '../loggedOut';
-import Link from 'next/link';
 import commerce from '../../lib/commerce';
-import moment from 'moment';
-import { connect } from 'react-redux';
-import Router, { withRouter } from 'next/router';
 
 class CustomerAccountPage extends Component {
   constructor(props) {
@@ -71,11 +71,11 @@ class CustomerAccountPage extends Component {
           orders: response.data,
         });
       })
-      .catch((error)=>{
+      .catch((error) => {
         this.setState({
           isError: true,
           message: [
-            'Opps, looks like an error occurred!'
+            'Opps, looks like an error occurred!',
           ],
         });
       });
@@ -165,8 +165,8 @@ class CustomerAccountPage extends Component {
         <div>{ shipping.name }</div>
         <div>{ shipping.street }</div>
         { shipping.street_2 && <div>{ shipping.street_2 }</div> }
-        <div>{ shipping.town_city}{(shipping.town_city && shipping.county_state) ? ',':'' } { shipping.county_state }</div>
-        <div>{ shipping.country}{(shipping.country && shipping.postal_zip_code) ? ',':'' } { shipping.postal_zip_code }</div>
+        <div>{ shipping.town_city}{(shipping.town_city && shipping.county_state) ? ',' : '' } { shipping.county_state }</div>
+        <div>{ shipping.country}{(shipping.country && shipping.postal_zip_code) ? ',' : '' } { shipping.postal_zip_code }</div>
       </div>
     );
   }
@@ -184,19 +184,18 @@ class CustomerAccountPage extends Component {
 
     return (
       <table className="table table-bordered">
-      <thead>
-        <tr>
-          <th>Order</th>
-          <th>Payment</th>
-          <th>Fulfillment</th>
-          <th>Total</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {this.state.orders.map((order) => {
-          return (
-            <tr key={ order.id }>
+        <thead>
+          <tr>
+            <th>Order</th>
+            <th>Payment</th>
+            <th>Fulfillment</th>
+            <th>Total</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.orders.map((order) => (
+            <tr key={order.id}>
               <td>
                 <div>
                   <Link href={`account/${order.id}`}>
@@ -218,10 +217,9 @@ class CustomerAccountPage extends Component {
                 </Link>
               </td>
             </tr>
-          )
-        })}
-      </tbody>
-    </table>
+          ))}
+        </tbody>
+      </table>
     );
   }
 
@@ -248,9 +246,8 @@ class CustomerAccountPage extends Component {
   }
 
   render() {
-
     if (this.props.loading.customer) {
-      return <TemplatePage page={  { message: 'Loading...' }  } />
+      return <TemplatePage page={{ message: 'Loading...' }} />;
     }
 
     // Displays message when the customer logs out.
@@ -292,7 +289,7 @@ class CustomerAccountPage extends Component {
               <div className="col-12 col-md-4 col-lg-4 row-content">
                 <div className="card p-2 mt-6">
                   <h5 className="mb-2">
-                  { firstname } { lastname }
+                    { firstname } { lastname }
                   </h5>
                   <a
                     href={`mailto:${email}`}
@@ -317,12 +314,10 @@ class CustomerAccountPage extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    customer: state.customer,
-    loading: state.loading,
-  };
-};
+const mapStateToProps = (state) => ({
+  customer: state.customer,
+  loading: state.loading,
+});
 
 export default withRouter(
   connect(

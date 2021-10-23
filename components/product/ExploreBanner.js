@@ -34,11 +34,10 @@ export default class ExploreBanner extends React.Component {
 
     if (x.matches) {
       if (dimensions.top - window.innerHeight < 0 && dimensions.bottom > 0) {
-        const scrolledRatio =
-          (window.innerHeight - dimensions.top) / window.innerHeight - 1;
+        const scrolledRatio = (window.innerHeight - dimensions.top) / window.innerHeight - 1;
 
-        this.image.current.style.transform = `translateY(${-scrolledRatio *
-          100}px)`;
+        this.image.current.style.transform = `translateY(${-scrolledRatio
+          * 100}px)`;
       }
     }
   }
@@ -66,7 +65,10 @@ export default class ExploreBanner extends React.Component {
           </div>
 
           {/* Content */}
-          <div ref={this.exploreContainer} className="custom-container py-md-5">
+          <div
+            ref={this.exploreContainer}
+            className="custom-container py-md-5"
+          >
             <div className="row py-5">
               <div className="col-12 col-md-6 py-5">
                 <p

@@ -133,5 +133,20 @@
     "link": "products[8].id",
     "filename": "gel.jpg",
     "url": "https://cdn.chec.io/merchants/17851/images/c3cf1b72aaa232ba2ab495bd7485efe29cee138b5f08c2f945173|gel.jpg"
+  },
+  {
+    "link": "categories[0].id",
+    "filename": "1.png",
+    "url": "https://cdn.chec.io/merchants/17851/assets/hgcARyqn01lz8iK1|1.png"
+  },
+  {
+    "link": "categories[1].id",
+    "filename": "2.png",
+    "url": "https://cdn.chec.io/merchants/17851/assets/Dp0ryJG3NwCkQJaM|2.png"
+  },
+  {
+    "link": "categories[2].id",
+    "filename": "3.png",
+    "url": "https://cdn.chec.io/merchants/17851/assets/611Gzpe2nqsGbStE|3.png"
   }
 ]

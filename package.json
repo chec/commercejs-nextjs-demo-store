@@ -36,8 +36,11 @@
     "swiper": "^6.6.2"
   },
   "devDependencies": {
+    "@chec/eslint-config": "^0.0.1",
     "@chec/seeder": "^1.1.1",
+    "babel-eslint": "^10.1.0",
     "eslint": "7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
     "eslint-config-next": "11.1.2"
   }
 }

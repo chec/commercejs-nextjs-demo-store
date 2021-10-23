@@ -1,4 +1,4 @@
-import commerce from '../../lib/commerce'
+import commerce from '../../lib/commerce';
 import { CLEAR_CUSTOMER, SET_CUSTOMER } from './actionTypes';
 
 /**
@@ -19,7 +19,7 @@ export const setCustomer = () => (dispatch) => {
     commerce.customer.logout();
     dispatch({ type: CLEAR_CUSTOMER });
   });
-}
+};
 
 /**
  * Clear the logged in customer from state, and from Commerce.js.
@@ -27,4 +27,4 @@ export const setCustomer = () => (dispatch) => {
 export const clearCustomer = () => (dispatch) => {
   commerce.customer.logout();
   dispatch({ type: CLEAR_CUSTOMER });
-}
+};

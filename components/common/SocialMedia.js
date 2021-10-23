@@ -4,24 +4,24 @@ import Link from 'next/link';
 const imagesInfo = [
   {
     image: '/images/insta/1.png',
-    translateRatio: -50
+    translateRatio: -50,
   },
   {
     image: '/images/insta/2.jpg',
-    translateRatio: 30
+    translateRatio: 30,
   },
   {
     image: '/images/insta/3.jpg',
-    translateRatio: 0
+    translateRatio: 0,
   },
   {
     image: '/images/insta/4.jpg',
-    translateRatio: -20
+    translateRatio: -20,
   },
   {
     image: '/images/insta/5.jpg',
-    translateRatio: -80
-  }
+    translateRatio: -80,
+  },
 ];
 
 export default class SocialMedia extends React.Component {
@@ -46,7 +46,7 @@ export default class SocialMedia extends React.Component {
 
   handleScroll() {
     window.requestAnimationFrame(this.animate);
-  };
+  }
 
   animate() {
     if (!this.followContainer.current) {
@@ -55,16 +55,15 @@ export default class SocialMedia extends React.Component {
     const dimensions = this.followContainer.current.getBoundingClientRect();
 
     if (dimensions.top - window.innerHeight < 0 && dimensions.bottom > 0) {
-      const scrolledRatio =
-        (window.innerHeight - dimensions.top) / window.innerHeight;
+      const scrolledRatio = (window.innerHeight - dimensions.top) / window.innerHeight;
 
       this.images.forEach((image, index) => {
         const translateRatio = imagesInfo[index] ? imagesInfo[index].translateRatio : 0;
-        image &&
-          (image.style.transform = `translateY(${scrolledRatio * translateRatio}px)`);
+        image
+          && (image.style.transform = `translateY(${scrolledRatio * translateRatio}px)`);
       });
     }
-  };
+  }
 
   render() {
     return (
@@ -85,7 +84,10 @@ export default class SocialMedia extends React.Component {
                 <Link href="/about">
                   <a className="d-flex py-3 align-items-center font-color-black borderbottom border-color-black">
                     <p className="mr-3">Follow us</p>
-                    <img src="/icon/arrow-long-right.svg" alt="Arrow icon"/>
+                    <img
+                      src="/icon/arrow-long-right.svg"
+                      alt="Arrow icon"
+                    />
                   </a>
                 </Link>
               </div>
@@ -93,12 +95,15 @@ export default class SocialMedia extends React.Component {
           </div>
           <div className="d-flex footer-follow--images">
             {imagesInfo.map((item, i) => (
-              <div key={i} className="justify-content-sm-end flex-column follow-images">
+              <div
+                key={i}
+                className="justify-content-sm-end flex-column follow-images"
+              >
                 <div
-                  ref={image => this.images.push(image)}
+                  ref={(image) => this.images.push(image)}
                   style={{
                     paddingBottom: '100%',
-                    background: `url("${item.image}") center center/cover`
+                    background: `url("${item.image}") center center/cover`,
                   }}
                 />
               </div>
