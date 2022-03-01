@@ -1,9 +1,0 @@
-[build]
-  command = "yarn deploy"
-  publish = "out"
-
-[[plugins]]
-  package = "netlify-plugin-onboarding"
-
-[template.environment]
-  NEXT_PUBLIC_CHEC_PUBLIC_KEY = "Chec Public Key (under Setup > Developer)"
