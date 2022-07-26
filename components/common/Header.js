@@ -208,7 +208,7 @@ class Header extends Component {
               </a>
             </Link>
           </div>
-          <div className="d-flex">
+          <div className="d-flex" suppressHydrationWarning={true}>
             { process.browser && this.renderLoginLogout() }
             <div
               className="position-relative cursor-pointer"

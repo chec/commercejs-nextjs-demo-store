@@ -573,7 +573,13 @@ class CheckoutPage extends Component {
                           <p className="mb-1 font-size-caption font-color-light">
                             First name*
                           </p>
-                          <input required name="customer[first_name]" autoComplete="given-name" value={this.state['customer[first_name]']} className="rounded-0 w-100" />
+                          <input 
+                          required 
+                          name="customer[first_name]" 
+                          autoComplete="given-name" 
+                          value={this.state['customer[first_name]']} 
+                          onChange={(e) => this.setState({['customer[first_name]']: e.target.value})} 
+                          className="rounded-0 w-100" />
                         </label>
                       </div>
                       <div className="col-12 col-sm-6 mb-3">
@@ -581,7 +587,13 @@ class CheckoutPage extends Component {
                           <p className="mb-1 font-size-caption font-color-light">
                             Last name*
                           </p>
-                          <input required name="customer[last_name]" autoComplete="family-name" value={this.state['customer[last_name]']} className="rounded-0 w-100" />
+                          <input 
+                          required 
+                          name="customer[last_name]" 
+                          autoComplete="family-name" 
+                          value={this.state['customer[last_name]']} 
+                          onChange={(e) => this.setState({['customer[last_name]']: e.target.value})} 
+                          className="rounded-0 w-100" />
                         </label>
                       </div>
                     </div>
@@ -595,6 +607,7 @@ class CheckoutPage extends Component {
                             name="customer[phone]"
                             autoComplete="tel"
                             value={this.state['customer[phone]']}
+                            onChange={(e) => this.setState({['customer[phone]']: e.target.value})}
                             className="rounded-0 w-100"
                           />
                         </label>
@@ -609,6 +622,7 @@ class CheckoutPage extends Component {
                             name="customer[email]"
                             autoComplete="email"
                             value={this.state['customer[email]']}
+                            onChange={(e) => this.setState({['customer[email]']: e.target.value})}
                             className="rounded-0 w-100"
                           />
                         </label>
@@ -674,7 +688,11 @@ class CheckoutPage extends Component {
                         <p className="mb-1 font-size-caption font-color-light">
                           Order notes (optional)
                         </p>
-                        <textarea name="orderNotes" value={this.state.orderNotes} className="rounded-0 w-100" />
+                        <textarea 
+                        name="orderNotes" 
+                        value={this.state.orderNotes} 
+                        onChange={(e) => this.setState({ orderNotes: e.target.value})} 
+                        className="rounded-0 w-100" />
                       </label>
                     </div>
 

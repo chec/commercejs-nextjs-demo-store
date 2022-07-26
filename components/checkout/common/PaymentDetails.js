@@ -49,6 +49,7 @@ export default class PaymentDetails extends Component {
                     name="cardNumber"
                     pattern="[0-9. ]+"
                     value={cardNumber}
+                    onChange={(e) => this.setState({ cardNumber: e.target.value})}
                     maxLength="16"
                     className="rounded-0 w-100"
                   />
@@ -62,6 +63,7 @@ export default class PaymentDetails extends Component {
                   <input
                     name="cvc"
                     value={cvc}
+                    onChange={(e) => this.setState({ cvc: e.target.value})}
                     maxLength="3"
                     type="number"
                     className="rounded-0 w-100"
@@ -77,6 +79,7 @@ export default class PaymentDetails extends Component {
                     name="expMonth"
                     type="number"
                     value={expMonth}
+                    onChange={(e) => this.setState({ expMonth: e.target.value})}
                     className="rounded-0 w-100"
                     placeholder="MM"
                   />
@@ -91,6 +94,7 @@ export default class PaymentDetails extends Component {
                     type="number"
                     name="expYear"
                     value={expYear}
+                    onChange={(e) => this.setState({ expYear: e.target.value})}
                     className="rounded-0 w-100"
                     placeholder="YY"
                   />
