@@ -33,7 +33,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "sass": "^1.34.0",
-    "swiper": "^6.6.2"
+    "swiper": "^8.4.4"
   },
   "devDependencies": {
     "@chec/seeder": "^1.1.1",
