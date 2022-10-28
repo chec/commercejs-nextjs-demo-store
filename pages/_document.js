@@ -29,7 +29,6 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900&display=swap"
             rel="stylesheet"
           />
-          <link rel="stylesheet" href="https://unpkg.com/swiper@6.6.2/swiper-bundle.min.css" />
           <meta name="title" content="Headless Commerce example with Netlify" key="title" />
           <meta name="description" content="An open source headless commerce example powered by Commerce.js and Netlify. Start your headless commerce application now!" />
           <meta property="og:title" content="Commerce.js | Demo storefront" />
